@@ -9,19 +9,41 @@
 /* Begin PBXBuildFile section */
 		BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */; };
 		BE1DC52C214FA1D300E6AF30 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC52B214FA1D300E6AF30 /* MainViewController.swift */; };
-		BE1DC52F214FA1D300E6AF30 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC52D214FA1D300E6AF30 /* Main.storyboard */; };
 		BE1DC531214FA1D400E6AF30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC530214FA1D400E6AF30 /* Assets.xcassets */; };
 		BE1DC534214FA1D400E6AF30 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC532214FA1D400E6AF30 /* LaunchScreen.storyboard */; };
+		BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC541214FA61E00E6AF30 /* Helpers.swift */; };
+		BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */; };
+		BE1DC546214FAA6700E6AF30 /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC545214FAA6700E6AF30 /* AskViewController.swift */; };
+		BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC547214FAADC00E6AF30 /* ForgotPasswordViewController.swift */; };
+		BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC549214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift */; };
+		BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC54B214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift */; };
+		BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */; };
+		BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */; };
+		BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC551214FABCE00E6AF30 /* SearchCollectionViewController.swift */; };
+		BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */; };
+		BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */; };
+		BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55721500AF700E6AF30 /* StandardTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		BE1DC526214FA1D300E6AF30 /* 020g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 020g.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1DC52B214FA1D300E6AF30 /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		BE1DC52E214FA1D300E6AF30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		BE1DC530214FA1D400E6AF30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BE1DC533214FA1D400E6AF30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1DC535214FA1D400E6AF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE1DC541214FA61E00E6AF30 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
+		BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
+		BE1DC545214FAA6700E6AF30 /* AskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskViewController.swift; sourceTree = "<group>"; };
+		BE1DC547214FAADC00E6AF30 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		BE1DC549214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTreeTableViewController.swift; sourceTree = "<group>"; };
+		BE1DC54B214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCatalogTreeTableViewController.swift; sourceTree = "<group>"; };
+		BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductTableViewController.swift; sourceTree = "<group>"; };
+		BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewController.swift; sourceTree = "<group>"; };
+		BE1DC551214FABCE00E6AF30 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
+		BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
+		BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInputContainerView.swift; sourceTree = "<group>"; };
+		BE1DC55721500AF700E6AF30 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +80,7 @@
 				BE1DC53E214FA27900E6AF30 /* Models */,
 				BE1DC53F214FA27E00E6AF30 /* Views */,
 				BE1DC53D214FA27200E6AF30 /* Controllers */,
+				BE1DC540214FA60500E6AF30 /* Helpers */,
 				BE1DC53B214FA24E00E6AF30 /* Interface Builders */,
 				BE1DC530214FA1D400E6AF30 /* Assets.xcassets */,
 				BE1DC535214FA1D400E6AF30 /* Info.plist */,
@@ -68,7 +91,6 @@
 		BE1DC53B214FA24E00E6AF30 /* Interface Builders */ = {
 			isa = PBXGroup;
 			children = (
-				BE1DC52D214FA1D300E6AF30 /* Main.storyboard */,
 				BE1DC532214FA1D400E6AF30 /* LaunchScreen.storyboard */,
 			);
 			path = "Interface Builders";
@@ -86,6 +108,15 @@
 			isa = PBXGroup;
 			children = (
 				BE1DC52B214FA1D300E6AF30 /* MainViewController.swift */,
+				BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */,
+				BE1DC545214FAA6700E6AF30 /* AskViewController.swift */,
+				BE1DC547214FAADC00E6AF30 /* ForgotPasswordViewController.swift */,
+				BE1DC551214FABCE00E6AF30 /* SearchCollectionViewController.swift */,
+				BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */,
+				BE1DC549214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift */,
+				BE1DC54B214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift */,
+				BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */,
+				BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -100,8 +131,18 @@
 		BE1DC53F214FA27E00E6AF30 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */,
+				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		BE1DC540214FA60500E6AF30 /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				BE1DC541214FA61E00E6AF30 /* Helpers.swift */,
+			);
+			path = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -164,7 +205,6 @@
 			files = (
 				BE1DC534214FA1D400E6AF30 /* LaunchScreen.storyboard in Resources */,
 				BE1DC531214FA1D400E6AF30 /* Assets.xcassets in Resources */,
-				BE1DC52F214FA1D300E6AF30 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,7 +215,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */,
+				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
+				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
+				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
+				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* MainViewController.swift in Sources */,
+				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
+				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
+				BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */,
+				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
+				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
+				BE1DC546214FAA6700E6AF30 /* AskViewController.swift in Sources */,
+				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -183,14 +235,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		BE1DC52D214FA1D300E6AF30 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				BE1DC52E214FA1D300E6AF30 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		BE1DC532214FA1D400E6AF30 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (

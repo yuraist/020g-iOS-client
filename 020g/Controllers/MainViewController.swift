@@ -10,13 +10,19 @@ import UIKit
 
 class MainViewController: UITableViewController {
   
+  private func setupViewControllerStyle() {
+    navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
+    navigationController?.navigationBar.tintColor = ApplicationColor.white
+    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+  }
+  
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    if #available(iOS 11.0, *) {
-      navigationController?.navigationBar.prefersLargeTitles = true
-    }
-    
+    setupViewControllerStyle()
     navigationItem.title = "0.20g - агрегатор №1"
   }
   
