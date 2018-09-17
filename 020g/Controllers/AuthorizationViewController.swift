@@ -10,21 +10,38 @@ import UIKit
 
 class AuthorizationViewController: UIViewController {
   
+  let loginInputContainerView = LoginInputContainerView(frame: .zero)
+  
+  private func setupNavigationControllerStyle() {
+    if #available(iOS 11.0, *) {
+      navigationController?.navigationBar.prefersLargeTitles = true
+      navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+      navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+    }
+    
+    navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
+    navigationController?.navigationBar.tintColor = ApplicationColor.white
+    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+    
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissController))
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Do any additional setup after loading the view.
+    setupNavigationControllerStyle()
+    navigationItem.title = "Войти"
+    
+    view.backgroundColor = ApplicationColor.gray
+    view.addSubview(loginInputContainerView)
+    
+    loginInputContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    loginInputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    loginInputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32).isActive = true
+    loginInputContainerView.heightAnchor.constraint(equalToConstant: 195).isActive = true
   }
   
-  
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using segue.destination.
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
+  @objc private func dismissController() {
+    dismiss(animated: true, completion: nil)
+  }
 }

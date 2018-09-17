@@ -10,22 +10,44 @@ import UIKit
 
 class MainViewController: UITableViewController {
   
-  private func setupViewControllerStyle() {
+  override var preferredStatusBarStyle: UIStatusBarStyle {
+    return .lightContent
+  }
+  
+  private func setupNavigationControllerStyle() {
+    if #available(iOS 11.0, *) {
+      navigationController?.navigationBar.prefersLargeTitles = false
+      navigationController?.navigationItem.largeTitleDisplayMode = .automatic
+      navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+    }
+    
     navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
     navigationController?.navigationBar.tintColor = ApplicationColor.white
     navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
   }
   
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
+  private func setupNavigationItem() {
+    navigationItem.title = "0.20g - агрегатор №1"
+    
+    let loginBarButtonItem = UIBarButtonItem(title: "Войти", style: .plain, target: self, action: #selector(showAuthorizationViewController))
+    let searchBarButtonItem = UIBarButtonItem(title: "Поиск", style: .plain, target: self, action: #selector(showSearchCollectionViewController))
+    navigationItem.rightBarButtonItems = [loginBarButtonItem, searchBarButtonItem]
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setupViewControllerStyle()
-    navigationItem.title = "0.20g - агрегатор №1"
+    setupNavigationControllerStyle()
+    setupNavigationItem()
+    
   }
   
+  @objc private func showAuthorizationViewController() {
+    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+  }
+  
+  @objc private func showSearchCollectionViewController() {
+    
+  }
   
 }
 
