@@ -10,6 +10,9 @@ import UIKit
 
 class LoginInputContainerView: UIView {
   
+  static let signUpHeight: CGFloat = 260
+  static let loginHeight: CGFloat = 140
+  
   var isSignUpView = false
   
   let emailTextField = StandardTextField(placeholder: "Email", isSecureTextEntry: false)
@@ -23,6 +26,7 @@ class LoginInputContainerView: UIView {
   let loginButton: UIButton = {
     let button = UIButton()
     button.setTitle("Войти", for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     button.tintColor = ApplicationColor.white
     button.backgroundColor = ApplicationColor.darkBlue
     button.layer.cornerRadius = 5
@@ -36,7 +40,7 @@ class LoginInputContainerView: UIView {
     super.init(frame: frame)
     
     setupContainerView()
-    setupSubviews()
+    addSubviews()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -53,46 +57,13 @@ class LoginInputContainerView: UIView {
     layer.shadowOffset = CGSize(width: 0, height: 0)
   }
   
-  private func setupSubviews() {
+  private func addSubviews() {
     addSubview(emailTextField)
     addSubview(nameTextField)
     addSubview(phoneTextField)
     addSubview(passwordTextField)
     addSubview(repeatPasswordTextField)
     addSubview(loginButton)
-    
-    if isSignUpView {
-      nameTextField.isHidden = false
-      phoneTextField.isHidden = false
-      repeatPasswordTextField.isHidden = false
-      loginButton.setTitle("Регистрация", for: .normal)
-    } else {
-      nameTextField.isHidden = true
-      phoneTextField.isHidden = true
-      repeatPasswordTextField.isHidden = true
-      loginButton.setTitle("Войти", for: .normal)
-    }
-    
-    emailTextField.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-    emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
-    emailTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
-    emailTextField.heightAnchor.constraint(equalToConstant: 44).isActive = true
-    
-    var previousItem = emailTextField
-    for item in inputs {
-      if !item.isHidden && item != emailTextField {
-        item.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-        item.topAnchor.constraint(equalTo: previousItem.bottomAnchor, constant: 16).isActive = true
-        item.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
-        item.heightAnchor.constraint(equalToConstant: 44).isActive = true
-        previousItem = item
-      }
-    }
-    
-    loginButton.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-    loginButton.topAnchor.constraint(equalTo: previousItem.bottomAnchor, constant: 16).isActive = true
-    loginButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
-    loginButton.heightAnchor.constraint(equalToConstant: 44).isActive = true
   }
   
 }

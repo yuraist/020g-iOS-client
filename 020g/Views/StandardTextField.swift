@@ -10,6 +10,8 @@ import UIKit
 
 class StandardTextField: UITextField {
   
+  var textFieldHeightAnchor: NSLayoutConstraint?
+  
   init(placeholder: String, isSecureTextEntry: Bool) {
     super.init(frame: .zero)
     
@@ -19,6 +21,7 @@ class StandardTextField: UITextField {
     self.borderStyle = .roundedRect
     self.isSecureTextEntry = isSecureTextEntry
     self.translatesAutoresizingMaskIntoConstraints = false
+    self.font = UIFont.systemFont(ofSize: 15)
     
     if placeholder == "Email" {
       self.keyboardType = .emailAddress

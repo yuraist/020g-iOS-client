@@ -38,7 +38,8 @@ class AuthorizationViewController: UIViewController {
     loginInputContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
     loginInputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     loginInputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32).isActive = true
-    loginInputContainerView.heightAnchor.constraint(equalToConstant: 195).isActive = true
+    loginInputContainerView.heightAnchor.constraint(equalToConstant: LoginInputContainerView.loginHeight).isActive = true
+    
   }
   
   @objc private func dismissController() {
