@@ -14,18 +14,14 @@ class MainViewController: UITableViewController {
     return .lightContent
   }
   
+  // Set the style for teh navigation bar
   private func setupNavigationControllerStyle() {
-    if #available(iOS 11.0, *) {
-      navigationController?.navigationBar.prefersLargeTitles = false
-      navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-      navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
-    }
-    
     navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
     navigationController?.navigationBar.tintColor = ApplicationColor.white
     navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
   }
   
+  // Setup items of the navigation bar
   private func setupNavigationItem() {
     navigationItem.title = "0.20g - агрегатор №1"
     
@@ -38,7 +34,6 @@ class MainViewController: UITableViewController {
     super.viewDidLoad()
     setupNavigationControllerStyle()
     setupNavigationItem()
-    
   }
   
   @objc private func showAuthorizationViewController() {

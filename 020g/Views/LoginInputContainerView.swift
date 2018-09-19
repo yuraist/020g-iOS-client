@@ -10,15 +10,18 @@ import UIKit
 
 class LoginInputContainerView: UIView {
   
+  // Constants for changing view's height
   static let signUpHeight: CGFloat = 236
   static let loginHeight: CGFloat = 140
   
+  // In which mode the view is presenting
   var isSignUpView = false {
     didSet {
       changeFormMode()
     }
   }
   
+  // Text fields and button for singing up and loggin in
   let emailTextField = StandardTextField(placeholder: "Email", isSecureTextEntry: false)
   let emailSeparatorView = SeparatorView()
   let nameTextField = StandardTextField(placeholder: "Имя", isSecureTextEntry: false)
@@ -30,16 +33,18 @@ class LoginInputContainerView: UIView {
   let repeatPasswordTextField = StandardTextField(placeholder: "Повторите пароль", isSecureTextEntry: true)
   let repeatPasswordSeparatorView = SeparatorView()
   
-  let loginButton: LoginButton = {
-    let button = LoginButton(frame: .zero)
-    button.title = "Вход"
+  let loginButton: StandardButton = {
+    let button = StandardButton(frame: .zero)
+    button.title = "Войти"
     return button
   }()
   
+  // References to the height anchors of the fields that not showing in the login mode
   var nameTextFieldHeightAnchor: NSLayoutConstraint?
   var phoneTextFieldHeightAnchor: NSLayoutConstraint?
   var repeatPasswordTextFieldHeightAnchor: NSLayoutConstraint?
   
+  // Array of fields for changing the firstResponder when user's printing
   var inputs: [StandardTextField]
   
   override init(frame: CGRect) {
@@ -54,6 +59,7 @@ class LoginInputContainerView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
+  // Setup the view's properties
   private func setupContainerView() {
     translatesAutoresizingMaskIntoConstraints = false
     backgroundColor = ApplicationColor.white
@@ -64,6 +70,7 @@ class LoginInputContainerView: UIView {
     layer.shadowOffset = CGSize(width: 0, height: 0)
   }
   
+  // Setup subviews and their layout constraints
   private func addAndSetupSubviews() {
     addSubview(emailTextField)
     addSubview(emailSeparatorView)
@@ -147,8 +154,9 @@ class LoginInputContainerView: UIView {
     loginButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
   }
   
+  // Switch sign up / login modes
   private func changeFormMode() {
-    loginButton.title = isSignUpView ? "Регистрация" : "Вход"
+    loginButton.title = isSignUpView ? "Зарегистрироваться" : "Войти"
     
     // Deactivate anchors to change them
     nameTextFieldHeightAnchor?.isActive = false

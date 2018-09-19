@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginButton: UIButton {
+class StandardButton: UIButton {
 
   var title: String? {
     didSet {
@@ -18,8 +18,15 @@ class LoginButton: UIButton {
   
   override init(frame: CGRect) {
     super.init(frame: frame)
-    
-    title = "Войти"
+    setupButton()
+  }
+  
+  init(title: String) {
+    super.init(frame: .zero)
+    setupButton()
+  }
+  
+  private func setupButton() {
     titleLabel?.font = UIFont.systemFont(ofSize: 15)
     tintColor = ApplicationColor.white
     backgroundColor = ApplicationColor.darkBlue

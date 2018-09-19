@@ -13,44 +13,85 @@ class AuthorizationViewController: UIViewController {
   let loginInputContainerView = LoginInputContainerView(frame: .zero)
   var loginInputContainerViewHeightAnchor: NSLayoutConstraint?
   
+  let switchModeButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Зарегистрироваться", for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+    button.titleLabel?.textColor = ApplicationColor.buttonBlue
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+  }()
+  
+  let recallPasswordButton: UIButton = {
+    let button = UIButton(type: .system)
+    button.setTitle("Напомнить пароль", for: .normal)
+    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+    button.titleLabel?.textColor = ApplicationColor.buttonGray
+    button.titleLabel?.textAlignment = .right
+    button.translatesAutoresizingMaskIntoConstraints = false
+    return button
+  }()
+  
   private func setupNavigationControllerStyle() {
-    if #available(iOS 11.0, *) {
-      navigationController?.navigationBar.prefersLargeTitles = true
-      navigationController?.navigationItem.largeTitleDisplayMode = .automatic
-      navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
-    }
-    
     navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
     navigationController?.navigationBar.tintColor = ApplicationColor.white
     navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
-    
+  }
+  
+  private func setupNavigationItem() {
+    navigationItem.title = "Вход"
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissController))
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     setupNavigationControllerStyle()
-    navigationItem.title = "Войти"
+    setupNavigationItem()
     
     view.backgroundColor = ApplicationColor.gray
     view.addSubview(loginInputContainerView)
+    view.addSubview(switchModeButton)
+    view.addSubview(recallPasswordButton)
     
+    // Setup the loginInputContainerView layout constraints
     loginInputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     loginInputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     loginInputContainerView.widthAnchor.constraint(equalToConstant: 304).isActive = true
     loginInputContainerViewHeightAnchor = loginInputContainerView.heightAnchor.constraint(equalToConstant: LoginInputContainerView.loginHeight)
     loginInputContainerViewHeightAnchor?.isActive = true
     
-    loginInputContainerView.loginButton.addTarget(self, action: #selector(changeFormMode), for: .touchUpInside)
+    // Setup the switchModeButton layout constraints
+    switchModeButton.leftAnchor.constraint(equalTo: loginInputContainerView.leftAnchor).isActive = true
+    switchModeButton.topAnchor.constraint(equalTo: loginInputContainerView.bottomAnchor, constant: 16).isActive = true
+    switchModeButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    switchModeButton.widthAnchor.constraint(equalTo: loginInputContainerView.widthAnchor, multiplier: 0.5).isActive = true
+    
+    // Setup the recallPasswordButton layout constraints
+    recallPasswordButton.rightAnchor.constraint(equalTo: loginInputContainerView.rightAnchor).isActive = true
+    recallPasswordButton.topAnchor.constraint(equalTo: loginInputContainerView.bottomAnchor, constant: 16).isActive = true
+    recallPasswordButton.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    recallPasswordButton.widthAnchor.constraint(equalTo: loginInputContainerView.widthAnchor, multiplier: 0.5).isActive = true
+    
+    // Add an action for the login button
+    loginInputContainerView.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
+    
+    // Add an action for the switchModeButton
+    switchModeButton.addTarget(self, action: #selector(changeFormMode), for: .touchUpInside)
+  }
+  
+  @objc private func login() {
+    
   }
   
   @objc private func changeFormMode() {
+    // Change the form mode for all inputs
+    loginInputContainerView.isSignUpView = !loginInputContainerView.isSignUpView
+    
     // Change the navigation bar title
     navigationItem.title = loginInputContainerView.isSignUpView ? "Регистрация" : "Вход"
     
-    // Change the form mode for all inputs
-    loginInputContainerView.isSignUpView = !loginInputContainerView.isSignUpView
+    // Change the switchButton title
+    switchModeButton.setTitle(loginInputContainerView.isSignUpView ? "Войти" : "Зарегистрироваться", for: .normal)
     
     // Change layouts of the container
     loginInputContainerViewHeightAnchor?.isActive = false
