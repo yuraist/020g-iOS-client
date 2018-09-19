@@ -11,6 +11,7 @@ import UIKit
 class AuthorizationViewController: UIViewController {
   
   let loginInputContainerView = LoginInputContainerView(frame: .zero)
+  var loginInputContainerViewHeightAnchor: NSLayoutConstraint?
   
   private func setupNavigationControllerStyle() {
     if #available(iOS 11.0, *) {
@@ -35,11 +36,26 @@ class AuthorizationViewController: UIViewController {
     view.backgroundColor = ApplicationColor.gray
     view.addSubview(loginInputContainerView)
     
-    loginInputContainerView.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 16).isActive = true
+    loginInputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     loginInputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    loginInputContainerView.widthAnchor.constraint(equalTo: view.widthAnchor, constant: -32).isActive = true
-    loginInputContainerView.heightAnchor.constraint(equalToConstant: LoginInputContainerView.loginHeight).isActive = true
+    loginInputContainerView.widthAnchor.constraint(equalToConstant: 304).isActive = true
+    loginInputContainerViewHeightAnchor = loginInputContainerView.heightAnchor.constraint(equalToConstant: LoginInputContainerView.loginHeight)
+    loginInputContainerViewHeightAnchor?.isActive = true
     
+    loginInputContainerView.loginButton.addTarget(self, action: #selector(changeFormMode), for: .touchUpInside)
+  }
+  
+  @objc private func changeFormMode() {
+    // Change the navigation bar title
+    navigationItem.title = loginInputContainerView.isSignUpView ? "Регистрация" : "Вход"
+    
+    // Change the form mode for all inputs
+    loginInputContainerView.isSignUpView = !loginInputContainerView.isSignUpView
+    
+    // Change layouts of the container
+    loginInputContainerViewHeightAnchor?.isActive = false
+    loginInputContainerViewHeightAnchor = loginInputContainerView.heightAnchor.constraint(equalToConstant: loginInputContainerView.isSignUpView ? LoginInputContainerView.signUpHeight : LoginInputContainerView.loginHeight)
+    loginInputContainerViewHeightAnchor?.isActive = true
   }
   
   @objc private func dismissController() {

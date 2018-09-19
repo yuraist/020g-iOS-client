@@ -23,6 +23,8 @@
 		BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */; };
 		BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */; };
 		BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55721500AF700E6AF30 /* StandardTextField.swift */; };
+		BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC559215221E200E6AF30 /* SeparatorView.swift */; };
+		BE1DC55C2152225D00E6AF30 /* LoginButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55B2152225D00E6AF30 /* LoginButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
 		BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInputContainerView.swift; sourceTree = "<group>"; };
 		BE1DC55721500AF700E6AF30 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
+		BE1DC559215221E200E6AF30 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
+		BE1DC55B2152225D00E6AF30 /* LoginButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +137,8 @@
 			children = (
 				BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */,
 				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
+				BE1DC559215221E200E6AF30 /* SeparatorView.swift */,
+				BE1DC55B2152225D00E6AF30 /* LoginButton.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -216,6 +222,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */,
+				BE1DC55C2152225D00E6AF30 /* LoginButton.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
@@ -227,6 +234,7 @@
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
 				BE1DC546214FAA6700E6AF30 /* AskViewController.swift in Sources */,
+				BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */,
 				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
 			);

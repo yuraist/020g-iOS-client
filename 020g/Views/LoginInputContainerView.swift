@@ -10,37 +10,44 @@ import UIKit
 
 class LoginInputContainerView: UIView {
   
-  static let signUpHeight: CGFloat = 260
+  static let signUpHeight: CGFloat = 236
   static let loginHeight: CGFloat = 140
   
-  var isSignUpView = false
+  var isSignUpView = false {
+    didSet {
+      changeFormMode()
+    }
+  }
   
   let emailTextField = StandardTextField(placeholder: "Email", isSecureTextEntry: false)
+  let emailSeparatorView = SeparatorView()
   let nameTextField = StandardTextField(placeholder: "Имя", isSecureTextEntry: false)
+  let nameSeparatorView = SeparatorView()
   let phoneTextField = StandardTextField(placeholder: "Телефон (не обязательно)", isSecureTextEntry: false)
+  let phoneSeparatorView = SeparatorView()
   let passwordTextField = StandardTextField(placeholder: "Пароль", isSecureTextEntry: true)
+  let passwordSeparatorView = SeparatorView()
   let repeatPasswordTextField = StandardTextField(placeholder: "Повторите пароль", isSecureTextEntry: true)
+  let repeatPasswordSeparatorView = SeparatorView()
   
-  var inputs: [StandardTextField]
-  
-  let loginButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("Войти", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.tintColor = ApplicationColor.white
-    button.backgroundColor = ApplicationColor.darkBlue
-    button.layer.cornerRadius = 5
-    button.layer.masksToBounds = true
-    button.translatesAutoresizingMaskIntoConstraints = false
+  let loginButton: LoginButton = {
+    let button = LoginButton(frame: .zero)
+    button.title = "Вход"
     return button
   }()
+  
+  var nameTextFieldHeightAnchor: NSLayoutConstraint?
+  var phoneTextFieldHeightAnchor: NSLayoutConstraint?
+  var repeatPasswordTextFieldHeightAnchor: NSLayoutConstraint?
+  
+  var inputs: [StandardTextField]
   
   override init(frame: CGRect) {
     self.inputs = [emailTextField, nameTextField, phoneTextField, passwordTextField, repeatPasswordTextField]
     super.init(frame: frame)
     
     setupContainerView()
-    addSubviews()
+    addAndSetupSubviews()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -57,13 +64,105 @@ class LoginInputContainerView: UIView {
     layer.shadowOffset = CGSize(width: 0, height: 0)
   }
   
-  private func addSubviews() {
+  private func addAndSetupSubviews() {
     addSubview(emailTextField)
+    addSubview(emailSeparatorView)
     addSubview(nameTextField)
+    addSubview(nameSeparatorView)
     addSubview(phoneTextField)
+    addSubview(phoneSeparatorView)
     addSubview(passwordTextField)
+    addSubview(passwordSeparatorView)
     addSubview(repeatPasswordTextField)
+    addSubview(repeatPasswordSeparatorView)
     addSubview(loginButton)
+    
+    // Setup emailTextField layout constraints
+    emailTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    emailTextField.topAnchor.constraint(equalTo: topAnchor, constant: 14).isActive = true
+    emailTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
+    emailTextField.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    
+    // Setup emailSeparatorView layout constraints
+    emailSeparatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    emailSeparatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: -1).isActive = true
+    emailSeparatorView.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
+    emailSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    // Setup nameTextField layout constraints
+    nameTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    nameTextField.topAnchor.constraint(equalTo: emailSeparatorView.bottomAnchor, constant: 0).isActive = true
+    nameTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
+    nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalToConstant: 0)
+    nameTextFieldHeightAnchor?.isActive = true
+    
+    // Setup nameSeparatorView layout constraints
+    nameSeparatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    nameSeparatorView.topAnchor.constraint(equalTo: nameTextField.bottomAnchor, constant: -1).isActive = true
+    nameSeparatorView.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
+    nameSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    // Setup phoneTextField layout constraints
+    phoneTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    phoneTextField.topAnchor.constraint(equalTo: nameSeparatorView.bottomAnchor).isActive = true
+    phoneTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
+    phoneTextFieldHeightAnchor = phoneTextField.heightAnchor.constraint(equalToConstant: 0)
+    phoneTextFieldHeightAnchor?.isActive = true
+    
+    // Setup phoneSeparatorView layout constraints
+    phoneSeparatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    phoneSeparatorView.topAnchor.constraint(equalTo: phoneTextField.bottomAnchor, constant: -1).isActive = true
+    phoneSeparatorView.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
+    phoneSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    // Setup passwordTextField layour constraints
+    passwordTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    passwordTextField.topAnchor.constraint(equalTo: phoneSeparatorView.bottomAnchor).isActive = true
+    passwordTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
+    passwordTextField.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    
+    // Setup passwordSeparatorView layout constraints
+    passwordSeparatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    passwordSeparatorView.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: -1).isActive = true
+    passwordSeparatorView.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
+    passwordSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    // Setup repeatPasswordTextField layout constraints
+    repeatPasswordTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    repeatPasswordTextField.topAnchor.constraint(equalTo: passwordSeparatorView.bottomAnchor, constant: 0).isActive = true
+    repeatPasswordTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
+    repeatPasswordTextFieldHeightAnchor = repeatPasswordTextField.heightAnchor.constraint(equalToConstant: 0)
+    repeatPasswordTextFieldHeightAnchor?.isActive = true
+    
+    // Setup repeatPasswordSeparatorView layout constraints
+    repeatPasswordSeparatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    repeatPasswordSeparatorView.topAnchor.constraint(equalTo: repeatPasswordTextField.bottomAnchor, constant: -1).isActive = true
+    repeatPasswordSeparatorView.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
+    repeatPasswordSeparatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
+    
+    // Setup loginButton layout constraints
+    loginButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    loginButton.topAnchor.constraint(equalTo: repeatPasswordSeparatorView.bottomAnchor, constant: 16).isActive = true
+    loginButton.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
+    loginButton.heightAnchor.constraint(equalToConstant: 32).isActive = true
+  }
+  
+  private func changeFormMode() {
+    loginButton.title = isSignUpView ? "Регистрация" : "Вход"
+    
+    // Deactivate anchors to change them
+    nameTextFieldHeightAnchor?.isActive = false
+    phoneTextFieldHeightAnchor?.isActive = false
+    repeatPasswordTextFieldHeightAnchor?.isActive = false
+    
+    nameTextFieldHeightAnchor = nameTextField.heightAnchor.constraint(equalToConstant: isSignUpView ? 32 : 0)
+    phoneTextFieldHeightAnchor = phoneTextField.heightAnchor.constraint(equalToConstant: isSignUpView ? 32 : 0)
+    repeatPasswordTextFieldHeightAnchor = repeatPasswordTextField.heightAnchor.constraint(equalToConstant: isSignUpView ? 32 : 0)
+    
+    // Activate changed anchors
+    nameTextFieldHeightAnchor?.isActive = true
+    phoneTextFieldHeightAnchor?.isActive = true
+    repeatPasswordTextFieldHeightAnchor?.isActive = true
   }
   
 }

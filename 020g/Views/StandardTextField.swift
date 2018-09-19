@@ -16,9 +16,6 @@ class StandardTextField: UITextField {
     super.init(frame: .zero)
     
     self.placeholder = placeholder
-    self.layer.cornerRadius = 5
-    self.layer.masksToBounds = true
-    self.borderStyle = .roundedRect
     self.isSecureTextEntry = isSecureTextEntry
     self.translatesAutoresizingMaskIntoConstraints = false
     self.font = UIFont.systemFont(ofSize: 15)

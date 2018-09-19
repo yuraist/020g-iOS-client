@@ -19,5 +19,6 @@ enum ApplicationColor {
   static let midBlue = UIColor.rgb(82, 106, 192)
   static let violet = UIColor.rgb(157, 167, 218)
   static let gray = UIColor.rgb(240, 240, 240)
+  static let lightGray = UIColor.lightGray
   static let white = UIColor.white
 }
