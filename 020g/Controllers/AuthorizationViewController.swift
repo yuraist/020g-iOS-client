@@ -17,7 +17,8 @@ class AuthorizationViewController: UIViewController {
     let button = UIButton(type: .system)
     button.setTitle("Зарегистрироваться", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.titleLabel?.textColor = ApplicationColor.buttonBlue
+    button.contentHorizontalAlignment = .left
+    button.setTitleColor(ApplicationColor.buttonBlue, for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -26,8 +27,8 @@ class AuthorizationViewController: UIViewController {
     let button = UIButton(type: .system)
     button.setTitle("Напомнить пароль", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.titleLabel?.textColor = ApplicationColor.buttonGray
-    button.titleLabel?.textAlignment = .right
+    button.contentHorizontalAlignment = .right
+    button.setTitleColor(ApplicationColor.buttonGray, for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -48,11 +49,15 @@ class AuthorizationViewController: UIViewController {
     setupNavigationControllerStyle()
     setupNavigationItem()
     
+    // Setup the background color for the view
     view.backgroundColor = ApplicationColor.gray
+    
+    // Add subviews
     view.addSubview(loginInputContainerView)
     view.addSubview(switchModeButton)
     view.addSubview(recallPasswordButton)
     
+    // MARK: - Setup subviews
     // Setup the loginInputContainerView layout constraints
     loginInputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     loginInputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
@@ -77,6 +82,9 @@ class AuthorizationViewController: UIViewController {
     
     // Add an action for the switchModeButton
     switchModeButton.addTarget(self, action: #selector(changeFormMode), for: .touchUpInside)
+    
+    // Add an action for the recallPasswordButton
+    recallPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
   }
   
   @objc private func login() {
@@ -97,6 +105,10 @@ class AuthorizationViewController: UIViewController {
     loginInputContainerViewHeightAnchor?.isActive = false
     loginInputContainerViewHeightAnchor = loginInputContainerView.heightAnchor.constraint(equalToConstant: loginInputContainerView.isSignUpView ? LoginInputContainerView.signUpHeight : LoginInputContainerView.loginHeight)
     loginInputContainerViewHeightAnchor?.isActive = true
+  }
+  
+  @objc private func forgotPassword() {
+    show(ForgotPasswordViewController(), sender: self)
   }
   
   @objc private func dismissController() {

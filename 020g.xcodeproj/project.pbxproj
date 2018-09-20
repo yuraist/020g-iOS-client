@@ -25,6 +25,7 @@
 		BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55721500AF700E6AF30 /* StandardTextField.swift */; };
 		BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC559215221E200E6AF30 /* SeparatorView.swift */; };
 		BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55B2152225D00E6AF30 /* StandardButton.swift */; };
+		BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +49,7 @@
 		BE1DC55721500AF700E6AF30 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
 		BE1DC559215221E200E6AF30 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		BE1DC55B2152225D00E6AF30 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
+		BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallPasswordView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */,
+				BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */,
 				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
 				BE1DC559215221E200E6AF30 /* SeparatorView.swift */,
 				BE1DC55B2152225D00E6AF30 /* StandardButton.swift */,
@@ -237,6 +240,7 @@
 				BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */,
 				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
+				BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -24,6 +24,7 @@ class StandardButton: UIButton {
   init(title: String) {
     super.init(frame: .zero)
     setupButton()
+    setTitle(title, for: .normal)
   }
   
   private func setupButton() {
