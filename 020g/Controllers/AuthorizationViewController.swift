@@ -88,7 +88,8 @@ class AuthorizationViewController: UIViewController {
   }
   
   @objc private func login() {
-    
+    // TODO: - Change the logic
+    show(AskViewController(), sender: self)
   }
   
   @objc private func changeFormMode() {

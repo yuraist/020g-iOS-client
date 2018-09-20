@@ -26,6 +26,9 @@
 		BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC559215221E200E6AF30 /* SeparatorView.swift */; };
 		BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55B2152225D00E6AF30 /* StandardButton.swift */; };
 		BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */; };
+		BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */; };
+		BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5612153F10800E6AF30 /* AskView.swift */; };
+		BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC563215408C500E6AF30 /* UIViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +53,9 @@
 		BE1DC559215221E200E6AF30 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		BE1DC55B2152225D00E6AF30 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
 		BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallPasswordView.swift; sourceTree = "<group>"; };
+		BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledInputView.swift; sourceTree = "<group>"; };
+		BE1DC5612153F10800E6AF30 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
+		BE1DC563215408C500E6AF30 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -139,8 +145,10 @@
 			children = (
 				BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */,
 				BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */,
-				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
+				BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */,
+				BE1DC5612153F10800E6AF30 /* AskView.swift */,
 				BE1DC559215221E200E6AF30 /* SeparatorView.swift */,
+				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
 				BE1DC55B2152225D00E6AF30 /* StandardButton.swift */,
 			);
 			path = Views;
@@ -150,6 +158,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1DC541214FA61E00E6AF30 /* Helpers.swift */,
+				BE1DC563215408C500E6AF30 /* UIViewExtension.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -232,7 +241,10 @@
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* MainViewController.swift in Sources */,
 				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
+				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
+				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
+				BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */,
 				BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */,
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
