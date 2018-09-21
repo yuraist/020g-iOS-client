@@ -32,6 +32,7 @@
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainTableViewController.swift */; };
+		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,7 @@
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 			children = (
 				BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */,
 				BEA2FFAA215500C000E5C6FA /* MainTableViewController.swift */,
+				BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */,
 				BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */,
 				BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */,
 				BE1DC547214FAADC00E6AF30 /* ForgotPasswordViewController.swift */,
@@ -250,6 +253,7 @@
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
+				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
 				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
 				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
