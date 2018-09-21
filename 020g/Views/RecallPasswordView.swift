@@ -25,6 +25,8 @@ class RecallPasswordView: UIView {
     return tf
   }()
   
+  let separatorView = SeparatorView()
+  
   let recallButton: StandardButton = {
     let button = StandardButton(title: "Отправить")
     return button
@@ -47,6 +49,7 @@ class RecallPasswordView: UIView {
     
     addSubview(messageLabel)
     addSubview(emailTextField)
+    addSubview(separatorView)
     addSubview(recallButton)
     
     // Setup messageLabel layout constraints
@@ -60,6 +63,12 @@ class RecallPasswordView: UIView {
     emailTextField.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     emailTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -24).isActive = true
     emailTextField.heightAnchor.constraint(equalToConstant: 32).isActive = true
+    
+    // Setup separatorView
+    separatorView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    separatorView.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: -1).isActive = true
+    separatorView.widthAnchor.constraint(equalTo: emailTextField.widthAnchor).isActive = true
+    separatorView.heightAnchor.constraint(equalToConstant: 1).isActive = true
     
     // Setup recallButton layout constraints
     recallButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
