@@ -12,6 +12,7 @@ import UIKit
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
   private let menuCellId = "menuCell"
+  private let menuImageNames = ["list", "signIn", "catalogue", "list", "pen"]
   private let menuTitles = ["Каталог цен", "Авторизация", "Регистрация", "Страйкбольные магазины", "Задать вопрос"]
   
   private lazy var menuTableView: UITableView = {
@@ -48,6 +49,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: menuCellId, for: indexPath) as! MenuTableViewCell
+    cell.imageView?.image = UIImage(named: menuImageNames[indexPath.row])
     cell.textLabel?.text = menuTitles[indexPath.row]
     return cell
   }

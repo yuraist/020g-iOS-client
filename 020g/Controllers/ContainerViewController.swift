@@ -8,10 +8,23 @@
 
 import UIKit
 
-class MainViewController: UITableViewController {
+class ContainerViewController: UIViewController {
   
   override var preferredStatusBarStyle: UIStatusBarStyle {
     return .lightContent
+  }
+  
+  var isShowMenu = false
+  var menuViewController: MenuViewController!
+  
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = ApplicationColor.midBlue
+    
+    setupNavigationControllerStyle()
+    setupNavigationItem()
+    
+    menuViewController = MenuViewController()
   }
   
   // Set the style for teh navigation bar
@@ -61,12 +74,6 @@ class MainViewController: UITableViewController {
     item.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
   }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    setupNavigationControllerStyle()
-    setupNavigationItem()
-  }
-  
   @objc private func showAuthorizationViewController() {
     present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
   }
@@ -76,7 +83,21 @@ class MainViewController: UITableViewController {
   }
   
   @objc private func showMenu() {
-    show(MenuViewController(), sender: self)
+    isShowMenu = !isShowMenu
+    
+    if isShowMenu {
+      slideInMenuView()
+    } else {
+      slideOutMenuView()
+    }
+  }
+  
+  private func slideInMenuView() {
+    show(menuViewController, sender: self)
+  }
+  
+  private func slideOutMenuView() {
+    
   }
   
 }
