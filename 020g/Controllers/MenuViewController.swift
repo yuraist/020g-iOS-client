@@ -49,7 +49,17 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: menuCellId, for: indexPath) as! MenuTableViewCell
+    
     cell.imageView?.image = UIImage(named: menuImageNames[indexPath.row])
+    
+    // Setup the image
+    let imageSize = CGSize(width: 24, height: 24)
+    UIGraphicsBeginImageContextWithOptions(imageSize, false, UIScreen.main.scale)
+    let imageRect = CGRect(origin: CGPoint.zero, size: imageSize)
+    cell.imageView?.image!.draw(in: imageRect)
+    cell.imageView?.image! = UIGraphicsGetImageFromCurrentImageContext()!
+    UIGraphicsEndImageContext()
+    
     cell.textLabel?.text = menuTitles[indexPath.row]
     return cell
   }
