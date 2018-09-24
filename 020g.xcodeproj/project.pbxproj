@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */; };
 		BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */; };
 		BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */; };
 		BE1DC531214FA1D400E6AF30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC530214FA1D400E6AF30 /* Assets.xcassets */; };
@@ -31,11 +32,12 @@
 		BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC563215408C500E6AF30 /* UIViewExtension.swift */; };
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
-		BEA2FFAB215500C000E5C6FA /* MainTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainTableViewController.swift */; };
+		BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		BE1DC526214FA1D300E6AF30 /* 020g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 020g.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -62,7 +64,7 @@
 		BE1DC563215408C500E6AF30 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
-		BEA2FFAA215500C000E5C6FA /* MainTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTableViewController.swift; sourceTree = "<group>"; };
+		BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -128,7 +130,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */,
-				BEA2FFAA215500C000E5C6FA /* MainTableViewController.swift */,
+				BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */,
 				BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */,
 				BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */,
 				BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */,
@@ -156,12 +158,13 @@
 			children = (
 				BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */,
 				BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */,
-				BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */,
 				BE1DC5612153F10800E6AF30 /* AskView.swift */,
-				BE1DC559215221E200E6AF30 /* SeparatorView.swift */,
 				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
+				BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */,
+				BE1DC559215221E200E6AF30 /* SeparatorView.swift */,
 				BE1DC55B2152225D00E6AF30 /* StandardButton.swift */,
 				BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */,
+				BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -249,11 +252,12 @@
 				BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
-				BEA2FFAB215500C000E5C6FA /* MainTableViewController.swift in Sources */,
+				BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
+				BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */,
 				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
 				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
