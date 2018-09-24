@@ -30,6 +30,8 @@
 		BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */; };
 		BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5612153F10800E6AF30 /* AskView.swift */; };
 		BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC563215408C500E6AF30 /* UIViewExtension.swift */; };
+		BE3D1D202159537500A6E9E4 /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */; };
+		BE3D1D22215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D21215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift */; };
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */; };
@@ -62,6 +64,8 @@
 		BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledInputView.swift; sourceTree = "<group>"; };
 		BE1DC5612153F10800E6AF30 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
 		BE1DC563215408C500E6AF30 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE3D1D21215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +169,8 @@
 				BE1DC55B2152225D00E6AF30 /* StandardButton.swift */,
 				BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */,
 				BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */,
+				BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */,
+				BE3D1D21215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -255,6 +261,7 @@
 				BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
+				BE3D1D22215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
 				BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */,
@@ -263,6 +270,7 @@
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
 				BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */,
 				BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */,
+				BE3D1D202159537500A6E9E4 /* MenuBarCollectionViewCell.swift in Sources */,
 				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
 				BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */,
 				BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */,

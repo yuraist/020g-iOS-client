@@ -10,6 +10,8 @@ import UIKit
 
 class MenuBarView: UIView {
   
+  private let cellId = "menuBarCellId"
+  
   let centerButtonView: UIView = {
     let view = UIView()
     view.backgroundColor = ApplicationColor.white
@@ -30,6 +32,7 @@ class MenuBarView: UIView {
     super.init(frame: frame)
     translatesAutoresizingMaskIntoConstraints = false
     setupSubviews()
+    setupCollectionView()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -57,7 +60,37 @@ class MenuBarView: UIView {
     collectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     collectionView.topAnchor.constraint(equalTo: centerButtonView.bottomAnchor).isActive = true
     collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    collectionView.heightAnchor.constraint(equalToConstant: 28).isActive = true
+    collectionView.heightAnchor.constraint(equalToConstant: 32).isActive = true
+  }
+  
+  func setupCollectionView() {
+    collectionView.delegate = self
+    collectionView.dataSource = self
+    collectionView.showsHorizontalScrollIndicator = false
+    
+    collectionView.register(MenuBarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+    
+    if let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      collectionViewLayout.scrollDirection = .horizontal
+      collectionViewLayout.minimumLineSpacing = 0
+      collectionViewLayout.minimumInteritemSpacing = 0
+    }
+  }
+  
+}
+
+extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return 5
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: 100, height: 32)
   }
   
 }

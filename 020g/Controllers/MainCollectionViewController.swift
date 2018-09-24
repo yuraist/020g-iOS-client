@@ -24,9 +24,7 @@ class MainCollectionViewController: UICollectionViewController {
     navigationItem.title = "0.20g - агрегатор №1"
     setupNavigationItem()
     setupMenuBar()
-    
-    collectionView.backgroundColor = ApplicationColor.white
-    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
+    setupCollectionView()
   }
   
   // Setup items of the navigation bar
@@ -70,12 +68,23 @@ class MainCollectionViewController: UICollectionViewController {
     }
     menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    menuBar.heightAnchor.constraint(equalToConstant: 80).isActive = true
+    menuBar.heightAnchor.constraint(equalToConstant: 84).isActive = true
   }
   
   private func setupBarButtonConstraints(forBarItem item: UIBarButtonItem) {
     item.customView?.widthAnchor.constraint(equalToConstant: 22).isActive = true
     item.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
+  }
+  
+  private func setupCollectionView() {
+    collectionView.backgroundColor = ApplicationColor.white
+    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
+    
+    if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
+      let insetHeight = navigationControllerHeight + UIApplication.shared.statusBarFrame.height + menuBar.frame.size.height
+      collectionView.contentInset = UIEdgeInsets(top: insetHeight, left: 0, bottom: 0, right: 0)
+    }
+    
   }
   
   @objc private func showAuthorizationViewController() {
@@ -112,14 +121,14 @@ class MainCollectionViewController: UICollectionViewController {
 
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: view.frame.size.width/2, height: view.frame.size.width/2)
+    return CGSize(width: view.frame.size.width/2 - 2, height: view.frame.size.width/2 - 4)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
+    return 2
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 0
+    return 2
   }
 }
