@@ -35,7 +35,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     // Setup layout constraints for the menuTableView
     menuTableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
     menuTableView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    menuTableView.widthAnchor.constraint(equalToConstant: 280).isActive = true
+    menuTableView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     menuTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
   }
   

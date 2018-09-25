@@ -78,7 +78,7 @@ class MainCollectionViewController: UICollectionViewController {
   
   private func setupCollectionView() {
     collectionView.backgroundColor = ApplicationColor.white
-    collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
+    collectionView.register(CatalogueItemCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
     
     if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
       let insetHeight = navigationControllerHeight + UIApplication.shared.statusBarFrame.height + menuBar.frame.size.height
@@ -113,7 +113,7 @@ class MainCollectionViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath)
-    cell.backgroundColor = ApplicationColor.buttonBlue
+    
     return cell
   }
   

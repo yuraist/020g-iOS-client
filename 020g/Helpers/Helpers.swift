@@ -21,6 +21,7 @@ enum ApplicationColor {
   static let buttonGray = UIColor.rgb(123, 123, 123)
   static let violet = UIColor.rgb(157, 167, 218)
   static let gray = UIColor.rgb(240, 240, 240)
+  static let darkGray = UIColor.darkGray
   static let lightGray = UIColor.lightGray
   static let white = UIColor.white
 }
