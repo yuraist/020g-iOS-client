@@ -24,7 +24,7 @@ class ContainerViewController: UIViewController {
   
   // Add additional controllers
   var centerNavigationController: UINavigationController!
-  var mainController: MainCollectionViewController!
+  var mainController: UIViewController!
   var menuViewController: MenuViewController?
   
   override func viewDidLoad() {
@@ -34,7 +34,7 @@ class ContainerViewController: UIViewController {
     // Setup mainViewController
     let layout = UICollectionViewFlowLayout()
     mainController = MainCollectionViewController(collectionViewLayout: layout)
-    mainController.delegate = self
+    (mainController as! MainCollectionViewController).delegate = self
     
     // Setup navigation controller
     setupNavigationController()

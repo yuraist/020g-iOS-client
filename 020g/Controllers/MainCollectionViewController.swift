@@ -25,6 +25,8 @@ class MainCollectionViewController: UICollectionViewController {
     setupNavigationItem()
     setupMenuBar()
     setupCollectionView()
+    
+    checkApiKeys()
   }
   
   // Setup items of the navigation bar
@@ -99,12 +101,16 @@ class MainCollectionViewController: UICollectionViewController {
     delegate?.toggleLeftPanel?()
   }
   
-  private func slideInMenuView() {
-    
-  }
-  
-  private func slideOutMenuView() {
-    
+  private func checkApiKeys() {
+    APIManager.shared.checkKeys(withCatalogKey: nil, completion: { success, keys in
+      if success {
+        if keys != nil {
+          print(keys!.catalogKey)
+        }
+      } else {
+        print("Something went wrong")
+      }
+    })
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

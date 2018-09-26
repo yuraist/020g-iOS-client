@@ -63,4 +63,12 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     cell.textLabel?.text = menuTitles[indexPath.row]
     return cell
   }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let row = indexPath.row
+    if menuTitles[row] == "Страйкбольные магазины" {
+      // TODO: - Show in the center view controller
+      show(ShopListTableViewController(), sender: self)
+    }
+  }
 }

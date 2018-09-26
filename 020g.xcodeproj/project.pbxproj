@@ -36,6 +36,9 @@
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
+		BEF6F697215AA816000E4BCB /* ShopListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */; };
+		BEF6F699215B35E1000E4BCB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F698215B35E1000E4BCB /* APIManager.swift */; };
+		BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -70,6 +73,9 @@
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
+		BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListTableViewController.swift; sourceTree = "<group>"; };
+		BEF6F698215B35E1000E4BCB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
+		BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +152,7 @@
 				BE1DC54B214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift */,
 				BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */,
 				BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */,
+				BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -153,6 +160,8 @@
 		BE1DC53E214FA27900E6AF30 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				BEF6F698215B35E1000E4BCB /* APIManager.swift */,
+				BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -259,6 +268,7 @@
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
 				BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */,
+				BEF6F699215B35E1000E4BCB /* APIManager.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BE3D1D22215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift in Sources */,
@@ -267,6 +277,7 @@
 				BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */,
 				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
 				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,
+				BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */,
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
 				BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */,
 				BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */,
@@ -277,6 +288,7 @@
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
 				BE1DC546214FAA6700E6AF30 /* AskViewController.swift in Sources */,
+				BEF6F697215AA816000E4BCB /* ShopListTableViewController.swift in Sources */,
 				BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */,
 				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
