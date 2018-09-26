@@ -9,6 +9,15 @@
 import Foundation
 
 struct ApiKeys: Codable {
+  
+  static var token: String? {
+    didSet {
+      if token != nil {
+        UserDefaults.standard.set(token!, forKey: "token")
+      }
+    }
+  }
+  
   var catalogKey: String
   var superKey: String?
   

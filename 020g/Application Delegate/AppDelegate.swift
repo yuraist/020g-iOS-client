@@ -18,6 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = ContainerViewController()
     window?.makeKeyAndVisible()
+    
+    // Get a token (catalog_key)
+    let catalogKey = UserDefaults.standard.string(forKey: "token")
+    APIManager.shared.checkKeys(withCatalogKey: catalogKey) { (success, key) in
+      if success {
+        ApiKeys.token = key?.catalogKey
+        print(ApiKeys.token ?? "no token")
+      } else {
+        ApiKeys.token = nil
+      }
+    }
     return true
   }
   
