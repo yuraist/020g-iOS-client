@@ -9,16 +9,21 @@
 import UIKit
 
 class APIManager {
+  
   static let shared = APIManager()
   
+  let urlSheme = "http"
   let baseUrl = "020g.ru"
   
-  func checkKeys(withCatalogKey catalogKey: String?, completion: ((Bool, ApiKeys?)->Void)?) {
+  func checkKeys(success: ((Bool)->Void)?) {
     // Configure url
     var urlComponents = URLComponents()
-    urlComponents.scheme = "http"
-    urlComponents.host = "020g.ru"
+    urlComponents.scheme = urlSheme
+    urlComponents.host = baseUrl
     urlComponents.path = "/abpro/check_keys"
+    
+    // Get catalog_key if there is one
+    let catalogKey = UserDefaults.standard.string(forKey: "token")
     
     // Add query parameters
     let catalogKeyItem = URLQueryItem(name: "catalog_key", value: catalogKey ?? "")
@@ -47,12 +52,13 @@ class APIManager {
         let decoder = JSONDecoder()
         do {
           let keys = try decoder.decode(ApiKeys.self, from: jsonData)
-          completion?(true, keys)
+          ApiKeys.token = keys.catalogKey
+          success?(true)
         } catch {
-          completion?(false, nil)
+          success?(false)
         }
       } else {
-        completion?(false, nil)
+        success?(false)
       }
     }
     
