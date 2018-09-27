@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// Structure represents product categories
 struct Category: Codable {
   let cat: Int
   let title: String
@@ -18,6 +19,7 @@ struct Category: Codable {
   }
 }
 
+/// Structure represents a list of product categories
 struct Categories: Codable {
   let list: [Category]
 }
