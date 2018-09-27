@@ -8,6 +8,29 @@
 
 import UIKit
 
+enum Method: String {
+  case get = "GET"
+  case post = "POST"
+}
+
+extension URLRequest {
+  static func configureRequest(forPath path: String, queryItems items: [URLQueryItem], method: Method) -> URLRequest {
+    var urlComponents = URLComponents()
+    urlComponents.scheme = "http"
+    urlComponents.host = "020g.ru"
+    urlComponents.path = path
+    urlComponents.queryItems = items
+    
+    guard let url = urlComponents.url else {
+      fatalError("cannot create a url")
+    }
+    
+    var request = URLRequest(url: url)
+    request.httpMethod = method.rawValue
+    return request
+  }
+}
+
 /// An intergace to manage API requests
 class APIManager {
   
@@ -127,5 +150,52 @@ class APIManager {
     }
     
     task.resume()
+  }
+  
+  func getTabProducts(categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
+    // Check the identification token
+    guard let token = ApiKeys.token else {
+      fatalError("No token")
+    }
+
+    // Create query items for a request
+    let tokenItem = URLQueryItem(name: "token", value: token)
+    let appnameItem = URLQueryItem(name: "appname", value: appName)
+    let categoryItem = URLQueryItem(name: "cat", value: "\(categoryId)")
+    let pageItem = URLQueryItem(name: "page", value: "\(page)")
+    let queryItems = [tokenItem, appnameItem, categoryItem, pageItem]
+    
+    // Configure the request
+    let request = URLRequest.configureRequest(forPath: "/abpro/get_tab_products", queryItems: queryItems, method: .get)
+    // Configure a session
+    let session = URLSession(configuration: .default)
+    // Configure a task
+    let dataTask = session.dataTask(with: request) { (data, response, error) in
+      if error != nil {
+        print(error!)
+        completion?(false, nil)
+      }
+      
+      if let jsonData = data {
+        do {
+          let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+          let productDictionaryList = jsonObject["list"] as! [Dictionary<String, Any>]
+          
+          var products = [Product]()
+          for productDict in productDictionaryList {
+            let product = Product(withDictionary: productDict)
+            products.append(product)
+          }
+          completion?(true, products)
+        } catch {
+          completion?(false, nil)
+        }
+      } else {
+        completion?(false, nil)
+      }
+    }
+    
+    // Resume the data task
+    dataTask.resume()
   }
 }

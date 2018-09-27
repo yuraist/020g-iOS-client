@@ -106,9 +106,7 @@ class MainCollectionViewController: UICollectionViewController {
       APIManager.shared.guestIndex(token: ApiKeys.token!) { (success, categories) in
         if success {
           if let categories = categories {
-            for category in categories {
-              print("Category #\(category.cat): \(category.title)")
-            }
+            self.getProductList(forCategory: categories[0].cat, page: 1)
           }
         } else {
           print("No success")
@@ -116,6 +114,16 @@ class MainCollectionViewController: UICollectionViewController {
       }
     } else {
       print("No token")
+    }
+  }
+  
+  private func getProductList(forCategory category: Int, page: Int) {
+    if ApiKeys.token != nil {
+      APIManager.shared.getTabProducts(categoryId: category, page: page) { (success, products) in
+//        if let products = products {
+          // TODO: - Update collection view controller
+//        }
+      }
     }
   }
   
