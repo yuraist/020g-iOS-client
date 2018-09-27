@@ -8,9 +8,10 @@
 
 import Foundation
 
+/// A keys stogare interface
 struct ApiKeys: Codable {
   
-  // Token
+  /// A string to pass into API requests as an identification key
   static var token = UserDefaults.standard.string(forKey: "token") {
     didSet {
       if token != nil {
@@ -19,7 +20,11 @@ struct ApiKeys: Codable {
     }
   }
   
+  /// A string that pass as a token string
   var catalogKey: String
+  
+  /// An unnecessary string to store, but it must be passed
+  /// as a query parameter into the APIManager method to checking keys
   var superKey: String?
   
   enum CodingKeys: String, CodingKey {
