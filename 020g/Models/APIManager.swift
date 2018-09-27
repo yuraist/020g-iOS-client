@@ -8,6 +8,7 @@
 
 import UIKit
 
+/// An intergace to manage API requests
 class APIManager {
   
   static let shared = APIManager()
@@ -16,6 +17,14 @@ class APIManager {
   let baseUrl = "020g.ru"
   let appName = "020g"
   
+  
+  /// Requests a catalog_key and super_key to API and returns the success block.
+  /**
+   Configuers an HTTP-request by creating URL from the url components
+   (scheme, host, path) and query items (parameters)
+   - parameters:
+     - success: Contains true value if a new token (catalog_key) has been received else contains false
+   */
   func checkKeys(success: ((Bool)->Void)?) {
     // Configure url
     var urlComponents = URLComponents()
@@ -67,6 +76,13 @@ class APIManager {
     task.resume()
   }
   
+  /// Returns a block with boolean value of request success and with an array of received categories
+  /**
+   Creates a request that configured the same way as checkKeys(success:) to the API
+   - parameters:
+     - token: String to pass into HTTP-request parameters
+     - completion: Completion handler to call when the request is complete.
+   */
   func guestIndex(token: String, completion: ((Bool, [Category]?)->Void)?) {
     // Configure url components
     var urlComponents = URLComponents()

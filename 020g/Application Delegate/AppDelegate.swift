@@ -15,10 +15,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-    // Check token
+    // Check token before the app is loaded
     APIManager.shared.checkKeys(success: nil)
     
-    // Add a root view controller
+    // Add the ContainerViewController as a root view controller
     window = UIWindow(frame: UIScreen.main.bounds)
     window?.rootViewController = ContainerViewController()
     window?.makeKeyAndVisible()
