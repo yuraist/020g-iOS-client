@@ -10,7 +10,8 @@ import Foundation
 
 struct ApiKeys: Codable {
   
-  static var token: String? = UserDefaults.standard.string(forKey: "token") {
+  // Token
+  static var token = UserDefaults.standard.string(forKey: "token") {
     didSet {
       if token != nil {
         UserDefaults.standard.set(token!, forKey: "token")

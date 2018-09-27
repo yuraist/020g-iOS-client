@@ -25,6 +25,8 @@ class MainCollectionViewController: UICollectionViewController {
     setupNavigationItem()
     setupMenuBar()
     setupCollectionView()
+    
+    getCategories()
   }
   
   // Setup items of the navigation bar
@@ -97,6 +99,24 @@ class MainCollectionViewController: UICollectionViewController {
   
   @objc private func showMenu() {
     delegate?.toggleLeftPanel?()
+  }
+  
+  private func getCategories() {
+    if ApiKeys.token != nil {
+      APIManager.shared.guestIndex(token: ApiKeys.token!) { (success, categories) in
+        if success {
+          if let categories = categories {
+            for category in categories {
+              print("Category #\(category.cat): \(category.title)")
+            }
+          }
+        } else {
+          print("No success")
+        }
+      }
+    } else {
+      print("No token")
+    }
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

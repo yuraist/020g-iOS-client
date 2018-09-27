@@ -39,6 +39,7 @@
 		BEF6F697215AA816000E4BCB /* ShopListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */; };
 		BEF6F699215B35E1000E4BCB /* APIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F698215B35E1000E4BCB /* APIManager.swift */; };
 		BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */; };
+		BEF6F69D215B9378000E4BCB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69C215B9378000E4BCB /* Category.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -76,6 +77,7 @@
 		BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListTableViewController.swift; sourceTree = "<group>"; };
 		BEF6F698215B35E1000E4BCB /* APIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIManager.swift; sourceTree = "<group>"; };
 		BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
+		BEF6F69C215B9378000E4BCB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -162,6 +164,7 @@
 			children = (
 				BEF6F698215B35E1000E4BCB /* APIManager.swift */,
 				BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */,
+				BEF6F69C215B9378000E4BCB /* Category.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -266,6 +269,7 @@
 				BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */,
 				BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
+				BEF6F69D215B9378000E4BCB /* Category.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
 				BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */,
 				BEF6F699215B35E1000E4BCB /* APIManager.swift in Sources */,
