@@ -27,7 +27,7 @@ class AskViewController: UIViewController {
     inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
     inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
     inputContainerView.widthAnchor.constraint(equalToConstant: 304).isActive = true
-    inputContainerView.heightAnchor.constraint(equalToConstant: 500).isActive = true
+    inputContainerView.heightAnchor.constraint(equalToConstant: 370).isActive = true
   }
   
   private func setupNavigationControllerStyle() {

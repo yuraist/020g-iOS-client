@@ -12,8 +12,8 @@ class TitledInputView: UIView {
 
   let titleLabel: UILabel = {
     let label = UILabel()
-    label.textColor = ApplicationColor.lightGray
-    label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+    label.textColor = ApplicationColor.darkGray
+    label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
