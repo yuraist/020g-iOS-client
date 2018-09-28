@@ -14,7 +14,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   var delegate: MenuViewControllerDelegate?
   
   private let menuCellId = "menuCell"
-  private let menuImageNames = ["list", "signIn", "catalogue", "list", "pen"]
+  private let menuImageNames = ["list", "signIn", "catalogue", "pen"]
   private let menuTitles = ["Каталог цен", "Авторизация", "Страйкбольные магазины", "Задать вопрос"]
   
   private lazy var menuTableView: UITableView = {
@@ -55,7 +55,7 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
     cell.imageView?.image = UIImage(named: menuImageNames[indexPath.row])
     
     // Setup the image
-    let imageSize = CGSize(width: 24, height: 24)
+    let imageSize = CGSize(width: 22, height: 22)
     UIGraphicsBeginImageContextWithOptions(imageSize, false, UIScreen.main.scale)
     let imageRect = CGRect(origin: CGPoint.zero, size: imageSize)
     cell.imageView?.image!.draw(in: imageRect)

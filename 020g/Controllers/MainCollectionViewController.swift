@@ -65,8 +65,8 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   private func setupBarButtonConstraints(forBarItem item: UIBarButtonItem) {
-    item.customView?.widthAnchor.constraint(equalToConstant: 22).isActive = true
-    item.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
+    item.customView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
+    item.customView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
   }
   
   @objc private func showAuthorizationViewController() {
