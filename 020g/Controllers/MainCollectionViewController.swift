@@ -29,6 +29,8 @@ class MainCollectionViewController: UICollectionViewController {
     getCategories()
   }
   
+  // MARK: - Setup navigation controller
+  
   // Setup items of the navigation bar
   private func setupNavigationItem() {
     let loginButton = UIButton()
@@ -62,31 +64,9 @@ class MainCollectionViewController: UICollectionViewController {
     navigationItem.leftBarButtonItem = menuBarButtonItem
   }
   
-  private func setupMenuBar() {
-    view.addSubview(menuBar)
-    if let navigationBarHeight = navigationController?.navigationBar.frame.size.height {
-      let topLayoutGuideHeight = navigationBarHeight + UIApplication.shared.statusBarFrame.size.height
-      menuBar.topAnchor.constraint(equalTo: view.topAnchor, constant: topLayoutGuideHeight).isActive = true
-    }
-    menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    menuBar.heightAnchor.constraint(equalToConstant: 84).isActive = true
-  }
-  
   private func setupBarButtonConstraints(forBarItem item: UIBarButtonItem) {
     item.customView?.widthAnchor.constraint(equalToConstant: 22).isActive = true
     item.customView?.heightAnchor.constraint(equalToConstant: 22).isActive = true
-  }
-  
-  private func setupCollectionView() {
-    collectionView.backgroundColor = ApplicationColor.white
-    collectionView.register(CatalogueItemCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
-    
-    if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
-      let insetHeight = navigationControllerHeight + UIApplication.shared.statusBarFrame.height + menuBar.frame.size.height
-      collectionView.contentInset = UIEdgeInsets(top: insetHeight, left: 0, bottom: 0, right: 0)
-    }
-    
   }
   
   @objc private func showAuthorizationViewController() {
@@ -99,6 +79,30 @@ class MainCollectionViewController: UICollectionViewController {
   
   @objc private func showMenu() {
     delegate?.toggleLeftPanel?()
+  }
+  
+  // MARK: - Setup menu bar
+  
+  private func setupMenuBar() {
+    view.addSubview(menuBar)
+    if let navigationBarHeight = navigationController?.navigationBar.frame.size.height {
+      let topLayoutGuideHeight = navigationBarHeight + UIApplication.shared.statusBarFrame.size.height
+      menuBar.topAnchor.constraint(equalTo: view.topAnchor, constant: topLayoutGuideHeight).isActive = true
+    }
+    menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    menuBar.heightAnchor.constraint(equalToConstant: 84).isActive = true
+  }
+  
+  private func setupCollectionView() {
+    collectionView.backgroundColor = ApplicationColor.white
+    collectionView.register(CatalogueItemCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
+    
+    if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
+      let insetHeight = navigationControllerHeight + UIApplication.shared.statusBarFrame.height + menuBar.frame.size.height
+      collectionView.contentInset = UIEdgeInsets(top: insetHeight, left: 0, bottom: 0, right: 0)
+    }
+    
   }
   
   private func getCategories() {

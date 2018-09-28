@@ -11,9 +11,11 @@ import UIKit
 
 class MenuViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
   
+  var delegate: MenuViewControllerDelegate?
+  
   private let menuCellId = "menuCell"
   private let menuImageNames = ["list", "signIn", "catalogue", "list", "pen"]
-  private let menuTitles = ["Каталог цен", "Авторизация", "Регистрация", "Страйкбольные магазины", "Задать вопрос"]
+  private let menuTitles = ["Каталог цен", "Авторизация", "Страйкбольные магазины", "Задать вопрос"]
   
   private lazy var menuTableView: UITableView = {
     let tableView = UITableView(frame: .zero, style: .plain)
@@ -65,10 +67,6 @@ class MenuViewController: UIViewController, UITableViewDelegate, UITableViewData
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let row = indexPath.row
-    if menuTitles[row] == "Страйкбольные магазины" {
-      // TODO: - Show in the center view controller
-      show(ShopListTableViewController(), sender: self)
-    }
+    delegate?.didSelect!(screen: menuTitles[indexPath.row])
   }
 }

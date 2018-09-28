@@ -29,7 +29,11 @@ class ContainerViewController: UIViewController {
   var centerNavigationController: UINavigationController!
   
   /// Center controller
-  var mainController: UIViewController!
+  var mainController: UIViewController! {
+    didSet {
+      setupNavigationController()
+    }
+  }
   
   /// A controller represents a side menu view
   var menuViewController: MenuViewController?
@@ -40,10 +44,6 @@ class ContainerViewController: UIViewController {
     
     // Setup the mainViewController
     setupMainViewController()
-    
-    // Setup navigation controller
-    setupNavigationController()
-    setupNavigationControllerStyle()
   }
   
   /// Initiates a MainCollectionViewController instance and set it to the mainController property.
@@ -63,6 +63,9 @@ class ContainerViewController: UIViewController {
     view.addSubview(centerNavigationController.view)
     addChild(centerNavigationController)
     centerNavigationController.didMove(toParent: self)
+    
+    // Setup the navigation controller appearance
+    setupNavigationControllerStyle()
   }
   
   /// Set a color and a title color for the navigation bar
@@ -91,6 +94,7 @@ extension ContainerViewController: CenterViewControllerDelegate {
     guard menuViewController == nil else { return }
     
     let vc = MenuViewController()
+    vc.delegate = self
     addChild(sidePanelController: vc)
     menuViewController = vc
   }
@@ -135,5 +139,31 @@ extension ContainerViewController: CenterViewControllerDelegate {
     } else {
       centerNavigationController.view.layer.shadowOpacity = 0.0
     }
+  }
+}
+
+extension ContainerViewController: MenuViewControllerDelegate {
+  func didSelect(screen: String) {
+    switch screen {
+    case "Каталог цен":
+      if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListTableViewController  {
+        centerNavigationController.popViewController(animated: true)
+      }
+    case "Авторизация":
+      present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+    case "Страйкбольные магазины":
+      if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListTableViewController {
+        break
+      } else {
+        let shopListViewController = ShopListTableViewController()
+        shopListViewController.delegate = self
+        centerNavigationController.pushViewController(shopListViewController, animated: true)
+      }
+    case "Задать вопрос":
+      present(UINavigationController(rootViewController: AskViewController()), animated: true, completion: nil)
+    default:
+      return
+    }
+    toggleLeftPanel()
   }
 }

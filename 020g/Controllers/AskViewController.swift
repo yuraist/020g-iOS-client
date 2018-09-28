@@ -18,7 +18,8 @@ class AskViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "Задать вопрос"
+    setupNavigationItem()
+    setupNavigationControllerStyle()
     
     view.backgroundColor = ApplicationColor.gray
     view.addSubview(inputContainerView)
@@ -29,4 +30,18 @@ class AskViewController: UIViewController {
     inputContainerView.heightAnchor.constraint(equalToConstant: 500).isActive = true
   }
   
+  private func setupNavigationControllerStyle() {
+    navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
+    navigationController?.navigationBar.tintColor = ApplicationColor.white
+    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+  }
+  
+  private func setupNavigationItem() {
+    navigationItem.title = "Задать вопрос"
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissController))
+  }
+  
+  @objc private func dismissController() {
+    dismiss(animated: true, completion: nil)
+  }
 }
