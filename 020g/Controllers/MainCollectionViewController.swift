@@ -38,17 +38,17 @@ class MainCollectionViewController: UICollectionViewController {
   private func setupNavigationItem() {
     let loginButton = UIButton()
     loginButton.setImage(#imageLiteral(resourceName: "signIn").withRenderingMode(.alwaysTemplate), for: .normal)
-    loginButton.tintColor = ApplicationColor.white
+    loginButton.tintColor = ApplicationColors.white
     loginButton.addTarget(self, action: #selector(showAuthorizationViewController), for: .touchUpInside)
     
     let searchButton = UIButton()
     searchButton.setImage(#imageLiteral(resourceName: "search").withRenderingMode(.alwaysTemplate), for: .normal)
-    searchButton.tintColor = ApplicationColor.white
+    searchButton.tintColor = ApplicationColors.white
     searchButton.addTarget(self, action: #selector(showSearchCollectionViewController), for: .touchUpInside)
     
     let menuButton = UIButton()
     menuButton.setImage(#imageLiteral(resourceName: "menu").withRenderingMode(.alwaysTemplate), for: .normal)
-    menuButton.tintColor = ApplicationColor.white
+    menuButton.tintColor = ApplicationColors.white
     menuButton.addTarget(self, action: #selector(showMenu), for: .touchUpInside)
     
     loginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -98,7 +98,7 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   private func setupCollectionView() {
-    collectionView.backgroundColor = ApplicationColor.white
+    collectionView.backgroundColor = ApplicationColors.white
     collectionView.register(CatalogueItemCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
     
     if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
@@ -131,8 +131,15 @@ class MainCollectionViewController: UICollectionViewController {
       ApiManager.shared.getTabProducts(categoryId: category, page: page) { (success, products) in
         if let products = products {
           self.productItems = products
+          self.reloadCollectionView()
         }
       }
+    }
+  }
+  
+  func reloadCollectionView() {
+    DispatchQueue.main.async {
+      self.collectionView.reloadData()
     }
   }
   
@@ -141,8 +148,8 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath)
-    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CatalogueItemCollectionViewCell
+    cell.item = productItems[indexPath.item]
     return cell
   }
   

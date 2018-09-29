@@ -21,7 +21,7 @@ class AskViewController: UIViewController {
     setupNavigationItem()
     setupNavigationControllerStyle()
     
-    view.backgroundColor = ApplicationColor.gray
+    view.backgroundColor = ApplicationColors.gray
     view.addSubview(inputContainerView)
     
     inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
@@ -31,9 +31,9 @@ class AskViewController: UIViewController {
   }
   
   private func setupNavigationControllerStyle() {
-    navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
-    navigationController?.navigationBar.tintColor = ApplicationColor.white
-    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+    navigationController?.navigationBar.barTintColor = ApplicationColors.darkBlue
+    navigationController?.navigationBar.tintColor = ApplicationColors.white
+    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColors.white] as [NSAttributedString.Key: Any]
   }
   
   private func setupNavigationItem() {

@@ -16,7 +16,7 @@ class AskView: UIView {
   
   let textViewTitleLabel: UILabel = {
     let label = UILabel()
-    label.textColor = ApplicationColor.darkGray
+    label.textColor = ApplicationColors.darkGray
     label.text = "Текст сообщения"
     label.font = UIFont.systemFont(ofSize: 14, weight: .bold)
     label.translatesAutoresizingMaskIntoConstraints = false
@@ -26,7 +26,7 @@ class AskView: UIView {
   
   let textView: UITextView = {
     let tv = UITextView()
-    tv.textColor = ApplicationColor.lightGray
+    tv.textColor = ApplicationColors.lightGray
     tv.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     tv.translatesAutoresizingMaskIntoConstraints = false
     return tv
@@ -79,7 +79,7 @@ class AskView: UIView {
   
   private func setupContainerView() {
     translatesAutoresizingMaskIntoConstraints = false
-    backgroundColor = ApplicationColor.white
+    backgroundColor = ApplicationColors.white
     layer.cornerRadius = 5
     layer.shadowColor = UIColor(white: 0, alpha: 1).cgColor
     layer.shadowOpacity = 0.16

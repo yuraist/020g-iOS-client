@@ -29,8 +29,8 @@ class StandardButton: UIButton {
   
   private func setupButton() {
     titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    tintColor = ApplicationColor.white
-    backgroundColor = ApplicationColor.darkBlue
+    tintColor = ApplicationColors.white
+    backgroundColor = ApplicationColors.darkBlue
     layer.cornerRadius = 5
     layer.masksToBounds = true
     translatesAutoresizingMaskIntoConstraints = false

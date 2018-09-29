@@ -15,7 +15,7 @@ class MenuBarView: UIView {
   
   let centerButtonView: UIView = {
     let view = UIView()
-    view.backgroundColor = ApplicationColor.white
+    view.backgroundColor = ApplicationColors.white
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
@@ -24,7 +24,7 @@ class MenuBarView: UIView {
   
   let collectionView: UICollectionView = {
     let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    cv.backgroundColor = ApplicationColor.violet
+    cv.backgroundColor = ApplicationColors.violet
     cv.translatesAutoresizingMaskIntoConstraints = false
     return cv
   }()

@@ -62,7 +62,7 @@ class LoginInputContainerView: UIView {
   // Setup the view's properties
   private func setupContainerView() {
     translatesAutoresizingMaskIntoConstraints = false
-    backgroundColor = ApplicationColor.white
+    backgroundColor = ApplicationColors.white
     layer.cornerRadius = 5
     layer.shadowColor = UIColor(white: 0, alpha: 1).cgColor
     layer.shadowOpacity = 0.16

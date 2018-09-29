@@ -27,17 +27,17 @@ class ShopListTableViewController: UITableViewController {
   private func setupNavigationItem() {
     let loginButton = UIButton()
     loginButton.setImage(#imageLiteral(resourceName: "signIn").withRenderingMode(.alwaysTemplate), for: .normal)
-    loginButton.tintColor = ApplicationColor.white
+    loginButton.tintColor = ApplicationColors.white
     loginButton.addTarget(self, action: #selector(showAuthorizationViewController), for: .touchUpInside)
     
     let searchButton = UIButton()
     searchButton.setImage(#imageLiteral(resourceName: "search").withRenderingMode(.alwaysTemplate), for: .normal)
-    searchButton.tintColor = ApplicationColor.white
+    searchButton.tintColor = ApplicationColors.white
     searchButton.addTarget(self, action: #selector(showSearchCollectionViewController), for: .touchUpInside)
     
     let menuButton = UIButton()
     menuButton.setImage(#imageLiteral(resourceName: "menu").withRenderingMode(.alwaysTemplate), for: .normal)
-    menuButton.tintColor = ApplicationColor.white
+    menuButton.tintColor = ApplicationColors.white
     menuButton.addTarget(self, action: #selector(showMenu), for: .touchUpInside)
     
     loginButton.translatesAutoresizingMaskIntoConstraints = false

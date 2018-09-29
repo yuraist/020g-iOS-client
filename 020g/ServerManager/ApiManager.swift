@@ -13,65 +13,11 @@ enum Method: String {
   case post = "POST"
 }
 
-extension URLRequest {
-  static func configureRequest(forPath path: String, queryItems items: [URLQueryItem], method: Method) -> URLRequest {
-    // Configure a URL
-    var urlComponents = URLComponents()
-    urlComponents.scheme = "http"
-    urlComponents.host = "020g.ru"
-    urlComponents.path = path
-    urlComponents.queryItems = items
-    
-    guard let url = urlComponents.url else {
-      fatalError("cannot create a url")
-    }
-    
-    // Configure a request
-    var request = URLRequest(url: url)
-    request.httpMethod = method.rawValue
-    return request
-  }
-  
-  static func getRequest(forPath path: String, queryItems itemsDictionary: [String: String], method: Method) -> URLRequest {
-    // Configure a URL
-    var urlComponents = URLComponents()
-    urlComponents.scheme = "http"
-    urlComponents.host = "020g.ru"
-    urlComponents.path = path
-    
-    // Add query items into the URL
-    var items = [URLQueryItem]()
-    for (name, value) in itemsDictionary {
-      items.append(URLQueryItem(name: name, value: value))
-    }
-    urlComponents.queryItems = items
-    
-    guard let url = urlComponents.url else {
-      fatalError("cannot create a url")
-    }
-    
-    // Configure a request
-    var request = URLRequest(url: url)
-    request.httpMethod = method.rawValue
-    return request
-  }
-}
-
-extension URLSessionDataTask {
-  static func getDefaultDataTask(forPath path: String, queryItems itemsDictionary: [String: String], method: Method, completionHandler completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-    let request = URLRequest.getRequest(forPath: path, queryItems: itemsDictionary, method: method)
-    let dataTask = URLSession(configuration: .default).dataTask(with: request, completionHandler: completion)
-    return dataTask
-  }
-}
-
 /// An intergace to manage API requests
 class ApiManager {
   
   static let shared = ApiManager()
-  
-  let urlScheme = "http"
-  let baseUrl = "020g.ru"
+
   let appName = "020g"
   
   

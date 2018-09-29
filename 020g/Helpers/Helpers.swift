@@ -13,15 +13,3 @@ extension UIColor {
     return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: 1.0)
   }
 }
-
-enum ApplicationColor {
-  static let buttonBlue = UIColor.rgb(39, 52, 146)
-  static let darkBlue = UIColor.rgb(71, 82, 162)
-  static let midBlue = UIColor.rgb(82, 106, 192)
-  static let buttonGray = UIColor.rgb(123, 123, 123)
-  static let violet = UIColor.rgb(157, 167, 218)
-  static let gray = UIColor.rgb(240, 240, 240)
-  static let darkGray = UIColor.darkGray
-  static let lightGray = UIColor.lightGray
-  static let white = UIColor.white
-}

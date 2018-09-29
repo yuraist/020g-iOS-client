@@ -21,7 +21,7 @@ class ForgotPasswordViewController: UIViewController {
     navigationItem.title = "Напомнить пароль"
     
     // Setup view's background color
-    view.backgroundColor = ApplicationColor.gray
+    view.backgroundColor = ApplicationColors.gray
     
     view.addSubview(inputContainerView)
     

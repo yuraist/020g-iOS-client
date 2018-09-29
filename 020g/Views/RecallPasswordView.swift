@@ -14,7 +14,7 @@ class RecallPasswordView: UIView {
     let label = UILabel()
     label.numberOfLines = 2
     label.font = UIFont.systemFont(ofSize: 15)
-    label.textColor = ApplicationColor.lightGray
+    label.textColor = ApplicationColors.lightGray
     label.text = "Укажите Ваш Email для восстановления пароля"
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
@@ -35,7 +35,7 @@ class RecallPasswordView: UIView {
   // Setup the view's properties
   private func setupContainerView() {
     translatesAutoresizingMaskIntoConstraints = false
-    backgroundColor = ApplicationColor.white
+    backgroundColor = ApplicationColors.white
     layer.cornerRadius = 5
     layer.shadowColor = UIColor(white: 0, alpha: 1).cgColor
     layer.shadowOpacity = 0.16

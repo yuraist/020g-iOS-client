@@ -40,7 +40,7 @@ class ContainerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = ApplicationColor.midBlue
+    view.backgroundColor = ApplicationColors.midBlue
     
     // Setup the mainViewController
     setupMainViewController()
@@ -70,10 +70,10 @@ class ContainerViewController: UIViewController {
   
   /// Set a color and a title color for the navigation bar
   private func setupNavigationControllerStyle() {
-    centerNavigationController.navigationBar.barTintColor = ApplicationColor.darkBlue
-    centerNavigationController.navigationBar.tintColor = ApplicationColor.white
+    centerNavigationController.navigationBar.barTintColor = ApplicationColors.darkBlue
+    centerNavigationController.navigationBar.tintColor = ApplicationColors.white
     centerNavigationController.navigationBar.titleTextAttributes = [
-      NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+      NSAttributedString.Key.foregroundColor: ApplicationColors.white] as [NSAttributedString.Key: Any]
   }
 }
 

@@ -18,7 +18,7 @@ class AuthorizationViewController: UIViewController {
     button.setTitle("Зарегистрироваться", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     button.contentHorizontalAlignment = .left
-    button.setTitleColor(ApplicationColor.buttonBlue, for: .normal)
+    button.setTitleColor(ApplicationColors.buttonBlue, for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
@@ -28,15 +28,15 @@ class AuthorizationViewController: UIViewController {
     button.setTitle("Напомнить пароль", for: .normal)
     button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
     button.contentHorizontalAlignment = .right
-    button.setTitleColor(ApplicationColor.buttonGray, for: .normal)
+    button.setTitleColor(ApplicationColors.buttonGray, for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
   
   private func setupNavigationControllerStyle() {
-    navigationController?.navigationBar.barTintColor = ApplicationColor.darkBlue
-    navigationController?.navigationBar.tintColor = ApplicationColor.white
-    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColor.white] as [NSAttributedString.Key: Any]
+    navigationController?.navigationBar.barTintColor = ApplicationColors.darkBlue
+    navigationController?.navigationBar.tintColor = ApplicationColors.white
+    navigationController?.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColors.white] as [NSAttributedString.Key: Any]
   }
   
   private func setupNavigationItem() {
@@ -50,7 +50,7 @@ class AuthorizationViewController: UIViewController {
     setupNavigationItem()
     
     // Setup the background color for the view
-    view.backgroundColor = ApplicationColor.gray
+    view.backgroundColor = ApplicationColors.gray
     
     // Add subviews
     view.addSubview(loginInputContainerView)

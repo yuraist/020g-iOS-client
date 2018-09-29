@@ -21,7 +21,7 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    backgroundColor = ApplicationColor.violet
+    backgroundColor = ApplicationColors.violet
     addSubview(textLabel)
     
     // Setup textLabel's layout constraints
