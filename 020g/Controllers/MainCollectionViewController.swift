@@ -18,6 +18,9 @@ class MainCollectionViewController: UICollectionViewController {
     return mb
   }()
   
+  var categories = [Category]()
+  var productItems = [Product]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -107,9 +110,11 @@ class MainCollectionViewController: UICollectionViewController {
   
   private func getCategories() {
     if ApiKeys.token != nil {
-      APIManager.shared.guestIndex(token: ApiKeys.token!) { (success, categories) in
+      ApiManager.shared.guestIndex(token: ApiKeys.token!) { (success, categories) in
         if success {
           if let categories = categories {
+            self.menuBar.categories = categories
+            self.menuBar.reloadCollectionView()
             self.getProductList(forCategory: categories[0].cat, page: 1)
           }
         } else {
@@ -123,16 +128,16 @@ class MainCollectionViewController: UICollectionViewController {
   
   private func getProductList(forCategory category: Int, page: Int) {
     if ApiKeys.token != nil {
-      APIManager.shared.getTabProducts(categoryId: category, page: page) { (success, products) in
-//        if let products = products {
-          // TODO: - Update collection view controller
-//        }
+      ApiManager.shared.getTabProducts(categoryId: category, page: page) { (success, products) in
+        if let products = products {
+          self.productItems = products
+        }
       }
     }
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 10
+    return productItems.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

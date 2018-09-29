@@ -15,6 +15,7 @@ enum Method: String {
 
 extension URLRequest {
   static func configureRequest(forPath path: String, queryItems items: [URLQueryItem], method: Method) -> URLRequest {
+    // Configure a URL
     var urlComponents = URLComponents()
     urlComponents.scheme = "http"
     urlComponents.host = "020g.ru"
@@ -25,16 +26,49 @@ extension URLRequest {
       fatalError("cannot create a url")
     }
     
+    // Configure a request
+    var request = URLRequest(url: url)
+    request.httpMethod = method.rawValue
+    return request
+  }
+  
+  static func getRequest(forPath path: String, queryItems itemsDictionary: [String: String], method: Method) -> URLRequest {
+    // Configure a URL
+    var urlComponents = URLComponents()
+    urlComponents.scheme = "http"
+    urlComponents.host = "020g.ru"
+    urlComponents.path = path
+    
+    // Add query items into the URL
+    var items = [URLQueryItem]()
+    for (name, value) in itemsDictionary {
+      items.append(URLQueryItem(name: name, value: value))
+    }
+    urlComponents.queryItems = items
+    
+    guard let url = urlComponents.url else {
+      fatalError("cannot create a url")
+    }
+    
+    // Configure a request
     var request = URLRequest(url: url)
     request.httpMethod = method.rawValue
     return request
   }
 }
 
+extension URLSessionDataTask {
+  static func getDefaultDataTask(forPath path: String, queryItems itemsDictionary: [String: String], method: Method, completionHandler completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    let request = URLRequest.getRequest(forPath: path, queryItems: itemsDictionary, method: method)
+    let dataTask = URLSession(configuration: .default).dataTask(with: request, completionHandler: completion)
+    return dataTask
+  }
+}
+
 /// An intergace to manage API requests
-class APIManager {
+class ApiManager {
   
-  static let shared = APIManager()
+  static let shared = ApiManager()
   
   let urlScheme = "http"
   let baseUrl = "020g.ru"
@@ -46,39 +80,18 @@ class APIManager {
    Configuers an HTTP-request by creating URL from the url components
    (scheme, host, path) and query items (parameters)
    - parameters:
-     - success: Contains true value if a new token (catalog_key) has been received else contains false
+   - success: Contains true value if a new token (catalog_key) has been received else contains false
    */
   func checkKeys(success: ((Bool)->Void)?) {
-    // Configure url
-    var urlComponents = URLComponents()
-    urlComponents.scheme = urlScheme
-    urlComponents.host = baseUrl
-    urlComponents.path = "/abpro/check_keys"
-    
-    // Get catalog_key if there is one
-    let catalogKey = UserDefaults.standard.string(forKey: "token")
-    
-    // Add query parameters
-    let catalogKeyItem = URLQueryItem(name: "catalog_key", value: catalogKey ?? "")
-    let superKeyItem = URLQueryItem(name: "super_key", value: "")
-    
-    urlComponents.queryItems = [catalogKeyItem, superKeyItem]
-    
-    // Create url from the url components
-    guard let url = urlComponents.url else {
-      fatalError("Could not create URL from components")
+    // Create a data task
+    var queryItems = ["super_key": ""]
+    if let catalogKey = UserDefaults.standard.string(forKey: "token") {
+      queryItems["catalog_key"] = catalogKey
+    } else {
+      queryItems["catalog_key"] = ""
     }
     
-    // Configure an http request
-    var request = URLRequest(url: url)
-    request.httpMethod = "GET"
-    
-    // Configure a url session
-    let config = URLSessionConfiguration.default
-    let session = URLSession(configuration: config)
-    
-    // Create a data task
-    let task = session.dataTask(with: request) { (data, response, error) in
+    let task = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/check_keys", queryItems: queryItems, method: .get) { (data, response, error) in
       if let error = error {
         print(error)
       } else if let jsonData = data {
@@ -103,35 +116,19 @@ class APIManager {
   /**
    Creates a request that configured the same way as checkKeys(success:) to the API
    - parameters:
-     - token: String to pass into HTTP-request parameters
-     - completion: Completion handler to call when the request is complete.
+   - token: String to pass into HTTP-request parameters
+   - completion: Completion handler to call when the request is complete.
    */
   func guestIndex(token: String, completion: ((Bool, [Category]?)->Void)?) {
-    // Configure url components
-    var urlComponents = URLComponents()
-    urlComponents.scheme = urlScheme
-    urlComponents.host = baseUrl
-    urlComponents.path = "/abpro/guest_index"
-    
-    let tokenItem = URLQueryItem(name: "token", value: ApiKeys.token!)
-    let appNameItem = URLQueryItem(name: "appname", value: appName)
-    
-    urlComponents.queryItems = [tokenItem, appNameItem]
-    
-    // Configure url
-    guard let url = urlComponents.url else {
-      fatalError("Could not create URL from components")
+    guard let token = ApiKeys.token else {
+      // Cannot complete the request
+      completion?(false, nil)
+      return
     }
     
-    // Create a request
-    var request = URLRequest(url: url)
-    request.httpMethod = "GET"
-    
-    let config = URLSessionConfiguration.default
-    let session = URLSession(configuration: config)
-    
-    // Create a task
-    let task = session.dataTask(with: request) { (data, response, error) in
+    // Check a token and get categories if there is the token
+    let queryItems = ["token": token, "appname": appName]
+    let task = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/guest_index", queryItems: queryItems, method: .get) { (data, response, error) in
       if let error = error {
         print(error)
       } else if let jsonData = data {
@@ -149,28 +146,19 @@ class APIManager {
       }
     }
     
+    // Resume the task
     task.resume()
   }
   
   func getTabProducts(categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
     // Check the identification token
     guard let token = ApiKeys.token else {
-      fatalError("No token")
+      completion?(false, nil)
+      return
     }
-
-    // Create query items for a request
-    let tokenItem = URLQueryItem(name: "token", value: token)
-    let appnameItem = URLQueryItem(name: "appname", value: appName)
-    let categoryItem = URLQueryItem(name: "cat", value: "\(categoryId)")
-    let pageItem = URLQueryItem(name: "page", value: "\(page)")
-    let queryItems = [tokenItem, appnameItem, categoryItem, pageItem]
     
-    // Configure the request
-    let request = URLRequest.configureRequest(forPath: "/abpro/get_tab_products", queryItems: queryItems, method: .get)
-    // Configure a session
-    let session = URLSession(configuration: .default)
-    // Configure a task
-    let dataTask = session.dataTask(with: request) { (data, response, error) in
+    let queryItems = ["token": token, "appname": appName, "cat": "\(categoryId)", "page": "\(page)"]
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get_tab_products", queryItems: queryItems, method: .get) { (data, response, error) in
       if error != nil {
         print(error!)
         completion?(false, nil)

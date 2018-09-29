@@ -11,6 +11,7 @@ import UIKit
 class MenuBarView: UIView {
   
   private let cellId = "menuBarCellId"
+  var categories = [Category]()
   
   let centerButtonView: UIView = {
     let view = UIView()
@@ -77,15 +78,21 @@ class MenuBarView: UIView {
     }
   }
   
+  func reloadCollectionView() {
+    DispatchQueue.main.async {
+      self.collectionView.reloadData()
+    }
+  }
 }
 
 extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 5
+    return categories.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuBarCollectionViewCell
+    cell.textLabel.text = categories[indexPath.item].title
     return cell
   }
   
