@@ -13,6 +13,16 @@ class CatalogueItemCollectionViewCell: UICollectionViewCell {
   var item: Product? {
     didSet {
       nameLabel.text = item?.name
+      
+      if let cMin = item?.priceMin, let cMax = item?.priceMax {
+        if cMin < cMax && cMin != 0 {
+          priceLabel.text = "от \(cMin) руб."
+        } else if cMin == cMax && cMin != 0 {
+          priceLabel.text = "\(cMin)"
+        } else if cMin == 0 {
+          priceLabel.text = "Нет в наличии"
+        }
+      }
       priceLabel.text = String(describing: item!.priceMin) + " руб."
       if let imageUrl = item?.img {
         imageView.loadImage(withUrlString: imageUrl)
