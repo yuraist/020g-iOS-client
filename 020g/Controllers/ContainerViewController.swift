@@ -87,7 +87,6 @@ extension ContainerViewController: CenterViewControllerDelegate {
     isShowingMenu = !isShowingMenu
   }
   
-  /// Creates a menuViewController instance and adds it to the viewController
   func addLeftPanelViewController() {
     guard menuViewController == nil else { return }
     initializeMenuViewController()
@@ -110,17 +109,28 @@ extension ContainerViewController: CenterViewControllerDelegate {
   }
   
   func animateMenuOpening() {
-    animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
+    animateCenterPanelXPosition(targetPosition: computeCenterPanelTargetPositionForOpeningMenu())
   }
   
   func animateMenuClosing() {
-    animateCenterPanelXPosition(targetPosition: 0) { finished in
-      self.menuViewController?.view.removeFromSuperview()
-      self.menuViewController = nil
+    animateCenterPanelXPosition(targetPosition: computeCenterPanelTargetPositionForClosingMenu()) { finished in
+      self.removeMenuViewController()
     }
   }
   
-  /// Animates the center panel sliding in and sliding out
+  private func computeCenterPanelTargetPositionForOpeningMenu() -> CGFloat {
+    return centerNavigationController.view.frame.width - centerPanelExpandedOffset
+  }
+  
+  private func computeCenterPanelTargetPositionForClosingMenu() -> CGFloat {
+    return 0
+  }
+  
+  private func removeMenuViewController() {
+    self.menuViewController?.view.removeFromSuperview()
+    self.menuViewController = nil
+  }
+  
   func animateCenterPanelXPosition(targetPosition: CGFloat, completion: ((Bool) -> Void)? = nil) {
     UIView.animate(withDuration: 0.5,
                    delay: 0,
@@ -131,7 +141,6 @@ extension ContainerViewController: CenterViewControllerDelegate {
     }, completion: completion)
   }
   
-  /// Adds and removes a shadow for the center view
   func showShadowForCenterViewController() {
     centerNavigationController.view.layer.shadowOpacity = 0.8
   }
@@ -141,28 +150,49 @@ extension ContainerViewController: CenterViewControllerDelegate {
   }
 }
 
+// MARK: - MenuViewControllerDelegate
+
 extension ContainerViewController: MenuViewControllerDelegate {
   func didSelect(screen: String) {
     switch screen {
     case "Каталог цен":
-      if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListTableViewController  {
-        centerNavigationController.popViewController(animated: true)
-      }
+      showMainViewController()
     case "Авторизация":
-      present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+      showAuthorizationViewController()
     case "Страйкбольные магазины":
-      if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListTableViewController {
+      guard let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListTableViewController else {
+        showShopListTableViewController()
         break
-      } else {
-        let shopListViewController = ShopListTableViewController()
-        shopListViewController.delegate = self
-        centerNavigationController.pushViewController(shopListViewController, animated: true)
       }
     case "Задать вопрос":
-      present(UINavigationController(rootViewController: AskViewController()), animated: true, completion: nil)
+      showAskViewController()
     default:
       return
     }
     toggleLeftPanel()
+  }
+  
+  private func showMainViewController() {
+    if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListTableViewController  {
+      centerNavigationController.popViewController(animated: true)
+    }
+  }
+  
+  private func showAuthorizationViewController() {
+    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+  }
+  
+  private func showShopListTableViewController() {
+    centerNavigationController.pushViewController(initializeShopListTableViewController(), animated: true)
+  }
+  
+  private func initializeShopListTableViewController() -> ShopListTableViewController {
+    let shopListTableViewController = ShopListTableViewController()
+    shopListTableViewController.delegate = self
+    return shopListTableViewController
+  }
+  
+  private func showAskViewController() {
+    present(UINavigationController(rootViewController: AskViewController()), animated: true, completion: nil)
   }
 }
