@@ -8,116 +8,115 @@
 
 import UIKit
 
-/// The main controller contains views of the controllers to be presented on the screen at the current time
 class ContainerViewController: UIViewController {
   
-  // Set light status bar color
-  override var preferredStatusBarStyle: UIStatusBarStyle {
-    return .lightContent
-  }
+  override var preferredStatusBarStyle: UIStatusBarStyle {  return .lightContent }
   
-  /// A variable to define that a side menu is showing or not
-  var isShowMenu = false {
+  var isShowingMenu = false {
     didSet {
-      showShadowForCenterViewController(shouldShowShadow: isShowMenu)
+      if isShowingMenu {
+        showShadowForCenterViewController()
+      } else {
+        hideShadowForCenterViewController()
+      }
     }
   }
   
   private let centerPanelExpandedOffset: CGFloat = 100
   
-  /// A navigation controller contains the center controller
   var centerNavigationController: UINavigationController!
   
-  /// Center controller
   var mainController: UIViewController! {
     didSet {
       setupNavigationController()
     }
   }
   
-  /// A controller represents a side menu view
   var menuViewController: MenuViewController?
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = ApplicationColors.midBlue
-    
-    // Setup the mainViewController
     setupMainViewController()
   }
   
-  /// Initiates a MainCollectionViewController instance and set it to the mainController property.
-  /// Current controller is set as the mainController's delegate.
   private func setupMainViewController() {
     let layout = UICollectionViewFlowLayout()
     mainController = MainCollectionViewController(collectionViewLayout: layout)
     (mainController as! MainCollectionViewController).delegate = self
   }
   
-  /// Creates a UINavigationController instance and adds its view into the current view.
   private func setupNavigationController() {
-    // Create a new navigation controller
-    centerNavigationController = UINavigationController(rootViewController: mainController)
-    
-    // Setup parent-child relationship
-    view.addSubview(centerNavigationController.view)
-    addChild(centerNavigationController)
-    centerNavigationController.didMove(toParent: self)
-    
-    // Setup the navigation controller appearance
+    initializeCenterNavigationController()
+    showCenterNavigationController()
     setupNavigationControllerStyle()
   }
   
-  /// Set a color and a title color for the navigation bar
+  private func initializeCenterNavigationController() {
+    centerNavigationController = UINavigationController(rootViewController: mainController)
+  }
+  
+  private func showCenterNavigationController() {
+    view.addSubview(centerNavigationController.view)
+    addChild(centerNavigationController)
+    centerNavigationController.didMove(toParent: self)
+  }
+  
   private func setupNavigationControllerStyle() {
     centerNavigationController.navigationBar.barTintColor = ApplicationColors.darkBlue
     centerNavigationController.navigationBar.tintColor = ApplicationColors.white
     centerNavigationController.navigationBar.titleTextAttributes = [
-      NSAttributedString.Key.foregroundColor: ApplicationColors.white] as [NSAttributedString.Key: Any]
+      NSAttributedString.Key.foregroundColor: ApplicationColors.white
+      ] as [NSAttributedString.Key: Any]
   }
 }
 
 // MARK: CenterViewController delegate
 
-/// Implementation of the CenterViewControllerDelegate's methods
 extension ContainerViewController: CenterViewControllerDelegate {
   func toggleLeftPanel() {
-    if !isShowMenu {
+    if !isShowingMenu {
       addLeftPanelViewController()
     }
     
-    animateLeftPanel(shouldExpand: !isShowMenu)
+    if isShowingMenu {
+      animateMenuClosing()
+    } else {
+      animateMenuOpening()
+    }
+    
+    isShowingMenu = !isShowingMenu
   }
   
   /// Creates a menuViewController instance and adds it to the viewController
   func addLeftPanelViewController() {
     guard menuViewController == nil else { return }
-    
-    let vc = MenuViewController()
-    vc.delegate = self
-    addChild(sidePanelController: vc)
-    menuViewController = vc
+    initializeMenuViewController()
+    showMenuViewController()
   }
   
-  /// Adds the side panel controller's view below the container controller's view
-  func addChild(sidePanelController: MenuViewController) {
-    view.insertSubview(sidePanelController.view, at: 0)
-    addChild(sidePanelController)
-    sidePanelController.didMove(toParent: self)
+  private func initializeMenuViewController() {
+    menuViewController = MenuViewController()
+    menuViewController!.delegate = self
   }
   
-  /// Changes the isShowMenu property and call the center panel animation
-  /// and removes view of the menu controller if the animation is sliding out
-  func animateLeftPanel(shouldExpand: Bool) {
-    if shouldExpand {
-      isShowMenu = !isShowMenu
-      animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
-    } else {
-      animateCenterPanelXPosition(targetPosition: 0) { finished in
-        self.isShowMenu = !self.isShowMenu
-        self.menuViewController?.view.removeFromSuperview()
-        self.menuViewController = nil
-      }
+  private func showMenuViewController() {
+    addChild(menuViewController: menuViewController!)
+  }
+  
+  func addChild(menuViewController: MenuViewController) {
+    view.insertSubview(menuViewController.view, at: 0)
+    addChild(menuViewController)
+    menuViewController.didMove(toParent: self)
+  }
+  
+  func animateMenuOpening() {
+    animateCenterPanelXPosition(targetPosition: centerNavigationController.view.frame.width - centerPanelExpandedOffset)
+  }
+  
+  func animateMenuClosing() {
+    animateCenterPanelXPosition(targetPosition: 0) { finished in
+      self.menuViewController?.view.removeFromSuperview()
+      self.menuViewController = nil
     }
   }
   
@@ -133,12 +132,12 @@ extension ContainerViewController: CenterViewControllerDelegate {
   }
   
   /// Adds and removes a shadow for the center view
-  func showShadowForCenterViewController(shouldShowShadow: Bool) {
-    if shouldShowShadow {
-      centerNavigationController.view.layer.shadowOpacity = 0.8
-    } else {
-      centerNavigationController.view.layer.shadowOpacity = 0.0
-    }
+  func showShadowForCenterViewController() {
+    centerNavigationController.view.layer.shadowOpacity = 0.8
+  }
+  
+  func hideShadowForCenterViewController() {
+    centerNavigationController.view.layer.shadowOpacity = 0.0
   }
 }
 

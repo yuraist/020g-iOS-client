@@ -8,18 +8,17 @@
 
 import UIKit
 
-enum Method: String {
+enum HTTPMethod: String {
   case get = "GET"
   case post = "POST"
 }
 
 /// An intergace to manage API requests
-class ApiManager {
+class ApiHandler {
   
-  static let shared = ApiManager()
+  static let shared = ApiHandler()
 
   let appName = "020g"
-  
   
   /// Requests a catalog_key and super_key to API and returns the success block.
   /**
@@ -65,7 +64,7 @@ class ApiManager {
    - token: String to pass into HTTP-request parameters
    - completion: Completion handler to call when the request is complete.
    */
-  func guestIndex(token: String, completion: ((Bool, [Category]?)->Void)?) {
+  func fetchCatalogCategories(token: String, completion: ((Bool, [Category]?)->Void)?) {
     guard let token = ApiKeys.token else {
       // Cannot complete the request
       completion?(false, nil)
@@ -96,7 +95,15 @@ class ApiManager {
     task.resume()
   }
   
-  func getTabProducts(categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
+  /// Fetches a product list for the specific category
+  /**
+   Checks the auth token and requests products if the token is passed.
+   - parameters:
+     - categoryId: integer value of the category for which you want to fetch products
+     - page: integer value of page of product list pagination
+     - completion: block that constains the boolean value of request success and the Product array
+  */
+  func getProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
     // Check the identification token
     guard let token = ApiKeys.token else {
       completion?(false, nil)

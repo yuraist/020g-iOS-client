@@ -20,11 +20,12 @@ struct ApiKeys: Codable {
     }
   }
   
-  /// A string that pass as a token string
+  /** A string that pass as a token string */
   var catalogKey: String
   
-  /// An unnecessary string to store, but it must be passed
-  /// as a query parameter into the APIManager method to checking keys
+  /** An unnecessary string to store, but it must be passed
+   as a query parameter into the APIManager method to checking keys
+   */
   var superKey: String?
   
   enum CodingKeys: String, CodingKey {

@@ -29,7 +29,6 @@ struct Product: Codable {
   }
   
   init(withDictionary dictionary: [String: Any]) {
-    
     id = Int((dictionary["id"] as! NSString).intValue)
     name = dictionary["name"] as! String
     brand = dictionary["brand"] as! String

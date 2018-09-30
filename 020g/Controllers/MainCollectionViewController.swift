@@ -110,7 +110,7 @@ class MainCollectionViewController: UICollectionViewController {
   
   private func getCategories() {
     if ApiKeys.token != nil {
-      ApiManager.shared.guestIndex(token: ApiKeys.token!) { (success, categories) in
+      ApiHandler.shared.fetchCatalogCategories(token: ApiKeys.token!) { (success, categories) in
         if success {
           if let categories = categories {
             self.menuBar.categories = categories
@@ -128,7 +128,7 @@ class MainCollectionViewController: UICollectionViewController {
   
   private func getProductList(forCategory category: Int, page: Int) {
     if ApiKeys.token != nil {
-      ApiManager.shared.getTabProducts(categoryId: category, page: page) { (success, products) in
+      ApiHandler.shared.getProducts(ofCategory: category, page: page) { (success, products) in
         if let products = products {
           self.productItems = products
           self.reloadCollectionView()
