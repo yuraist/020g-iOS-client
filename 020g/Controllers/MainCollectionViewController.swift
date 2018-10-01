@@ -13,63 +13,105 @@ class MainCollectionViewController: UICollectionViewController {
   private let itemCellId = "cellId"
   var delegate: CenterViewControllerDelegate?
   
-  let menuBar: MenuBarView = {
-    let mb = MenuBarView()
-    return mb
-  }()
+  let menuBar = MenuBarView()
   
   var categories = [Category]()
-  var productItems = [Product]()
+  var productItems = [[Product]]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    navigationItem.title = "0.20g - агрегатор №1"
-    setupNavigationItem()
+    setNavigationItemTitle()
+    setupNavigationItemContent()
     setupMenuBar()
     setupCollectionView()
-    
     getCategories()
   }
   
   // MARK: - Setup navigation controller
   
-  // Setup items of the navigation bar
-  private func setupNavigationItem() {
-    let loginButton = UIButton()
-    loginButton.setImage(#imageLiteral(resourceName: "signIn").withRenderingMode(.alwaysTemplate), for: .normal)
-    loginButton.tintColor = ApplicationColors.white
-    loginButton.addTarget(self, action: #selector(showAuthorizationViewController), for: .touchUpInside)
-    
-    let searchButton = UIButton()
-    searchButton.setImage(#imageLiteral(resourceName: "search").withRenderingMode(.alwaysTemplate), for: .normal)
-    searchButton.tintColor = ApplicationColors.white
-    searchButton.addTarget(self, action: #selector(showSearchCollectionViewController), for: .touchUpInside)
-    
-    let menuButton = UIButton()
-    menuButton.setImage(#imageLiteral(resourceName: "menu").withRenderingMode(.alwaysTemplate), for: .normal)
-    menuButton.tintColor = ApplicationColors.white
-    menuButton.addTarget(self, action: #selector(showMenu), for: .touchUpInside)
-    
-    loginButton.translatesAutoresizingMaskIntoConstraints = false
-    searchButton.translatesAutoresizingMaskIntoConstraints = false
-    menuButton.translatesAutoresizingMaskIntoConstraints = false
-    
-    let loginBarButtonItem = UIBarButtonItem(customView: loginButton)
-    let searchBarButtonItem = UIBarButtonItem(customView: searchButton)
-    let menuBarButtonItem = UIBarButtonItem(customView: menuButton)
-    
-    setupBarButtonConstraints(forBarItem: loginBarButtonItem)
-    setupBarButtonConstraints(forBarItem: searchBarButtonItem)
-    setupBarButtonConstraints(forBarItem: menuBarButtonItem)
-    
-    navigationItem.rightBarButtonItems = [loginBarButtonItem, searchBarButtonItem]
-    navigationItem.leftBarButtonItem = menuBarButtonItem
+  private func setNavigationItemTitle() {
+    navigationItem.title = "0.20g - агрегатор №1"
   }
   
-  private func setupBarButtonConstraints(forBarItem item: UIBarButtonItem) {
-    item.customView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
-    item.customView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
+  class BarButton: UIButton {
+    
+    init(image: UIImage) {
+      super.init(frame: .zero)
+      setTranslatesAutoresizingMaskIntoConstraintsFalse()
+      setTintColorWhite()
+      setNormalImage(image)
+    }
+    
+    private func setTranslatesAutoresizingMaskIntoConstraintsFalse() {
+      translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    private func setTintColorWhite() {
+      tintColor = ApplicationColors.white
+    }
+    
+    private func setNormalImage(_ image: UIImage) {
+      setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+  }
+  
+  class CustomBarButtonItem: UIBarButtonItem {
+    
+    override var customView: UIView? {
+      didSet {
+        setupConstraintsForCustomView()
+      }
+    }
+    
+    init(button: BarButton) {
+      super.init()
+      customView = button
+    }
+    
+    private func setupConstraintsForCustomView() {
+      customView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
+      customView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+      fatalError("init(coder:) has not been implemented")
+    }
+  }
+  
+  private lazy var loginButton: BarButton = {
+    let loginButton = BarButton(image: #imageLiteral(resourceName: "signIn"))
+    loginButton.addTarget(self, action: #selector(showAuthorizationViewController), for: .touchUpInside)
+    return loginButton
+  }()
+  
+  private lazy var searchButton: BarButton = {
+    let searchButton = BarButton(image: #imageLiteral(resourceName: "search"))
+    searchButton.addTarget(self, action: #selector(showSearchCollectionViewController), for: .touchUpInside)
+    return searchButton
+  }()
+  
+  private lazy var menuButton: BarButton = {
+    let menuButton = BarButton(image: #imageLiteral(resourceName: "menu"))
+    menuButton.addTarget(self, action: #selector(showMenu), for: .touchUpInside)
+    return menuButton
+  }()
+  
+  private lazy var loginBarButtonItem = CustomBarButtonItem(button: loginButton)
+  private lazy var searchBarButtonItem = CustomBarButtonItem(button: searchButton)
+  private lazy var menuBarButtonItem = CustomBarButtonItem(button: menuButton)
+  
+  private func setupNavigationItemContent() {
+    addButtonItemsToBar()
+  }
+  
+  private func addButtonItemsToBar() {
+    navigationItem.rightBarButtonItems = [loginBarButtonItem, searchBarButtonItem]
+    navigationItem.leftBarButtonItem = menuBarButtonItem
   }
   
   @objc private func showAuthorizationViewController() {
@@ -130,7 +172,7 @@ class MainCollectionViewController: UICollectionViewController {
     if ApiKeys.token != nil {
       ApiHandler.shared.getProducts(ofCategory: category, page: page) { (success, products) in
         if let products = products {
-          self.productItems = products
+          self.productItems = [products]
           self.reloadCollectionView()
         }
       }
@@ -144,12 +186,12 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return productItems.count
+    return productItems.count > 0 ? productItems[0].count : productItems.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CatalogueItemCollectionViewCell
-    cell.item = productItems[indexPath.item]
+    cell.item = productItems[0][indexPath.item]
     return cell
   }
   
