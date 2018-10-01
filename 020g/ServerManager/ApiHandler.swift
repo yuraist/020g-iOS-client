@@ -103,7 +103,7 @@ class ApiHandler {
      - page: integer value of page of product list pagination
      - completion: block that constains the boolean value of request success and the Product array
   */
-  func getProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
+  func fetchProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
     // Check the identification token
     guard let token = ApiKeys.token else {
       completion?(false, nil)

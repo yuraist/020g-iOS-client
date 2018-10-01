@@ -11,9 +11,15 @@ import UIKit
 class CatalogCollectionView: UICollectionView {
   private let cellId = "catalogCell"
   
+  var category: Category? {
+    didSet {
+      self.fetchProducts(page: 1)
+    }
+  }
+  
   var products = [Product]() {
     didSet {
-      reloadData()
+      self.reloadCollectionView()
     }
   }
   
@@ -44,6 +50,24 @@ class CatalogCollectionView: UICollectionView {
   
   private func setupTranslatesAutoresizingMaskIntoConstraintsFalse() {
     translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  private func fetchProducts(page: Int) {
+    guard let category = category else {
+      return
+    }
+    
+    ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: page) { (success, products) in
+      if let products = products {
+        self.products = products
+      }
+    }
+  }
+  
+  private func reloadCollectionView() {
+    DispatchQueue.main.async {
+      self.reloadData()
+    }
   }
   
   required init?(coder aDecoder: NSCoder) {

@@ -11,7 +11,14 @@ import UIKit
 class MenuBarView: UIView {
   
   private let cellId = "menuBarCellId"
-  var categories = [Category]()
+  
+  var catalogCollectionView: CatalogCollectionView?
+  
+  var categories = [Category]() {
+    didSet {
+      reloadCollectionView()
+    }
+  }
   
   let centerButtonView: UIView = {
     let view = UIView()
@@ -96,6 +103,10 @@ extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuBarCollectionViewCell
     cell.textLabel.text = categories[indexPath.item].title
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    catalogCollectionView?.category = categories[indexPath.item]
   }
   
   private func getCellWidth(forString string: String) -> CGFloat {

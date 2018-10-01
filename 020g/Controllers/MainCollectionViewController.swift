@@ -15,8 +15,11 @@ class MainCollectionViewController: UICollectionViewController {
   
   let menuBar = MenuBarView()
   
-  var categories = [Category]()
-  var productItems = [[Product]]()
+  var products = [[Product]]() {
+    didSet {
+      reloadCollectionView()
+    }
+  }
   
   private var totalMenuHeight: CGFloat {
     return navigationControllerHeight + menuBarHeight + statusBarHeight
@@ -68,7 +71,7 @@ class MainCollectionViewController: UICollectionViewController {
     setNavigationItemTitle()
     setupNavigationItemContent()
     setupCollectionView()
-    getCategories()
+    fetchCategories()
   }
   
   // MARK: - Setup menu bar
@@ -122,6 +125,8 @@ class MainCollectionViewController: UICollectionViewController {
     setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse()
     setupCollectionViewTopConstraint()
     setWhiteBackgroundColorForCollectionView()
+    setupCollectionViewScrollDirection()
+    setCollectionViewPagingEnabled()
     registerCollectionViewCell()
   }
   
@@ -140,11 +145,21 @@ class MainCollectionViewController: UICollectionViewController {
     collectionView.backgroundColor = ApplicationColors.white
   }
   
+  private func setupCollectionViewScrollDirection() {
+    if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+      layout.scrollDirection = .horizontal
+    }
+  }
+  
+  private func setCollectionViewPagingEnabled() {
+    collectionView.isPagingEnabled = true
+  }
+  
   private func registerCollectionViewCell() {
     collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
   }
   
-  private func getCategories() {
+  private func fetchCategories() {
     guard let token = ApiKeys.token else {
       return
     }
@@ -152,20 +167,22 @@ class MainCollectionViewController: UICollectionViewController {
     ApiHandler.shared.fetchCatalogCategories(token: token) { (success, categories) in
       if success {
         if let categories = categories {
-          self.menuBar.categories = categories
-          self.menuBar.reloadCollectionView()
-          self.getProductList(forCategory: categories[0].cat, page: 1)
+          self.passCategoriesToMenuBar(categories: categories)
+          self.fetchProducts(forCategory: categories[0].cat, page: 1)
         }
       }
     }
   }
   
-  private func getProductList(forCategory category: Int, page: Int) {
+  private func passCategoriesToMenuBar(categories: [Category]) {
+    menuBar.categories = categories
+  }
+  
+  private func fetchProducts(forCategory category: Int, page: Int) {
     if ApiKeys.token != nil {
-      ApiHandler.shared.getProducts(ofCategory: category, page: page) { (success, products) in
+      ApiHandler.shared.fetchProducts(ofCategory: category, page: page) { (success, products) in
         if let products = products {
-          self.productItems = [products]
-          self.reloadCollectionView()
+          self.products = [products]
         }
       }
     }
@@ -178,12 +195,13 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return productItems.count
+    return menuBar.categories.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CategoryCollectionViewCell
-    cell.products = productItems[indexPath.item]
+    menuBar.catalogCollectionView = cell.catalogCollectionView
+    cell.catalogCollectionView.category = menuBar.categories[indexPath.item]
     return cell
   }
   
