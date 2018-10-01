@@ -18,69 +18,25 @@ class MainCollectionViewController: UICollectionViewController {
   var categories = [Category]()
   var productItems = [[Product]]()
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    setNavigationItemTitle()
-    setupNavigationItemContent()
-    setupMenuBar()
-    setupCollectionView()
-    getCategories()
+  private var totalMenuHeight: CGFloat {
+    return navigationControllerHeight + menuBarHeight + statusBarHeight
   }
   
-  // MARK: - Setup navigation controller
-  
-  private func setNavigationItemTitle() {
-    navigationItem.title = "0.20g - агрегатор №1"
+  private var topLayoutGuideHeight: CGFloat {
+    return statusBarHeight + navigationControllerHeight
   }
   
-  class BarButton: UIButton {
-    
-    init(image: UIImage) {
-      super.init(frame: .zero)
-      setTranslatesAutoresizingMaskIntoConstraintsFalse()
-      setTintColorWhite()
-      setNormalImage(image)
-    }
-    
-    private func setTranslatesAutoresizingMaskIntoConstraintsFalse() {
-      translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    private func setTintColorWhite() {
-      tintColor = ApplicationColors.white
-    }
-    
-    private func setNormalImage(_ image: UIImage) {
-      setImage(image.withRenderingMode(.alwaysTemplate), for: .normal)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
+  private var menuBarHeight: CGFloat { return 84 }
+  
+  private var navigationControllerHeight: CGFloat {
+    get {
+      guard let navigationControllerHeight = navigationController?.navigationBar.frame.size.height else { return 0 }
+      return navigationControllerHeight
     }
   }
   
-  class CustomBarButtonItem: UIBarButtonItem {
-    
-    override var customView: UIView? {
-      didSet {
-        setupConstraintsForCustomView()
-      }
-    }
-    
-    init(button: BarButton) {
-      super.init()
-      customView = button
-    }
-    
-    private func setupConstraintsForCustomView() {
-      customView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
-      customView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-      fatalError("init(coder:) has not been implemented")
-    }
+  private var statusBarHeight: CGFloat {
+    return UIApplication.shared.statusBarFrame.size.height
   }
   
   private lazy var loginButton: BarButton = {
@@ -105,6 +61,40 @@ class MainCollectionViewController: UICollectionViewController {
   private lazy var searchBarButtonItem = CustomBarButtonItem(button: searchButton)
   private lazy var menuBarButtonItem = CustomBarButtonItem(button: menuButton)
   
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    
+    setupMenuBar()
+    setNavigationItemTitle()
+    setupNavigationItemContent()
+    setupCollectionView()
+    getCategories()
+  }
+  
+  // MARK: - Setup menu bar
+  
+  private func setupMenuBar() {
+    addMenuBar()
+    addConstraintsForMenuBar()
+  }
+  
+  private func addMenuBar() {
+    view.addSubview(menuBar)
+  }
+  
+  private func addConstraintsForMenuBar() {
+    menuBar.topAnchor.constraint(equalTo: view.topAnchor, constant: topLayoutGuideHeight).isActive = true
+    menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    menuBar.heightAnchor.constraint(equalToConstant: menuBarHeight).isActive = true
+  }
+  
+  // MARK: - Setup navigation controller
+  
+  private func setNavigationItemTitle() {
+    navigationItem.title = "0.20g - агрегатор №1"
+  }
+  
   private func setupNavigationItemContent() {
     addButtonItemsToBar()
   }
@@ -126,45 +116,47 @@ class MainCollectionViewController: UICollectionViewController {
     delegate?.toggleLeftPanel?()
   }
   
-  // MARK: - Setup menu bar
-  
-  private func setupMenuBar() {
-    view.addSubview(menuBar)
-    if let navigationBarHeight = navigationController?.navigationBar.frame.size.height {
-      let topLayoutGuideHeight = navigationBarHeight + UIApplication.shared.statusBarFrame.size.height
-      menuBar.topAnchor.constraint(equalTo: view.topAnchor, constant: topLayoutGuideHeight).isActive = true
-    }
-    menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    menuBar.heightAnchor.constraint(equalToConstant: 84).isActive = true
-  }
+  // MARK: - Setup collection view
   
   private func setupCollectionView() {
+    setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse()
+    setupCollectionViewTopConstraint()
+    setWhiteBackgroundColorForCollectionView()
+    registerCollectionViewCell()
+  }
+  
+  private func setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse() {
+    collectionView.translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  private func setupCollectionViewTopConstraint() {
+    collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
+  }
+  
+  private func setWhiteBackgroundColorForCollectionView() {
     collectionView.backgroundColor = ApplicationColors.white
-    collectionView.register(CatalogueItemCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
-    
-    if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
-      let insetHeight = navigationControllerHeight + UIApplication.shared.statusBarFrame.height + menuBar.frame.size.height
-      collectionView.contentInset = UIEdgeInsets(top: insetHeight, left: 0, bottom: 0, right: 0)
-    }
-    
+  }
+  
+  private func registerCollectionViewCell() {
+    collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
   }
   
   private func getCategories() {
-    if ApiKeys.token != nil {
-      ApiHandler.shared.fetchCatalogCategories(token: ApiKeys.token!) { (success, categories) in
-        if success {
-          if let categories = categories {
-            self.menuBar.categories = categories
-            self.menuBar.reloadCollectionView()
-            self.getProductList(forCategory: categories[0].cat, page: 1)
-          }
-        } else {
-          print("No success")
+    guard let token = ApiKeys.token else {
+      return
+    }
+    
+    ApiHandler.shared.fetchCatalogCategories(token: token) { (success, categories) in
+      if success {
+        if let categories = categories {
+          self.menuBar.categories = categories
+          self.menuBar.reloadCollectionView()
+          self.getProductList(forCategory: categories[0].cat, page: 1)
         }
       }
-    } else {
-      print("No token")
     }
   }
   
@@ -186,12 +178,12 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return productItems.count > 0 ? productItems[0].count : productItems.count
+    return productItems.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CatalogueItemCollectionViewCell
-    cell.item = productItems[0][indexPath.item]
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CategoryCollectionViewCell
+    cell.products = productItems[indexPath.item]
     return cell
   }
   
@@ -199,14 +191,14 @@ class MainCollectionViewController: UICollectionViewController {
 
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: view.frame.size.width/2 - 2, height: view.frame.size.width/2 - 4)
+    return CGSize(width: view.frame.width, height: view.frame.height - totalMenuHeight)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    return 0
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    return 0
   }
 }

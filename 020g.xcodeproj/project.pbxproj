@@ -31,13 +31,17 @@
 		BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5612153F10800E6AF30 /* AskView.swift */; };
 		BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC563215408C500E6AF30 /* UIViewExtension.swift */; };
 		BE3D1D202159537500A6E9E4 /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */; };
-		BE3D1D22215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D21215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift */; };
+		BE3D1D22215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D21215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift */; };
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
 		BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */; };
 		BEF1B98A215F69AB00348A3D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */; };
+		BEF1B98D2162088400348A3D /* BarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B98C2162088400348A3D /* BarButton.swift */; };
+		BEF1B98F216208B100348A3D /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B98E216208B100348A3D /* CustomBarButtonItem.swift */; };
+		BEF1B991216208EA00348A3D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */; };
+		BEF1B99321620B3300348A3D /* CatalogCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */; };
 		BEF6F697215AA816000E4BCB /* ShopListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */; };
 		BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F698215B35E1000E4BCB /* ApiHandler.swift */; };
 		BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */; };
@@ -74,13 +78,17 @@
 		BE1DC5612153F10800E6AF30 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
 		BE1DC563215408C500E6AF30 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
-		BE3D1D21215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogueItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE3D1D21215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogItemCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 		BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskExtension.swift; sourceTree = "<group>"; };
 		BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		BEF1B98C2162088400348A3D /* BarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
+		BEF1B98E216208B100348A3D /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButtonItem.swift; sourceTree = "<group>"; };
+		BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
+		BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionView.swift; sourceTree = "<group>"; };
 		BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListTableViewController.swift; sourceTree = "<group>"; };
 		BEF6F698215B35E1000E4BCB /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
 		BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
@@ -193,7 +201,11 @@
 				BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */,
 				BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */,
 				BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */,
-				BE3D1D21215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift */,
+				BE3D1D21215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift */,
+				BEF1B98C2162088400348A3D /* BarButton.swift */,
+				BEF1B98E216208B100348A3D /* CustomBarButtonItem.swift */,
+				BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */,
+				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -307,7 +319,7 @@
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BEF6F69F215CC144000E4BCB /* Product.swift in Sources */,
-				BE3D1D22215954DD00A6E9E4 /* CatalogueItemCollectionViewCell.swift in Sources */,
+				BE3D1D22215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
 				BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */,
@@ -316,9 +328,11 @@
 				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,
 				BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */,
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
+				BEF1B991216208EA00348A3D /* CategoryCollectionViewCell.swift in Sources */,
 				BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */,
 				BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */,
 				BE3D1D202159537500A6E9E4 /* MenuBarCollectionViewCell.swift in Sources */,
+				BEF1B98D2162088400348A3D /* BarButton.swift in Sources */,
 				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
 				BEF6F6A4215F64F9000E4BCB /* ApplicationColors.swift in Sources */,
 				BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */,
@@ -327,8 +341,10 @@
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
 				BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */,
+				BEF1B99321620B3300348A3D /* CatalogCollectionView.swift in Sources */,
 				BE1DC546214FAA6700E6AF30 /* AskViewController.swift in Sources */,
 				BEF6F697215AA816000E4BCB /* ShopListTableViewController.swift in Sources */,
+				BEF1B98F216208B100348A3D /* CustomBarButtonItem.swift in Sources */,
 				BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */,
 				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,

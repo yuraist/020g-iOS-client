@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CatalogueItemCollectionViewCell: UICollectionViewCell {
+class CatalogItemCollectionViewCell: UICollectionViewCell {
   
   var item: Product? {
     didSet {

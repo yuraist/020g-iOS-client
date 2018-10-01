@@ -29,6 +29,8 @@ class MenuBarView: UIView {
     return cv
   }()
   
+  var height: CGFloat { return frame.size.height }
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     translatesAutoresizingMaskIntoConstraints = false
