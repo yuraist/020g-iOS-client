@@ -11,17 +11,41 @@ import UIKit
 class ShopListTableViewController: UITableViewController {
   
   private let cellId = "shopListCellId"
-  
   var delegate: CenterViewControllerDelegate?
+  
+  var shops = [Shop]() {
+    didSet {
+      self.reloadTableView()
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    navigationItem.title = "Страйкбольные магазины"
+    setNavigationTitle()
     setupNavigationItem()
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+    registerTableViewCell()
+    fetchShops()
+  }
+  
+  private func fetchShops() {
+    ApiHandler.shared.fetchShops { (success, shops) in
+      if let shops = shops {
+        self.shops = shops
+      }
+    }
+  }
+  
+  private func reloadTableView() {
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
   }
   
   // MARK: - Setup navigation controller
+  
+  private func setNavigationTitle() {
+    navigationItem.title = "Страйкбольные магазины"
+  }
   
   // Setup items of the navigation bar
   private func setupNavigationItem() {
@@ -56,6 +80,10 @@ class ShopListTableViewController: UITableViewController {
     navigationItem.leftBarButtonItem = menuBarButtonItem
   }
   
+  private func registerTableViewCell() {
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+  }
+  
   private func setupBarButtonConstraints(forBarItem item: UIBarButtonItem) {
     item.customView?.widthAnchor.constraint(equalToConstant: 20).isActive = true
     item.customView?.heightAnchor.constraint(equalToConstant: 20).isActive = true
@@ -76,13 +104,12 @@ class ShopListTableViewController: UITableViewController {
   // MARK: - Table view data source
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of rows
-    return 0
+    return shops.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-    
+    cell.textLabel?.text = shops[indexPath.row].domain
     return cell
   }
   

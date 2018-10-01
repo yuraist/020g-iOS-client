@@ -42,6 +42,7 @@
 		BEF1B98F216208B100348A3D /* CustomBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B98E216208B100348A3D /* CustomBarButtonItem.swift */; };
 		BEF1B991216208EA00348A3D /* CategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */; };
 		BEF1B99321620B3300348A3D /* CatalogCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */; };
+		BEF1B995216247F800348A3D /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B994216247F800348A3D /* Shop.swift */; };
 		BEF6F697215AA816000E4BCB /* ShopListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */; };
 		BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F698215B35E1000E4BCB /* ApiHandler.swift */; };
 		BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */; };
@@ -89,6 +90,7 @@
 		BEF1B98E216208B100348A3D /* CustomBarButtonItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomBarButtonItem.swift; sourceTree = "<group>"; };
 		BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionView.swift; sourceTree = "<group>"; };
+		BEF1B994216247F800348A3D /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		BEF6F696215AA816000E4BCB /* ShopListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListTableViewController.swift; sourceTree = "<group>"; };
 		BEF6F698215B35E1000E4BCB /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
 		BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
@@ -184,6 +186,7 @@
 				BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */,
 				BEF6F69C215B9378000E4BCB /* Category.swift */,
 				BEF6F69E215CC144000E4BCB /* Product.swift */,
+				BEF1B994216247F800348A3D /* Shop.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -335,6 +338,7 @@
 				BEF1B98D2162088400348A3D /* BarButton.swift in Sources */,
 				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
 				BEF6F6A4215F64F9000E4BCB /* ApplicationColors.swift in Sources */,
+				BEF1B995216247F800348A3D /* Shop.swift in Sources */,
 				BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */,
 				BEF6F6A1215E63AA000E4BCB /* MenuViewControllerDelegate.swift in Sources */,
 				BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */,

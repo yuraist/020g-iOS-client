@@ -36,7 +36,7 @@ class ApiHandler {
       queryItems["catalog_key"] = ""
     }
     
-    let task = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/check_keys", queryItems: queryItems, method: .get) { (data, response, error) in
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/check_keys", queryItems: queryItems, method: .get) { (data, response, error) in
       if let error = error {
         print(error)
       } else if let jsonData = data {
@@ -52,9 +52,7 @@ class ApiHandler {
         success?(false)
       }
     }
-    
-    // Start the task
-    task.resume()
+    dataTask.resume()
   }
   
   /// Returns a block with boolean value of request success and with an array of received categories
@@ -64,7 +62,7 @@ class ApiHandler {
    - token: String to pass into HTTP-request parameters
    - completion: Completion handler to call when the request is complete.
    */
-  func fetchCatalogCategories(token: String, completion: ((Bool, [Category]?)->Void)?) {
+  func fetchCatalogCategories(completion: ((Bool, [Category]?)->Void)?) {
     guard let token = ApiKeys.token else {
       // Cannot complete the request
       completion?(false, nil)
@@ -73,7 +71,7 @@ class ApiHandler {
     
     // Check a token and get categories if there is the token
     let queryItems = ["token": token, "appname": appName]
-    let task = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/guest_index", queryItems: queryItems, method: .get) { (data, response, error) in
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/guest_index", queryItems: queryItems, method: .get) { (data, response, error) in
       if let error = error {
         print(error)
       } else if let jsonData = data {
@@ -90,9 +88,7 @@ class ApiHandler {
         completion?(false, nil)
       }
     }
-    
-    // Resume the task
-    task.resume()
+    dataTask.resume()
   }
   
   /// Fetches a product list for the specific category
@@ -104,7 +100,6 @@ class ApiHandler {
      - completion: block that constains the boolean value of request success and the Product array
   */
   func fetchProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
-    // Check the identification token
     guard let token = ApiKeys.token else {
       completion?(false, nil)
       return
@@ -135,8 +130,38 @@ class ApiHandler {
         completion?(false, nil)
       }
     }
+    dataTask.resume()
+  }
+  
+  func fetchShops(completion: ((Bool, [Shop]?)->Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(false, nil)
+      return
+    }
     
-    // Resume the data task
+    let queryItems = ["token": token]
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get-shops", queryItems: queryItems, method: .get) { (data, response, error) in
+      if error != nil {
+        completion?(false, nil)
+        return
+      }
+      
+      if let jsonData = data {
+        do {
+          let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+          if let jsonShops = jsonObject["list"] as? [[String: Any]] {
+            var shops = [Shop]()
+            for jsonShop in jsonShops {
+              shops.append(Shop(withDictionary: jsonShop))
+            }
+            completion?(true, shops)
+          }
+          completion?(false, nil)
+        } catch {
+          completion?(false, nil)
+        }
+      }
+    }
     dataTask.resume()
   }
 }

@@ -11,9 +11,8 @@ import UIKit
 class MainCollectionViewController: UICollectionViewController {
   
   private let itemCellId = "cellId"
+  private let menuBar = MenuBarView()
   var delegate: CenterViewControllerDelegate?
-  
-  let menuBar = MenuBarView()
   
   var products = [[Product]]() {
     didSet {
@@ -29,11 +28,16 @@ class MainCollectionViewController: UICollectionViewController {
     return statusBarHeight + navigationControllerHeight
   }
   
-  private var menuBarHeight: CGFloat { return 84 }
+  private var menuBarHeight: CGFloat {
+    return 84
+    
+  }
   
   private var navigationControllerHeight: CGFloat {
     get {
-      guard let navigationControllerHeight = navigationController?.navigationBar.frame.size.height else { return 0 }
+      guard let navigationControllerHeight = navigationController?.navigationBar.frame.size.height else {
+        return 0
+      }
       return navigationControllerHeight
     }
   }
@@ -107,18 +111,6 @@ class MainCollectionViewController: UICollectionViewController {
     navigationItem.leftBarButtonItem = menuBarButtonItem
   }
   
-  @objc private func showAuthorizationViewController() {
-    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
-  }
-  
-  @objc private func showSearchCollectionViewController() {
-    
-  }
-  
-  @objc private func showMenu() {
-    delegate?.toggleLeftPanel?()
-  }
-  
   // MARK: - Setup collection view
   
   private func setupCollectionView() {
@@ -160,11 +152,7 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   private func fetchCategories() {
-    guard let token = ApiKeys.token else {
-      return
-    }
-    
-    ApiHandler.shared.fetchCatalogCategories(token: token) { (success, categories) in
+    ApiHandler.shared.fetchCatalogCategories() { (success, categories) in
       if success {
         if let categories = categories {
           self.passCategoriesToMenuBar(categories: categories)
@@ -179,11 +167,9 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   private func fetchProducts(forCategory category: Int, page: Int) {
-    if ApiKeys.token != nil {
-      ApiHandler.shared.fetchProducts(ofCategory: category, page: page) { (success, products) in
-        if let products = products {
-          self.products = [products]
-        }
+    ApiHandler.shared.fetchProducts(ofCategory: category, page: page) { (success, products) in
+      if let products = products {
+        self.products = [products]
       }
     }
   }
@@ -193,6 +179,8 @@ class MainCollectionViewController: UICollectionViewController {
       self.collectionView.reloadData()
     }
   }
+  
+  // MARK: - UICollectionViewDataSource
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return menuBar.categories.count
@@ -205,6 +193,19 @@ class MainCollectionViewController: UICollectionViewController {
     return cell
   }
   
+  // MARK: - Button actions
+  
+  @objc private func showAuthorizationViewController() {
+    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+  }
+  
+  @objc private func showSearchCollectionViewController() {
+    
+  }
+  
+  @objc private func showMenu() {
+    delegate?.toggleLeftPanel?()
+  }
 }
 
 extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
