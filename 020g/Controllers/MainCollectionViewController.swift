@@ -71,11 +71,19 @@ class MainCollectionViewController: UICollectionViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    fetchCatalogKeysAndCategories()
     setupMenuBar()
     setNavigationItemTitle()
     setupNavigationItemContent()
     setupCollectionView()
-    fetchCategories()
+  }
+  
+  private func fetchCatalogKeysAndCategories() {
+    ApiHandler.shared.checkKeys { (success) in
+      if success {
+        self.fetchCategories()
+      }
+    }
   }
   
   // MARK: - Setup menu bar
