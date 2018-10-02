@@ -101,14 +101,15 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
   }
   
   private func changeHeightOfTopAndBottomLines(to number: CGFloat) {
-    topLineHeightAnchor?.isActive = false
-    bottomLineHeightAnchor?.isActive = false
-    
     topLineHeightAnchor?.constant = number
     bottomLineHeightAnchor?.constant = number
-    
-    topLineHeightAnchor?.isActive = true
-    bottomLineHeightAnchor?.isActive = true
+    animateLines()
+  }
+  
+  private func animateLines() {
+    UIView.animate(withDuration: 0.3, delay: 0, options: .curveEaseOut, animations: {
+      self.layoutIfNeeded()
+    }, completion: nil)
   }
   
   required init?(coder aDecoder: NSCoder) {
