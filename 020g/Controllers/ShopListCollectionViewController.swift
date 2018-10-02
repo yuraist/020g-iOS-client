@@ -15,7 +15,8 @@ class ShopListCollectionViewController: UICollectionViewController {
   
   var shops = [Shop]() {
     didSet {
-      self.reloadCollectionView()
+      reloadCollectionView()
+      updateCollectionViewLayout()
     }
   }
   
@@ -73,6 +74,10 @@ class ShopListCollectionViewController: UICollectionViewController {
     collectionView.reloadData()
   }
   
+  private func updateCollectionViewLayout() {
+    collectionView.collectionViewLayout.invalidateLayout()
+  }
+  
   // MARK: - Setup navigation controller
   
   private func setNavigationTitle() {
@@ -125,11 +130,11 @@ class ShopListCollectionViewController: UICollectionViewController {
 
 extension ShopListCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    guard let cell = collectionView.cellForItem(at: indexPath) as? ShopCollectionViewCell else {
-      return CGSize.zero
+    if let cell = collectionView.cellForItem(at: indexPath) as? ShopCollectionViewCell {
+      return CGSize(width: view.frame.width, height: cell.cellHeight)
     }
     
-    return CGSize(width: view.frame.width, height: cell.cellHeight)
+    return CGSize(width: view.frame.width, height: 44)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
