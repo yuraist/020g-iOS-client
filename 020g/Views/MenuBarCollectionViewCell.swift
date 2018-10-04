@@ -14,6 +14,7 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
     let label = UILabel()
     label.text = "Category"
     label.textAlignment = .center
+    label.font = UIFont.systemFont(ofSize: 13)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -42,8 +43,11 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
     return view
   }()
   
-  private var topLineHeightAnchor: NSLayoutConstraint?
-  private var bottomLineHeightAnchor: NSLayoutConstraint?
+  private let selectedCellTopLineView = SelectedCellLineView(frame: .zero)
+  private let selectedCellBottomLineView = SelectedCellLineView(frame: .zero)
+  
+  var topLineHeightAnchor: NSLayoutConstraint?
+  var bottomLineHeightAnchor: NSLayoutConstraint?
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -59,8 +63,8 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
   
   private func addSubviews() {
     addSubview(textLabel)
-    addSubview(selectedCellTopLine)
-    addSubview(selectedCellBottomLine)
+    addSubview(selectedCellTopLineView)
+    addSubview(selectedCellBottomLineView)
   }
   
   private func setupSubviewsConstraints() {
@@ -77,18 +81,18 @@ class MenuBarCollectionViewCell: UICollectionViewCell {
   }
   
   private func setupSelectedViewTopLineConstraints() {
-    selectedCellTopLine.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    selectedCellTopLine.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    selectedCellTopLine.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    topLineHeightAnchor = selectedCellTopLine.heightAnchor.constraint(equalToConstant: 0)
+    selectedCellTopLineView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+    selectedCellTopLineView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    selectedCellTopLineView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+    topLineHeightAnchor = selectedCellTopLineView.heightAnchor.constraint(equalToConstant: 0)
     topLineHeightAnchor?.isActive = true
   }
   
   private func setupSelectedViewBottomLineConstraints() {
-    selectedCellBottomLine.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-    selectedCellBottomLine.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    selectedCellBottomLine.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    bottomLineHeightAnchor = selectedCellBottomLine.heightAnchor.constraint(equalToConstant: 0)
+    selectedCellBottomLineView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    selectedCellBottomLineView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    selectedCellBottomLineView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+    bottomLineHeightAnchor = selectedCellBottomLineView.heightAnchor.constraint(equalToConstant: 0)
     bottomLineHeightAnchor?.isActive = true
   }
   

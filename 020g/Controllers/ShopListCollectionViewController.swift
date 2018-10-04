@@ -122,7 +122,7 @@ class ShopListCollectionViewController: UICollectionViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShopCollectionViewCell
     cell.shop = shops[indexPath.item]
-    cell.backgroundColor = .lightGray
+    cell.backgroundColor = ApplicationColors.white
     return cell
   }
   

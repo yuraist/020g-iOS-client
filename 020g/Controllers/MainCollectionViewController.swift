@@ -104,6 +104,10 @@ class MainCollectionViewController: UICollectionViewController {
     menuBar.heightAnchor.constraint(equalToConstant: menuBarHeight).isActive = true
   }
   
+  private func addStartingMenuBarItemIndexPath() {
+    menuBar.selectedItemIndexPath = getCurrentCellIndexPath()
+  }
+  
   // MARK: - Setup navigation controller
   
   private func setNavigationItemTitle() {
@@ -188,6 +192,19 @@ class MainCollectionViewController: UICollectionViewController {
     }
   }
   
+  override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    changeMenuBarSelectedItem()
+  }
+  
+  private func changeMenuBarSelectedItem() {
+    menuBar.selectedItemIndexPath = getCurrentCellIndexPath()
+  }
+  
+  private func getCurrentCellIndexPath() -> IndexPath {
+    let cell = collectionView.visibleCells[0]
+    return collectionView.indexPath(for: cell) ?? IndexPath(item: 0, section: 0)
+  }
+  
   // MARK: - UICollectionViewDataSource
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -196,7 +213,7 @@ class MainCollectionViewController: UICollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CategoryCollectionViewCell
-    menuBar.catalogCollectionView = cell.catalogCollectionView
+    menuBar.catalogCollectionView = collectionView
     cell.catalogCollectionView.category = menuBar.categories[indexPath.item]
     return cell
   }

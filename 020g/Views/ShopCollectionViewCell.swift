@@ -17,7 +17,6 @@ class ShopCollectionViewCell: UICollectionViewCell {
   var shop: Shop? {
     didSet {
       setCountFields()
-      addInfoFields()
     }
   }
   
@@ -53,31 +52,4 @@ class ShopCollectionViewCell: UICollectionViewCell {
     countFields += 1
   }
   
-  private func addInfoFields() {
-    createAndSetupDomainView()
-  }
-  
-  private func createAndSetupDomainView() {
-    let domainView = DomainView(withDomain: shop!.domain)
-    addSubview(domainView)
-    setupDomainViewConstraints(domainView)
-    
-    let cityField = ShopInfoFieldView(info: shop!.city)
-    addSubview(cityField)
-    setupConstraints(forView: cityField, withPreviousView: domainView)
-  }
-  
-  private func setupDomainViewConstraints(_ view: DomainView) {
-    view.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    view.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-    view.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    view.heightAnchor.constraint(equalToConstant: 44).isActive = true
-  }
-  
-  private func setupConstraints(forView view: UIView, withPreviousView prev: UIView) {
-    view.topAnchor.constraint(equalTo: prev.bottomAnchor).isActive = true
-    view.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-    view.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    view.heightAnchor.constraint(equalToConstant: 44).isActive = true
-  }
 }

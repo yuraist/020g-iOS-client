@@ -12,7 +12,18 @@ class MenuBarView: UIView {
   
   private let cellId = "menuBarCellId"
   
-  var catalogCollectionView: CatalogCollectionView?
+  let pricesButton = StandardButton(title: "Каталог цен")
+  
+  var catalogCollectionView: UICollectionView?
+  var height: CGFloat { return frame.size.height }
+  
+  var selectedItemIndexPath = IndexPath(item: 0, section: 0) {
+    didSet {
+      deselectOldItem(indexPath: oldValue)
+      selectNewItem()
+      scrollCollectionViewToNewPosition()
+    }
+  }
   
   var categories = [Category]() {
     didSet {
@@ -27,8 +38,6 @@ class MenuBarView: UIView {
     return view
   }()
   
-  let pricesButton = StandardButton(title: "Каталог цен")
-  
   let collectionView: UICollectionView = {
     let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     cv.backgroundColor = ApplicationColors.violet
@@ -36,12 +45,13 @@ class MenuBarView: UIView {
     return cv
   }()
   
-  var height: CGFloat { return frame.size.height }
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
-    translatesAutoresizingMaskIntoConstraints = false
-    setupSubviews()
+    
+    setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    
+    addSubviews()
+    setupConstraintsOfSubviews()
     setupCollectionView()
   }
   
@@ -49,24 +59,37 @@ class MenuBarView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setupSubviews() {
+  private func setTranslatesAutoresizingMaskIntoConstraintsFalse() {
+    translatesAutoresizingMaskIntoConstraints = false
+  }
+  
+  private func addSubviews() {
     addSubview(centerButtonView)
     addSubview(pricesButton)
     addSubview(collectionView)
-    
-    // Setup the centerButtonView's layout constraints
+  }
+  
+  private func setupConstraintsOfSubviews() {
+    setupCenterButtonViewConstraints()
+    setupPriceButtonConstraints()
+    setupCollectionViewConstratints()
+  }
+  
+  private func setupCenterButtonViewConstraints() {
     centerButtonView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     centerButtonView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     centerButtonView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     centerButtonView.heightAnchor.constraint(equalToConstant: 52).isActive = true
-    
-    // Setup the pricesButton's layout constraints
+  }
+  
+  private func setupPriceButtonConstraints() {
     pricesButton.leftAnchor.constraint(equalTo: centerButtonView.leftAnchor, constant: 8).isActive = true
     pricesButton.topAnchor.constraint(equalTo: centerButtonView.topAnchor, constant: 8).isActive = true
     pricesButton.rightAnchor.constraint(equalTo: centerButtonView.rightAnchor, constant: -8).isActive = true
     pricesButton.bottomAnchor.constraint(equalTo: centerButtonView.bottomAnchor, constant: -8).isActive = true
-    
-    // Setup the collectionView's layout constraints
+  }
+  
+  private func setupCollectionViewConstratints() {
     collectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     collectionView.topAnchor.constraint(equalTo: centerButtonView.bottomAnchor).isActive = true
     collectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
@@ -74,12 +97,30 @@ class MenuBarView: UIView {
   }
   
   func setupCollectionView() {
+    setCollectionViewDelegate()
+    setCollectionViewDataSource()
+    removeScrollIndicator()
+    registerCollectionViewCell()
+    setupCollectionViewLayout()
+  }
+  
+  private func setCollectionViewDelegate() {
     collectionView.delegate = self
+  }
+  
+  private func setCollectionViewDataSource() {
     collectionView.dataSource = self
+  }
+  
+  private func removeScrollIndicator() {
     collectionView.showsHorizontalScrollIndicator = false
-    
+  }
+  
+  private func registerCollectionViewCell() {
     collectionView.register(MenuBarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-    
+  }
+  
+  private func setupCollectionViewLayout() {
     if let collectionViewLayout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
       collectionViewLayout.scrollDirection = .horizontal
       collectionViewLayout.minimumLineSpacing = 0
@@ -92,6 +133,19 @@ class MenuBarView: UIView {
       self.collectionView.reloadData()
     }
   }
+  
+  private func deselectOldItem(indexPath: IndexPath) {
+    collectionView.cellForItem(at: indexPath)?.isSelected = false
+  }
+  
+  private func selectNewItem() {
+    collectionView.cellForItem(at: selectedItemIndexPath)?.isSelected = true
+  }
+  
+  private func scrollCollectionViewToNewPosition() {
+    collectionView.scrollToItem(at: selectedItemIndexPath, at: .centeredHorizontally, animated: true)
+  }
+  
 }
 
 extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -106,7 +160,8 @@ extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    catalogCollectionView?.category = categories[indexPath.item]
+    selectedItemIndexPath = indexPath
+    catalogCollectionView?.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
   }
   
   private func getCellWidth(forString string: String) -> CGFloat {
