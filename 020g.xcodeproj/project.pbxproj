@@ -10,6 +10,7 @@
 		BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
+		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
 		BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */; };
 		BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */; };
 		BE1DC531214FA1D400E6AF30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC530214FA1D400E6AF30 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
+		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BE1DC526214FA1D300E6AF30 /* 020g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 020g.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -191,6 +193,7 @@
 				BEF6F69C215B9378000E4BCB /* Category.swift */,
 				BEF6F69E215CC144000E4BCB /* Product.swift */,
 				BEF1B994216247F800348A3D /* Shop.swift */,
+				BE19008C21672DB4005069C9 /* User.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -350,6 +353,7 @@
 				BEF6F6A1215E63AA000E4BCB /* MenuViewControllerDelegate.swift in Sources */,
 				BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */,
 				BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */,
+				BE19008D21672DB4005069C9 /* User.swift in Sources */,
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
 				BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */,
