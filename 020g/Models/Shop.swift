@@ -21,6 +21,12 @@ struct Shop {
   var siteId: Int
   var freePhone: String?
   
+  var cellHeight: CGFloat {
+    return CGFloat(44 * countFields)
+  }
+  
+  private var countFields = 4
+  
   init(withDictionary dictionary: [String: Any]) {
     address = dictionary["address"] as! String
     city = dictionary["city"] as! String
@@ -33,5 +39,37 @@ struct Shop {
     vkGroup = dictionary["vk_group"] as? String
     siteId = Int((dictionary["site_id"] as! NSString).intValue)
     freePhone = dictionary["free_phone"] as? String
+  }
+  
+  private mutating func setCountFields() {
+    countFields = 44
+    
+    if email != nil {
+      incrementCountFields()
+    }
+    
+    if phone1 != nil {
+      incrementCountFields()
+    }
+    
+    if phone2 != nil {
+      incrementCountFields()
+    }
+    
+    if phone3 != nil {
+      incrementCountFields()
+    }
+    
+    if freePhone != nil {
+      incrementCountFields()
+    }
+    
+    if vkGroup != nil {
+      incrementCountFields()
+    }
+  }
+  
+  private mutating func incrementCountFields() {
+    countFields += 1
   }
 }

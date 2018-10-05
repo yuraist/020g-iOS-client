@@ -15,8 +15,10 @@ class ShopListCollectionViewController: UICollectionViewController {
   
   var shops = [Shop]() {
     didSet {
-      reloadCollectionView()
-      updateCollectionViewLayout()
+      DispatchQueue.main.async {
+        self.reloadCollectionView()
+        self.updateCollectionViewLayout()
+      }
     }
   }
   
@@ -59,15 +61,13 @@ class ShopListCollectionViewController: UICollectionViewController {
   private func fetchShops() {
     ApiHandler.shared.fetchShops { (success, shops) in
       if let shops = shops {
-        self.shops = shops
+          self.shops = shops
       }
     }
   }
   
   private func reloadCollectionView() {
-    DispatchQueue.main.async {
-      self.updateCollectionViewData()
-    }
+    updateCollectionViewData()
   }
   
   private func updateCollectionViewData() {
@@ -130,11 +130,8 @@ class ShopListCollectionViewController: UICollectionViewController {
 
 extension ShopListCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    if let cell = collectionView.cellForItem(at: indexPath) as? ShopCollectionViewCell {
-      return CGSize(width: view.frame.width, height: cell.cellHeight)
-    }
-    
-    return CGSize(width: view.frame.width, height: 44)
+    let cellHeight = shops[indexPath.item].cellHeight
+    return CGSize(width: view.frame.width, height: cellHeight)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -48,6 +48,7 @@ class AuthorizationViewController: UIViewController {
     super.viewDidLoad()
     setupNavigationControllerStyle()
     setupNavigationItem()
+    setControllerAsTextFieldsDelegate()
     
     // Setup the background color for the view
     view.backgroundColor = ApplicationColors.gray
@@ -114,5 +115,21 @@ class AuthorizationViewController: UIViewController {
   
   @objc private func dismissController() {
     dismiss(animated: true, completion: nil)
+  }
+}
+
+extension AuthorizationViewController: UITextFieldDelegate {
+  
+  private func setControllerAsTextFieldsDelegate() {
+    loginInputContainerView.emailTextField.delegate = self
+    loginInputContainerView.passwordTextField.delegate = self
+    loginInputContainerView.nameTextField.delegate = self
+    loginInputContainerView.repeatPasswordTextField.delegate = self
+    loginInputContainerView.phoneTextField.delegate = self
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    return true
   }
 }
