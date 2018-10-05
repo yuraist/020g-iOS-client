@@ -173,4 +173,7 @@ class LoginInputContainerView: UIView {
     repeatPasswordTextFieldHeightAnchor?.isActive = true
   }
   
+  func changeContainerViewMode() {
+    isSignUpView = !isSignUpView
+  }
 }

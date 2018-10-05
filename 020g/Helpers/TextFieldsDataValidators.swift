@@ -22,9 +22,9 @@ extension UITextField {
     return isValidEmailMask
   }
   
-  var isValidLength: Bool {
+  var isValidTextLength: Bool {
     if let text = text {
-      return text.count >= 0 && text.count <= 32
+      return text.count >= 0 && text.count < 32
     }
     return false
   }
