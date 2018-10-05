@@ -164,4 +164,26 @@ class ApiHandler {
     }
     dataTask.resume()
   }
+  
+  func getUserInfo(completion: ((Bool, User?) -> Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(false, nil)
+      return
+    }
+    
+    let queryItems = ["key": token]
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/user/get", queryItems: queryItems, method: .get) { (data, response, err) in
+      if let jsonData = data {
+        let decoder = JSONDecoder()
+        
+        do {
+          let user = try decoder.decode(User.self, from: jsonData)
+          completion?(true, user)
+        } catch {
+          completion?(false, nil)
+        }
+      }
+    }
+    dataTask.resume()
+  }
 }
