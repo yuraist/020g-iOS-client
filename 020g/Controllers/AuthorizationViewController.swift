@@ -141,75 +141,20 @@ extension AuthorizationViewController: UITextFieldDelegate {
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
     if textField.isPhoneNumberField {
-      let textFieldString = textField.text! as NSString
-      var newString = textFieldString.replacingCharacters(in: range, with: string)
-      let validationSet = CharacterSet.decimalDigits.inverted
-      
-      let numberArray = newString.components(separatedBy: validationSet)
-      newString = numberArray.joined()
-      
-      
-      if newString.count > 11 {
-        return false
-      }
-      
-      if newString.count > 0 {
-        if newString.first == "7" {
-          newString.insert("+", at: newString.startIndex)
-        } else if newString.first != "8" {
-          newString.insert("7", at: newString.startIndex)
-          newString.insert("+", at: newString.startIndex)
-        } else {
-          newString.remove(at: newString.startIndex)
-          newString.insert("7", at: newString.startIndex)
-          newString.insert("+", at: newString.startIndex)
-        }
-      }
-      
-      if newString.count > 2 {
-        let newIndex = newString.index(newString.startIndex, offsetBy: 2)
-        let newIndexPlus = newString.index(newString.startIndex, offsetBy: 3)
-        newString.insert(" ", at: newIndex)
-        newString.insert("(", at: newIndexPlus)
-      }
-      
-      if newString.count > 7 {
-        let newIndex = newString.index(newString.startIndex, offsetBy: 7)
-        let newIndexPlus = newString.index(newString.startIndex, offsetBy: 8)
-        newString.insert(")", at: newIndex)
-        newString.insert(" ", at: newIndexPlus)
-      }
-      
-      if newString.count > 12 {
-        let newIndex = newString.index(newString.startIndex, offsetBy: 12)
-        newString.insert("-", at: newIndex)
-      }
-      
-      if newString.count > 15 {
-        let newIndex = newString.index(newString.startIndex, offsetBy: 15)
-        newString.insert("-", at: newIndex)
-      }
-      
-      textField.text = newString
+      textField.handlePhoneNumberField(withReplacingString: string, in: range)
       return false
     }
     
-    return textField.isValidTextLength || string.count < 1
+    return textField.textLengthIsValid || string.count < 1
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField.isEmailField {
-      if textField.isValidEmail {
-        textField.setValid()
-        textField.resignFirstResponder()
-        return true
-      } else {
-        textField.setInvalid()
-        return false
-      }
+    if textField.isValid {
+      textField.changeAppearanceForValidField()
+      resignFirstResponder()
+      return true
     }
-    
-    textField.resignFirstResponder()
+    textField.changeAppearanceForInvalidField()
     return false
   }
 }

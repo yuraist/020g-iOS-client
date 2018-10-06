@@ -11,7 +11,7 @@
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
-		BE19008F21678CC0005069C9 /* TextFieldsDataValidators.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008E21678CC0005069C9 /* TextFieldsDataValidators.swift */; };
+		BE19008F21678CC0005069C9 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008E21678CC0005069C9 /* UITextFieldExtension.swift */; };
 		BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */; };
 		BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */; };
 		BE1DC531214FA1D400E6AF30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC530214FA1D400E6AF30 /* Assets.xcassets */; };
@@ -61,7 +61,7 @@
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
-		BE19008E21678CC0005069C9 /* TextFieldsDataValidators.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldsDataValidators.swift; sourceTree = "<group>"; };
+		BE19008E21678CC0005069C9 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
 		BE1DC526214FA1D300E6AF30 /* 020g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = 020g.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -227,12 +227,12 @@
 		BE1DC540214FA60500E6AF30 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				BE1DC563215408C500E6AF30 /* UIViewExtension.swift */,
+				BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */,
+				BE19008E21678CC0005069C9 /* UITextFieldExtension.swift */,
+				BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */,
 				BE1DC541214FA61E00E6AF30 /* Helpers.swift */,
 				BEF6F6A3215F64F9000E4BCB /* ApplicationColors.swift */,
-				BE1DC563215408C500E6AF30 /* UIViewExtension.swift */,
-				BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */,
-				BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */,
-				BE19008E21678CC0005069C9 /* TextFieldsDataValidators.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -326,7 +326,7 @@
 			files = (
 				BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */,
 				BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */,
-				BE19008F21678CC0005069C9 /* TextFieldsDataValidators.swift in Sources */,
+				BE19008F21678CC0005069C9 /* UITextFieldExtension.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
 				BEF6F69D215B9378000E4BCB /* Category.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
