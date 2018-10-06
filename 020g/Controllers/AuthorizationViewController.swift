@@ -100,16 +100,50 @@ class AuthorizationViewController: UIViewController {
   @objc private func login() {
     if formIsValid() {
       hideKeyboard()
+      prepareDataAndSendLoginRequest()
     } else {
       showAlertMessage()
     }
+  }
+  
+  private func prepareDataAndSendLoginRequest() {
+    if submitFormButtonIsLogin() {
+      let data = getValidLoginData()
+      print(data)
+    } else {
+      let data = getValidSignUpData()
+      print(data)
+    }
+  }
+  
+  private func getValidLoginData() -> [String: String] {
+    let email = loginInputContainerView.emailTextField.text!
+    let password = loginInputContainerView.passwordTextField.text!
+    let data = ["email": email, "password": password]
+    return data
+  }
+  
+  private func getValidSignUpData() -> [String: String] {
+    var data = [String: String]()
+    data["email"] = loginInputContainerView.emailTextField.text!
+    let name = loginInputContainerView.nameTextField.text!
+    data["name"] = name.components(separatedBy: CharacterSet.whitespaces).joined()
+    if let phoneNumber = loginInputContainerView.phoneTextField.text {
+      data["phoneNumber"] = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+    data["password"] = loginInputContainerView.passwordTextField.text!
+    return data
   }
   
   private func formIsValid() -> Bool {
     if submitFormButtonIsLogin() {
       return loginInputContainerView.emailTextField.isValid && loginInputContainerView.passwordTextField.isValid
     } else {
-      var result = loginInputContainerView.emailTextField.isValid && loginInputContainerView.nameTextField.isValid && loginInputContainerView.phoneTextField.isValid && loginInputContainerView.passwordTextField.isValid && loginInputContainerView.repeatPasswordTextField.isValid
+      var result = loginInputContainerView.emailTextField.isValid &&
+        loginInputContainerView.nameTextField.isValid &&
+        loginInputContainerView.phoneTextField.isValid &&
+        loginInputContainerView.passwordTextField.isValid &&
+        loginInputContainerView.repeatPasswordTextField.isValid
       result = result && (loginInputContainerView.passwordTextField.text == loginInputContainerView.repeatPasswordTextField.text)
       return result
     }
