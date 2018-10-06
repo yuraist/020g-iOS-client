@@ -176,4 +176,20 @@ class LoginInputContainerView: UIView {
   func changeContainerViewMode() {
     isSignUpView = !isSignUpView
   }
+  
+  func getEmailTextFieldData() -> String {
+    return emailTextField.text!
+  }
+  
+  func getNameTextFieldHandledData() -> String {
+    return nameTextField.text!.components(separatedBy: CharacterSet.whitespaces).joined()
+  }
+  
+  func getPhoneNumberTextFieldHandledData() -> String {
+    return phoneTextField.text!.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+  }
+  
+  func getPasswordTextFieldData() -> String {
+    return passwordTextField.text!
+  }
 }

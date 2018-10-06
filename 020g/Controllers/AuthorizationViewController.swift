@@ -125,13 +125,15 @@ class AuthorizationViewController: UIViewController {
   
   private func getValidSignUpData() -> [String: String] {
     var data = [String: String]()
-    data["email"] = loginInputContainerView.emailTextField.text!
-    let name = loginInputContainerView.nameTextField.text!
-    data["name"] = name.components(separatedBy: CharacterSet.whitespaces).joined()
-    if let phoneNumber = loginInputContainerView.phoneTextField.text {
-      data["phoneNumber"] = phoneNumber.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    
+    data["email"] = loginInputContainerView.getEmailTextFieldData()
+    data["name"] = loginInputContainerView.getNameTextFieldHandledData()
+    data["password"] = loginInputContainerView.getPasswordTextFieldData()
+    
+    if let phoneNumber = loginInputContainerView.phoneTextField.text, phoneNumber != "" {
+      data["phoneNumber"] = loginInputContainerView.getPhoneNumberTextFieldHandledData()
     }
-    data["password"] = loginInputContainerView.passwordTextField.text!
+    
     return data
   }
   
