@@ -98,7 +98,32 @@ class AuthorizationViewController: UIViewController {
   }
   
   @objc private func login() {
-    validateForm()
+    if formIsValid() {
+      hideKeyboard()
+    } else {
+      showAlertMessage()
+    }
+  }
+  
+  private func formIsValid() -> Bool {
+    if submitFormButtonIsLogin() {
+      return loginInputContainerView.emailTextField.isValid && loginInputContainerView.passwordTextField.isValid
+    } else {
+      var result = loginInputContainerView.emailTextField.isValid && loginInputContainerView.nameTextField.isValid && loginInputContainerView.phoneTextField.isValid && loginInputContainerView.passwordTextField.isValid && loginInputContainerView.repeatPasswordTextField.isValid
+      result = result && (loginInputContainerView.passwordTextField.text == loginInputContainerView.repeatPasswordTextField.text)
+      return result
+    }
+  }
+  
+  private func submitFormButtonIsLogin() -> Bool {
+    return loginInputContainerView.loginButton.title == "Войти"
+  }
+  
+  private func showAlertMessage() {
+    let alert = UIAlertController(title: "Ошибка", message: "Вы ввели данные неверно. Пожалуйста, проверьте правильность введенных вами данных и попробуйте снова.", preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "Хорошо", style: .default, handler: nil)
+    alert.addAction(alertAction)
+    present(alert, animated: true, completion: nil)
   }
   
   @objc private func changeFormMode() {
@@ -131,9 +156,6 @@ class AuthorizationViewController: UIViewController {
     loginInputContainerViewHeightAnchor?.isActive = true
   }
   
-  private func validateForm() {
-    
-  }
 }
 
 extension AuthorizationViewController: UITextFieldDelegate {
@@ -151,10 +173,14 @@ extension AuthorizationViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField.isValid {
       textField.changeAppearanceForValidField()
-      resignFirstResponder()
+      textField.resignFirstResponder()
       return true
     }
     textField.changeAppearanceForInvalidField()
     return false
+  }
+  
+  private func hideKeyboard() {
+    loginInputContainerView.endEditing(true)
   }
 }
