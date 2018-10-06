@@ -192,4 +192,8 @@ class LoginInputContainerView: UIView {
   func getPasswordTextFieldData() -> String {
     return passwordTextField.text!
   }
+  
+  func clearTextFields() {
+    
+  }
 }

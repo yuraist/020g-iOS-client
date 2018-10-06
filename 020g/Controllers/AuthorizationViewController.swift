@@ -107,31 +107,49 @@ class AuthorizationViewController: UIViewController {
   }
   
   private func prepareDataAndSendLoginRequest() {
+    var data = [String: String]()
+    
     if submitFormButtonIsLogin() {
-      let data = getValidLoginData()
-      print(data)
+      data = getValidLoginData()
     } else {
-      let data = getValidSignUpData()
-      print(data)
+      data = getValidSignUpData()
+    }
+    
+    loginRequest(with: data)
+  }
+  
+  private func loginRequest(with data: [String: String]) {
+    ApiHandler.shared.authorize(login: submitFormButtonIsLogin(), data: data) { (success) in
+      if success {
+        DispatchQueue.main.async {
+          let alert = UIAlertController(title: "Авторизован", message: "Авторизация успешно выполнена", preferredStyle: .alert)
+          let alertAction = UIAlertAction(title: "Ok", style: .default, handler: { action in
+            self.loginInputContainerView.clearTextFields()
+          })
+          alert.addAction(alertAction)
+          self.present(alert, animated: true, completion: nil)
+        }
+      }
     }
   }
   
   private func getValidLoginData() -> [String: String] {
     let email = loginInputContainerView.emailTextField.text!
     let password = loginInputContainerView.passwordTextField.text!
-    let data = ["email": email, "password": password]
+    let data = ["login": email, "password": password, "key": ApiKeys.token!]
     return data
   }
   
   private func getValidSignUpData() -> [String: String] {
     var data = [String: String]()
     
+    data["key"] = ApiKeys.token!
     data["email"] = loginInputContainerView.getEmailTextFieldData()
     data["name"] = loginInputContainerView.getNameTextFieldHandledData()
     data["password"] = loginInputContainerView.getPasswordTextFieldData()
     
     if let phoneNumber = loginInputContainerView.phoneTextField.text, phoneNumber != "" {
-      data["phoneNumber"] = loginInputContainerView.getPhoneNumberTextFieldHandledData()
+      data["phone"] = loginInputContainerView.getPhoneNumberTextFieldHandledData()
     }
     
     return data
@@ -219,4 +237,5 @@ extension AuthorizationViewController: UITextFieldDelegate {
   private func hideKeyboard() {
     loginInputContainerView.endEditing(true)
   }
+  
 }

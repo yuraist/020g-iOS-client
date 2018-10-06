@@ -17,7 +17,7 @@ enum HTTPMethod: String {
 class ApiHandler {
   
   static let shared = ApiHandler()
-
+  
   let appName = "020g"
   
   /// Requests a catalog_key and super_key to API and returns the success block.
@@ -95,10 +95,10 @@ class ApiHandler {
   /**
    Checks the auth token and requests products if the token is passed.
    - parameters:
-     - categoryId: integer value of the category for which you want to fetch products
-     - page: integer value of page of product list pagination
-     - completion: block that constains the boolean value of request success and the Product array
-  */
+   - categoryId: integer value of the category for which you want to fetch products
+   - page: integer value of page of product list pagination
+   - completion: block that constains the boolean value of request success and the Product array
+   */
   func fetchProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
     guard let token = ApiKeys.token else {
       completion?(false, nil)
@@ -185,5 +185,37 @@ class ApiHandler {
       }
     }
     dataTask.resume()
+  }
+  
+  func authorize(login: Bool, data: [String: String], completion: ((Bool) -> Void)?) {
+    var path = "/abpro/"
+    
+    if login {
+      path.append("auth")
+    } else {
+      path.append("register")
+    }
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: path, queryItems: data, method: .get) { (data, response, error) in
+      guard let data = data else {
+        completion?(false)
+        return
+      }
+      
+      do {
+        let jsonObject = try self.getJsonObject(with: data)
+        if let status = jsonObject["status"] as? Bool {
+          completion?(status)
+        }
+      } catch {
+        completion?(false)
+      }
+    }
+    dataTask.resume()
+  }  
+  
+  private func getJsonObject(with data: Data) throws -> [String: Any] {
+    let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
+    return jsonObject as! [String: Any]
   }
 }
