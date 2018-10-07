@@ -177,8 +177,8 @@ class ApiHandler {
         let decoder = JSONDecoder()
         
         do {
-          let user = try decoder.decode(User.self, from: jsonData)
-          completion?(true, user)
+          let users = try decoder.decode(Users.self, from: jsonData)
+          completion?(true, users.user)
         } catch {
           completion?(false, nil)
         }

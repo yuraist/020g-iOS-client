@@ -10,7 +10,11 @@ import UIKit
 
 struct User: Codable {
   var name: String
-  var phone: String
-  var email: String?
+  var phone: String?
+  var email: String
   var pay: String
+}
+
+struct Users: Codable {
+  var user: User
 }
