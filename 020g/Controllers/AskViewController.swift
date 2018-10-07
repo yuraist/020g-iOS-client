@@ -65,6 +65,7 @@ class AskViewController: UIViewController {
       ApiHandler.shared.askQuestion(data: data) {
         DispatchQueue.main.async {
           self.clearInputs()
+          self.showSuccessAlert()
         }
       }
     }
@@ -103,6 +104,12 @@ class AskViewController: UIViewController {
     inputContainerView.nameInput.textField.text = ""
     inputContainerView.phoneInput.textField.text = ""
     inputContainerView.textView.text = ""
+  }
+  
+  private func showSuccessAlert() {
+    let alert = UIAlertController(title: "Ваше сообщение отправлено успешно", message: "", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Хорошо", style: .default, handler: nil))
+    present(alert, animated: true, completion: nil)
   }
   
   private func addHideKeyboardOnTapGestureAction() {

@@ -20,6 +20,7 @@ class ForgotPasswordViewController: UIViewController {
     addInputContainerView()
     setupConstraintsOfInputContainerView()
     setupInputContainerViewTextFieldDelegate()
+    addSendRequestAction()
   }
   
   private func setNavigationItemTitle() {
@@ -54,6 +55,32 @@ class ForgotPasswordViewController: UIViewController {
     inputContainerView.emailTextField.delegate = self
   }
   
+  private func addSendRequestAction() {
+    inputContainerView.recallButton.addTarget(self, action: #selector(sendRequest), for: .touchUpInside)
+  }
+  
+  @objc private func sendRequest() {
+    if inputContainerView.emailTextField.emailFieldIsValid {
+      var data = ["email": inputContainerView.emailTextField.text!]
+      data["key"] = ApiKeys.token!
+      ApiHandler.shared.restorePassword(data: data) {
+        DispatchQueue.main.async {
+          self.clearInput()
+          self.showSuccessMessageAlert()
+        }
+      }
+    }
+  }
+  
+  private func clearInput() {
+    inputContainerView.emailTextField.text = ""
+  }
+  
+  private func showSuccessMessageAlert() {
+    let alert = UIAlertController(title: "Успешно", message: "Проверьте указанную вами почту", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+    present(alert, animated: true, completion: nil)
+  }
 }
 
 extension ForgotPasswordViewController: UITextFieldDelegate {
