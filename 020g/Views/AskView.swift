@@ -10,9 +10,9 @@ import UIKit
 
 class AskView: UIView {
 
-  let nameTextField = TitledInputView(placeholder: "Чтобы знать как к Вам обращаться", title: "Имя")
-  let phoneTextField = TitledInputView(placeholder: "Необязательно, но оперативнее", title: "Телефон")
-  let emailTextField = TitledInputView(placeholder: "Сюда мы отправим ответ на вопрос", title: "Email")
+  let nameInput = TitledInputView(placeholder: "Чтобы знать как к Вам обращаться", title: "Имя")
+  let phoneInput = TitledInputView(placeholder: "Необязательно, но оперативнее", title: "Телефон")
+  let emailInput = TitledInputView(placeholder: "Сюда мы отправим ответ на вопрос", title: "Email")
   
   let textViewTitleLabel: UILabel = {
     let label = UILabel()
@@ -39,34 +39,34 @@ class AskView: UIView {
     setupContainerView()
     
     // Add subviews
-    addSubview(nameTextField)
-    addSubview(phoneTextField)
-    addSubview(emailTextField)
+    addSubview(nameInput)
+    addSubview(phoneInput)
+    addSubview(emailInput)
     addSubview(textViewTitleLabel)
     addSubview(textView)
     addSubview(sendButton)
     
     // Setup views layout constraints
     // Setup nameTextField layout constraints
-    nameTextField.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-    nameTextField.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
-    nameTextField.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
-    nameTextField.heightAnchor.constraint(equalToConstant: 52).isActive = true
+    nameInput.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    nameInput.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
+    nameInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
+    nameInput.heightAnchor.constraint(equalToConstant: 52).isActive = true
     
     // Setup layout constraints for phoneTextField and emailTextField
-    addDefaultConstraints(toView: phoneTextField, relatedTo: nameTextField)
-    addDefaultConstraints(toView: emailTextField, relatedTo: phoneTextField)
+    addDefaultConstraints(toView: phoneInput, relatedTo: nameInput)
+    addDefaultConstraints(toView: emailInput, relatedTo: phoneInput)
     
     // Setup layout constraints for textiViewTitleLabel
     textViewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
-    textViewTitleLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: 4).isActive = true
+    textViewTitleLabel.topAnchor.constraint(equalTo: emailInput.bottomAnchor, constant: 4).isActive = true
     textViewTitleLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     textViewTitleLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
     // Setup layout constraints for textView
     textView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     textView.topAnchor.constraint(equalTo: textViewTitleLabel.bottomAnchor, constant: 8).isActive = true
-    textView.widthAnchor.constraint(equalTo: emailTextField.widthAnchor).isActive = true
+    textView.widthAnchor.constraint(equalTo: emailInput.widthAnchor).isActive = true
     textView.heightAnchor.constraint(equalToConstant: 90).isActive = true
     
     // Setup layout constraints for sendButton

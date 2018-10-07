@@ -34,7 +34,7 @@ extension UITextField {
     return false
   }
   
-  private var emailFieldIsValid: Bool {
+  var emailFieldIsValid: Bool {
     return isValidEmailMask
   }
   

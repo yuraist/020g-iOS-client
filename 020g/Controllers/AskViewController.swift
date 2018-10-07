@@ -10,11 +10,7 @@ import UIKit
 
 class AskViewController: UIViewController {
   
-  let inputContainerView: AskView = {
-    let view = AskView(frame: .zero)
-    view.translatesAutoresizingMaskIntoConstraints = false
-    return view
-  }()
+  private let inputContainerView = AskView(frame: .zero)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -23,7 +19,9 @@ class AskViewController: UIViewController {
     setGrayBackgroundColor()
     addInputContainerView()
     setupConstraintsForInputContainerView()
+    addSendButtonAction()
     addHideKeyboardOnTapGestureAction()
+    setInputsTextFieldDelegate()
   }
   
   private func setupNavigationControllerStyle() {
@@ -52,6 +50,36 @@ class AskViewController: UIViewController {
     inputContainerView.heightAnchor.constraint(equalToConstant: 370).isActive = true
   }
   
+  private func addSendButtonAction() {
+    if formIsValid() {
+      sendAskQuestionRequest()
+    }
+  }
+  
+  private func formIsValid() -> Bool {
+    return true
+  }
+  
+  private func sendAskQuestionRequest() {
+    let data = getData()
+    ApiHandler.shared.askQuestion(data: data) {
+      DispatchQueue.main.async {
+        self.clearInputs()
+      }
+    }
+  }
+  
+  private func getData() -> [String: String] {
+    return [String: String]()
+  }
+  
+  private func clearInputs() {
+    inputContainerView.emailInput.textField.text = ""
+    inputContainerView.nameInput.textField.text = ""
+    inputContainerView.phoneInput.textField.text = ""
+    inputContainerView.textView.text = ""
+  }
+  
   private func addHideKeyboardOnTapGestureAction() {
     let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
     view.addGestureRecognizer(gestureRecognizer)
@@ -64,16 +92,34 @@ class AskViewController: UIViewController {
   @objc private func hideKeyboard() {
     view.endEditing(true)
   }
+  
+  private func setInputsTextFieldDelegate() {
+    inputContainerView.emailInput.textField.delegate = self
+    inputContainerView.nameInput.textField.delegate = self
+    inputContainerView.phoneInput.textField.delegate = self
+  }
 }
 
 extension AskViewController: UITextFieldDelegate {
-  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-    if textField.isValid {
-      textField.changeAppearanceForValidField()
-      textField.resignFirstResponder()
-    } else {
-      textField.changeAppearanceForInvalidField()
+
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    if textField.placeholder == "Необязательно, но оперативнее" {
+      textField.handlePhoneNumberField(withReplacingString: string, in: range)
+      return false
     }
-    return textField.isValid
+    return textField.textLengthIsValid || string.count < 1
+  }
+
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField.placeholder == "Сюда мы отправим ответ на вопрос" {
+      if textField.emailFieldIsValid {
+        textField.changeAppearanceForValidField()
+      } else {
+        textField.changeAppearanceForInvalidField()
+        return false
+      }
+    }
+    textField.resignFirstResponder()
+    return true
   }
 }
