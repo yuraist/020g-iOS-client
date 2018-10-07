@@ -218,4 +218,27 @@ class ApiHandler {
     let jsonObject = try JSONSerialization.jsonObject(with: data, options: [])
     return jsonObject as! [String: Any]
   }
+  
+  func restorePassword(data: [String: String], completion: (() -> Void)?) {
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/password", queryItems: data, method: .get) {_,_,_ in
+      completion?()
+    }
+    dataTask.resume()
+  }
+  
+  func askQuestion(data: [String: String], completion: (() -> Void)?) {
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/request", queryItems: data, method: .post) { (data, response, error) in
+      if let data = data {
+        do {
+          let info = try JSONSerialization.jsonObject(with: data, options: [])
+          print(info)
+          completion?()
+        } catch let error {
+          print(error)
+          completion?()
+        }
+      }
+    }
+    dataTask.resume()
+  }
 }

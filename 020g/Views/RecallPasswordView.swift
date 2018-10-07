@@ -32,8 +32,14 @@ class RecallPasswordView: UIView {
     return button
   }()
 
-  // Setup the view's properties
-  private func setupContainerView() {
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    setupContainerViewAppearance()
+    addSubviews()
+    setupConstraintsOfSubviews()
+  }
+  
+  private func setupContainerViewAppearance() {
     translatesAutoresizingMaskIntoConstraints = false
     backgroundColor = ApplicationColors.white
     layer.cornerRadius = 5
@@ -43,15 +49,14 @@ class RecallPasswordView: UIView {
     layer.shadowOffset = CGSize(width: 0, height: 0)
   }
   
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    setupContainerView()
-    
+  private func addSubviews() {
     addSubview(messageLabel)
     addSubview(emailTextField)
     addSubview(separatorView)
     addSubview(recallButton)
-    
+  }
+  
+  private func setupConstraintsOfSubviews() {
     // Setup messageLabel layout constraints
     messageLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     messageLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true

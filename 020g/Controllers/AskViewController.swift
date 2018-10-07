@@ -20,14 +20,10 @@ class AskViewController: UIViewController {
     super.viewDidLoad()
     setupNavigationItem()
     setupNavigationControllerStyle()
-    
-    view.backgroundColor = ApplicationColors.gray
-    view.addSubview(inputContainerView)
-    
-    inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    inputContainerView.widthAnchor.constraint(equalToConstant: 304).isActive = true
-    inputContainerView.heightAnchor.constraint(equalToConstant: 370).isActive = true
+    setGrayBackgroundColor()
+    addInputContainerView()
+    setupConstraintsForInputContainerView()
+    addHideKeyboardOnTapGestureAction()
   }
   
   private func setupNavigationControllerStyle() {
@@ -41,7 +37,43 @@ class AskViewController: UIViewController {
     navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissController))
   }
   
+  private func setGrayBackgroundColor() {
+    view.backgroundColor = ApplicationColors.gray
+  }
+  
+  private func addInputContainerView() {
+    view.addSubview(inputContainerView)
+  }
+  
+  private func setupConstraintsForInputContainerView() {
+    inputContainerView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    inputContainerView.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    inputContainerView.widthAnchor.constraint(equalToConstant: 304).isActive = true
+    inputContainerView.heightAnchor.constraint(equalToConstant: 370).isActive = true
+  }
+  
+  private func addHideKeyboardOnTapGestureAction() {
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+    view.addGestureRecognizer(gestureRecognizer)
+  }
+  
   @objc private func dismissController() {
     dismiss(animated: true, completion: nil)
+  }
+  
+  @objc private func hideKeyboard() {
+    view.endEditing(true)
+  }
+}
+
+extension AskViewController: UITextFieldDelegate {
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    if textField.isValid {
+      textField.changeAppearanceForValidField()
+      textField.resignFirstResponder()
+    } else {
+      textField.changeAppearanceForInvalidField()
+    }
+    return textField.isValid
   }
 }

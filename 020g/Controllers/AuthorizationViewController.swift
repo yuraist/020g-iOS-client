@@ -42,6 +42,7 @@ class AuthorizationViewController: UIViewController {
     addSubviews()
     setupConstraintsToSubviews()
     setupButtonTargets()
+    addHideKeyboardActionWhenTappedOutsideInputContainer()
   }
   
   private func setGrayBackgroundColorToView() {
@@ -95,6 +96,11 @@ class AuthorizationViewController: UIViewController {
     loginInputContainerView.loginButton.addTarget(self, action: #selector(login), for: .touchUpInside)
     switchModeButton.addTarget(self, action: #selector(changeFormMode), for: .touchUpInside)
     recallPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
+  }
+  
+  private func addHideKeyboardActionWhenTappedOutsideInputContainer() {
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
+    view.addGestureRecognizer(gestureRecognizer)
   }
   
   @objc private func login() {
@@ -236,6 +242,10 @@ extension AuthorizationViewController: UITextFieldDelegate {
   
   private func hideKeyboard() {
     loginInputContainerView.endEditing(true)
+  }
+  
+  @objc private func hideKeyboardAction() {
+    view.endEditing(true)
   }
   
 }
