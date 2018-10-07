@@ -22,6 +22,7 @@ class AskViewController: UIViewController {
     addSendButtonAction()
     addHideKeyboardOnTapGestureAction()
     setInputsTextFieldDelegate()
+    fillInputsIfUserIsLoggedIn()
   }
   
   private func setupNavigationControllerStyle() {
@@ -129,6 +130,25 @@ class AskViewController: UIViewController {
     inputContainerView.emailInput.textField.delegate = self
     inputContainerView.nameInput.textField.delegate = self
     inputContainerView.phoneInput.textField.delegate = self
+  }
+  
+  private func fillInputsIfUserIsLoggedIn() {
+    ApiHandler.shared.getUserInfo { (success, user) in
+      if let user = user {
+        DispatchQueue.main.async {
+          self.fillInputs(withUser: user)
+        }
+      }
+    }
+  }
+  
+  private func fillInputs(withUser user: User) {
+    inputContainerView.nameInput.textField.text = user.name
+    inputContainerView.emailInput.textField.text = user.email
+    
+    if let phone = user.phone {
+      inputContainerView.phoneInput.textField.handlePhoneNumberField(withReplacingString: phone, in: NSRange(location: 0, length: 0))
+    }
   }
 }
 
