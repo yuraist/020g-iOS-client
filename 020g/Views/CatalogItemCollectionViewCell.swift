@@ -13,6 +13,8 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
   var item: Product? {
     didSet {
       nameLabel.text = item?.name
+      numberLabel.text = String(describing: item!.bind)
+      priceLabel.text = String(describing: item!.priceMin) + " руб."
       
       if let cMin = item?.priceMin, let cMax = item?.priceMax {
         if cMin < cMax && cMin != 0 {
@@ -23,9 +25,15 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
           priceLabel.text = "Нет в наличии"
         }
       }
-      priceLabel.text = String(describing: item!.priceMin) + " руб."
+      
       if let imageUrl = item?.img {
         imageView.loadImage(withUrlString: imageUrl)
+      }
+      
+      if let available = item?.available, available {
+        availableIndicatorView.backgroundColor = .green
+      } else {
+        availableIndicatorView.backgroundColor = .red
       }
     }
   }
@@ -70,12 +78,25 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     return imageView
   }()
   
+  let availableIndicatorView: UIView = {
+    let view = UIView()
+    view.backgroundColor = .green
+    view.layer.cornerRadius = 5
+    view.layer.masksToBounds = true
+    view.translatesAutoresizingMaskIntoConstraints = false
+    return view
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
+    
+    backgroundColor = ApplicationColors.white
+    
     addSubview(imageView)
     imageView.addSubview(numberLabel)
     imageView.addSubview(nameLabel)
     imageView.addSubview(priceLabel)
+    imageView.addSubview(availableIndicatorView)
     
     // Setup imageView's layout constratins
     imageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
@@ -100,6 +121,11 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     priceLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
     priceLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
     priceLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+    
+    availableIndicatorView.leftAnchor.constraint(equalTo: imageView.leftAnchor, constant: 10).isActive = true
+    availableIndicatorView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10).isActive = true
+    availableIndicatorView.widthAnchor.constraint(equalToConstant: 10).isActive = true
+    availableIndicatorView.heightAnchor.constraint(equalToConstant: 10).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {

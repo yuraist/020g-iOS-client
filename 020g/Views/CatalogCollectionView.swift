@@ -28,7 +28,7 @@ class CatalogCollectionView: UICollectionView {
     registerCell()
     registerDelegate()
     registerDataSource()
-    setWhiteBackgroundColor()
+    setGrayBackgroundColor()
     setupTranslatesAutoresizingMaskIntoConstraintsFalse()
   }
   
@@ -46,6 +46,10 @@ class CatalogCollectionView: UICollectionView {
   
   private func setWhiteBackgroundColor() {
     backgroundColor = ApplicationColors.white
+  }
+  
+  private func setGrayBackgroundColor() {
+    backgroundColor = ApplicationColors.gray
   }
   
   private func setupTranslatesAutoresizingMaskIntoConstraintsFalse() {
@@ -88,14 +92,14 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: frame.size.width/2 - 2, height: frame.size.width/2 - 4)
+    return CGSize(width: frame.size.width/2 - 1, height: frame.size.width/2 - 2)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    return 0
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    return 1
   }
 }
