@@ -9,7 +9,11 @@
 import UIKit
 
 extension URLSessionDataTask {
-  static func getDefaultDataTask(forPath path: String, queryItems itemsDictionary: [String: String], method: HTTPMethod, completionHandler completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+  static func getDefaultDataTask(forPath path: String,
+                                 queryItems itemsDictionary: [String: String],
+                                 method: HTTPMethod,
+                                 completionHandler completion: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
+    
     let request = URLRequest.getRequest(forPath: path, queryItems: itemsDictionary, method: method)
     let dataTask = URLSession(configuration: .default).dataTask(with: request, completionHandler: completion)
     return dataTask
@@ -25,7 +29,6 @@ extension URLRequest {
     urlComponents.host = "020g.ru"
     urlComponents.path = path
     
-    // Add query items into the URL
     var items = [URLQueryItem]()
     for (name, value) in itemsDictionary {
       items.append(URLQueryItem(name: name, value: value))

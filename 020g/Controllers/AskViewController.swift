@@ -51,26 +51,51 @@ class AskViewController: UIViewController {
   }
   
   private func addSendButtonAction() {
-    if formIsValid() {
-      sendAskQuestionRequest()
-    }
+    inputContainerView.sendButton.addTarget(self, action: #selector(sendAskQuestionRequest), for: .touchUpInside)
   }
   
   private func formIsValid() -> Bool {
     return true
   }
   
-  private func sendAskQuestionRequest() {
-    let data = getData()
-    ApiHandler.shared.askQuestion(data: data) {
-      DispatchQueue.main.async {
-        self.clearInputs()
+  @objc private func sendAskQuestionRequest() {
+    if formIsValid() {
+      let data = getData()
+      print(data)
+      ApiHandler.shared.askQuestion(data: data) {
+        DispatchQueue.main.async {
+          self.clearInputs()
+        }
       }
     }
   }
   
   private func getData() -> [String: String] {
-    return [String: String]()
+    var data = [String: String]()
+    
+    guard let token = ApiKeys.token else {
+      return [String: String]()
+    }
+    
+    data["key"] = token
+    
+    if inputContainerView.emailInput.textField.emailFieldIsValid {
+      data["email"] = inputContainerView.emailInput.textField.text!
+    }
+    
+    if let name = inputContainerView.nameInput.textField.text, name != "" {
+      data["name"] = name.components(separatedBy: .whitespaces).joined()
+    }
+    
+    if let phone = inputContainerView.phoneInput.textField.text, phone != "" {
+      data["phone"] = phone.components(separatedBy: CharacterSet.decimalDigits.inverted).joined()
+    }
+    
+    if let text = inputContainerView.textView.text, text != "" {
+      data["text"] = text
+    }
+    
+    return data
   }
   
   private func clearInputs() {

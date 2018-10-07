@@ -230,14 +230,13 @@ class ApiHandler {
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/request", queryItems: data, method: .post) { (data, response, error) in
       if let data = data {
         do {
-          let info = try JSONSerialization.jsonObject(with: data, options: [])
-          print(info)
-          completion?()
+          let responseInfo = try JSONSerialization.jsonObject(with: data, options: [])
+          print(responseInfo)
         } catch let error {
           print(error)
-          completion?()
         }
       }
+      completion?()
     }
     dataTask.resume()
   }
