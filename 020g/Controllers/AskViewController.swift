@@ -14,6 +14,7 @@ class AskViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    addKeyboardNotification()
     setupNavigationItem()
     setupNavigationControllerStyle()
     setGrayBackgroundColor()
@@ -23,6 +24,39 @@ class AskViewController: UIViewController {
     addHideKeyboardOnTapGestureAction()
     setInputsTextFieldDelegate()
     fillInputsIfUserIsLoggedIn()
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillShowNotification, object: view.window)
+    NotificationCenter.default.removeObserver(self, name: UIResponder.keyboardWillHideNotification, object: view.window)
+  }
+  
+  private func addKeyboardNotification() {
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+  }
+  
+  private var oldYPosition: CGFloat = 0
+  
+  @objc private func keyboardWillShow(sender: Notification) {
+    oldYPosition = inputContainerView.frame.origin.y
+    if inputContainerView.textView.isFirstResponder {
+      if let keyboardSize = (sender.userInfo?[UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+        let newYPosition = view.frame.size.height - (keyboardSize.height + 70 + inputContainerView.frame.size.height)
+        UIView.animate(withDuration: 0.3) {
+          self.inputContainerView.frame.origin.y = newYPosition
+        }
+      }
+    }
+  }
+  
+  @objc private func keyboardWillHide(sender: Notification) {
+    if oldYPosition != inputContainerView.frame.origin.y {
+      UIView.animate(withDuration: 0.3) {
+        self.inputContainerView.frame.origin.y = self.oldYPosition
+      }
+    }
   }
   
   private func setupNavigationControllerStyle() {
@@ -130,6 +164,7 @@ class AskViewController: UIViewController {
     inputContainerView.emailInput.textField.delegate = self
     inputContainerView.nameInput.textField.delegate = self
     inputContainerView.phoneInput.textField.delegate = self
+    inputContainerView.textView.delegate = self
   }
   
   private func fillInputsIfUserIsLoggedIn() {
@@ -153,7 +188,7 @@ class AskViewController: UIViewController {
 }
 
 extension AskViewController: UITextFieldDelegate {
-
+  
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     if textField.placeholder == "Необязательно, но оперативнее" {
       textField.handlePhoneNumberField(withReplacingString: string, in: range)
@@ -161,7 +196,7 @@ extension AskViewController: UITextFieldDelegate {
     }
     return textField.textLengthIsValid || string.count < 1
   }
-
+  
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     if textField.placeholder == "Сюда мы отправим ответ на вопрос" {
       if textField.emailFieldIsValid {
@@ -175,3 +210,21 @@ extension AskViewController: UITextFieldDelegate {
     return true
   }
 }
+
+extension AskViewController: UITextViewDelegate {
+  
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    
+    let textViewString = textView.text as NSString
+    let newString = textViewString.replacingCharacters(in: range, with: text)
+    
+    if newString.count <= 300 {
+      textView.text = newString
+    }
+    
+    inputContainerView.textViewLetterCountLabel.text = "\(300 - textView.text.count)"
+    return false
+  }
+  
+}
+

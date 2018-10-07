@@ -48,8 +48,6 @@ class AskView: UIView {
     super.init(frame: frame)
     setupContainerView()
     
-    textView.delegate = self
-    
     // Add subviews
     addSubview(nameInput)
     addSubview(phoneInput)
@@ -101,19 +99,3 @@ class AskView: UIView {
   }
 }
 
-extension AskView: UITextViewDelegate {
-  
-  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
-    
-    let textViewString = textView.text as NSString
-    let newString = textViewString.replacingCharacters(in: range, with: text)
-    
-    if newString.count <= 300 {
-      textView.text = newString
-    }
-    
-    textViewLetterCountLabel.text = "\(300 - textView.text.count)"
-    return false
-  }
-  
-}
