@@ -24,6 +24,16 @@ class AskView: UIView {
     return label
   }()
   
+  lazy var textViewLetterCountLabel: UILabel = {
+    let label = UILabel()
+    label.text = "\(300 - textView.text.count)"
+    label.textAlignment = .right
+    label.textColor = ApplicationColors.lightGray
+    label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
   let textView: UITextView = {
     let tv = UITextView()
     tv.textColor = ApplicationColors.lightGray
@@ -38,32 +48,35 @@ class AskView: UIView {
     super.init(frame: frame)
     setupContainerView()
     
+    textView.delegate = self
+    
     // Add subviews
     addSubview(nameInput)
     addSubview(phoneInput)
     addSubview(emailInput)
     addSubview(textViewTitleLabel)
+    addSubview(textViewLetterCountLabel)
     addSubview(textView)
     addSubview(sendButton)
     
-    // Setup views layout constraints
-    // Setup nameTextField layout constraints
     nameInput.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     nameInput.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
     nameInput.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
     nameInput.heightAnchor.constraint(equalToConstant: 52).isActive = true
     
-    // Setup layout constraints for phoneTextField and emailTextField
     addDefaultConstraints(toView: phoneInput, relatedTo: nameInput)
     addDefaultConstraints(toView: emailInput, relatedTo: phoneInput)
     
-    // Setup layout constraints for textiViewTitleLabel
     textViewTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
     textViewTitleLabel.topAnchor.constraint(equalTo: emailInput.bottomAnchor, constant: 4).isActive = true
     textViewTitleLabel.widthAnchor.constraint(equalToConstant: 200).isActive = true
     textViewTitleLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
     
-    // Setup layout constraints for textView
+    textViewLetterCountLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+    textViewLetterCountLabel.topAnchor.constraint(equalTo: textViewTitleLabel.topAnchor).isActive = true
+    textViewLetterCountLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    textViewLetterCountLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+    
     textView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     textView.topAnchor.constraint(equalTo: textViewTitleLabel.bottomAnchor, constant: 8).isActive = true
     textView.widthAnchor.constraint(equalTo: emailInput.widthAnchor).isActive = true
@@ -86,4 +99,21 @@ class AskView: UIView {
     layer.shadowRadius = 6
     layer.shadowOffset = CGSize(width: 0, height: 0)
   }
+}
+
+extension AskView: UITextViewDelegate {
+  
+  func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+    
+    let textViewString = textView.text as NSString
+    let newString = textViewString.replacingCharacters(in: range, with: text)
+    
+    if newString.count <= 300 {
+      textView.text = newString
+    }
+    
+    textViewLetterCountLabel.text = "\(300 - textView.text.count)"
+    return false
+  }
+  
 }
