@@ -38,6 +38,9 @@ class ShopCollectionViewCell: UICollectionViewCell {
         
         domainLabel.text = shop.domain
         cityLabel.text = shop.city
+        if let url = URL(string: "https://www.google.com/s2/favicons?domain=\(shop.domain)") {
+          shopImageView.kf.setImage(with: url)
+        }
         contactButton.contactUrl = URL(string: shop.contacts)
         
         if let email = shop.email {
@@ -66,6 +69,8 @@ class ShopCollectionViewCell: UICollectionViewCell {
         }
         
         if let vkGroup = shop.vkGroup {
+          vkGroupButton.contentHorizontalAlignment = .left
+          vkGroupButton.contactUrl = URL(string: vkGroup)
           vkGroupButton.setTitle(vkGroup, for: .normal)
           addSubviewAndSetupConstraints(view: vkGroupButton)
         }
@@ -77,6 +82,12 @@ class ShopCollectionViewCell: UICollectionViewCell {
     let view = UIView()
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
+  }()
+  
+  private let shopImageView: UIImageView = {
+    let iv = UIImageView()
+    iv.translatesAutoresizingMaskIntoConstraints = false
+    return iv
   }()
   
   private let domainLabel: UILabel = {
@@ -104,14 +115,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
   
   private var lastBottomYAxisAnchor: NSLayoutYAxisAnchor?
   
-  private let vkGroupButton: UIButton = {
-    let button = UIButton()
-    button.contentHorizontalAlignment = .left
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitleColor(ApplicationColors.buttonBlue, for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-    return button
-  }()
+  let vkGroupButton = ContactButton(frame: .zero)
   
   override init(frame: CGRect) {
     super.init(frame: frame)
@@ -126,6 +130,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
   
   private func addGeneralSubviews() {
     addSubview(headerView)
+    headerView.addSubview(shopImageView)
     headerView.addSubview(domainLabel)
     headerView.addSubview(contactButton)
     addSubview(headerSeparatorView)
@@ -138,7 +143,12 @@ class ShopCollectionViewCell: UICollectionViewCell {
     headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     headerView.heightAnchor.constraint(equalToConstant: 44).isActive = true
     
-    domainLabel.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
+    shopImageView.leftAnchor.constraint(equalTo: headerView.leftAnchor, constant: 16).isActive = true
+    shopImageView.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
+    shopImageView.widthAnchor.constraint(equalToConstant: 22).isActive = true
+    shopImageView.heightAnchor.constraint(equalToConstant: 22).isActive = true
+    
+    domainLabel.leftAnchor.constraint(equalTo: shopImageView.rightAnchor, constant: 16).isActive = true
     domainLabel.centerYAnchor.constraint(equalTo: headerView.centerYAnchor).isActive = true
     domainLabel.widthAnchor.constraint(equalToConstant: 220).isActive = true
     domainLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true

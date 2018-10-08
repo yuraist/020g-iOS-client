@@ -124,6 +124,9 @@ class ShopListCollectionViewController: UICollectionViewController {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShopCollectionViewCell
     cell.shop = shops[indexPath.item]
     cell.contactButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
+    if cell.shop?.vkGroup != nil {
+      cell.vkGroupButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
+    }
     return cell
   }
   
