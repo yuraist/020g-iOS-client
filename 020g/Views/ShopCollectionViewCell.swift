@@ -8,6 +8,25 @@
 
 import UIKit
 
+class ContactButton: UIButton {
+  
+  var contactUrl: URL?
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    
+    setTitle("КОНТАКТЫ", for: .normal)
+    contentHorizontalAlignment = .right
+    translatesAutoresizingMaskIntoConstraints = false
+    setTitleColor(ApplicationColors.buttonBlue, for: .normal)
+    titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
 class ShopCollectionViewCell: UICollectionViewCell {
   
   var shop: Shop? {
@@ -19,6 +38,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
         
         domainLabel.text = shop.domain
         cityLabel.text = shop.city
+        contactButton.contactUrl = URL(string: shop.contacts)
         
         if let email = shop.email {
           emailLabel.text = email
@@ -66,15 +86,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
     return label
   }()
   
-  private let contactButton: UIButton = {
-    let button = UIButton()
-    button.setTitle("КОНТАКТЫ", for: .normal)
-    button.contentHorizontalAlignment = .right
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.setTitleColor(ApplicationColors.buttonBlue, for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .regular)
-    return button
-  }()
+  let contactButton = ContactButton(frame: .zero)
   
   private let headerSeparatorView: UIView = {
     let view = UIView()

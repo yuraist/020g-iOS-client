@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 class ShopListCollectionViewController: UICollectionViewController {
   
@@ -122,10 +123,16 @@ class ShopListCollectionViewController: UICollectionViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShopCollectionViewCell
     cell.shop = shops[indexPath.item]
-    cell.backgroundColor = ApplicationColors.white
+    cell.contactButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
     return cell
   }
   
+  @objc private func openContactInSafari(sender: ContactButton) {
+    if let contactUrl = sender.contactUrl {
+      let safariViewController = SFSafariViewController(url: contactUrl)
+      present(safariViewController, animated: true, completion: nil)
+    }
+  }
 }
 
 extension ShopListCollectionViewController: UICollectionViewDelegateFlowLayout {
@@ -139,6 +146,6 @@ extension ShopListCollectionViewController: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    return 0
   }
 }
