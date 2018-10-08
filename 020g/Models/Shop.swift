@@ -40,7 +40,7 @@ struct Shop {
   }
   
   func getNumberOfFields() -> Int {
-    var numberOfFields = 4
+    var numberOfFields = 2
     
     if email != nil {
       numberOfFields += 1
