@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class CatalogItemCollectionViewCell: UICollectionViewCell {
   
@@ -26,8 +27,9 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
         }
       }
       
-      if let imageUrl = item?.img {
-        imageView.loadImage(withUrlString: imageUrl)
+      if let imageUrl = item?.img, let url = URL(string: imageUrl) {
+        imageView.kf.indicatorType = .activity
+        imageView.kf.setImage(with: url)
       }
       
       if let available = item?.available, available {
