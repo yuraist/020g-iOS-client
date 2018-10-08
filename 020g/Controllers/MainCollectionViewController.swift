@@ -215,6 +215,7 @@ class MainCollectionViewController: UICollectionViewController {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CategoryCollectionViewCell
     menuBar.catalogCollectionView = collectionView
     cell.catalogCollectionView.category = menuBar.categories[indexPath.item]
+    cell.catalogCollectionView.parentViewController = self
     return cell
   }
   

@@ -23,6 +23,8 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
+  var parentViewController: UIViewController?
+  
   private var currentPage = 1
   
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
@@ -127,9 +129,16 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     let product = products[item]
     let productId = product.id
     ApiHandler.shared.getProduct(withId: productId) { (success, productResponse) in
-      if let product = productResponse?.product {
-        print(product)
+      if let productResponse = productResponse {
+        DispatchQueue.main.async {
+          self.showProductTableViewController(productResponse: productResponse)
+        }
       }
     }
+  }
+  
+  private func showProductTableViewController(productResponse: ProductResponse) {
+    let productTableViewController = ProductTableViewController(response: productResponse)
+    parentViewController?.show(productTableViewController, sender: parentViewController)
   }
 }
