@@ -22,10 +22,8 @@ struct Shop {
   var freePhone: String?
   
   var cellHeight: CGFloat {
-    return CGFloat(44 * countFields)
+    return CGFloat(44 * getNumberOfFields())
   }
-  
-  private var countFields = 4
   
   init(withDictionary dictionary: [String: Any]) {
     address = dictionary["address"] as! String
@@ -41,35 +39,33 @@ struct Shop {
     freePhone = dictionary["free_phone"] as? String
   }
   
-  private mutating func setCountFields() {
-    countFields = 44
+  func getNumberOfFields() -> Int {
+    var numberOfFields = 4
     
     if email != nil {
-      incrementCountFields()
+      numberOfFields += 1
     }
     
     if phone1 != nil {
-      incrementCountFields()
+      numberOfFields += 1
     }
     
     if phone2 != nil {
-      incrementCountFields()
+      numberOfFields += 1
     }
     
     if phone3 != nil {
-      incrementCountFields()
+      numberOfFields += 1
     }
     
     if freePhone != nil {
-      incrementCountFields()
+      numberOfFields += 1
     }
     
     if vkGroup != nil {
-      incrementCountFields()
+      numberOfFields += 1
     }
-  }
-  
-  private mutating func incrementCountFields() {
-    countFields += 1
+    
+    return numberOfFields
   }
 }
