@@ -13,7 +13,7 @@ class CatalogCollectionView: UICollectionView {
   
   var category: Category? {
     didSet {
-      self.fetchProducts(page: 1)
+      self.fetchProducts()
     }
   }
   
@@ -22,6 +22,8 @@ class CatalogCollectionView: UICollectionView {
       self.reloadCollectionView()
     }
   }
+  
+  private var currentPage = 1
   
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
@@ -56,16 +58,25 @@ class CatalogCollectionView: UICollectionView {
     translatesAutoresizingMaskIntoConstraints = false
   }
   
-  private func fetchProducts(page: Int) {
+  private func fetchProducts() {
     guard let category = category else {
       return
     }
     
-    ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: page) { (success, products) in
-      if let products = products {
-        self.products = products
+    ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: currentPage) { (success, newProducts) in
+      if let newProducts = newProducts {
+        self.products.append(contentsOf: newProducts)
       }
     }
+  }
+  
+  private func loadNewProducts() {
+    incrementCurrentPage()
+    fetchProducts()
+  }
+  
+  private func incrementCurrentPage() {
+    currentPage += 1
   }
   
   private func reloadCollectionView() {
@@ -87,9 +98,17 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogItemCollectionViewCell
     cell.item = products[indexPath.item]
+    
+    if indexPathIsLast(indexPath) {
+      loadNewProducts()
+    }
+    
     return cell
   }
-  
+
+  private func indexPathIsLast(_ indexPath: IndexPath) -> Bool {
+    return indexPath.item == (products.count - 1)
+  }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: frame.size.width/2 - 1, height: frame.size.width/2 - 2)
