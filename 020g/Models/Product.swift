@@ -56,7 +56,7 @@ struct Products: Codable {
 struct ProductFull: Codable {
   var id: Int
   var costs: String
-  var cost: Int
+  var cost: String
   var name: String
   var desc: String
   var images: [String]
@@ -73,7 +73,7 @@ struct Option: Codable {
 struct Price: Codable {
   var id: Int
   var site: String
-  var aviable: Bool
+  var aviable: Int
   var capt: String
   var city: String
   var price: String
@@ -84,10 +84,6 @@ struct Breadcrumb: Codable {
   var name: String
 }
 
-struct Breadcrumbs: Codable {
-  var breadcrumbs: [Breadcrumb]
-}
-
 struct City: Codable {
   var name: String
   var count: Int
@@ -95,13 +91,9 @@ struct City: Codable {
   var aviable: Bool
 }
 
-struct Cities: Codable {
-  var cities: [City]
-}
-
 struct ProductResponse: Codable {
   var status: Bool
-  var product: Product
-  var breadcrumbs: Breadcrumbs
-  var cities: Cities
+  var product: ProductFull
+  var breadcrumbs: [Breadcrumb]
+  var cities: [City]
 }

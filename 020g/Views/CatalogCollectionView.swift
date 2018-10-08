@@ -121,4 +121,15 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 1
   }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = indexPath.item
+    let product = products[item]
+    let productId = product.id
+    ApiHandler.shared.getProduct(withId: productId) { (success, productResponse) in
+      if let product = productResponse?.product {
+        print(product)
+      }
+    }
+  }
 }

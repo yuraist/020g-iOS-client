@@ -240,4 +240,27 @@ class ApiHandler {
     }
     dataTask.resume()
   }
+  
+  func getProduct(withId id: Int, completion: ((Bool, ProductResponse?) -> Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(false, nil)
+      return
+    }
+    
+    let queryItems = ["token": token, "product": "\(id)", "appname": "020g"]
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/product", queryItems: queryItems, method: .get) { (data, response, error) in
+      if let jsonData = data {
+        let decoder = JSONDecoder()
+        do {
+          let productResponse = try decoder.decode(ProductResponse.self, from: jsonData)
+          completion?(true, productResponse)
+        } catch let error {
+          print(error)
+          completion?(false, nil)
+        }
+      }
+    }
+    dataTask.resume()
+  }
 }
