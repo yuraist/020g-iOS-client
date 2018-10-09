@@ -121,25 +121,64 @@ class ProductTableViewController: UITableViewController {
   private func getCitiesTableViewCell() ->UITableViewCell {
     let cell = UITableViewCell(style: .default, reuseIdentifier: citiesCellId)
     cell.backgroundColor = ApplicationColors.gray
-    var textLabelString = ""
-    for city in response.cities.prefix(4) {
-      textLabelString += "\(city.name)(\(city.count)) \t"
-    }
-    cell.textLabel?.numberOfLines = 3
+    
+    let textLabelString = getCitiesText()
+    cell.textLabel?.numberOfLines = 0
     cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .light)
     cell.textLabel?.text = textLabelString
     return cell
+  }
+  
+  private func getCitiesText() -> String {
+    var text = ""
+    var suffix = ""
+    var cities = [City]()
+    if showExpandedCitiesCell {
+      cities = response.cities
+    } else {
+      if response.cities.count > 4 {
+        suffix = "все..."
+      }
+      cities = Array(response.cities.prefix(4))
+    }
+    
+    for city in cities {
+      if city.name != "" {
+        text += "\(city.name)(\(city.count))    "
+      }
+    }
+    
+    text += suffix
+    print(text)
+    return text
+  }
+  
+  private func getCitiesCellHeight(forText text: String) -> CGFloat {
+    let size = CGSize(width: 300, height: 1000)
+    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
+    let textRect = NSString(string: text).boundingRect(with: size, options: options, attributes: [.font: UIFont.systemFont(ofSize: 18)], context: nil)
+    return textRect.height + 24
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath == IndexPath(row: 0, section: 0) {
       return view.frame.size.width
     } else if indexPath == IndexPath(row: 2, section: 0) {
-      if !showExpandedCitiesCell {
-        return 88
-      }
+      let text = getCitiesText()
+      return getCitiesCellHeight(forText: text)
     }
     
     return 44
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.cellForRow(at: indexPath)?.backgroundColor = ApplicationColors.white
+    
+    if indexPath == IndexPath(row: 2, section: 0) {
+      showExpandedCitiesCell = !showExpandedCitiesCell
+      tableView.beginUpdates()
+      tableView.reloadRows(at: [indexPath], with: .automatic)
+      tableView.endUpdates()
+    }
   }
 }
