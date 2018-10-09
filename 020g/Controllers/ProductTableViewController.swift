@@ -12,6 +12,7 @@ class ProductTableViewController: UITableViewController {
   
   private let cellId = "tableViewCell"
   private let carouselCellId = "carouselCell"
+  private let priceCellId = "priceCellId"
   
   var response: ProductResponse
   
@@ -33,6 +34,7 @@ class ProductTableViewController: UITableViewController {
   private func registerCells() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     tableView.register(ProductImageCarouselTableViewCell.self, forCellReuseIdentifier: carouselCellId)
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: priceCellId)
   }
   
   private func removeSeparatorLine() {
@@ -79,16 +81,29 @@ class ProductTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      if indexPath.row == 0 {
-        let cell = ProductImageCarouselTableViewCell(style: .default, reuseIdentifier: carouselCellId)
-        cell.imageUrls = response.product.images
-        return cell
-      }
+      return cellForFirstSection(row: indexPath.row)
     }
     
     return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
   }
 
+  private func cellForFirstSection(row: Int) -> UITableViewCell {
+    switch row {
+    case 0:
+      let cell = ProductImageCarouselTableViewCell(style: .default, reuseIdentifier: carouselCellId)
+      cell.imageUrls = response.product.images
+      return cell
+    case 1:
+      let cell = UITableViewCell(style: .default, reuseIdentifier: priceCellId)
+      cell.backgroundColor = ApplicationColors.buttonBlue
+      cell.textLabel?.textColor = ApplicationColors.white
+      cell.textLabel?.text = response.product.costs
+      return cell
+    default:
+      return tableView.dequeueReusableCell(withIdentifier: cellId)!
+    }
+  }
+  
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath == IndexPath(row: 0, section: 0) {
       return view.frame.size.width
