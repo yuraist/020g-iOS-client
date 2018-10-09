@@ -15,6 +15,7 @@ class ProductTableViewController: UITableViewController {
   private let averagePriceCellId = "averagePriceCell"
   private let citiesCellId = "citiesCell"
   private let priceCellId = "priceCell"
+  private let detailCellId = "detailCell"
   
   private var showExpandedCitiesCell = false
   
@@ -41,6 +42,7 @@ class ProductTableViewController: UITableViewController {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: averagePriceCellId)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: citiesCellId)
     tableView.register(ProductPriceCell.self, forCellReuseIdentifier: priceCellId)
+    tableView.register(ProductDetailCell.self, forCellReuseIdentifier: detailCellId)
   }
   
   private func removeSeparatorLine() {
@@ -90,6 +92,8 @@ class ProductTableViewController: UITableViewController {
       return cellForFirstSection(row: indexPath.row)
     } else if indexPath.section == 1 {
       return cellForSecondSection(indexPath: indexPath)
+    } else if indexPath.section == 2 {
+      return cellForThirdSection(indexPath: indexPath)
     }
     
     return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
@@ -111,6 +115,12 @@ class ProductTableViewController: UITableViewController {
   private func cellForSecondSection(indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: priceCellId, for: indexPath) as! ProductPriceCell
     cell.price = response.product.prices[indexPath.row]
+    return cell
+  }
+  
+  private func cellForThirdSection(indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: detailCellId, for: indexPath) as! ProductDetailCell
+    cell.option = response.product.opts[indexPath.row]
     return cell
   }
   
