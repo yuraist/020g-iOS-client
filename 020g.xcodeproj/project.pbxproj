@@ -42,6 +42,7 @@
 		BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
 		BEC49823216B49140058347E /* ShopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC49822216B49140058347E /* ShopLabel.swift */; };
+		BEE57E07216C8346005C9672 /* ProductImageCarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */; };
 		BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */; };
 		BEF1B98A215F69AB00348A3D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */; };
 		BEF1B98D2162088400348A3D /* BarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B98C2162088400348A3D /* BarButton.swift */; };
@@ -96,6 +97,7 @@
 		BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 		BEC49822216B49140058347E /* ShopLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopLabel.swift; sourceTree = "<group>"; };
+		BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCarouselTableViewCell.swift; sourceTree = "<group>"; };
 		BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskExtension.swift; sourceTree = "<group>"; };
 		BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		BEF1B98C2162088400348A3D /* BarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
@@ -238,6 +240,7 @@
 				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
 				BEC49822216B49140058347E /* ShopLabel.swift */,
 				BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */,
+				BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -420,6 +423,7 @@
 				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
 				BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */,
 				BEF6F6A4215F64F9000E4BCB /* ApplicationColors.swift in Sources */,
+				BEE57E07216C8346005C9672 /* ProductImageCarouselTableViewCell.swift in Sources */,
 				BEF1B995216247F800348A3D /* Shop.swift in Sources */,
 				BEC49823216B49140058347E /* ShopLabel.swift in Sources */,
 				BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */,
