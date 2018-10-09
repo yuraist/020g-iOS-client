@@ -32,8 +32,22 @@ class ProductTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setupNavigationItem()
     registerCells()
     removeSeparatorLine()
+  }
+  
+  private func setupNavigationItem() {
+    setNavigationTitle()
+    setBackBarButtonItem()
+  }
+  
+  private func setNavigationTitle() {
+    navigationItem.title = response.product.name
+  }
+  
+  private func setBackBarButtonItem() {
+    navigationItem.backBarButtonItem?.title = ""
   }
   
   private func registerCells() {
