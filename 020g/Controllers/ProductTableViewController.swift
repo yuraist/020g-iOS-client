@@ -13,6 +13,9 @@ class ProductTableViewController: UITableViewController {
   private let cellId = "tableViewCell"
   private let carouselCellId = "carouselCell"
   private let priceCellId = "priceCellId"
+  private let citiesCellId = "citiesCellId"
+  
+  private var showExpandedCitiesCell = false
   
   var response: ProductResponse
   
@@ -35,6 +38,7 @@ class ProductTableViewController: UITableViewController {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     tableView.register(ProductImageCarouselTableViewCell.self, forCellReuseIdentifier: carouselCellId)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: priceCellId)
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: citiesCellId)
   }
   
   private func removeSeparatorLine() {
@@ -90,23 +94,50 @@ class ProductTableViewController: UITableViewController {
   private func cellForFirstSection(row: Int) -> UITableViewCell {
     switch row {
     case 0:
-      let cell = ProductImageCarouselTableViewCell(style: .default, reuseIdentifier: carouselCellId)
-      cell.imageUrls = response.product.images
-      return cell
+      return getProducImageCarouselTableViewCell()
     case 1:
-      let cell = UITableViewCell(style: .default, reuseIdentifier: priceCellId)
-      cell.backgroundColor = ApplicationColors.buttonBlue
-      cell.textLabel?.textColor = ApplicationColors.white
-      cell.textLabel?.text = response.product.costs
-      return cell
+      return getPriceTableViewCell()
+    case 2:
+      return getCitiesTableViewCell()
     default:
       return tableView.dequeueReusableCell(withIdentifier: cellId)!
     }
   }
   
+  private func getProducImageCarouselTableViewCell() -> ProductImageCarouselTableViewCell {
+    let cell = ProductImageCarouselTableViewCell(style: .default, reuseIdentifier: carouselCellId)
+    cell.imageUrls = response.product.images
+    return cell
+  }
+  
+  private func getPriceTableViewCell() -> UITableViewCell {
+    let cell = UITableViewCell(style: .default, reuseIdentifier: priceCellId)
+    cell.backgroundColor = ApplicationColors.buttonBlue
+    cell.textLabel?.textColor = ApplicationColors.white
+    cell.textLabel?.text = response.product.costs
+    return cell
+  }
+  
+  private func getCitiesTableViewCell() ->UITableViewCell {
+    let cell = UITableViewCell(style: .default, reuseIdentifier: citiesCellId)
+    cell.backgroundColor = ApplicationColors.gray
+    var textLabelString = ""
+    for city in response.cities.prefix(4) {
+      textLabelString += "\(city.name)(\(city.count)) \t"
+    }
+    cell.textLabel?.numberOfLines = 3
+    cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .light)
+    cell.textLabel?.text = textLabelString
+    return cell
+  }
+  
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath == IndexPath(row: 0, section: 0) {
       return view.frame.size.width
+    } else if indexPath == IndexPath(row: 2, section: 0) {
+      if !showExpandedCitiesCell {
+        return 88
+      }
     }
     
     return 44
