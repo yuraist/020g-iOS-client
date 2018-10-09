@@ -77,6 +77,10 @@ struct Price: Codable {
   var capt: String
   var city: String
   var price: String
+  
+  var isAvailable: Bool {
+    return aviable == 1
+  }
 }
 
 struct Breadcrumb: Codable {

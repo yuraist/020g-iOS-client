@@ -44,6 +44,7 @@
 		BEC49823216B49140058347E /* ShopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC49822216B49140058347E /* ShopLabel.swift */; };
 		BEE57E07216C8346005C9672 /* ProductImageCarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */; };
 		BEE57E09216C9017005C9672 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E08216C9017005C9672 /* ImageCollectionViewCell.swift */; };
+		BEE57E13216CB711005C9672 /* ProductPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E12216CB711005C9672 /* ProductPriceCell.swift */; };
 		BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */; };
 		BEF1B98A215F69AB00348A3D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */; };
 		BEF1B98D2162088400348A3D /* BarButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B98C2162088400348A3D /* BarButton.swift */; };
@@ -100,6 +101,7 @@
 		BEC49822216B49140058347E /* ShopLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopLabel.swift; sourceTree = "<group>"; };
 		BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCarouselTableViewCell.swift; sourceTree = "<group>"; };
 		BEE57E08216C9017005C9672 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		BEE57E12216CB711005C9672 /* ProductPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPriceCell.swift; sourceTree = "<group>"; };
 		BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLSessionDataTaskExtension.swift; sourceTree = "<group>"; };
 		BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		BEF1B98C2162088400348A3D /* BarButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarButton.swift; sourceTree = "<group>"; };
@@ -313,6 +315,7 @@
 			children = (
 				BEE57E08216C9017005C9672 /* ImageCollectionViewCell.swift */,
 				BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */,
+				BEE57E12216CB711005C9672 /* ProductPriceCell.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */,
 				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
+				BEE57E13216CB711005C9672 /* ProductPriceCell.swift in Sources */,
 				BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

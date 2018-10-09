@@ -12,8 +12,9 @@ class ProductTableViewController: UITableViewController {
   
   private let cellId = "tableViewCell"
   private let carouselCellId = "carouselCell"
-  private let priceCellId = "priceCellId"
-  private let citiesCellId = "citiesCellId"
+  private let averagePriceCellId = "averagePriceCell"
+  private let citiesCellId = "citiesCell"
+  private let priceCellId = "priceCell"
   
   private var showExpandedCitiesCell = false
   
@@ -37,8 +38,9 @@ class ProductTableViewController: UITableViewController {
   private func registerCells() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     tableView.register(ProductImageCarouselTableViewCell.self, forCellReuseIdentifier: carouselCellId)
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: priceCellId)
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: averagePriceCellId)
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: citiesCellId)
+    tableView.register(ProductPriceCell.self, forCellReuseIdentifier: priceCellId)
   }
   
   private func removeSeparatorLine() {
@@ -55,7 +57,7 @@ class ProductTableViewController: UITableViewController {
       return getFirstSecionTitle()
     case 1:
       return getSecondSectionTitle()
-    case 3:
+    case 2:
       return "Детально"
     default:
       return ""
@@ -86,6 +88,8 @@ class ProductTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
       return cellForFirstSection(row: indexPath.row)
+    } else if indexPath.section == 1 {
+      return cellForSecondSection(indexPath: indexPath)
     }
     
     return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
@@ -104,6 +108,12 @@ class ProductTableViewController: UITableViewController {
     }
   }
   
+  private func cellForSecondSection(indexPath: IndexPath) -> UITableViewCell {
+    let cell = tableView.dequeueReusableCell(withIdentifier: priceCellId, for: indexPath) as! ProductPriceCell
+    cell.price = response.product.prices[indexPath.row]
+    return cell
+  }
+  
   private func getProducImageCarouselTableViewCell() -> ProductImageCarouselTableViewCell {
     let cell = ProductImageCarouselTableViewCell(style: .default, reuseIdentifier: carouselCellId)
     cell.imageUrls = response.product.images
@@ -111,7 +121,7 @@ class ProductTableViewController: UITableViewController {
   }
   
   private func getPriceTableViewCell() -> UITableViewCell {
-    let cell = UITableViewCell(style: .default, reuseIdentifier: priceCellId)
+    let cell = UITableViewCell(style: .default, reuseIdentifier: averagePriceCellId)
     cell.backgroundColor = ApplicationColors.buttonBlue
     cell.textLabel?.textColor = ApplicationColors.white
     cell.textLabel?.text = response.product.costs
@@ -162,22 +172,27 @@ class ProductTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath == IndexPath(row: 0, section: 0) {
-      return view.frame.size.width
+      return getHeightForImagesCarousel()
     } else if indexPath == IndexPath(row: 2, section: 0) {
-      let text = getCitiesText()
-      return getCitiesCellHeight(forText: text)
+      return getCitiesCellHeight(forText: getCitiesText())
+    } else if indexPath.section == 1 {
+      return 64
     }
     
     return 44
   }
   
+  private func getHeightForImagesCarousel() -> CGFloat {
+    return view.frame.size.width
+  }
+  
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.cellForRow(at: indexPath)?.backgroundColor = ApplicationColors.white
-    
     if indexPath == IndexPath(row: 2, section: 0) {
       showExpandedCitiesCell = !showExpandedCitiesCell
+      
+      UIView.setAnimationsEnabled(false)
       tableView.beginUpdates()
-      tableView.reloadRows(at: [indexPath], with: .automatic)
+      tableView.reloadRows(at: [indexPath], with: .none)
       tableView.endUpdates()
     }
   }
