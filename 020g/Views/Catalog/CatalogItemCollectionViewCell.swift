@@ -55,7 +55,7 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     label.text = "Bolle"
     label.textColor = ApplicationColors.darkBlue
     label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+    label.font = UIFont.systemFont(ofSize: 12, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
