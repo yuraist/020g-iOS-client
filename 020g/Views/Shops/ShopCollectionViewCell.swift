@@ -121,6 +121,9 @@ class ShopCollectionViewCell: UICollectionViewCell {
     freeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
     freeLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
     
+    label.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+    freeLabel.font = UIFont.systemFont(ofSize: 15, weight: .medium)
+    
     return label
   }()
   

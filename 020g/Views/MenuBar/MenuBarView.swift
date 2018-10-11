@@ -167,7 +167,7 @@ extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UIC
   
   private func getCellWidth(forString string: String) -> CGFloat {
     let stringSize = (string as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: UIFont.systemFontSize)])
-    return stringSize.width + 30
+    return stringSize.width + 15
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

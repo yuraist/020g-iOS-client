@@ -8,6 +8,45 @@
 
 import UIKit
 
+class CustomHeaderView: UIView {
+  
+  var text: String? {
+    didSet {
+      label.text = text
+    }
+  }
+  
+  let label: UILabel = {
+    let label = UILabel()
+    label.textColor = ApplicationColors.darkGray
+    label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  override init(frame: CGRect) {
+    super.init(frame: frame)
+    
+    addLabel()
+    setupLabelConstraints()
+  }
+  
+  private func addLabel() {
+    addSubview(label)
+  }
+  
+  private func setupLabelConstraints() {
+    label.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
+    label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    label.widthAnchor.constraint(equalToConstant: 300)
+    label.heightAnchor.constraint(equalToConstant: 20).isActive = true
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+}
+
 class ProductTableViewController: UITableViewController {
   
   private let cellId = "tableViewCell"
@@ -68,11 +107,7 @@ class ProductTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    if section == 0 {
-      return 30
-    } else {
-      return super.tableView(tableView, heightForHeaderInSection: section)
-    }
+    return 30
   }
   
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -80,9 +115,16 @@ class ProductTableViewController: UITableViewController {
       let headerView = BreadcrumbsCollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30), collectionViewLayout: UICollectionViewFlowLayout())
       headerView.breadcrumbs = response.breadcrumbs
       return headerView
-    } else {
-      return super.tableView(tableView, viewForHeaderInSection: section)
     }
+    let headerView = CustomHeaderView(frame: .zero)
+    
+    if section == 1 {
+      headerView.text = getSecondSectionTitle()
+    } else if section == 2 {
+      headerView.text = "Детально"
+    }
+    
+    return headerView
   }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {

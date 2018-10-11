@@ -13,7 +13,7 @@ class ShopLabel: UILabel {
     super.init(frame: .zero)
     self.text = text
     translatesAutoresizingMaskIntoConstraints = false
-    font = UIFont.systemFont(ofSize: 16, weight: .light)
+    font = UIFont.systemFont(ofSize: 15, weight: .light)
   }
   
   required init?(coder aDecoder: NSCoder) {
