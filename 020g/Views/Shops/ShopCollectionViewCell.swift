@@ -64,7 +64,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
         }
         
         if let freePhone = shop.freePhone {
-          freePhoneLabel.text = freePhone + " БЕСПЛАТНО"
+          freePhoneLabel.text = freePhone
           addSubviewAndSetupConstraints(view: freePhoneLabel)
         }
         
@@ -111,7 +111,18 @@ class ShopCollectionViewCell: UICollectionViewCell {
   private let phone1Label = ShopLabel(text: "City")
   private let phone2Label = ShopLabel(text: "City")
   private let phone3Label = ShopLabel(text: "City")
-  private let freePhoneLabel = ShopLabel(text: "City")
+  private let freePhoneLabel: ShopLabel = {
+    let label = ShopLabel(text: "City")
+    
+    let freeLabel = ShopLabel(text: "БЕCПЛАТНО!")
+    label.addSubview(freeLabel)
+    freeLabel.rightAnchor.constraint(equalTo: label.rightAnchor).isActive = true
+    freeLabel.centerYAnchor.constraint(equalTo: label.centerYAnchor).isActive = true
+    freeLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    freeLabel.heightAnchor.constraint(equalToConstant: 18).isActive = true
+    
+    return label
+  }()
   
   private var lastBottomYAxisAnchor: NSLayoutYAxisAnchor?
   
@@ -176,7 +187,7 @@ class ShopCollectionViewCell: UICollectionViewCell {
       addSubview(view)
       view.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
       view.topAnchor.constraint(equalTo: lastBottomYAxisAnchor!, constant: 24).isActive = true
-      view.widthAnchor.constraint(equalToConstant: 300).isActive = true
+      view.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
       view.heightAnchor.constraint(equalToConstant: 20).isActive = true
       
       lastBottomYAxisAnchor = view.bottomAnchor
