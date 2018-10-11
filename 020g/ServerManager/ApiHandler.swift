@@ -13,22 +13,15 @@ enum HTTPMethod: String {
   case post = "POST"
 }
 
-/// An intergace to manage API requests
 class ApiHandler {
   
   static let shared = ApiHandler()
   
   let appName = "020g"
   
-  /// Requests a catalog_key and super_key to API and returns the success block.
-  /**
-   Configuers an HTTP-request by creating URL from the url components
-   (scheme, host, path) and query items (parameters)
-   - parameters:
-   - success: Contains true value if a new token (catalog_key) has been received else contains false
-   */
+ 
   func checkKeys(success: ((Bool)->Void)?) {
-    // Create a data task
+    
     var queryItems = ["super_key": ""]
     if let catalogKey = UserDefaults.standard.string(forKey: "token") {
       queryItems["catalog_key"] = catalogKey
