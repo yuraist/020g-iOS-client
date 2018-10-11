@@ -8,6 +8,141 @@
 
 import UIKit
 
+class BreadcrumbCollectionViewCell: UICollectionViewCell {
+  
+  var breadcrumb: Breadcrumb? {
+    didSet {
+      if let breadcrumb = breadcrumb {
+        breadcrumbNameLabel.text = breadcrumb.name
+        if !isLastCell {
+          breadcrumbNameLabel.text = breadcrumb.name + "  >"
+        } else {
+          breadcrumbNameLabel.textAlignment = .left
+        }
+      }
+    }
+  }
+  
+  var isLastCell = false
+  
+  private let breadcrumbNameLabel: UILabel = {
+    let label = UILabel()
+    label.textColor = ApplicationColors.lightGray
+    label.font = UIFont.systemFont(ofSize: 14)
+    label.textAlignment = .center
+    label.translatesAutoresizingMaskIntoConstraints = false
+    return label
+  }()
+  
+  override init(frame: CGRect) {
+    super.init(frame: .zero)
+    
+    addLabel()
+    setupLabelConstraints()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func addLabel() {
+    addSubview(breadcrumbNameLabel)
+  }
+  
+  private func setupLabelConstraints() {
+    breadcrumbNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+    breadcrumbNameLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    breadcrumbNameLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -4).isActive = true
+    breadcrumbNameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+  }
+}
+
+class BreadcrumbsCollectionView: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+  private let cellId = "cellId"
+  var breadcrumbs = [Breadcrumb]() {
+    didSet {
+      reloadData()
+      scrollToItem(at: IndexPath(item: breadcrumbs.count - 1, section: 0), at: .left, animated: false)
+    }
+  }
+  
+  override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
+    super.init(frame: frame, collectionViewLayout: layout)
+    setWhiteBackgroundColor()
+    setDelegate()
+    setDataSource()
+    registerCell()
+    setupCollectionViewLayout()
+    hideCollectionViewScrollIndicator()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func setWhiteBackgroundColor() {
+    backgroundColor = ApplicationColors.gray
+  }
+  
+  private func setDelegate() {
+    delegate = self
+  }
+  
+  private func setDataSource() {
+    dataSource = self
+  }
+  
+  private func registerCell() {
+    register(BreadcrumbCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+  }
+  
+  private func setupCollectionViewLayout() {
+    if let layout = collectionViewLayout as? UICollectionViewFlowLayout {
+      layout.scrollDirection = .horizontal
+    }
+  }
+  
+  private func hideCollectionViewScrollIndicator() {
+    showsHorizontalScrollIndicator = false
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return breadcrumbs.count
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    let item = indexPath.item
+    let breadcrumb = breadcrumbs[item]
+    let isLastCell = item == (breadcrumbs.count - 1)
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BreadcrumbCollectionViewCell
+    cell.isLastCell = isLastCell
+    cell.breadcrumb = breadcrumb
+    return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let breadcrumbName = breadcrumbs[indexPath.item].name + " >"
+    let width = computeBreadcrumbWidth(breadcrumbName: breadcrumbName)
+    return CGSize(width: width, height: 30)
+  }
+  
+  private func computeBreadcrumbWidth(breadcrumbName name: String) -> CGFloat {
+    let initialStringSize = CGSize(width: CGFloat.greatestFiniteMagnitude, height: 20)
+    let size = NSString(string: name).boundingRect(with: initialStringSize, options: .usesLineFragmentOrigin, attributes: [.font: UIFont.systemFont(ofSize: 14)], context: nil)
+    
+    return size.width + 12
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+  
+}
+
 class ProductTableViewController: UITableViewController {
   
   private let cellId = "tableViewCell"
@@ -67,6 +202,24 @@ class ProductTableViewController: UITableViewController {
     return 3
   }
   
+  override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    if section == 0 {
+      return 30
+    } else {
+      return super.tableView(tableView, heightForHeaderInSection: section)
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    if section == 0 {
+      let headerView = BreadcrumbsCollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30), collectionViewLayout: UICollectionViewFlowLayout())
+      headerView.breadcrumbs = response.breadcrumbs
+      return headerView
+    } else {
+      return super.tableView(tableView, viewForHeaderInSection: section)
+    }
+  }
+  
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
     switch section {
     case 0:
@@ -89,7 +242,7 @@ class ProductTableViewController: UITableViewController {
   }
   
   private func getSecondSectionTitle() -> String {
-    return "Все цены на \(response.product.name)"
+    return response.product.name
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -112,7 +265,7 @@ class ProductTableViewController: UITableViewController {
     
     return tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
   }
-
+  
   private func cellForFirstSection(row: Int) -> UITableViewCell {
     switch row {
     case 0:
