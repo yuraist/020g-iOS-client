@@ -18,15 +18,17 @@ class ApiHandler {
   let appName = "020g"
   static let shared = ApiHandler()
   
+  
   func checkKeys(success: ((Bool)->Void)?) {
     let queryItems = getCheckApiKeysQueryItems()
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/check_keys", queryItems: queryItems, method: .get) { (data, response, error) in
       if let jsonData = data {
         do {
-          let keys = try self.decodeApiKeys(from: jsonData)
+          let keys = try self.decodeObject(ApiKeys.self, from: jsonData)
           ApiKeys.setToken(token: keys.catalogKey)
           success?(true)
-        } catch {
+        } catch let error {
+          print(error)
           success?(false)
         }
       } else {
@@ -49,37 +51,26 @@ class ApiHandler {
     return ""
   }
   
-  private func decodeApiKeys(from data: Data) throws -> ApiKeys {
-    return try JSONDecoder().decode(ApiKeys.self, from: data)
+  private func decodeObject<T>(_ type: T.Type, from data: Data) throws -> T where T:Decodable {
+    return try JSONDecoder().decode(T.self, from: data)
   }
   
-  /// Returns a block with boolean value of request success and with an array of received categories
-  /**
-   Creates a request that configured the same way as checkKeys(success:) to the API
-   - parameters:
-   - token: String to pass into HTTP-request parameters
-   - completion: Completion handler to call when the request is complete.
-   */
+  
   func fetchCatalogCategories(completion: ((Bool, [Category]?)->Void)?) {
     guard let token = ApiKeys.token else {
-      // Cannot complete the request
       completion?(false, nil)
       return
     }
     
-    // Check a token and get categories if there is the token
     let queryItems = ["token": token, "appname": appName]
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/guest_index", queryItems: queryItems, method: .get) { (data, response, error) in
-      if let error = error {
-        print(error)
-      } else if let jsonData = data {
-        let decoder = JSONDecoder()
-        
+      if let jsonData = data {
         do {
-          let categories = try decoder.decode(Categories.self, from: jsonData)
+          let categories = try self.decodeObject(Categories.self, from: jsonData)
           let categoriesArray = categories.list
           completion?(true, categoriesArray)
-        } catch {
+        } catch let error {
+          print(error)
           completion?(false, nil)
         }
       } else {
@@ -89,14 +80,6 @@ class ApiHandler {
     dataTask.resume()
   }
   
-  /// Fetches a product list for the specific category
-  /**
-   Checks the auth token and requests products if the token is passed.
-   - parameters:
-   - categoryId: integer value of the category for which you want to fetch products
-   - page: integer value of page of product list pagination
-   - completion: block that constains the boolean value of request success and the Product array
-   */
   func fetchProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
     guard let token = ApiKeys.token else {
       completion?(false, nil)
