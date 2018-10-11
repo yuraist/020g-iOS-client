@@ -57,7 +57,7 @@ class AuthorizationViewController: UIViewController {
   
   private func setupNavigationItem() {
     navigationItem.title = "Вход"
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissController))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Отмена", style: .done, target: self, action: #selector(dismissController))
   }
   
   private func setControllerAsTextFieldsDelegate() {

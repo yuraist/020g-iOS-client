@@ -69,6 +69,8 @@
 		BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE0FF0D2216F512600F126BB /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BE0FF0D3216F517200F126BB /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "ru-RU"; path = "ru-RU.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -77,7 +79,6 @@
 		BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
 		BE1DC530214FA1D400E6AF30 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BE1DC533214FA1D400E6AF30 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BE1DC535214FA1D400E6AF30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE1DC541214FA61E00E6AF30 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewController.swift; sourceTree = "<group>"; };
@@ -394,11 +395,10 @@
 			};
 			buildConfigurationList = BE1DC521214FA1D300E6AF30 /* Build configuration list for PBXProject "020g" */;
 			compatibilityVersion = "Xcode 9.3";
-			developmentRegion = en;
+			developmentRegion = "ru-RU";
 			hasScannedForEncodings = 0;
 			knownRegions = (
-				en,
-				Base,
+				"ru-RU",
 			);
 			mainGroup = BE1DC51D214FA1D300E6AF30;
 			productRefGroup = BE1DC527214FA1D300E6AF30 /* Products */;
@@ -527,7 +527,8 @@
 		BE1DC532214FA1D400E6AF30 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				BE1DC533214FA1D400E6AF30 /* Base */,
+				BE0FF0D2216F512600F126BB /* ru-RU */,
+				BE0FF0D3216F517200F126BB /* ru-RU */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -539,6 +540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -600,6 +602,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
