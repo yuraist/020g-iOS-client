@@ -17,10 +17,12 @@ class ProductPriceCell: UITableViewCell {
     }
   }
   
+  private static let fontSize: CGFloat = 14
+  
   private let shopLabel: UILabel = {
     let label = UILabel()
     label.textColor = ApplicationColors.darkGray
-    label.font = UIFont.systemFont(ofSize: 18, weight: .light)
+    label.font = UIFont.systemFont(ofSize: fontSize, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -28,7 +30,7 @@ class ProductPriceCell: UITableViewCell {
   private let availableLabel: UILabel = {
     let label = UILabel()
     label.textAlignment = .right
-    label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
+    label.font = UIFont.systemFont(ofSize: fontSize, weight: .regular)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -37,7 +39,7 @@ class ProductPriceCell: UITableViewCell {
     let label = UILabel()
     label.textAlignment = .right
     label.textColor = ApplicationColors.darkGray
-    label.font = UIFont.systemFont(ofSize: 18)
+    label.font = UIFont.systemFont(ofSize: fontSize)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -115,19 +117,19 @@ class ProductPriceCell: UITableViewCell {
   }
   
   private func setupConstraintsForLabels() {
-    shopLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+    shopLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
     shopLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    shopLabel.widthAnchor.constraint(equalToConstant: 140).isActive = true
+    shopLabel.widthAnchor.constraint(equalToConstant: 110).isActive = true
     shopLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
-    priceLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+    priceLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -6).isActive = true
     priceLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    priceLabel.widthAnchor.constraint(equalToConstant: 100).isActive = true
+    priceLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
     priceLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
-    availableLabel.rightAnchor.constraint(equalTo: priceLabel.leftAnchor, constant: -8).isActive = true
+    availableLabel.rightAnchor.constraint(equalTo: priceLabel.leftAnchor, constant: -2).isActive = true
     availableLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    availableLabel.leftAnchor.constraint(equalTo: shopLabel.rightAnchor, constant: 8).isActive = true
+    availableLabel.leftAnchor.constraint(equalTo: shopLabel.rightAnchor, constant: 2).isActive = true
     availableLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
   }
   
