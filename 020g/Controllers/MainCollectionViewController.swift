@@ -201,8 +201,11 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   private func getCurrentCellIndexPath() -> IndexPath {
-    let cell = collectionView.visibleCells[0]
-    return collectionView.indexPath(for: cell) ?? IndexPath(item: 0, section: 0)
+    if let cell = collectionView.visibleCells.first, let indexPath = collectionView.indexPath(for: cell) {
+      return indexPath
+    } else {
+      return IndexPath(item: 0, section: 0)
+    }
   }
   
   // MARK: - UICollectionViewDataSource

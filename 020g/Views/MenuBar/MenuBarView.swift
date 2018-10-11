@@ -131,6 +131,7 @@ class MenuBarView: UIView {
   func reloadCollectionView() {
     DispatchQueue.main.async {
       self.collectionView.reloadData()
+      self.collectionView.selectItem(at: IndexPath(item: 0, section: 0), animated: true, scrollPosition: .left)
     }
   }
   

@@ -20,9 +20,13 @@ class ApiHandler {
   
   
   func checkKeys(success: ((Bool)->Void)?) {
+    
     let queryItems = getCheckApiKeysQueryItems()
+    
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/check_keys", queryItems: queryItems, method: .get) { (data, response, error) in
+      
       if let jsonData = data {
+        
         do {
           let keys = try self.decodeObject(ApiKeys.self, from: jsonData)
           ApiKeys.setToken(token: keys.catalogKey)
@@ -31,6 +35,7 @@ class ApiHandler {
           print(error)
           success?(false)
         }
+        
       } else {
         success?(false)
       }
@@ -57,6 +62,7 @@ class ApiHandler {
   
   
   func fetchCatalogCategories(completion: ((Bool, [Category]?)->Void)?) {
+    
     guard let token = ApiKeys.token else {
       completion?(false, nil)
       return
@@ -80,7 +86,9 @@ class ApiHandler {
     dataTask.resume()
   }
   
+  
   func fetchProducts(ofCategory categoryId: Int, page: Int, completion: ((Bool, [Product]?)->Void)?) {
+    
     guard let token = ApiKeys.token else {
       completion?(false, nil)
       return
@@ -88,23 +96,16 @@ class ApiHandler {
     
     let queryItems = ["token": token, "appname": appName, "cat": "\(categoryId)", "page": "\(page)"]
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get_tab_products", queryItems: queryItems, method: .get) { (data, response, error) in
-      if error != nil {
-        print(error!)
-        completion?(false, nil)
-      }
-      
       if let jsonData = data {
         do {
           let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
-          let productDictionaryList = jsonObject["list"] as! [Dictionary<String, Any>]
           
-          var products = [Product]()
-          for productDict in productDictionaryList {
-            let product = Product(withDictionary: productDict)
-            products.append(product)
-          }
+          let productsJsonArray = jsonObject["list"] as! [Dictionary<String, Any>]
+          let products = Product.getProducts(fromJsonArray: productsJsonArray)
+          
           completion?(true, products)
-        } catch {
+        } catch let error {
+          print(error)
           completion?(false, nil)
         }
       } else {
@@ -114,7 +115,9 @@ class ApiHandler {
     dataTask.resume()
   }
   
+  
   func fetchShops(completion: ((Bool, [Shop]?)->Void)?) {
+    
     guard let token = ApiKeys.token else {
       completion?(false, nil)
       return
@@ -122,10 +125,6 @@ class ApiHandler {
     
     let queryItems = ["token": token]
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get-shops", queryItems: queryItems, method: .get) { (data, response, error) in
-      if error != nil {
-        completion?(false, nil)
-        return
-      }
       
       if let jsonData = data {
         do {

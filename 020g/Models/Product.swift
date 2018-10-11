@@ -43,6 +43,15 @@ struct Product: Codable {
     like = Bool((dictionary["id"] as! NSString).boolValue)
     mark = Bool((dictionary["id"] as! NSString).boolValue)
   }
+  
+  static func getProducts(fromJsonArray array: [Dictionary<String, Any>]) -> [Product] {
+    var products = [Product]()
+    for productDictionary in array {
+      let product = Product(withDictionary: productDictionary)
+      products.append(product)
+    }
+    return products
+  }
 }
 
 struct Products: Codable {
