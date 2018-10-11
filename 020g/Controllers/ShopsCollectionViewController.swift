@@ -1,5 +1,5 @@
 //
-//  ShopListCollectionViewController.swift
+//  ShopsCollectionViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 25/09/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ShopListCollectionViewController: UICollectionViewController {
+class ShopsCollectionViewController: UICollectionViewController {
   
   private let cellId = "shopListCellId"
   var delegate: CenterViewControllerDelegate?
@@ -47,6 +47,7 @@ class ShopListCollectionViewController: UICollectionViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    setWhiteBackgroundColor()
     setNavigationTitle()
     setupNavigationItemContent()
     setCollectionViewDelegate()
@@ -54,9 +55,8 @@ class ShopListCollectionViewController: UICollectionViewController {
     fetchShops()
   }
   
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    
+  private func setWhiteBackgroundColor() {
+    collectionView.backgroundColor = ApplicationColors.gray
   }
   
   private func fetchShops() {
@@ -138,7 +138,7 @@ class ShopListCollectionViewController: UICollectionViewController {
   }
 }
 
-extension ShopListCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension ShopsCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let cellHeight = shops[indexPath.item].cellHeight
     return CGSize(width: view.frame.width, height: cellHeight)

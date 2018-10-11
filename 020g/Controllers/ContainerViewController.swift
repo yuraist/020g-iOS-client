@@ -160,7 +160,7 @@ extension ContainerViewController: MenuViewControllerDelegate {
     case "Авторизация":
       showAuthorizationViewController()
     case "Страйкбольные магазины":
-      guard let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListCollectionViewController else {
+      guard let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsCollectionViewController else {
         showShopListTableViewController()
         break
       }
@@ -173,7 +173,7 @@ extension ContainerViewController: MenuViewControllerDelegate {
   }
   
   private func showMainViewController() {
-    if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopListCollectionViewController  {
+    if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsCollectionViewController  {
       centerNavigationController.popViewController(animated: true)
     }
   }
@@ -186,8 +186,8 @@ extension ContainerViewController: MenuViewControllerDelegate {
     centerNavigationController.pushViewController(initializeShopListTableViewController(), animated: true)
   }
   
-  private func initializeShopListTableViewController() -> ShopListCollectionViewController {
-    let shopListTableViewController = ShopListCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+  private func initializeShopListTableViewController() -> ShopsCollectionViewController {
+    let shopListTableViewController = ShopsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
     shopListTableViewController.delegate = self
     return shopListTableViewController
   }
