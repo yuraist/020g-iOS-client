@@ -214,51 +214,14 @@ class ProductTableViewController: UITableViewController {
   
   private func getCitiesTableViewCell() ->UITableViewCell {
     let cell = UITableViewCell(style: .default, reuseIdentifier: citiesCellId)
-    cell.backgroundColor = ApplicationColors.gray
-    
-    let textLabelString = getCitiesText()
-    cell.textLabel?.numberOfLines = 0
-    cell.textLabel?.font = UIFont.systemFont(ofSize: 18, weight: .light)
-    cell.textLabel?.text = textLabelString
+    cell.textLabel?.text = "Доступные города"
+    cell.accessoryType = .disclosureIndicator
     return cell
-  }
-  
-  private func getCitiesText() -> String {
-    var text = ""
-    var suffix = ""
-    var cities = [City]()
-    if showExpandedCitiesCell {
-      cities = response.cities
-    } else {
-      if response.cities.count > 4 {
-        suffix = "все..."
-      }
-      cities = Array(response.cities.prefix(4))
-    }
-    
-    for city in cities {
-      if city.name != "" {
-        text += "\(city.name)(\(city.count))    "
-      }
-    }
-    
-    text += suffix
-    print(text)
-    return text
-  }
-  
-  private func getCitiesCellHeight(forText text: String) -> CGFloat {
-    let size = CGSize(width: 300, height: 1000)
-    let options = NSStringDrawingOptions.usesFontLeading.union(.usesLineFragmentOrigin)
-    let textRect = NSString(string: text).boundingRect(with: size, options: options, attributes: [.font: UIFont.systemFont(ofSize: 18)], context: nil)
-    return textRect.height + 24
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath == IndexPath(row: 0, section: 0) {
       return getHeightForImagesCarousel()
-    } else if indexPath == IndexPath(row: 2, section: 0) {
-      return getCitiesCellHeight(forText: getCitiesText())
     } else if indexPath.section == 1 {
       return 64
     }
@@ -272,12 +235,13 @@ class ProductTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath == IndexPath(row: 2, section: 0) {
-      showExpandedCitiesCell = !showExpandedCitiesCell
-      
-      UIView.setAnimationsEnabled(false)
-      tableView.beginUpdates()
-      tableView.reloadRows(at: [indexPath], with: .none)
-      tableView.endUpdates()
+      showCitiesTableViewController()
     }
+  }
+  
+  private func showCitiesTableViewController() {
+    let citiesTableViewController = CitiesTableViewController()
+    citiesTableViewController.cities = response.cities.filter({ $0.name != "" })
+    show(citiesTableViewController, sender: self)
   }
 }
