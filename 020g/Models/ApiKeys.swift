@@ -10,12 +10,15 @@ import Foundation
 
 struct ApiKeys: Codable {
   
-  static var token = UserDefaults.standard.string(forKey: "token") {
-    didSet {
-      if token != nil {
-        UserDefaults.standard.set(token!, forKey: "token")
-      }
-    }
+  static var token = UserDefaults.standard.string(forKey: "token")
+  
+  static func setToken(token: String) {
+    saveTokenToUserDefaults(token: token)
+    self.token = token
+  }
+  
+  private static func saveTokenToUserDefaults(token: String) {
+    UserDefaults.standard.set(token, forKey: "token")
   }
   
   var catalogKey: String

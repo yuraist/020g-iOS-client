@@ -15,28 +15,16 @@ enum HTTPMethod: String {
 
 class ApiHandler {
   
+  let appName = "020g"
   static let shared = ApiHandler()
   
-  let appName = "020g"
-  
- 
   func checkKeys(success: ((Bool)->Void)?) {
-    
-    var queryItems = ["super_key": ""]
-    if let catalogKey = UserDefaults.standard.string(forKey: "token") {
-      queryItems["catalog_key"] = catalogKey
-    } else {
-      queryItems["catalog_key"] = ""
-    }
-    
+    let queryItems = getCheckApiKeysQueryItems()
     let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/check_keys", queryItems: queryItems, method: .get) { (data, response, error) in
-      if let error = error {
-        print(error)
-      } else if let jsonData = data {
-        let decoder = JSONDecoder()
+      if let jsonData = data {
         do {
-          let keys = try decoder.decode(ApiKeys.self, from: jsonData)
-          ApiKeys.token = keys.catalogKey
+          let keys = try self.decodeApiKeys(from: jsonData)
+          ApiKeys.setToken(token: keys.catalogKey)
           success?(true)
         } catch {
           success?(false)
@@ -46,6 +34,23 @@ class ApiHandler {
       }
     }
     dataTask.resume()
+  }
+  
+  private func getCheckApiKeysQueryItems() -> [String: String] {
+    let catalogKey = getCurrentCatalogKey()
+    let queryItems = ["super_key": "", "catalog_key": catalogKey]
+    return queryItems
+  }
+  
+  private func getCurrentCatalogKey() -> String {
+    if let catalogKey = UserDefaults.standard.string(forKey: "token") {
+      return catalogKey
+    }
+    return ""
+  }
+  
+  private func decodeApiKeys(from data: Data) throws -> ApiKeys {
+    return try JSONDecoder().decode(ApiKeys.self, from: data)
   }
   
   /// Returns a block with boolean value of request success and with an array of received categories
