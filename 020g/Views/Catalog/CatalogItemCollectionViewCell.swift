@@ -21,7 +21,7 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
         if cMin < cMax && cMin != 0 {
           priceLabel.text = "от \(cMin) руб."
         } else if cMin == cMax && cMin != 0 {
-          priceLabel.text = "\(cMin)"
+          priceLabel.text = "\(cMin) руб."
         } else if cMin == 0 {
           priceLabel.text = "Нет в наличии"
         }
@@ -45,7 +45,7 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     label.text = "5"
     label.textColor = ApplicationColors.darkBlue
     label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 17, weight: .light)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -55,7 +55,7 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     label.text = "Bolle"
     label.textColor = ApplicationColors.darkBlue
     label.textAlignment = .center
-    label.font = UIFont.systemFont(ofSize: 17, weight: .light)
+    label.font = UIFont.systemFont(ofSize: 14, weight: .light)
     label.translatesAutoresizingMaskIntoConstraints = false
     return label
   }()
@@ -108,21 +108,21 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     
     // Setup numberLabel's layout constraints
     numberLabel.leftAnchor.constraint(equalTo: imageView.leftAnchor).isActive = true
-    numberLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+    numberLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 6).isActive = true
     numberLabel.widthAnchor.constraint(equalToConstant: 24).isActive = true
-    numberLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+    numberLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
     
     // Setup nameLabel's layout constraints
     nameLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
-    nameLabel.topAnchor.constraint(equalTo: imageView.topAnchor).isActive = true
+    nameLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 6).isActive = true
     nameLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
-    nameLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
+    nameLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
     
     // Setup priceLabel's layout constraints
     priceLabel.rightAnchor.constraint(equalTo: imageView.rightAnchor).isActive = true
     priceLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-    priceLabel.widthAnchor.constraint(equalToConstant: 80).isActive = true
-    priceLabel.heightAnchor.constraint(equalToConstant: 24).isActive = true
+    priceLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    priceLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
     
     availableIndicatorView.leftAnchor.constraint(equalTo: imageView.leftAnchor, constant: 10).isActive = true
     availableIndicatorView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10).isActive = true
