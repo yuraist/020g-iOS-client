@@ -19,12 +19,16 @@ extension UITextField {
     }
   }
   
-  private var isEmailField: Bool {
+  var isEmailField: Bool {
     return placeholder == "Email"
   }
   
   var isPhoneNumberField: Bool {
     return placeholder == "Телефон (не обязательно)"
+  }
+  
+  var isNameField: Bool {
+    return placeholder == "Имя"
   }
   
   var textLengthIsValid: Bool {

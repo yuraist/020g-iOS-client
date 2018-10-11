@@ -227,6 +227,10 @@ extension AuthorizationViewController: UITextFieldDelegate {
       return false
     }
     
+    if (textField.isEmailField || textField.isNameField) && string == " " {
+      return false
+    }
+    
     return textField.textLengthIsValid || string.count < 1
   }
   
