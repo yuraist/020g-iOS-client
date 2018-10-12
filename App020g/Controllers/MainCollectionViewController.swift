@@ -31,7 +31,6 @@ class MainCollectionViewController: CenterViewController, UICollectionViewDelega
   
   private var menuBarHeight: CGFloat {
     return 84
-    
   }
   
   private var navigationControllerHeight: CGFloat {

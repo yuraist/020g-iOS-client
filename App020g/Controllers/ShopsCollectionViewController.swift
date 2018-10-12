@@ -9,10 +9,10 @@
 import UIKit
 import SafariServices
 
-class ShopsCollectionViewController: UICollectionViewController {
+class ShopsCollectionViewController: CenterViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   
   private let cellId = "shopListCellId"
-  var delegate: CenterViewControllerDelegate?
+  var collectionView: UICollectionView?
   
   var shops = [Shop]() {
     didSet {
@@ -23,40 +23,51 @@ class ShopsCollectionViewController: UICollectionViewController {
     }
   }
   
-  private lazy var loginButton: BarButton = {
-    let loginButton = BarButton(image: #imageLiteral(resourceName: "signIn"))
-    loginButton.addTarget(self, action: #selector(showAuthorizationViewController), for: .touchUpInside)
-    return loginButton
-  }()
-  
-  private lazy var searchButton: BarButton = {
-    let searchButton = BarButton(image: #imageLiteral(resourceName: "search"))
-    searchButton.addTarget(self, action: #selector(showSearchCollectionViewController), for: .touchUpInside)
-    return searchButton
-  }()
-  
-  private lazy var menuButton: BarButton = {
-    let menuButton = BarButton(image: #imageLiteral(resourceName: "menu"))
-    menuButton.addTarget(self, action: #selector(showMenu), for: .touchUpInside)
-    return menuButton
-  }()
-  
-  private lazy var loginBarButtonItem = CustomBarButtonItem(button: loginButton)
-  private lazy var searchBarButtonItem = CustomBarButtonItem(button: searchButton)
-  private lazy var menuBarButtonItem = CustomBarButtonItem(button: menuButton)
+  private var navigationControllerHeight: CGFloat {
+    get {
+      if let navigationControllerHeight = navigationController?.navigationBar.frame.size.height {
+        return navigationControllerHeight
+      }
+        return 0
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setWhiteBackgroundColor()
+    
+    createAndAddCollectionView()
+    setupCollectionViewConstraints()
+    collectionView?.setWhiteBackgroundColor()
     setNavigationTitle()
-    setupNavigationItemContent()
-    setCollectionViewDelegate()
+    setCollectionViewDelegateAndDataSource()
     registerCollectionViewCell()
     fetchShops()
   }
   
-  private func setWhiteBackgroundColor() {
-    collectionView.backgroundColor = ApplicationColors.gray
+  private func createAndAddCollectionView() {
+    collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    view.addSubview(collectionView!)
+  }
+  
+  private func setupCollectionViewConstraints() {
+    collectionView?.translatesAutoresizingMaskIntoConstraints = false
+    collectionView?.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    collectionView?.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -navigationControllerHeight).isActive = true
+    collectionView?.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    collectionView?.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+  }
+  
+  private func setNavigationTitle() {
+    navigationItem.title = "Страйкбольные магазины"
+  }
+  
+  private func setCollectionViewDelegateAndDataSource() {
+    collectionView?.delegate = self
+    collectionView?.dataSource = self
+  }
+  
+  private func registerCollectionViewCell() {
+    collectionView?.register(ShopCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
   }
   
   private func fetchShops() {
@@ -72,55 +83,21 @@ class ShopsCollectionViewController: UICollectionViewController {
   }
   
   private func updateCollectionViewData() {
-    collectionView.reloadData()
+    collectionView?.reloadData()
   }
   
   private func updateCollectionViewLayout() {
-    collectionView.collectionViewLayout.invalidateLayout()
+    collectionView?.collectionViewLayout.invalidateLayout()
   }
   
-  // MARK: - Setup navigation controller
-  
-  private func setNavigationTitle() {
-    navigationItem.title = "Страйкбольные магазины"
-  }
-  
-  private func setupNavigationItemContent() {
-    addButtonItemsToBar()
-  }
-  
-  private func addButtonItemsToBar() {
-    navigationItem.rightBarButtonItems = [loginBarButtonItem, searchBarButtonItem]
-    navigationItem.leftBarButtonItem = menuBarButtonItem
-  }
-  
-  private func registerCollectionViewCell() {
-    collectionView.register(ShopCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-  }
-  
-  @objc private func showAuthorizationViewController() {
-    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
-  }
-  
-  @objc private func showSearchCollectionViewController() {
-    
-  }
-  
-  @objc private func showMenu() {
-    delegate?.toggleLeftPanel?()
-  }
-  
-  private func setCollectionViewDelegate() {
-    collectionView.delegate = self
-  }
   
   // MARK: - Collection view data source
 
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return shops.count
   }
   
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShopCollectionViewCell
     cell.shop = shops[indexPath.item]
     cell.contactButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
@@ -136,9 +113,7 @@ class ShopsCollectionViewController: UICollectionViewController {
       present(safariViewController, animated: true, completion: nil)
     }
   }
-}
-
-extension ShopsCollectionViewController: UICollectionViewDelegateFlowLayout {
+  
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let cellHeight = shops[indexPath.item].cellHeight
     return CGSize(width: view.frame.width, height: cellHeight)

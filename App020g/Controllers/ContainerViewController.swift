@@ -171,7 +171,7 @@ extension ContainerViewController: MenuViewControllerDelegate {
   
   private func showMainViewController() {
     if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsCollectionViewController  {
-      centerNavigationController.popViewController(animated: true)
+      centerNavigationController.popViewController(animated: false)
     }
   }
   
@@ -180,11 +180,11 @@ extension ContainerViewController: MenuViewControllerDelegate {
   }
   
   private func showShopListTableViewController() {
-    centerNavigationController.pushViewController(initializeShopListTableViewController(), animated: true)
+    centerNavigationController.pushViewController(initializeShopListTableViewController(), animated: false)
   }
   
   private func initializeShopListTableViewController() -> ShopsCollectionViewController {
-    let shopListTableViewController = ShopsCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    let shopListTableViewController = ShopsCollectionViewController()
     shopListTableViewController.delegate = self
     return shopListTableViewController
   }
