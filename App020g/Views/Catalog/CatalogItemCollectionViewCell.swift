@@ -13,30 +13,7 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
   
   var item: Product? {
     didSet {
-      nameLabel.text = item?.name
-      numberLabel.text = String(describing: item!.bind)
-      priceLabel.text = String(describing: item!.priceMin) + " руб."
-      
-      if let cMin = item?.priceMin, let cMax = item?.priceMax {
-        if cMin < cMax && cMin != 0 {
-          priceLabel.text = "от \(cMin) руб."
-        } else if cMin == cMax && cMin != 0 {
-          priceLabel.text = "\(cMin) руб."
-        } else if cMin == 0 {
-          priceLabel.text = "Нет в наличии"
-        }
-      }
-      
-      if let imageUrl = item?.img, let url = URL(string: imageUrl) {
-        imageView.kf.indicatorType = .activity
-        imageView.kf.setImage(with: url)
-      }
-      
-      if let available = item?.available, available {
-        availableIndicatorView.backgroundColor = ApplicationColors.green
-      } else {
-        availableIndicatorView.backgroundColor = ApplicationColors.red
-      }
+      setupCellWithProduct()
     }
   }
   
@@ -122,6 +99,64 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     
     imageView.addConstraints(withFormat: "H:|-10-[v0(10)]", views: availableIndicatorView)
     imageView.addConstraints(withFormat: "V:[v0(10)]-10-|", views: availableIndicatorView)
+  }
+  
+  private func setupCellWithProduct() {
+    if let product = item {
+      setProductImage()
+      nameLabel.text = product.name
+      numberLabel.text = String(product.bind)
+      priceLabel.text = getPriceText()
+      setProductAvailableIndicatorColor()
+    }
+  }
+  
+  private func setProductImage() {
+    imageView.kf.indicatorType = .activity
+    imageView.kf.setImage(with: getImageUrl())
+  }
+  
+  private func getImageUrl() -> URL? {
+    guard var imageUrlString = item?.img else {
+      return nil
+    }
+    
+    if imageUrlString.hasPrefix("http://020g.ru/ipk/g1") {
+      imageUrlString = imageUrlString.replacingOccurrences(of: "g1", with: "g8")
+    }
+    
+    let url = URL(string: imageUrlString)
+    return url
+  }
+  
+  private func getPriceText() -> String {
+    var priceString = ""
+    if let cMin = item?.priceMin, let cMax = item?.priceMax {
+      if cMin < cMax && cMin != 0 {
+        priceString = "от \(cMin) руб."
+      } else if cMin == cMax && cMin != 0 {
+        priceString = "\(cMin) руб."
+      } else if cMin == 0 {
+        priceString = "Нет в наличии"
+      }
+    }
+    return priceString
+  }
+  
+  private func setProductAvailableIndicatorColor() {
+    if let available = item?.available, available {
+      setProductAvailableIndicatorGreen()
+    } else {
+      setProductAvailableIndicatorRed()
+    }
+  }
+  
+  private func setProductAvailableIndicatorGreen() {
+    availableIndicatorView.backgroundColor = ApplicationColors.green
+  }
+  
+  private func setProductAvailableIndicatorRed() {
+    availableIndicatorView.backgroundColor = ApplicationColors.red
   }
   
 }
