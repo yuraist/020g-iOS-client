@@ -22,6 +22,7 @@ class CitiesTableViewController: UITableViewController {
     
     registerCell()
     setNavigationItemTitle()
+    removeBackBarButtonTitle()
   }
   
   private func registerCell() {
@@ -32,6 +33,10 @@ class CitiesTableViewController: UITableViewController {
     navigationItem.title = "Доступные города"
   }
   
+  private func removeBackBarButtonTitle() {
+    navigationController?.navigationBar.backItem?.title = ""
+  }
+  
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return cities.count
   }
@@ -39,7 +44,17 @@ class CitiesTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     let city = cities[indexPath.row]
-    cell.textLabel?.text = city.name + " (\(city.count))"
+    cell.textLabel?.text = "\(city.count) - \(city.name)"
+    cell.textLabel?.textColor = textColor(forCity: city)
+    cell.backgroundColor = cellColor(forCity: city)
     return cell
+  }
+  
+  private func textColor(forCity city: City) -> UIColor {
+    return city.aviable ? ApplicationColors.green : ApplicationColors.red
+  }
+  
+  private func cellColor(forCity city: City) -> UIColor {
+    return city.aviable ? ApplicationColors.lighterGreen : ApplicationColors.lighterRed
   }
 }

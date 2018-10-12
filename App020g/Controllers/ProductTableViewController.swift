@@ -241,7 +241,11 @@ class ProductTableViewController: UITableViewController {
   
   private func showCitiesTableViewController() {
     let citiesTableViewController = CitiesTableViewController()
-    citiesTableViewController.cities = response.cities.filter({ $0.name != "" })
+    citiesTableViewController.cities = getValidCities()
     show(citiesTableViewController, sender: self)
+  }
+  
+  private func getValidCities() -> [City] {
+    return response.cities.filter({ $0.name != "" && $0.name != "Город" })
   }
 }
