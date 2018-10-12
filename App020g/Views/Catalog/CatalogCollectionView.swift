@@ -48,10 +48,6 @@ class CatalogCollectionView: UICollectionView {
     dataSource = self
   }
   
-  private func setWhiteBackgroundColor() {
-    backgroundColor = ApplicationColors.white
-  }
-  
   private func setGrayBackgroundColor() {
     backgroundColor = ApplicationColors.gray
   }

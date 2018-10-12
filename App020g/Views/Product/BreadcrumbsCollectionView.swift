@@ -31,10 +31,6 @@ class BreadcrumbsCollectionView: UICollectionView, UICollectionViewDelegate, UIC
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setWhiteBackgroundColor() {
-    backgroundColor = ApplicationColors.gray
-  }
-  
   private func setDelegate() {
     delegate = self
   }

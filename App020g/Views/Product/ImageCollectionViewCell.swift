@@ -29,10 +29,6 @@ class ImageCollectionViewCell: UICollectionViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setWhiteBackgroundColor() {
-    backgroundColor = ApplicationColors.white
-  }
-  
   private func addImageView() {
     addSubview(imageView)
   }

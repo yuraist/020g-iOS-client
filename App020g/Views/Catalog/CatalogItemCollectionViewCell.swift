@@ -92,45 +92,36 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    backgroundColor = ApplicationColors.white
+    setWhiteBackgroundColor()
+    addSubviews()
+    setupConstraints()
     
-    addSubview(imageView)
-    imageView.addSubview(numberLabel)
-    imageView.addSubview(nameLabel)
-    imageView.addSubview(priceLabel)
-    imageView.addSubview(availableIndicatorView)
-    
-    // Setup imageView's layout constratins
-    imageView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-    imageView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    imageView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-    imageView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-    
-    // Setup numberLabel's layout constraints
-    numberLabel.leftAnchor.constraint(equalTo: imageView.leftAnchor).isActive = true
-    numberLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 6).isActive = true
-    numberLabel.widthAnchor.constraint(equalToConstant: 24).isActive = true
-    numberLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-    
-    // Setup nameLabel's layout constraints
-    nameLabel.centerXAnchor.constraint(equalTo: imageView.centerXAnchor).isActive = true
-    nameLabel.topAnchor.constraint(equalTo: imageView.topAnchor, constant: 6).isActive = true
-    nameLabel.widthAnchor.constraint(equalToConstant: 120).isActive = true
-    nameLabel.heightAnchor.constraint(equalToConstant: 16).isActive = true
-    
-    // Setup priceLabel's layout constraints
-    priceLabel.rightAnchor.constraint(equalTo: imageView.rightAnchor).isActive = true
-    priceLabel.bottomAnchor.constraint(equalTo: imageView.bottomAnchor).isActive = true
-    priceLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
-    priceLabel.heightAnchor.constraint(equalToConstant: 28).isActive = true
-    
-    availableIndicatorView.leftAnchor.constraint(equalTo: imageView.leftAnchor, constant: 10).isActive = true
-    availableIndicatorView.bottomAnchor.constraint(equalTo: imageView.bottomAnchor, constant: -10).isActive = true
-    availableIndicatorView.widthAnchor.constraint(equalToConstant: 10).isActive = true
-    availableIndicatorView.heightAnchor.constraint(equalToConstant: 10).isActive = true
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+  
+  private func addSubviews() {
+    addSubviews(imageView)
+    imageView.addSubviews(numberLabel, nameLabel, priceLabel, availableIndicatorView)
+  }
+  
+  private func setupConstraints() {
+    addConstraints(withFormat: "H:|[v0]|", views: imageView)
+    addConstraints(withFormat: "V:|[v0]|", views: imageView)
+    
+    imageView.addConstraints(withFormat: "H:|[v0(24)]", views: numberLabel)
+    imageView.addConstraints(withFormat: "V:|-6-[v0(16)]", views: numberLabel)
+    
+    imageView.addConstraints(withFormat: "H:|-24-[v0]-24-|", views: nameLabel)
+    imageView.addConstraints(withFormat: "V:|-6-[v0(16)]", views: nameLabel)
+    
+    imageView.addConstraints(withFormat: "H:[v0(90)]|", views: priceLabel)
+    imageView.addConstraints(withFormat: "V:[v0(28)]|", views: priceLabel)
+    
+    imageView.addConstraints(withFormat: "H:|-10-[v0(10)]", views: availableIndicatorView)
+    imageView.addConstraints(withFormat: "V:[v0(10)]-10-|", views: availableIndicatorView)
+  }
+  
 }

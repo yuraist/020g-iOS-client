@@ -12,16 +12,5 @@ import XCTest
 
 class App020gTests: XCTestCase {
   
-  override func setUp() {
-    
-  }
-  
-  override func tearDown() {
-    
-  }
-  
-  func testExample() {
-    
-  }
-  
+ 
 }

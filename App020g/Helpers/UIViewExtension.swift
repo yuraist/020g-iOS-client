@@ -33,4 +33,14 @@ extension UIView {
     
     addConstraints(NSLayoutConstraint.constraints(withVisualFormat: format, options: NSLayoutConstraint.FormatOptions(), metrics: nil, views: viewsDictionary))
   }
+  
+  func setWhiteBackgroundColor() {
+    backgroundColor = ApplicationColors.white
+  }
+  
+  func addSubviews(_ views: UIView...) {
+    for view in views {
+      addSubview(view)
+    }
+  }
 }

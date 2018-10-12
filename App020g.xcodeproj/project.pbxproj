@@ -13,6 +13,8 @@
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
 		BE0FF0D5216FC3C200F126BB /* CitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D4216FC3C200F126BB /* CitiesTableViewController.swift */; };
 		BE0FF0DD2170705C00F126BB /* App020gTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0DC2170705C00F126BB /* App020gTests.swift */; };
+		BE0FF0ED2170AA3B00F126BB /* App020gSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */; };
+		BE0FF0F52170AE4500F126BB /* App020gFakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -74,6 +76,13 @@
 			remoteGlobalIDString = BE1DC525214FA1D300E6AF30;
 			remoteInfo = 020g;
 		};
+		BE0FF0EF2170AA3B00F126BB /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BE1DC51E214FA1D300E6AF30 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BE1DC525214FA1D300E6AF30;
+			remoteInfo = App020g;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -90,6 +99,10 @@
 		BE0FF0DA2170705C00F126BB /* App020gTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = App020gTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE0FF0DC2170705C00F126BB /* App020gTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gTests.swift; sourceTree = "<group>"; };
 		BE0FF0DE2170705C00F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE0FF0EA2170AA3B00F126BB /* App020gSlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = App020gSlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gSlowTests.swift; sourceTree = "<group>"; };
+		BE0FF0EE2170AA3B00F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gFakeTests.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -154,6 +167,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		BE0FF0E72170AA3B00F126BB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		BE1DC523214FA1D300E6AF30 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -183,11 +203,22 @@
 			path = 020gTests;
 			sourceTree = "<group>";
 		};
+		BE0FF0EB2170AA3B00F126BB /* App020gSlowTests */ = {
+			isa = PBXGroup;
+			children = (
+				BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */,
+				BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */,
+				BE0FF0EE2170AA3B00F126BB /* Info.plist */,
+			);
+			path = App020gSlowTests;
+			sourceTree = "<group>";
+		};
 		BE1DC51D214FA1D300E6AF30 = {
 			isa = PBXGroup;
 			children = (
 				BE1DC528214FA1D300E6AF30 /* App020g */,
 				BE0FF0DB2170705C00F126BB /* 020gTests */,
+				BE0FF0EB2170AA3B00F126BB /* App020gSlowTests */,
 				BE1DC527214FA1D300E6AF30 /* Products */,
 				C37F5F096A8D7CAB6E88F2B9 /* Pods */,
 				BB8F4453BBE381C4A4AA5608 /* Frameworks */,
@@ -199,6 +230,7 @@
 			children = (
 				BE1DC526214FA1D300E6AF30 /* App020g.app */,
 				BE0FF0DA2170705C00F126BB /* App020gTests.xctest */,
+				BE0FF0EA2170AA3B00F126BB /* App020gSlowTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -418,6 +450,24 @@
 			productReference = BE0FF0DA2170705C00F126BB /* App020gTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		BE0FF0E92170AA3B00F126BB /* App020gSlowTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BE0FF0F12170AA3B00F126BB /* Build configuration list for PBXNativeTarget "App020gSlowTests" */;
+			buildPhases = (
+				BE0FF0E62170AA3B00F126BB /* Sources */,
+				BE0FF0E72170AA3B00F126BB /* Frameworks */,
+				BE0FF0E82170AA3B00F126BB /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BE0FF0F02170AA3B00F126BB /* PBXTargetDependency */,
+			);
+			name = App020gSlowTests;
+			productName = App020gSlowTests;
+			productReference = BE0FF0EA2170AA3B00F126BB /* App020gSlowTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		BE1DC525214FA1D300E6AF30 /* App020g */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = BE1DC538214FA1D400E6AF30 /* Build configuration list for PBXNativeTarget "App020g" */;
@@ -451,6 +501,10 @@
 						CreatedOnToolsVersion = 10.0;
 						TestTargetID = BE1DC525214FA1D300E6AF30;
 					};
+					BE0FF0E92170AA3B00F126BB = {
+						CreatedOnToolsVersion = 10.0;
+						TestTargetID = BE1DC525214FA1D300E6AF30;
+					};
 					BE1DC525214FA1D300E6AF30 = {
 						CreatedOnToolsVersion = 10.0;
 					};
@@ -470,12 +524,20 @@
 			targets = (
 				BE1DC525214FA1D300E6AF30 /* App020g */,
 				BE0FF0D92170705C00F126BB /* App020gTests */,
+				BE0FF0E92170AA3B00F126BB /* App020gSlowTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		BE0FF0D82170705C00F126BB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE0FF0E82170AA3B00F126BB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -538,6 +600,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				BE0FF0DD2170705C00F126BB /* App020gTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BE0FF0E62170AA3B00F126BB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BE0FF0ED2170AA3B00F126BB /* App020gSlowTests.swift in Sources */,
+				BE0FF0F52170AE4500F126BB /* App020gFakeTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -609,6 +680,11 @@
 			target = BE1DC525214FA1D300E6AF30 /* App020g */;
 			targetProxy = BE0FF0DF2170705C00F126BB /* PBXContainerItemProxy */;
 		};
+		BE0FF0F02170AA3B00F126BB /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BE1DC525214FA1D300E6AF30 /* App020g */;
+			targetProxy = BE0FF0EF2170AA3B00F126BB /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -657,6 +733,46 @@
 					"@loader_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.yuraist.-20gTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App020g.app/App020g";
+			};
+			name = Release;
+		};
+		BE0FF0F22170AA3B00F126BB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N2HCJ99WYH;
+				INFOPLIST_FILE = App020gSlowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuraist.App020gSlowTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.2;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App020g.app/App020g";
+			};
+			name = Debug;
+		};
+		BE0FF0F32170AA3B00F126BB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = N2HCJ99WYH;
+				INFOPLIST_FILE = App020gSlowTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuraist.App020gSlowTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -833,6 +949,15 @@
 			buildConfigurations = (
 				BE0FF0E22170705C00F126BB /* Debug */,
 				BE0FF0E32170705C00F126BB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BE0FF0F12170AA3B00F126BB /* Build configuration list for PBXNativeTarget "App020gSlowTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BE0FF0F22170AA3B00F126BB /* Debug */,
+				BE0FF0F32170AA3B00F126BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
