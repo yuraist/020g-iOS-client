@@ -10,7 +10,17 @@ import UIKit
 
 class ContainerViewController: UIViewController {
   
+  var centerNavigationController: UINavigationController!
+  var menuViewController: MenuViewController?
+  
+  var mainController: CenterViewController! {
+    didSet {
+      setupNavigationController()
+    }
+  }
+  
   override var preferredStatusBarStyle: UIStatusBarStyle {  return .lightContent }
+  private let centerPanelExpandedOffset: CGFloat = 100
   
   var isShowingMenu = false {
     didSet {
@@ -22,27 +32,14 @@ class ContainerViewController: UIViewController {
     }
   }
   
-  private let centerPanelExpandedOffset: CGFloat = 100
-  
-  var centerNavigationController: UINavigationController!
-  
-  var mainController: UIViewController! {
-    didSet {
-      setupNavigationController()
-    }
-  }
-  
-  var menuViewController: MenuViewController?
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainViewController()
   }
   
   private func setupMainViewController() {
-    let layout = UICollectionViewFlowLayout()
-    mainController = MainCollectionViewController(collectionViewLayout: layout)
-    (mainController as! MainCollectionViewController).delegate = self
+    mainController = MainCollectionViewController()
+    mainController.delegate = self
   }
   
   private func setupNavigationController() {

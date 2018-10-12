@@ -16,6 +16,7 @@
 		BE0FF0ED2170AA3B00F126BB /* App020gSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */; };
 		BE0FF0F52170AE4500F126BB /* App020gFakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */; };
 		BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */; };
+		BE0FF0F92170E87600F126BB /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F82170E87600F126BB /* CenterViewController.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -105,6 +106,7 @@
 		BE0FF0EE2170AA3B00F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gFakeTests.swift; sourceTree = "<group>"; };
 		BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
+		BE0FF0F82170E87600F126BB /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 			children = (
 				BEF1B98B21614EBA00348A3D /* Delegates */,
 				BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */,
+				BE0FF0F82170E87600F126BB /* CenterViewController.swift */,
 				BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */,
 				BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */,
 				BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */,
@@ -638,6 +641,7 @@
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
 				BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */,
+				BE0FF0F92170E87600F126BB /* CenterViewController.swift in Sources */,
 				BEF1B98A215F69AB00348A3D /* UIImageViewExtension.swift in Sources */,
 				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
 				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,

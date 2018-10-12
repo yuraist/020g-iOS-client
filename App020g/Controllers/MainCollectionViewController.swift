@@ -8,11 +8,12 @@
 
 import UIKit
 
-class MainCollectionViewController: UICollectionViewController {
+class MainCollectionViewController: CenterViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   
   private let itemCellId = "cellId"
   private let menuBar = MenuBarView()
-  var delegate: CenterViewControllerDelegate?
+  
+  var collectionView: UICollectionView?
   
   var products = [[Product]]() {
     didSet {
@@ -46,36 +47,13 @@ class MainCollectionViewController: UICollectionViewController {
     return UIApplication.shared.statusBarFrame.size.height
   }
   
-  private lazy var loginButton: BarButton = {
-    let loginButton = BarButton(image: #imageLiteral(resourceName: "signIn"))
-    loginButton.addTarget(self, action: #selector(showAuthorizationViewController), for: .touchUpInside)
-    return loginButton
-  }()
-  
-  private lazy var searchButton: BarButton = {
-    let searchButton = BarButton(image: #imageLiteral(resourceName: "search"))
-    searchButton.addTarget(self, action: #selector(showSearchCollectionViewController), for: .touchUpInside)
-    return searchButton
-  }()
-  
-  private lazy var menuButton: BarButton = {
-    let menuButton = BarButton(image: #imageLiteral(resourceName: "menu"))
-    menuButton.addTarget(self, action: #selector(showMenu), for: .touchUpInside)
-    return menuButton
-  }()
-  
-  private lazy var loginBarButtonItem = CustomBarButtonItem(button: loginButton)
-  private lazy var searchBarButtonItem = CustomBarButtonItem(button: searchButton)
-  private lazy var menuBarButtonItem = CustomBarButtonItem(button: menuButton)
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupCollectionView()
     fetchCatalogKeysAndCategories()
     setupMenuBar()
     setNavigationItemTitle()
-    setupNavigationItemContent()
-    setupCollectionView()
   }
   
   private func fetchCatalogKeysAndCategories() {
@@ -114,18 +92,11 @@ class MainCollectionViewController: UICollectionViewController {
     navigationItem.title = "0.20g - агрегатор №1"
   }
   
-  private func setupNavigationItemContent() {
-    addButtonItemsToBar()
-  }
-  
-  private func addButtonItemsToBar() {
-    navigationItem.rightBarButtonItems = [loginBarButtonItem, searchBarButtonItem]
-    navigationItem.leftBarButtonItem = menuBarButtonItem
-  }
-  
   // MARK: - Setup collection view
   
   private func setupCollectionView() {
+    createAndAddCollectionView()
+    setCollectionViewDelegateAndDataSource()
     setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse()
     setupCollectionViewTopConstraint()
     setWhiteBackgroundColorForCollectionView()
@@ -134,33 +105,43 @@ class MainCollectionViewController: UICollectionViewController {
     registerCollectionViewCell()
   }
   
+  private func createAndAddCollectionView() {
+    collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    view.addSubview(collectionView!)
+  }
+  
+  private func setCollectionViewDelegateAndDataSource() {
+    collectionView?.delegate = self
+    collectionView?.dataSource = self
+  }
+  
   private func setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse() {
-    collectionView.translatesAutoresizingMaskIntoConstraints = false
+    collectionView!.translatesAutoresizingMaskIntoConstraints = false
   }
   
   private func setupCollectionViewTopConstraint() {
-    collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    collectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    collectionView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
+    collectionView!.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    collectionView!.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    collectionView!.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    collectionView!.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
   }
   
   private func setWhiteBackgroundColorForCollectionView() {
-    collectionView.backgroundColor = ApplicationColors.white
+    collectionView!.backgroundColor = ApplicationColors.white
   }
   
   private func setupCollectionViewScrollDirection() {
-    if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
+    if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
       layout.scrollDirection = .horizontal
     }
   }
   
   private func setCollectionViewPagingEnabled() {
-    collectionView.isPagingEnabled = true
+    collectionView?.isPagingEnabled = true
   }
   
   private func registerCollectionViewCell() {
-    collectionView.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
+    collectionView?.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
   }
   
   private func fetchCategories() {
@@ -188,11 +169,11 @@ class MainCollectionViewController: UICollectionViewController {
   
   func reloadCollectionView() {
     DispatchQueue.main.async {
-      self.collectionView.reloadData()
+      self.collectionView?.reloadData()
     }
   }
   
-  override func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     changeMenuBarSelectedItem()
   }
   
@@ -201,7 +182,7 @@ class MainCollectionViewController: UICollectionViewController {
   }
   
   private func getCurrentCellIndexPath() -> IndexPath {
-    if let cell = collectionView.visibleCells.first, let indexPath = collectionView.indexPath(for: cell) {
+    if let cell = collectionView?.visibleCells.first, let indexPath = collectionView?.indexPath(for: cell) {
       return indexPath
     } else {
       return IndexPath(item: 0, section: 0)
@@ -210,11 +191,11 @@ class MainCollectionViewController: UICollectionViewController {
   
   // MARK: - UICollectionViewDataSource
   
-  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return menuBar.categories.count
   }
   
-  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CategoryCollectionViewCell
     menuBar.catalogCollectionView = collectionView
     cell.catalogCollectionView.category = menuBar.categories[indexPath.item]
@@ -222,22 +203,6 @@ class MainCollectionViewController: UICollectionViewController {
     return cell
   }
   
-  // MARK: - Button actions
-  
-  @objc private func showAuthorizationViewController() {
-    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
-  }
-  
-  @objc private func showSearchCollectionViewController() {
-    
-  }
-  
-  @objc private func showMenu() {
-    delegate?.toggleLeftPanel?()
-  }
-}
-
-extension MainCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     return CGSize(width: view.frame.width, height: view.frame.height - totalMenuHeight)
   }
