@@ -33,9 +33,9 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
       }
       
       if let available = item?.available, available {
-        availableIndicatorView.backgroundColor = .green
+        availableIndicatorView.backgroundColor = ApplicationColors.green
       } else {
-        availableIndicatorView.backgroundColor = .red
+        availableIndicatorView.backgroundColor = ApplicationColors.red
       }
     }
   }
