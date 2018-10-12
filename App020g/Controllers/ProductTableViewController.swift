@@ -8,46 +8,14 @@
 
 import UIKit
 
-class CustomHeaderView: UIView {
+class ProductTableViewController: UITableViewController {
   
-  var text: String? {
+  var selectedCities = [City]() {
     didSet {
-      label.text = text
+      let indexPath = IndexPath(row: 2, section: 0)
+      tableView.reloadRows(at: [indexPath], with: .none)
     }
   }
-  
-  let label: UILabel = {
-    let label = UILabel()
-    label.textColor = ApplicationColors.darkGray
-    label.font = UIFont.systemFont(ofSize: 15, weight: .bold)
-    label.translatesAutoresizingMaskIntoConstraints = false
-    return label
-  }()
-  
-  override init(frame: CGRect) {
-    super.init(frame: frame)
-    
-    addLabel()
-    setupLabelConstraints()
-  }
-  
-  private func addLabel() {
-    addSubview(label)
-  }
-  
-  private func setupLabelConstraints() {
-    label.leftAnchor.constraint(equalTo: leftAnchor, constant: 8).isActive = true
-    label.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    label.widthAnchor.constraint(equalToConstant: 300)
-    label.heightAnchor.constraint(equalToConstant: 20).isActive = true
-  }
-  
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
-}
-
-class ProductTableViewController: UITableViewController {
   
   private let cellId = "tableViewCell"
   private let carouselCellId = "carouselCell"
@@ -213,9 +181,14 @@ class ProductTableViewController: UITableViewController {
   }
   
   private func getCitiesTableViewCell() ->UITableViewCell {
-    let cell = UITableViewCell(style: .default, reuseIdentifier: citiesCellId)
+    let cell = UITableViewCell(style: .value1, reuseIdentifier: citiesCellId)
     cell.textLabel?.text = "Доступные города"
     cell.accessoryType = .disclosureIndicator
+    
+    if selectedCities.count > 0 {
+      cell.detailTextLabel?.text = "[\(selectedCities.count)]"
+    }
+    
     return cell
   }
   
@@ -242,6 +215,7 @@ class ProductTableViewController: UITableViewController {
   private func showCitiesTableViewController() {
     let citiesTableViewController = CitiesTableViewController()
     citiesTableViewController.cities = getValidCities()
+    citiesTableViewController.productController = self
     show(citiesTableViewController, sender: self)
   }
   

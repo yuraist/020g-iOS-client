@@ -15,6 +15,7 @@
 		BE0FF0DD2170705C00F126BB /* App020gTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0DC2170705C00F126BB /* App020gTests.swift */; };
 		BE0FF0ED2170AA3B00F126BB /* App020gSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */; };
 		BE0FF0F52170AE4500F126BB /* App020gFakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */; };
+		BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -103,6 +104,7 @@
 		BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gSlowTests.swift; sourceTree = "<group>"; };
 		BE0FF0EE2170AA3B00F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gFakeTests.swift; sourceTree = "<group>"; };
+		BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -397,6 +399,7 @@
 				BEE57E14216CE3BE005C9672 /* ProductDetailCell.swift */,
 				BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */,
 				BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */,
+				BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -626,6 +629,7 @@
 				BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
 				BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */,
+				BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */,
 				BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,

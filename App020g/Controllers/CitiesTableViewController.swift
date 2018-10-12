@@ -17,6 +17,8 @@ class CitiesTableViewController: UITableViewController {
     }
   }
   
+  var productController: ProductTableViewController?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -44,6 +46,7 @@ class CitiesTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     let city = cities[indexPath.row]
+    
     cell.textLabel?.text = "\(city.count) - \(city.name)"
     cell.textLabel?.textColor = textColor(forCity: city)
     cell.backgroundColor = cellColor(forCity: city)
@@ -56,5 +59,19 @@ class CitiesTableViewController: UITableViewController {
   
   private func cellColor(forCity city: City) -> UIColor {
     return city.aviable ? ApplicationColors.lighterGreen : ApplicationColors.lighterRed
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let city = cities[indexPath.row]
+    
+    tableView.deselectRow(at: indexPath, animated: true)
+    
+    if productController?.selectedCities != nil {
+      if let index = productController!.selectedCities.firstIndex(where: { return $0.name == city.name }) {
+        productController!.selectedCities.remove(at: index)
+      } else {
+        productController!.selectedCities.append(city)
+      }
+    }
   }
 }
