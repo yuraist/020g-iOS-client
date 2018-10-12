@@ -35,6 +35,33 @@ class ContainerViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     setupMainViewController()
+    
+    let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(handlePanGesture(_:)))
+    centerNavigationController.view.addGestureRecognizer(panGestureRecognizer)
+  }
+  
+  @objc
+  private func handlePanGesture(_ recognizer: UIPanGestureRecognizer) {
+    switch recognizer.state {
+    case .began:
+      addLeftPanelViewController()
+      isShowingMenu = true
+    case .changed:
+      if let rview = recognizer.view {
+        let delta = rview.frame.origin.x + recognizer.translation(in: view).x
+        if delta > 0 {
+          rview.frame.origin.x = delta
+          recognizer.setTranslation(CGPoint.zero, in: view)
+        }
+      }
+    case .ended:
+      if let rview = recognizer.view {
+        let hasMovedGreaterThanHalfWay = rview.center.x > view.bounds.size.width
+        isShowingMenu = !hasMovedGreaterThanHalfWay
+        toggleLeftPanel()
+      }
+    default: break
+    }
   }
   
   private func setupMainViewController() {
