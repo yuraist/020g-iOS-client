@@ -13,13 +13,14 @@ class CatalogCollectionView: UICollectionView {
   
   var category: Category? {
     didSet {
-      self.fetchProducts()
+      products.removeAll()
+      fetchProducts()
     }
   }
   
   var products = [Product]() {
     didSet {
-      self.reloadCollectionView()
+      reloadCollectionView()
     }
   }
   

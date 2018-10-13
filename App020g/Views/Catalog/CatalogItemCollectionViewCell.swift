@@ -13,6 +13,7 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
   
   var item: Product? {
     didSet {
+      clearCell()
       setupCellWithProduct()
     }
   }
@@ -72,7 +73,6 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     setWhiteBackgroundColor()
     addSubviews()
     setupConstraints()
-    
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -99,6 +99,13 @@ class CatalogItemCollectionViewCell: UICollectionViewCell {
     
     imageView.addConstraints(withFormat: "H:|-10-[v0(10)]", views: availableIndicatorView)
     imageView.addConstraints(withFormat: "V:[v0(10)]-10-|", views: availableIndicatorView)
+  }
+  
+  private func clearCell() {
+    imageView.image = nil
+    nameLabel.text = ""
+    numberLabel.text = ""
+    priceLabel.text = ""
   }
   
   private func setupCellWithProduct() {
