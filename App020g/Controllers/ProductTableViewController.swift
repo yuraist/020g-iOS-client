@@ -12,9 +12,20 @@ class ProductTableViewController: UITableViewController {
   
   var selectedCities = [City]() {
     didSet {
-      let indexPath = IndexPath(row: 2, section: 0)
-      tableView.reloadRows(at: [indexPath], with: .none)
+//      let indexPath = IndexPath(row: 2, section: 0)
+//      tableView.reloadRows(at: [indexPath], with: .none)
+      tableView.reloadData()
     }
+  }
+  
+  var offersForSelectedCities: [Price] {
+    if selectedCities.count > 0 {
+      let prices = response.product.prices.filter { (price) -> Bool in
+        return selectedCities.contains(where: { return $0.name == price.city})
+      }
+      return prices
+    }
+    return [Price]()
   }
   
   private let cellId = "tableViewCell"
@@ -72,6 +83,23 @@ class ProductTableViewController: UITableViewController {
   
   override func numberOfSections(in tableView: UITableView) -> Int {
     return 3
+  }
+  
+  
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    switch section {
+    case 0: return 3
+    case 1: return getNumberOfPrices()
+    case 2: return response.product.opts.count
+    default: return 1
+    }
+  }
+  
+  private func getNumberOfPrices() -> Int {
+    if offersForSelectedCities.count > 0 {
+      return offersForSelectedCities.count
+    }
+    return response.product.prices.count
   }
   
   override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -133,15 +161,6 @@ class ProductTableViewController: UITableViewController {
   
   private func getThirdSectionTitle() -> String {
     return "Детально"
-  }
-  
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    switch section {
-    case 0: return 3
-    case 1: return response.product.prices.count
-    case 2: return response.product.opts.count
-    default: return 1
-    }
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
