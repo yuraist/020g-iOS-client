@@ -44,6 +44,7 @@ class App020gSlowTests: XCTestCase {
   
   func testProductImageSize() {
     let promise = expectation(description: "Completion handler invoked")
+    
     apiHandler.fetchProducts(ofCategory: 0, page: 1) { (success, products) in
       if let products = products {
         for product in products {

@@ -14,7 +14,7 @@ class App020gFakeTests: XCTestCase {
   
   override func setUp() {
     super.setUp()
-    controllerUnderTest = MainCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    controllerUnderTest = MainCollectionViewController()
   }
   
   override func tearDown() {

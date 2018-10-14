@@ -80,19 +80,29 @@ class ProductTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
     if section == 0 {
-      let headerView = BreadcrumbsCollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30), collectionViewLayout: UICollectionViewFlowLayout())
-      headerView.breadcrumbs = response.breadcrumbs
+      let headerView = getBreadcrumbsHeaderView()
       return headerView
     }
-    let headerView = CustomHeaderView(frame: .zero)
+    
+    let headerView = getDefaultHeaderView()
     
     if section == 1 {
       headerView.text = getSecondSectionTitle()
     } else if section == 2 {
-      headerView.text = "Детально"
+      headerView.text = getThirdSectionTitle()
     }
     
     return headerView
+  }
+  
+  private func getBreadcrumbsHeaderView() -> BreadcrumbsCollectionView {
+    let headerView = BreadcrumbsCollectionView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 30), collectionViewLayout: UICollectionViewFlowLayout())
+    headerView.breadcrumbs = response.breadcrumbs
+    return headerView
+  }
+  
+  private func getDefaultHeaderView() -> CustomHeaderView {
+    return CustomHeaderView(frame: .zero)
   }
   
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -102,7 +112,7 @@ class ProductTableViewController: UITableViewController {
     case 1:
       return getSecondSectionTitle()
     case 2:
-      return "Детально"
+      return getThirdSectionTitle()
     default:
       return ""
     }
@@ -118,6 +128,11 @@ class ProductTableViewController: UITableViewController {
   
   private func getSecondSectionTitle() -> String {
     return response.product.name
+  }
+  
+  
+  private func getThirdSectionTitle() -> String {
+    return "Детально"
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

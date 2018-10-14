@@ -12,6 +12,12 @@ class ProductImageCarouselTableViewCell: UITableViewCell {
   
   var imageUrls: [String]? {
     didSet {
+      setResizedImageUrls()
+    }
+  }
+  
+  var resizedImageUrls: [String]? {
+    didSet {
       imageCollectionView.reloadData()
     }
   }
@@ -84,6 +90,18 @@ class ProductImageCarouselTableViewCell: UITableViewCell {
     imageCollectionView.showsHorizontalScrollIndicator = false
   }
   
+  private func setResizedImageUrls() {
+    if let imageUrls = imageUrls {
+      resizedImageUrls = imageUrls.map { (imageUrl) -> String in
+        return getResizedImageUrl(withCurrentImageUrl: imageUrl)
+      }
+    }
+  }
+  
+  private func getResizedImageUrl(withCurrentImageUrl url: String) -> String {
+    return url.replacingOccurrences(of: "g1", with: "g2")
+  }
+  
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
@@ -96,13 +114,13 @@ extension ProductImageCarouselTableViewCell: UICollectionViewDelegate, UICollect
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return imageUrls?.count ?? 1
+    return resizedImageUrls?.count ?? 1
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = imageCollectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ImageCollectionViewCell
     
-    if let imageUrlString = imageUrls?[indexPath.item], let imageUrl = URL(string: imageUrlString) {
+    if let imageUrlString = resizedImageUrls?[indexPath.item], let imageUrl = URL(string: imageUrlString) {
       cell.imageView.kf.setImage(with: imageUrl)
     }
     
