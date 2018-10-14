@@ -47,10 +47,20 @@ class CitiesTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
     let city = cities[indexPath.row]
     
-    cell.textLabel?.text = "\(city.count) - \(city.name)"
+    if isCitySelected(city) {
+      cell.textLabel?.text = "\(city.count) - \(city.name) - выбран"
+    } else {
+      cell.textLabel?.text = "\(city.count) - \(city.name)"
+    }
+    
     cell.textLabel?.textColor = textColor(forCity: city)
     cell.backgroundColor = cellColor(forCity: city)
+    
     return cell
+  }
+  
+  private func isCitySelected(_ city: City) -> Bool {
+    return (productController?.selectedCities.contains(where: { return $0.name == city.name }))!
   }
   
   private func textColor(forCity city: City) -> UIColor {
@@ -73,5 +83,7 @@ class CitiesTableViewController: UITableViewController {
         productController!.selectedCities.append(city)
       }
     }
+    
+    tableView.reloadRows(at: [indexPath], with: .none)
   }
 }
