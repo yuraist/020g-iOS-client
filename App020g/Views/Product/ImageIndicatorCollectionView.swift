@@ -32,7 +32,7 @@ class ImageIndicatorCollectionViewCell: UICollectionViewCell {
   override init(frame: CGRect) {
     super.init(frame: frame)
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    setWhiteBackgroundColor()
+    setClearBackgroundColor()
     addIndicatorView()
     setupIndicatorViewConstraints()
   }
@@ -76,10 +76,16 @@ class ImageIndicatorCollectionView: UICollectionView {
     setHorizontalScrollDirection()
     setClearBackgroundColor()
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    
+    addObserverForImageChanging()
   }
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  deinit {
+    removeObserver()
   }
   
   private func registerCell() {
@@ -112,6 +118,22 @@ class ImageIndicatorCollectionView: UICollectionView {
     let cell = cellForItem(at: indexPath)
     return cell
   }
+  
+  private func addObserverForImageChanging() {
+    NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedIndicator), name: .imageCellChanged, object: nil)
+  }
+  
+  private func removeObserver() {
+    NotificationCenter.default.removeObserver(self)
+  }
+  
+  @objc
+  private func changeSelectedIndicator(_ notification: Notification) {
+    if let indexPath = notification.object as? IndexPath {
+      selectedImageNumber = indexPath.item
+    }
+  }
+  
 }
 
 
@@ -122,6 +144,7 @@ extension ImageIndicatorCollectionView: UICollectionViewDelegate, UICollectionVi
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ImageIndicatorCollectionViewCell
+    cell.isSelected = indexPath.item == selectedImageNumber
     return cell
   }
   

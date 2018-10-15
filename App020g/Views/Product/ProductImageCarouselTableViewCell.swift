@@ -156,4 +156,17 @@ extension ProductImageCarouselTableViewCell: UICollectionViewDelegate, UICollect
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0
   }
+  
+  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+    if let currentCell = imageCollectionView.visibleCells.first {
+      let currentIndex = imageCollectionView.indexPath(for: currentCell)
+      NotificationCenter.default.post(name: .imageCellChanged, object: currentIndex)
+    }
+  }
+}
+
+extension Notification.Name {
+  static var imageCellChanged: Notification.Name {
+    return .init(rawValue: "ProductImageCarouserlTableViewCell.imageCellChanged")
+  }
 }
