@@ -10,8 +10,20 @@ import UIKit
 
 class ProductImageCarouselTableViewCell: UITableViewCell {
   
+  private let cellId = "imageCell"
+  private let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+  
+  lazy var imageIndicator: ImageIndicatorCollectionView? = {
+    if let numberOfImages = imageUrls?.count {
+      let imageIndicator = ImageIndicatorCollectionView(numberOfImages: numberOfImages)
+      return imageIndicator
+    }
+    return nil
+  }()
+  
   var imageUrls: [String]? {
     didSet {
+      addImageIndicatorAndSetup()
       setResizedImageUrls()
     }
   }
@@ -22,8 +34,6 @@ class ProductImageCarouselTableViewCell: UITableViewCell {
     }
   }
   
-  private let cellId = "imageCell"
-  private let imageCollectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -104,6 +114,14 @@ class ProductImageCarouselTableViewCell: UITableViewCell {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  private func addImageIndicatorAndSetup() {
+    if imageIndicator != nil {
+      addSubview(imageIndicator!)
+      addConstraints(withFormat: "H:|-10-[v0]|", views: imageIndicator!)
+      addConstraints(withFormat: "V:[v0(10)]-10-|", views: imageIndicator!)
+    }
   }
 }
 

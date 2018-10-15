@@ -59,10 +59,6 @@ class MenuBarView: UIView {
     fatalError("init(coder:) has not been implemented")
   }
   
-  private func setTranslatesAutoresizingMaskIntoConstraintsFalse() {
-    translatesAutoresizingMaskIntoConstraints = false
-  }
-  
   private func addSubviews() {
     addSubview(centerButtonView)
     addSubview(pricesButton)

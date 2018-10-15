@@ -38,9 +38,17 @@ extension UIView {
     backgroundColor = ApplicationColors.white
   }
   
+  func setClearBackgroundColor() {
+    backgroundColor = .clear
+  }
+  
   func addSubviews(_ views: UIView...) {
     for view in views {
       addSubview(view)
     }
+  }
+  
+  func setTranslatesAutoresizingMaskIntoConstraintsFalse() {
+    translatesAutoresizingMaskIntoConstraints = false
   }
 }

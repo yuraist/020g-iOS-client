@@ -17,10 +17,6 @@ class BarButton: UIButton {
     setNormalImage(image)
   }
   
-  private func setTranslatesAutoresizingMaskIntoConstraintsFalse() {
-    translatesAutoresizingMaskIntoConstraints = false
-  }
-  
   private func setTintColorWhite() {
     tintColor = ApplicationColors.white
   }
