@@ -1,5 +1,5 @@
 //
-//  MainTableViewController.swift
+//  MainViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 21/09/2018.
@@ -8,18 +8,15 @@
 
 import UIKit
 
-class MainCollectionViewController: CenterViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class MainViewController: CenterViewController {
   
   private let itemCellId = "cellId"
-  private let menuBar = MenuBarView()
-  
-  var collectionView: UICollectionView?
-  
-  var products = [[Product]]() {
-    didSet {
-      reloadCollectionView()
-    }
-  }
+  private let menuBar = BarView()
+  private lazy var categoryPagesCollectionView: CategoryPagesCollectionView = {
+    let categoryPagesCollectionView = CategoryPagesCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
+    categoryPagesCollectionView.parentViewController = self
+    return categoryPagesCollectionView
+  }()
   
   private var totalMenuHeight: CGFloat {
     return navigationControllerHeight + menuBarHeight + statusBarHeight
@@ -44,6 +41,12 @@ class MainCollectionViewController: CenterViewController, UICollectionViewDelega
   
   private var statusBarHeight: CGFloat {
     return UIApplication.shared.statusBarFrame.size.height
+  }
+  
+  var products = [[Product]]() {
+    didSet {
+//      categoryPagesCollectionView.products = products
+    }
   }
   
   override func viewDidLoad() {
@@ -82,7 +85,7 @@ class MainCollectionViewController: CenterViewController, UICollectionViewDelega
   }
   
   private func addStartingMenuBarItemIndexPath() {
-    menuBar.selectedItemIndexPath = getCurrentCellIndexPath()
+    menuBar.selectedItemIndexPath = IndexPath(item: 0, section: 0)
   }
   
   // MARK: - Setup navigation controller
@@ -94,53 +97,19 @@ class MainCollectionViewController: CenterViewController, UICollectionViewDelega
   // MARK: - Setup collection view
   
   private func setupCollectionView() {
-    createAndAddCollectionView()
-    setCollectionViewDelegateAndDataSource()
-    setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse()
+    addCategoryPagesCollectionView()
     setupCollectionViewTopConstraint()
-    setWhiteBackgroundColorForCollectionView()
-    setupCollectionViewScrollDirection()
-    setCollectionViewPagingEnabled()
-    registerCollectionViewCell()
   }
   
-  private func createAndAddCollectionView() {
-    collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    view.addSubview(collectionView!)
-  }
-  
-  private func setCollectionViewDelegateAndDataSource() {
-    collectionView?.delegate = self
-    collectionView?.dataSource = self
-  }
-  
-  private func setCollectionViewTranslatesAutoresizingMaskIntoConstraintsFalse() {
-    collectionView!.translatesAutoresizingMaskIntoConstraints = false
+  private func addCategoryPagesCollectionView() {
+    view.addSubview(categoryPagesCollectionView)
   }
   
   private func setupCollectionViewTopConstraint() {
-    collectionView!.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    collectionView!.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    collectionView!.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    collectionView!.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
-  }
-  
-  private func setWhiteBackgroundColorForCollectionView() {
-    collectionView!.backgroundColor = ApplicationColors.white
-  }
-  
-  private func setupCollectionViewScrollDirection() {
-    if let layout = collectionView?.collectionViewLayout as? UICollectionViewFlowLayout {
-      layout.scrollDirection = .horizontal
-    }
-  }
-  
-  private func setCollectionViewPagingEnabled() {
-    collectionView?.isPagingEnabled = true
-  }
-  
-  private func registerCollectionViewCell() {
-    collectionView?.register(CategoryCollectionViewCell.self, forCellWithReuseIdentifier: itemCellId)
+    categoryPagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    categoryPagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    categoryPagesCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    categoryPagesCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
   }
   
   private func fetchCategories() {
@@ -148,6 +117,7 @@ class MainCollectionViewController: CenterViewController, UICollectionViewDelega
       if success {
         if let categories = categories {
           self.passCategoriesToMenuBar(categories: categories)
+          self.passCategoriesToCategoryPagesCollectionView(categories: categories)
           self.fetchProducts(forCategory: categories[0].cat, page: 1)
         }
       }
@@ -158,33 +128,15 @@ class MainCollectionViewController: CenterViewController, UICollectionViewDelega
     menuBar.categories = categories
   }
   
+  private func passCategoriesToCategoryPagesCollectionView(categories: [Category]) {
+    categoryPagesCollectionView.categories = categories
+  }
+  
   private func fetchProducts(forCategory category: Int, page: Int) {
     ApiHandler.shared.fetchProducts(ofCategory: category, page: page) { (success, products) in
       if let products = products {
         self.products = [products]
       }
-    }
-  }
-  
-  func reloadCollectionView() {
-    DispatchQueue.main.async {
-      self.collectionView?.reloadData()
-    }
-  }
-  
-  func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-    changeMenuBarSelectedItem()
-  }
-  
-  private func changeMenuBarSelectedItem() {
-    menuBar.selectedItemIndexPath = getCurrentCellIndexPath()
-  }
-  
-  private func getCurrentCellIndexPath() -> IndexPath {
-    if let cell = collectionView?.visibleCells.first, let indexPath = collectionView?.indexPath(for: cell) {
-      return indexPath
-    } else {
-      return IndexPath(item: 0, section: 0)
     }
   }
   

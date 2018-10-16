@@ -65,7 +65,7 @@ class ContainerViewController: UIViewController {
   }
   
   private func setupMainViewController() {
-    mainController = MainCollectionViewController()
+    mainController = MainViewController()
     mainController.delegate = self
   }
   

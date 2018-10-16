@@ -1,5 +1,5 @@
 //
-//  MenuBarView.swift
+//  BarView.swift
 //  020g
 //
 //  Created by Юрий Истомин on 24/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuBarView: UIView {
+class BarView: UIView {
   
   private let cellId = "menuBarCellId"
   
@@ -48,6 +48,7 @@ class MenuBarView: UIView {
   override init(frame: CGRect) {
     super.init(frame: frame)
     
+    addObserverFromCategoryPagesCollectionView()
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
     
     addSubviews()
@@ -57,6 +58,18 @@ class MenuBarView: UIView {
   
   required init?(coder aDecoder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  deinit {
+    removeObserverFromCategoryPagesCollectionView()
+  }
+  
+  private func addObserverFromCategoryPagesCollectionView() {
+    NotificationCenter.default.addObserver(self, selector: #selector(changeSelectedCategory), name: .categoryChanged, object: nil)
+  }
+  
+  private func removeObserverFromCategoryPagesCollectionView() {
+    NotificationCenter.default.removeObserver(self)
   }
   
   private func addSubviews() {
@@ -113,7 +126,7 @@ class MenuBarView: UIView {
   }
   
   private func registerCollectionViewCell() {
-    collectionView.register(MenuBarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+    collectionView.register(BarCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
   }
   
   private func setupCollectionViewLayout() {
@@ -142,16 +155,22 @@ class MenuBarView: UIView {
   private func scrollCollectionViewToNewPosition() {
     collectionView.scrollToItem(at: selectedItemIndexPath, at: .centeredHorizontally, animated: true)
   }
-  
+ 
+  @objc
+  private func changeSelectedCategory(_ notification: Notification) {
+    if let selectedIndex = notification.object as? Int {
+      selectedItemIndexPath = IndexPath(item: selectedIndex, section: 0)
+    }
+  }
 }
 
-extension MenuBarView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+extension BarView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return categories.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! MenuBarCollectionViewCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! BarCollectionViewCell
     cell.textLabel.text = categories[indexPath.item].title
     return cell
   }

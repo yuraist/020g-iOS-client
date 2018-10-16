@@ -1,5 +1,5 @@
 //
-//  CatalogueItemCollectionViewCell.swift
+//  CatalogCollectionViewCell.swift
 //  020g
 //
 //  Created by Юрий Истомин on 24/09/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import Kingfisher
 
-class CatalogItemCollectionViewCell: UICollectionViewCell {
+class CatalogCollectionViewCell: UICollectionViewCell {
   
   var item: Product? {
     didSet {

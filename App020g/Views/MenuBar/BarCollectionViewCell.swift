@@ -1,5 +1,5 @@
 //
-//  MenuBarCollectionViewCell.swift
+//  BarCollectionViewCell.swift
 //  020g
 //
 //  Created by Юрий Истомин on 24/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MenuBarCollectionViewCell: UICollectionViewCell {
+class BarCollectionViewCell: UICollectionViewCell {
   
   let textLabel: UILabel = {
     let label = UILabel()

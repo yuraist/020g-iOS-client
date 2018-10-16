@@ -169,4 +169,8 @@ extension Notification.Name {
   static var imageCellChanged: Notification.Name {
     return .init(rawValue: "ProductImageCarouserlTableViewCell.imageCellChanged")
   }
+  
+  static var categoryChanged: Notification.Name {
+    return .init(rawValue: "CategoryPagesCollectionView.categoryChanged")
+  }
 }

@@ -24,7 +24,7 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
-  var parentViewController: UIViewController?
+  var parentViewController: MainViewController?
   
   private var currentPage = 1
   
@@ -38,7 +38,7 @@ class CatalogCollectionView: UICollectionView {
   }
   
   private func registerCell() {
-    register(CatalogItemCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
+    register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
   }
   
   private func registerDelegate() {
@@ -95,7 +95,7 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogItemCollectionViewCell
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogCollectionViewCell
     cell.item = products[indexPath.item]
     
     if indexPathIsLast(indexPath) {

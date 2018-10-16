@@ -8,16 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		331B7EC981EEF71C2F7A5532 /* Pods_App020g.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */; };
-		BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */; };
+		BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* BarView.swift */; };
 		BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */; };
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
 		BE0FF0D5216FC3C200F126BB /* CitiesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D4216FC3C200F126BB /* CitiesTableViewController.swift */; };
-		BE0FF0DD2170705C00F126BB /* App020gTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0DC2170705C00F126BB /* App020gTests.swift */; };
-		BE0FF0ED2170AA3B00F126BB /* App020gSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */; };
-		BE0FF0F52170AE4500F126BB /* App020gFakeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */; };
 		BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */; };
 		BE0FF0F92170E87600F126BB /* CenterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0F82170E87600F126BB /* CenterViewController.swift */; };
 		BE0FF0FB2174702600F126BB /* ImageIndicatorCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0FA2174702600F126BB /* ImageIndicatorCollectionView.swift */; };
+		BE0FF1032175A45700F126BB /* App020gTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF1022175A45700F126BB /* App020gTests.swift */; };
+		BE0FF10B2175A84B00F126BB /* CategoryPagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -44,11 +43,11 @@
 		BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */; };
 		BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC5612153F10800E6AF30 /* AskView.swift */; };
 		BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC563215408C500E6AF30 /* UIViewExtension.swift */; };
-		BE3D1D202159537500A6E9E4 /* MenuBarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */; };
-		BE3D1D22215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D21215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift */; };
+		BE3D1D202159537500A6E9E4 /* BarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D1F2159537500A6E9E4 /* BarCollectionViewCell.swift */; };
+		BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */; };
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
-		BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */; };
+		BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
 		BEC49823216B49140058347E /* ShopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC49822216B49140058347E /* ShopLabel.swift */; };
 		BEE57E07216C8346005C9672 /* ProductImageCarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */; };
@@ -72,14 +71,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		BE0FF0DF2170705C00F126BB /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = BE1DC51E214FA1D300E6AF30 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = BE1DC525214FA1D300E6AF30;
-			remoteInfo = 020g;
-		};
-		BE0FF0EF2170AA3B00F126BB /* PBXContainerItemProxy */ = {
+		BE0FF1052175A45700F126BB /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = BE1DC51E214FA1D300E6AF30 /* Project object */;
 			proxyType = 1;
@@ -93,22 +85,19 @@
 		5C5FD13B83585B9DE8ACB215 /* Pods-App020g.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App020g.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App020g/Pods-App020g.debug.xcconfig"; sourceTree = "<group>"; };
 		62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App020g.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A10778BD348057FFF02D613 /* Pods-App020g.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App020g.release.xcconfig"; path = "Pods/Target Support Files/Pods-App020g/Pods-App020g.release.xcconfig"; sourceTree = "<group>"; };
-		BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarView.swift; sourceTree = "<group>"; };
+		BE05AA5A21592AEE002EDF38 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE0FF0D2216F512600F126BB /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "ru-RU"; path = "ru-RU.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BE0FF0D3216F517200F126BB /* ru-RU */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = "ru-RU"; path = "ru-RU.lproj/LaunchScreen.storyboard"; sourceTree = "<group>"; };
 		BE0FF0D4216FC3C200F126BB /* CitiesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesTableViewController.swift; sourceTree = "<group>"; };
-		BE0FF0DA2170705C00F126BB /* App020gTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = App020gTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE0FF0DC2170705C00F126BB /* App020gTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gTests.swift; sourceTree = "<group>"; };
-		BE0FF0DE2170705C00F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE0FF0EA2170AA3B00F126BB /* App020gSlowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = App020gSlowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gSlowTests.swift; sourceTree = "<group>"; };
-		BE0FF0EE2170AA3B00F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gFakeTests.swift; sourceTree = "<group>"; };
 		BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomHeaderView.swift; sourceTree = "<group>"; };
 		BE0FF0F82170E87600F126BB /* CenterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewController.swift; sourceTree = "<group>"; };
 		BE0FF0FA2174702600F126BB /* ImageIndicatorCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageIndicatorCollectionView.swift; sourceTree = "<group>"; };
+		BE0FF1002175A45700F126BB /* App020gTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = App020gTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		BE0FF1022175A45700F126BB /* App020gTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App020gTests.swift; sourceTree = "<group>"; };
+		BE0FF1042175A45700F126BB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryPagesCollectionView.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -136,11 +125,11 @@
 		BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitledInputView.swift; sourceTree = "<group>"; };
 		BE1DC5612153F10800E6AF30 /* AskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskView.swift; sourceTree = "<group>"; };
 		BE1DC563215408C500E6AF30 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
-		BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarCollectionViewCell.swift; sourceTree = "<group>"; };
-		BE3D1D21215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE3D1D1F2159537500A6E9E4 /* BarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
-		BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainCollectionViewController.swift; sourceTree = "<group>"; };
+		BEA2FFAA215500C000E5C6FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 		BEC49822216B49140058347E /* ShopLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopLabel.swift; sourceTree = "<group>"; };
 		BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCarouselTableViewCell.swift; sourceTree = "<group>"; };
@@ -166,14 +155,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		BE0FF0D72170705C00F126BB /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE0FF0E72170AA3B00F126BB /* Frameworks */ = {
+		BE0FF0FD2175A45700F126BB /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -200,31 +182,20 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		BE0FF0DB2170705C00F126BB /* 020gTests */ = {
+		BE0FF1012175A45700F126BB /* App020gTests */ = {
 			isa = PBXGroup;
 			children = (
-				BE0FF0DC2170705C00F126BB /* App020gTests.swift */,
-				BE0FF0DE2170705C00F126BB /* Info.plist */,
+				BE0FF1022175A45700F126BB /* App020gTests.swift */,
+				BE0FF1042175A45700F126BB /* Info.plist */,
 			);
-			path = 020gTests;
-			sourceTree = "<group>";
-		};
-		BE0FF0EB2170AA3B00F126BB /* App020gSlowTests */ = {
-			isa = PBXGroup;
-			children = (
-				BE0FF0EC2170AA3B00F126BB /* App020gSlowTests.swift */,
-				BE0FF0F42170AE4500F126BB /* App020gFakeTests.swift */,
-				BE0FF0EE2170AA3B00F126BB /* Info.plist */,
-			);
-			path = App020gSlowTests;
+			path = App020gTests;
 			sourceTree = "<group>";
 		};
 		BE1DC51D214FA1D300E6AF30 = {
 			isa = PBXGroup;
 			children = (
 				BE1DC528214FA1D300E6AF30 /* App020g */,
-				BE0FF0DB2170705C00F126BB /* 020gTests */,
-				BE0FF0EB2170AA3B00F126BB /* App020gSlowTests */,
+				BE0FF1012175A45700F126BB /* App020gTests */,
 				BE1DC527214FA1D300E6AF30 /* Products */,
 				C37F5F096A8D7CAB6E88F2B9 /* Pods */,
 				BB8F4453BBE381C4A4AA5608 /* Frameworks */,
@@ -235,8 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1DC526214FA1D300E6AF30 /* App020g.app */,
-				BE0FF0DA2170705C00F126BB /* App020gTests.xctest */,
-				BE0FF0EA2170AA3B00F126BB /* App020gSlowTests.xctest */,
+				BE0FF1002175A45700F126BB /* App020gTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -277,10 +247,11 @@
 			isa = PBXGroup;
 			children = (
 				BEF1B98B21614EBA00348A3D /* Delegates */,
+				BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */,
 				BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */,
 				BE0FF0F82170E87600F126BB /* CenterViewController.swift */,
-				BEA2FFAA215500C000E5C6FA /* MainCollectionViewController.swift */,
-				BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */,
+				BEA2FFAA215500C000E5C6FA /* MainViewController.swift */,
+				BEF6F696215AA816000E4BCB /* ShopsCollectionViewController.swift */,
 				BE1DC543214FAA3900E6AF30 /* AuthorizationViewController.swift */,
 				BE1DC547214FAADC00E6AF30 /* ForgotPasswordViewController.swift */,
 				BE1DC545214FAA6700E6AF30 /* AskViewController.swift */,
@@ -291,7 +262,6 @@
 				BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */,
 				BE0FF0D4216FC3C200F126BB /* CitiesTableViewController.swift */,
 				BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */,
-				BEF6F696215AA816000E4BCB /* ShopsCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -360,8 +330,8 @@
 		BEE57E0D216C90A9005C9672 /* MenuBar */ = {
 			isa = PBXGroup;
 			children = (
-				BE05AA5A21592AEE002EDF38 /* MenuBarView.swift */,
-				BE3D1D1F2159537500A6E9E4 /* MenuBarCollectionViewCell.swift */,
+				BE05AA5A21592AEE002EDF38 /* BarView.swift */,
+				BE3D1D1F2159537500A6E9E4 /* BarCollectionViewCell.swift */,
 				BE19008A2165C163005069C9 /* SelectedCellLineView.swift */,
 			);
 			path = MenuBar;
@@ -379,8 +349,9 @@
 		BEE57E0F216C9113005C9672 /* Catalog */ = {
 			isa = PBXGroup;
 			children = (
-				BE3D1D21215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift */,
 				BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */,
+				BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */,
+				BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */,
 				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
 			);
 			path = Catalog;
@@ -400,12 +371,12 @@
 			children = (
 				BEE57E08216C9017005C9672 /* ImageCollectionViewCell.swift */,
 				BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */,
+				BE0FF0FA2174702600F126BB /* ImageIndicatorCollectionView.swift */,
 				BEE57E12216CB711005C9672 /* ProductPriceCell.swift */,
 				BEE57E14216CE3BE005C9672 /* ProductDetailCell.swift */,
 				BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */,
 				BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */,
 				BE0FF0F62170C6DF00F126BB /* CustomHeaderView.swift */,
-				BE0FF0FA2174702600F126BB /* ImageIndicatorCollectionView.swift */,
 			);
 			path = Product;
 			sourceTree = "<group>";
@@ -441,40 +412,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		BE0FF0D92170705C00F126BB /* App020gTests */ = {
+		BE0FF0FF2175A45700F126BB /* App020gTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = BE0FF0E12170705C00F126BB /* Build configuration list for PBXNativeTarget "App020gTests" */;
+			buildConfigurationList = BE0FF1072175A45700F126BB /* Build configuration list for PBXNativeTarget "App020gTests" */;
 			buildPhases = (
-				BE0FF0D62170705C00F126BB /* Sources */,
-				BE0FF0D72170705C00F126BB /* Frameworks */,
-				BE0FF0D82170705C00F126BB /* Resources */,
+				BE0FF0FC2175A45700F126BB /* Sources */,
+				BE0FF0FD2175A45700F126BB /* Frameworks */,
+				BE0FF0FE2175A45700F126BB /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				BE0FF0E02170705C00F126BB /* PBXTargetDependency */,
+				BE0FF1062175A45700F126BB /* PBXTargetDependency */,
 			);
 			name = App020gTests;
-			productName = 020gTests;
-			productReference = BE0FF0DA2170705C00F126BB /* App020gTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		BE0FF0E92170AA3B00F126BB /* App020gSlowTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = BE0FF0F12170AA3B00F126BB /* Build configuration list for PBXNativeTarget "App020gSlowTests" */;
-			buildPhases = (
-				BE0FF0E62170AA3B00F126BB /* Sources */,
-				BE0FF0E72170AA3B00F126BB /* Frameworks */,
-				BE0FF0E82170AA3B00F126BB /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				BE0FF0F02170AA3B00F126BB /* PBXTargetDependency */,
-			);
-			name = App020gSlowTests;
-			productName = App020gSlowTests;
-			productReference = BE0FF0EA2170AA3B00F126BB /* App020gSlowTests.xctest */;
+			productName = App020gTests;
+			productReference = BE0FF1002175A45700F126BB /* App020gTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		BE1DC525214FA1D300E6AF30 /* App020g */ = {
@@ -506,11 +459,7 @@
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = "Юрий Истомин";
 				TargetAttributes = {
-					BE0FF0D92170705C00F126BB = {
-						CreatedOnToolsVersion = 10.0;
-						TestTargetID = BE1DC525214FA1D300E6AF30;
-					};
-					BE0FF0E92170AA3B00F126BB = {
+					BE0FF0FF2175A45700F126BB = {
 						CreatedOnToolsVersion = 10.0;
 						TestTargetID = BE1DC525214FA1D300E6AF30;
 					};
@@ -532,21 +481,13 @@
 			projectRoot = "";
 			targets = (
 				BE1DC525214FA1D300E6AF30 /* App020g */,
-				BE0FF0D92170705C00F126BB /* App020gTests */,
-				BE0FF0E92170AA3B00F126BB /* App020gSlowTests */,
+				BE0FF0FF2175A45700F126BB /* App020gTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		BE0FF0D82170705C00F126BB /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE0FF0E82170AA3B00F126BB /* Resources */ = {
+		BE0FF0FE2175A45700F126BB /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -604,20 +545,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		BE0FF0D62170705C00F126BB /* Sources */ = {
+		BE0FF0FC2175A45700F126BB /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BE0FF0DD2170705C00F126BB /* App020gTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		BE0FF0E62170AA3B00F126BB /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				BE0FF0ED2170AA3B00F126BB /* App020gSlowTests.swift in Sources */,
-				BE0FF0F52170AE4500F126BB /* App020gFakeTests.swift in Sources */,
+				BE0FF1032175A45700F126BB /* App020gTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -634,16 +566,17 @@
 				BEF6F69D215B9378000E4BCB /* Category.swift in Sources */,
 				BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */,
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
-				BEA2FFAB215500C000E5C6FA /* MainCollectionViewController.swift in Sources */,
+				BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */,
 				BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */,
 				BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
+				BE0FF10B2175A84B00F126BB /* CategoryPagesCollectionView.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
 				BEF6F69F215CC144000E4BCB /* Product.swift in Sources */,
-				BE3D1D22215954DD00A6E9E4 /* CatalogItemCollectionViewCell.swift in Sources */,
+				BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
-				BE05AA5B21592AEE002EDF38 /* MenuBarView.swift in Sources */,
+				BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */,
 				BE0FF0F92170E87600F126BB /* CenterViewController.swift in Sources */,
 				BEF1B98A215F69AB00348A3D /* UIImageViewExtension.swift in Sources */,
 				BE1DC548214FAADC00E6AF30 /* ForgotPasswordViewController.swift in Sources */,
@@ -655,7 +588,7 @@
 				BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */,
 				BE0FF0D5216FC3C200F126BB /* CitiesTableViewController.swift in Sources */,
 				BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */,
-				BE3D1D202159537500A6E9E4 /* MenuBarCollectionViewCell.swift in Sources */,
+				BE3D1D202159537500A6E9E4 /* BarCollectionViewCell.swift in Sources */,
 				BEF1B98D2162088400348A3D /* BarButton.swift in Sources */,
 				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
 				BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */,
@@ -687,15 +620,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		BE0FF0E02170705C00F126BB /* PBXTargetDependency */ = {
+		BE0FF1062175A45700F126BB /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = BE1DC525214FA1D300E6AF30 /* App020g */;
-			targetProxy = BE0FF0DF2170705C00F126BB /* PBXContainerItemProxy */;
-		};
-		BE0FF0F02170AA3B00F126BB /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = BE1DC525214FA1D300E6AF30 /* App020g */;
-			targetProxy = BE0FF0EF2170AA3B00F126BB /* PBXContainerItemProxy */;
+			targetProxy = BE0FF1052175A45700F126BB /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -712,19 +640,19 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		BE0FF0E22170705C00F126BB /* Debug */ = {
+		BE0FF1082175A45700F126BB /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N2HCJ99WYH;
-				INFOPLIST_FILE = 020gTests/Info.plist;
+				INFOPLIST_FILE = App020gTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yuraist.-20gTests";
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuraist.App020gTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -732,59 +660,19 @@
 			};
 			name = Debug;
 		};
-		BE0FF0E32170705C00F126BB /* Release */ = {
+		BE0FF1092175A45700F126BB /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = N2HCJ99WYH;
-				INFOPLIST_FILE = 020gTests/Info.plist;
+				INFOPLIST_FILE = App020gTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 					"@loader_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "com.yuraist.-20gTests";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App020g.app/App020g";
-			};
-			name = Release;
-		};
-		BE0FF0F22170AA3B00F126BB /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N2HCJ99WYH;
-				INFOPLIST_FILE = App020gSlowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuraist.App020gSlowTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/App020g.app/App020g";
-			};
-			name = Debug;
-		};
-		BE0FF0F32170AA3B00F126BB /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = N2HCJ99WYH;
-				INFOPLIST_FILE = App020gSlowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yuraist.App020gSlowTests;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuraist.App020gTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -956,20 +844,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		BE0FF0E12170705C00F126BB /* Build configuration list for PBXNativeTarget "App020gTests" */ = {
+		BE0FF1072175A45700F126BB /* Build configuration list for PBXNativeTarget "App020gTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				BE0FF0E22170705C00F126BB /* Debug */,
-				BE0FF0E32170705C00F126BB /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		BE0FF0F12170AA3B00F126BB /* Build configuration list for PBXNativeTarget "App020gSlowTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				BE0FF0F22170AA3B00F126BB /* Debug */,
-				BE0FF0F32170AA3B00F126BB /* Release */,
+				BE0FF1082175A45700F126BB /* Debug */,
+				BE0FF1092175A45700F126BB /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
