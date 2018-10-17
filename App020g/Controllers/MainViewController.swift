@@ -12,6 +12,7 @@ class MainViewController: CenterViewController {
   
   private let itemCellId = "cellId"
   private let menuBar = BarView()
+  
   private lazy var categoryPagesCollectionView: CategoryPagesCollectionView = {
     let categoryPagesCollectionView = CategoryPagesCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     categoryPagesCollectionView.parentViewController = self
@@ -43,18 +44,13 @@ class MainViewController: CenterViewController {
     return UIApplication.shared.statusBarFrame.size.height
   }
   
-  var products = [[Product]]() {
-    didSet {
-//      categoryPagesCollectionView.products = products
-    }
-  }
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
     setupCollectionView()
     fetchCatalogKeysAndCategories()
     setupMenuBar()
+    addCategoryPagesCollectionViewToMenuBarProperty()
     setNavigationItemTitle()
   }
   
@@ -88,6 +84,10 @@ class MainViewController: CenterViewController {
     menuBar.selectedItemIndexPath = IndexPath(item: 0, section: 0)
   }
   
+  private func addCategoryPagesCollectionViewToMenuBarProperty() {
+    menuBar.catalogCollectionView = categoryPagesCollectionView
+  }
+  
   // MARK: - Setup navigation controller
   
   private func setNavigationItemTitle() {
@@ -118,7 +118,6 @@ class MainViewController: CenterViewController {
         if let categories = categories {
           self.passCategoriesToMenuBar(categories: categories)
           self.passCategoriesToCategoryPagesCollectionView(categories: categories)
-          self.fetchProducts(forCategory: categories[0].cat, page: 1)
         }
       }
     }
@@ -132,14 +131,6 @@ class MainViewController: CenterViewController {
     categoryPagesCollectionView.categories = categories
   }
   
-  private func fetchProducts(forCategory category: Int, page: Int) {
-    ApiHandler.shared.fetchProducts(ofCategory: category, page: page) { (success, products) in
-      if let products = products {
-        self.products = [products]
-      }
-    }
-  }
-  
   // MARK: - UICollectionViewDataSource
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -148,9 +139,10 @@ class MainViewController: CenterViewController {
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: itemCellId, for: indexPath) as! CategoryCollectionViewCell
-    menuBar.catalogCollectionView = collectionView
+    
     cell.catalogCollectionView.category = menuBar.categories[indexPath.item]
     cell.catalogCollectionView.parentViewController = self
+    
     return cell
   }
   

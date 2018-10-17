@@ -14,7 +14,7 @@ class BarView: UIView {
   
   let pricesButton = StandardButton(title: "Каталог цен")
   
-  var catalogCollectionView: UICollectionView?
+  var catalogCollectionView: CategoryPagesCollectionView?
   var height: CGFloat { return frame.size.height }
   
   var selectedItemIndexPath = IndexPath(item: 0, section: 0) {
