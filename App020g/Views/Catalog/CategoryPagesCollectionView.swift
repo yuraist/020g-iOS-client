@@ -76,12 +76,16 @@ class CategoryPagesCollectionView: UICollectionView {
     let categoryIndex = getCurrentCategoryIndex()
     NotificationCenter.default.post(name: .categoryChanged, object: categoryIndex)
   }
-  
+ 
   private func getCurrentCategoryIndex() -> Int {
     if let cell = visibleCells.first, let indexPath = indexPath(for: cell) {
       return indexPath.item
     }
     return 0
+  }
+  
+  private func getCurrentVisibleCell() -> CategoryCollectionViewCell? {
+    return visibleCells.first as? CategoryCollectionViewCell
   }
 }
 
@@ -92,8 +96,10 @@ extension CategoryPagesCollectionView: UICollectionViewDelegateFlowLayout, UICol
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryCollectionViewCell
+    
     cell.catalogCollectionView.category = categories[indexPath.item]
     cell.catalogCollectionView.parentViewController = parentViewController
+    
     return cell
   }
   

@@ -15,6 +15,7 @@ class CategoryCollectionViewCell: UICollectionViewCell {
       catalogCollectionView.products = products
     }
   }
+  
   let catalogCollectionView = CatalogCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   
   override init(frame: CGRect) {

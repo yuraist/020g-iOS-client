@@ -13,6 +13,8 @@ class MainViewController: CenterViewController {
   private let itemCellId = "cellId"
   private let menuBar = BarView()
   
+  var catalogLastIndecies = [Int: IndexPath]()
+  
   private lazy var categoryPagesCollectionView: CategoryPagesCollectionView = {
     let categoryPagesCollectionView = CategoryPagesCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
     categoryPagesCollectionView.parentViewController = self
