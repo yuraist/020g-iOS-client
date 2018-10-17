@@ -10,13 +10,15 @@ import Foundation
 
 struct CatalogCategory: Codable {
   var news: String
-  var categoryId: String
-  var categoryName: String
+  var id: String
+  var name: String
+  var count: String
   
   enum CodingKeys: String, CodingKey {
     case news
-    case categoryId = "cat_id"
-    case categoryName = "cat_name"
+    case id = "cat_id"
+    case name = "cat_name"
+    case count = "prod_cnt"
   }
 }
 

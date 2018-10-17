@@ -20,6 +20,7 @@
 		BE0FF10D2177212100F126BB /* CatalogCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF10C2177212100F126BB /* CatalogCategory.swift */; };
 		BE0FF10F217723EC00F126BB /* ApiHandlerSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF10E217723EC00F126BB /* ApiHandlerSlowTests.swift */; };
 		BE0FF11121772FA900F126BB /* CatalogTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF11021772FA900F126BB /* CatalogTree.swift */; };
+		BE0FF1152177476C00F126BB /* CatalogTreeBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF1142177476C00F126BB /* CatalogTreeBaseCell.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -104,6 +105,7 @@
 		BE0FF10C2177212100F126BB /* CatalogCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCategory.swift; sourceTree = "<group>"; };
 		BE0FF10E217723EC00F126BB /* ApiHandlerSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandlerSlowTests.swift; sourceTree = "<group>"; };
 		BE0FF11021772FA900F126BB /* CatalogTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTree.swift; sourceTree = "<group>"; };
+		BE0FF1142177476C00F126BB /* CatalogTreeBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTreeBaseCell.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -196,6 +198,14 @@
 				BE0FF1042175A45700F126BB /* Info.plist */,
 			);
 			path = App020gTests;
+			sourceTree = "<group>";
+		};
+		BE0FF1132177475300F126BB /* CatalogTree */ = {
+			isa = PBXGroup;
+			children = (
+				BE0FF1142177476C00F126BB /* CatalogTreeBaseCell.swift */,
+			);
+			path = CatalogTree;
 			sourceTree = "<group>";
 		};
 		BE1DC51D214FA1D300E6AF30 = {
@@ -291,6 +301,7 @@
 			isa = PBXGroup;
 			children = (
 				BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */,
+				BE0FF1132177475300F126BB /* CatalogTree */,
 				BEE57E0B216C9055005C9672 /* InputContainers */,
 				BEE57E0C216C9071005C9672 /* CustomInputs */,
 				BEE57E0D216C90A9005C9672 /* MenuBar */,
@@ -585,6 +596,7 @@
 				BEF6F69F215CC144000E4BCB /* Product.swift in Sources */,
 				BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */,
 				BE0FF10D2177212100F126BB /* CatalogCategory.swift in Sources */,
+				BE0FF1152177476C00F126BB /* CatalogTreeBaseCell.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,
 				BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */,

@@ -54,6 +54,7 @@ class MainViewController: CenterViewController {
     setupMenuBar()
     addCategoryPagesCollectionViewToMenuBarProperty()
     setNavigationItemTitle()
+    setMenuBarButtonAction()
   }
   
   private func fetchCatalogKeysAndCategories() {
@@ -131,6 +132,16 @@ class MainViewController: CenterViewController {
   
   private func passCategoriesToCategoryPagesCollectionView(categories: [Category]) {
     categoryPagesCollectionView.categories = categories
+  }
+  
+  private func setMenuBarButtonAction() {
+    menuBar.pricesButton.addTarget(self, action: #selector(showCatalogTree), for: .touchUpInside)
+  }
+  
+  @objc
+  private func showCatalogTree() {
+    let catalogTreeController = CatalogTreeTableViewController()
+    show(catalogTreeController, sender: self)
   }
   
   // MARK: - UICollectionViewDataSource
