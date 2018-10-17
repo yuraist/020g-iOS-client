@@ -261,9 +261,37 @@ class ApiHandler {
           print(err)
           completion?(false, nil)
         }
+      } else {
+        completion?(false, nil)
       }
     }
     
     dataTask.resume()
   }
+  
+  func fetchCatalogTree(byCategory cat: Int, completion: ((Bool, CatalogTree?) -> Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(false, nil)
+      return
+    }
+    
+    let queryItems = ["token": token, "cat": "\(cat)", "appname": appName]
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get_tree_by_catalog", queryItems: queryItems, method: .get) { (data, _, _) in
+      if let jsonData = data {
+        do {
+        let tree = try self.decodeObject(CatalogTree.self, from: jsonData)
+        completion?(true, tree)
+        } catch let error {
+          print(error)
+          completion?(false, nil)
+        }
+      } else {
+        completion?(false, nil)
+      }
+    }
+    
+    dataTask.resume()
+  }
+  
 }

@@ -30,4 +30,22 @@ class ApiHandlerSlowTests: XCTestCase {
     XCTAssertNotNil(categoriesObject)
   }
   
+  func testFetchCatalogTreeByCategories() {
+    // given
+    let promise = expectation(description: "Get subcategories")
+    let handler = ApiHandler.shared
+    var catalogTree: CatalogTree?
+    
+    // when
+    handler.fetchCatalogTree(byCategory: 5) { (success, tree) in
+      if let tree = tree {
+        promise.fulfill()
+        catalogTree = tree
+      }
+    }
+    
+    // then
+    waitForExpectations(timeout: 5, handler: nil)
+    XCTAssertNotNil(catalogTree)
+  }
 }
