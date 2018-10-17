@@ -20,8 +20,18 @@ class CatalogTreeTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setNavagationTitle()
+    removeBackButtonTitle()
     registerCell()
     fetchCatalogOfCategories()
+  }
+  
+  private func setNavagationTitle() {
+    navigationItem.title = "Категории"
+  }
+  
+  private func removeBackButtonTitle() {
+    navigationItem.backBarButtonItem?.title = ""
   }
   
   private func registerCell() {
@@ -54,5 +64,11 @@ class CatalogTreeTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
+  }
+  
+  override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+    let destinationContrller = SecondCatalogTreeTableViewController(withCategory: categories[indexPath.row])
+    show(destinationContrller, sender: self)
   }
 }
