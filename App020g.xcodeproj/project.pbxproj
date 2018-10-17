@@ -21,6 +21,7 @@
 		BE0FF10F217723EC00F126BB /* ApiHandlerSlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF10E217723EC00F126BB /* ApiHandlerSlowTests.swift */; };
 		BE0FF11121772FA900F126BB /* CatalogTree.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF11021772FA900F126BB /* CatalogTree.swift */; };
 		BE0FF1152177476C00F126BB /* CatalogTreeBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF1142177476C00F126BB /* CatalogTreeBaseCell.swift */; };
+		BE0FF1172177596F00F126BB /* SecondCatalogTreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF1162177596F00F126BB /* SecondCatalogTreeCell.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -106,6 +107,7 @@
 		BE0FF10E217723EC00F126BB /* ApiHandlerSlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandlerSlowTests.swift; sourceTree = "<group>"; };
 		BE0FF11021772FA900F126BB /* CatalogTree.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTree.swift; sourceTree = "<group>"; };
 		BE0FF1142177476C00F126BB /* CatalogTreeBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogTreeBaseCell.swift; sourceTree = "<group>"; };
+		BE0FF1162177596F00F126BB /* SecondCatalogTreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCatalogTreeCell.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 			isa = PBXGroup;
 			children = (
 				BE0FF1142177476C00F126BB /* CatalogTreeBaseCell.swift */,
+				BE0FF1162177596F00F126BB /* SecondCatalogTreeCell.swift */,
 			);
 			path = CatalogTree;
 			sourceTree = "<group>";
@@ -606,6 +609,7 @@
 				BE1DC5622153F10800E6AF30 /* AskView.swift in Sources */,
 				BEE57E09216C9017005C9672 /* ImageCollectionViewCell.swift in Sources */,
 				BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */,
+				BE0FF1172177596F00F126BB /* SecondCatalogTreeCell.swift in Sources */,
 				BE1DC54C214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift in Sources */,
 				BE0FF11121772FA900F126BB /* CatalogTree.swift in Sources */,
 				BEF1B991216208EA00348A3D /* CategoryCollectionViewCell.swift in Sources */,

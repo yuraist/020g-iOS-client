@@ -10,7 +10,8 @@ import UIKit
 
 class SecondCatalogTreeTableViewController: UITableViewController {
 
-  private let cellId = "cell"
+  private let secondCell = "second"
+  private let baseCell = "base"
   
   var parentCategory: CatalogCategory
   
@@ -34,6 +35,7 @@ class SecondCatalogTreeTableViewController: UITableViewController {
     setNavagationTitle()
     removeBackButtonTitle()
     registerCell()
+    fetchCategoriesTree()
   }
   
   private func setNavagationTitle() {
@@ -45,7 +47,16 @@ class SecondCatalogTreeTableViewController: UITableViewController {
   }
   
   private func registerCell() {
-    
+    tableView.register(SecondCatalogTreeCell.self, forCellReuseIdentifier: secondCell)
+    tableView.register(CatalogTreeBaseCell.self, forCellReuseIdentifier: baseCell)
+  }
+  
+  private func fetchCategoriesTree() {
+    ApiHandler.shared.fetchCatalogTree(byCategory: parentCategory.id) { (success, tree) in
+      if let tree = tree {
+        self.catalogTree = tree
+      }
+    }
   }
   
   private func reloadTableView() {
@@ -59,7 +70,8 @@ class SecondCatalogTreeTableViewController: UITableViewController {
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: secondCell, for: indexPath) as! SecondCatalogTreeCell
+    cell.category = catalogTree?.tree[indexPath.row]
     return cell
   }
   

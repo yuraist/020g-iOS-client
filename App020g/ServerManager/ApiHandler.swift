@@ -269,7 +269,7 @@ class ApiHandler {
     dataTask.resume()
   }
   
-  func fetchCatalogTree(byCategory cat: Int, completion: ((Bool, CatalogTree?) -> Void)?) {
+  func fetchCatalogTree(byCategory cat: String, completion: ((Bool, CatalogTree?) -> Void)?) {
     guard let token = ApiKeys.token else {
       completion?(false, nil)
       return

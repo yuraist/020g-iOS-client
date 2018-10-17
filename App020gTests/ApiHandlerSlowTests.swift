@@ -37,7 +37,7 @@ class ApiHandlerSlowTests: XCTestCase {
     var catalogTree: CatalogTree?
     
     // when
-    handler.fetchCatalogTree(byCategory: 5) { (success, tree) in
+    handler.fetchCatalogTree(byCategory: "5") { (success, tree) in
       if let tree = tree {
         promise.fulfill()
         catalogTree = tree
