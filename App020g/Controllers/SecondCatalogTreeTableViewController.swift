@@ -91,9 +91,9 @@ class SecondCatalogTreeTableViewController: UITableViewController {
     
     if let category = catalogTree?.tree[indexPath.row] {
       if category.hasTree && !category.isShowingTree {
-        showTree()
+        showTree(withCategory: category, after: indexPath.row)
       } else if category.hasTree && category.isShowingTree {
-        hideTree()
+        hideTree(withCategory: category, after: indexPath.row)
       } else {
         showCatalog(withCategory: category)
       }
@@ -104,12 +104,25 @@ class SecondCatalogTreeTableViewController: UITableViewController {
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
-  private func showTree() {
-    print("showTree")
+  private func showTree(withCategory category: CatalogTreeChildCategory, after index: Int) {
+    let newIndex = index + 1
+    catalogTree?.tree[index].isShowingTree = true
+    catalogTree?.tree.insert(contentsOf: category.tree!, at: newIndex)
   }
   
-  private func hideTree() {
-    print("hideTree")
+  private func hideTree(withCategory category: CatalogTreeChildCategory, after index: Int) {
+    catalogTree!.tree[index].isShowingTree = false
+    removeCategories(forParent: category)
+  }
+  
+  private func removeCategories(forParent category: CatalogTreeChildCategory) {
+    for child in catalogTree!.tree {
+      if category.tree!.contains(where: { return $0.name == child.name }) {
+        if let index = catalogTree!.tree.firstIndex(where: { return $0.name == child.name }) {
+          catalogTree!.tree.remove(at: index)
+        }
+      }
+    }
   }
   
   private func showCatalog(withCategory category: CatalogTreeChildCategory) {
