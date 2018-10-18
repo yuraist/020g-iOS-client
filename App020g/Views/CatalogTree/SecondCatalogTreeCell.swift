@@ -30,6 +30,12 @@ class SecondCatalogTreeCell: UITableViewCell {
     return imageView
   }()
   
+  var isExpanded = false {
+    didSet {
+      switchPlusMinusIcon()
+    }
+  }
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -57,5 +63,21 @@ class SecondCatalogTreeCell: UITableViewCell {
     plusMinusIcon.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     categoryLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     categoryLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+  }
+  
+  private func switchPlusMinusIcon() {
+    if isExpanded {
+      plusMinusIcon.image = getMinusImage()
+    } else {
+      plusMinusIcon.image = getPlusImage()
+    }
+  }
+  
+  private func getPlusImage() -> UIImage {
+    return #imageLiteral(resourceName: "plus").withRenderingMode(.alwaysTemplate)
+  }
+  
+  private func getMinusImage() -> UIImage {
+    return  #imageLiteral(resourceName: "minus").withRenderingMode(.alwaysTemplate)
   }
 }

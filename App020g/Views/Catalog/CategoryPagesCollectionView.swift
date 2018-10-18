@@ -72,6 +72,12 @@ class CategoryPagesCollectionView: UICollectionView {
     sendNotificationAboutChangingCategory()
   }
   
+  func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
+    if let currentCell = getCurrentVisibleCell() {
+      print(currentCell.catalogCollectionView.indexPathsForVisibleItems)
+    }
+  }
+  
   private func sendNotificationAboutChangingCategory() {
     let categoryIndex = getCurrentCategoryIndex()
     NotificationCenter.default.post(name: .categoryChanged, object: categoryIndex)
