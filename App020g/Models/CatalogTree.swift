@@ -31,6 +31,14 @@ struct CatalogTreeChildCategory: Codable {
   var news: Int
   var tree: [CatalogTreeChildCategory]?
   
+  var isShowingTree = false
+  var hasTree: Bool {
+    if let tree = tree, tree.count > 0 {
+      return true
+    }
+    return false
+  }
+  
   enum CodingKeys: String, CodingKey {
     case id = "i"
     case name = "n"

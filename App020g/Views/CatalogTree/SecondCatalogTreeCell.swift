@@ -30,12 +30,6 @@ class SecondCatalogTreeCell: UITableViewCell {
     return imageView
   }()
   
-  var isExpanded = false {
-    didSet {
-      switchPlusMinusIcon()
-    }
-  }
-  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
@@ -48,6 +42,7 @@ class SecondCatalogTreeCell: UITableViewCell {
   }
   
   private func clearCell() {
+    switchPlusMinusIcon()
     categoryLabel.text = ""
   }
   
@@ -66,7 +61,7 @@ class SecondCatalogTreeCell: UITableViewCell {
   }
   
   private func switchPlusMinusIcon() {
-    if isExpanded {
+    if category?.isShowingTree ?? false {
       plusMinusIcon.image = getMinusImage()
     } else {
       plusMinusIcon.image = getPlusImage()

@@ -17,6 +17,13 @@ class CatalogTreeBaseCell: UITableViewCell {
     }
   }
   
+  var childCategory: CatalogTreeChildCategory? {
+    didSet {
+      clearCell()
+      setupCell()
+    }
+  }
+  
   private lazy var categoryLabel: UILabel = {
     let label = UILabel()
     label.font = UIFont.systemFont(ofSize: 17, weight: .light)
@@ -66,6 +73,9 @@ class CatalogTreeBaseCell: UITableViewCell {
   
   private func setupCell() {
     if let category = category {
+      categoryLabel.text = category.name
+      countBage.text = " \(category.count) "
+    } else if let category = childCategory {
       categoryLabel.text = category.name
       countBage.text = " \(category.count) "
     }
