@@ -49,10 +49,6 @@ class CatalogCollectionView: UICollectionView {
     dataSource = self
   }
   
-  private func setGrayBackgroundColor() {
-    backgroundColor = ApplicationColors.gray
-  }
-  
   private func setupTranslatesAutoresizingMaskIntoConstraintsFalse() {
     translatesAutoresizingMaskIntoConstraints = false
   }

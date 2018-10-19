@@ -138,10 +138,6 @@ class ShopCollectionViewCell: UICollectionViewCell {
     setupConstraintsOfGeneralSubviews()
   }
   
-  private func setGrayBackgroundColor() {
-    backgroundColor = ApplicationColors.gray
-  }
-  
   private func addGeneralSubviews() {
     addSubview(headerView)
     headerView.addSubview(shopImageView)

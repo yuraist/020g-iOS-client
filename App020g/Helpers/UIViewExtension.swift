@@ -38,6 +38,10 @@ extension UIView {
     backgroundColor = ApplicationColors.white
   }
   
+  func setGrayBackgroundColor() {
+    backgroundColor = ApplicationColors.gray
+  }
+  
   func setClearBackgroundColor() {
     backgroundColor = .clear
   }

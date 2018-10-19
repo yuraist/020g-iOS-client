@@ -35,6 +35,7 @@ class SecondCatalogTreeCell: UITableViewCell {
     
     addSubviews(categoryLabel, plusMinusIcon)
     setConstraintsForSubviews()
+    setGrayBackgroundColor()
   }
   
   required init?(coder aDecoder: NSCoder) {
