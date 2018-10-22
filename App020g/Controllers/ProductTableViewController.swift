@@ -7,13 +7,12 @@
 //
 
 import UIKit
+import SafariServices
 
 class ProductTableViewController: UITableViewController {
   
   var selectedCities = [City]() {
     didSet {
-//      let indexPath = IndexPath(row: 2, section: 0)
-//      tableView.reloadRows(at: [indexPath], with: .none)
       tableView.reloadData()
     }
   }
@@ -22,6 +21,9 @@ class ProductTableViewController: UITableViewController {
     if selectedCities.count > 0 {
       let prices = response.product.prices.filter { (price) -> Bool in
         return selectedCities.contains(where: { return $0.name == price.city})
+      }
+      prices.forEach { (price) in
+        print(price.city)
       }
       return prices
     }
@@ -65,7 +67,7 @@ class ProductTableViewController: UITableViewController {
   }
   
   private func setBackBarButtonItem() {
-    navigationItem.backBarButtonItem?.title = ""
+    navigationController?.navigationBar.backItem?.title = ""
   }
   
   private func registerCells() {
@@ -190,7 +192,13 @@ class ProductTableViewController: UITableViewController {
   
   private func cellForSecondSection(indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: priceCellId, for: indexPath) as! ProductPriceCell
-    cell.price = response.product.prices[indexPath.row]
+    
+    if offersForSelectedCities.count > 0 {
+      cell.price = offersForSelectedCities[indexPath.row]
+    } else {
+      cell.price = response.product.prices[indexPath.row]
+    }
+    
     return cell
   }
   
@@ -243,6 +251,14 @@ class ProductTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if indexPath == IndexPath(row: 2, section: 0) {
       showCitiesTableViewController()
+    } else if indexPath.section == 1 {
+      if offersForSelectedCities.count > 0 {
+        let price = offersForSelectedCities[indexPath.row]
+        showShopWebview(price)
+      } else {
+        let price = response.product.prices[indexPath.row]
+        showShopWebview(price)
+      }
     }
   }
   
@@ -251,6 +267,13 @@ class ProductTableViewController: UITableViewController {
     citiesTableViewController.cities = getValidCities()
     citiesTableViewController.productController = self
     show(citiesTableViewController, sender: self)
+  }
+  
+  private func showShopWebview(_ price: Price) {
+    if let shopUrl = URL(string: "http://020g.ru/go?id=\(price.id)") {
+      let safariViewController = SFSafariViewController(url: shopUrl)
+      present(safariViewController, animated: true, completion: nil)
+    }
   }
   
   private func getValidCities() -> [City] {

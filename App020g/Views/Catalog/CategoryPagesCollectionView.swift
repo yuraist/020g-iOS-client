@@ -11,6 +11,7 @@ import UIKit
 class CategoryPagesCollectionView: UICollectionView {
   
   private let cellId = "cell"
+  private var contentOffsets = [Int: CGPoint]()
   
   var parentViewController: MainViewController?
   
@@ -73,9 +74,7 @@ class CategoryPagesCollectionView: UICollectionView {
   }
   
   func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-    if let currentCell = getCurrentVisibleCell() {
-      print(currentCell.catalogCollectionView.indexPathsForVisibleItems)
-    }
+//    print(contentOffset)
   }
   
   private func sendNotificationAboutChangingCategory() {
@@ -106,7 +105,18 @@ extension CategoryPagesCollectionView: UICollectionViewDelegateFlowLayout, UICol
     cell.catalogCollectionView.category = categories[indexPath.item]
     cell.catalogCollectionView.parentViewController = parentViewController
     
+    if let cellContentOffset = contentOffsets[indexPath.item] {
+//      cell.catalogCollectionView.setContentOffset(contentOffset, animated: false)
+      print(cellContentOffset)
+    }
+    
     return cell
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    if let cell = cell as? CategoryCollectionViewCell {
+      contentOffsets[indexPath.item] = cell.catalogCollectionView.contentOffset
+    }
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

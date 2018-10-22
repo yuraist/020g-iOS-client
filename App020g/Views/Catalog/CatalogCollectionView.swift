@@ -14,6 +14,7 @@ class CatalogCollectionView: UICollectionView {
   var category: Category? {
     didSet {
       products.removeAll()
+      currentPage = 1
       fetchProducts()
     }
   }
