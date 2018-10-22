@@ -58,6 +58,7 @@ class ProductPriceCell: UITableViewCell {
   private func clearCell() {
     backgroundColor = ApplicationColors.white
     availableLabel.textColor = ApplicationColors.darkGray
+    priceLabel.text = ""
   }
   
   private func setupCell() {

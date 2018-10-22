@@ -53,8 +53,11 @@ class MainViewController: CenterViewController {
     fetchCatalogKeysAndCategories()
     setupMenuBar()
     addCategoryPagesCollectionViewToMenuBarProperty()
-    setNavigationItemTitle()
     setMenuBarButtonAction()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    setNavigationItemTitle()
   }
   
   private func fetchCatalogKeysAndCategories() {
@@ -124,6 +127,10 @@ class MainViewController: CenterViewController {
         }
       }
     }
+  }
+  
+  private func fetchProducts() {
+    
   }
   
   private func passCategoriesToMenuBar(categories: [Category]) {
