@@ -294,4 +294,27 @@ class ApiHandler {
     dataTask.resume()
   }
   
+  func fetchFilter(forCategoryId categoryId: Int, completion: ((FilterResponse?) -> Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(nil)
+      return
+    }
+    
+    let queryItems = ["token": token, "appname": appName, "cat": "\(categoryId)"]
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get_filter", queryItems: queryItems, method: .get) { (data, _, _) in
+      if let jsonData = data {
+        do {
+          let filterResponse = try self.decodeObject(FilterResponse.self, from: jsonData)
+          completion?(filterResponse)
+        } catch let error {
+          print(error)
+          completion?(nil)
+        }
+      }
+      completion?(nil)
+    }
+    
+    dataTask.resume()
+  }
 }

@@ -48,4 +48,24 @@ class ApiHandlerSlowTests: XCTestCase {
     waitForExpectations(timeout: 5, handler: nil)
     XCTAssertNotNil(catalogTree)
   }
+  
+  func testFetchFilter() {
+    // given
+    let promise = expectation(description: "")
+    let categoryId = 143
+    var filterResponse: FilterResponse?
+    
+    // when
+    ApiHandler.shared.fetchFilter(forCategoryId: categoryId) { (filter) in
+      if let filter = filter {
+        print(filter)
+        filterResponse = filter
+        promise.fulfill()
+      }
+    }
+    
+    // then
+    waitForExpectations(timeout: 5, handler: nil)
+    XCTAssertNotNil(filterResponse)
+  }
 }

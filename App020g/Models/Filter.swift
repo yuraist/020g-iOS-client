@@ -19,8 +19,8 @@ struct FilterParameter: Codable {
   var name: String
   var type: Int
   var options: [FilterOption]?
-  var cost_min_orig: Int?
-  var cost_max_orig: Int?
+  var cost_min_orig: String?
+  var cost_max_orig: String?
   var cost_min: Int?
   var cost_max: Int?
 }
