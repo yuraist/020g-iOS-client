@@ -59,8 +59,10 @@ class CatalogCollectionView: UICollectionView {
       return
     }
     
-    if let newProducts = parentViewController?.products[category.cat] {
-      products.append(contentsOf: newProducts)
+    ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: currentPage) { (success, newProducts) in
+      if let newProducts = newProducts {
+        self.products.append(contentsOf: newProducts)
+      }
     }
   }
   
@@ -70,9 +72,7 @@ class CatalogCollectionView: UICollectionView {
   }
   
   private func incrementCurrentPage() {
-    if let categoryId = category?.cat, parentViewController?.productPages[categoryId] != nil {
-      parentViewController!.productPages[categoryId]! = parentViewController!.productPages[categoryId]! + 1
-    }
+    currentPage += 1
   }
   
   private func reloadCollectionView() {
@@ -101,7 +101,7 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     
     return cell
   }
-
+  
   private func indexPathIsLast(_ indexPath: IndexPath) -> Bool {
     return indexPath.item == (products.count - 1)
   }

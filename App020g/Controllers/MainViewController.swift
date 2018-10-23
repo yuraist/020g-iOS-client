@@ -46,17 +46,6 @@ class MainViewController: CenterViewController {
     return UIApplication.shared.statusBarFrame.size.height
   }
   
-  // Category.id : [Products]
-  var products = [Int: [Product]]() {
-    didSet {
-      DispatchQueue.main.async {
-        self.categoryPagesCollectionView.reloadData()
-      }
-    }
-  }
-  
-  var productPages = [Int: Int]() // Category.id : currentPage
-  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -75,29 +64,6 @@ class MainViewController: CenterViewController {
     ApiHandler.shared.checkKeys { (success) in
       if success {
         self.fetchCategories()
-      }
-    }
-  }
-  
-  private func fetchCategories() {
-    ApiHandler.shared.fetchCatalogCategories() { (success, categories) in
-      if success {
-        if let categories = categories {
-          self.passCategoriesToMenuBar(categories: categories)
-          self.passCategoriesToCategoryPagesCollectionView(categories: categories)
-          self.fetchProducts(ofCategory: categories[0])
-        }
-      }
-    }
-  }
-  
-  private func fetchProducts(ofCategory category: Category) {
-    let currentPage = productPages[category.cat] ?? 1
-    ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: currentPage) { (success, products) in
-      if let newProducts = products, self.products[category.cat] != nil {
-        self.products[category.cat]!.append(contentsOf: newProducts)
-      } else if let newProducts = products {
-        self.products[category.cat] = newProducts
       }
     }
   }
@@ -150,6 +116,21 @@ class MainViewController: CenterViewController {
     categoryPagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     categoryPagesCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     categoryPagesCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
+  }
+  
+  private func fetchCategories() {
+    ApiHandler.shared.fetchCatalogCategories() { (success, categories) in
+      if success {
+        if let categories = categories {
+          self.passCategoriesToMenuBar(categories: categories)
+          self.passCategoriesToCategoryPagesCollectionView(categories: categories)
+        }
+      }
+    }
+  }
+  
+  private func fetchProducts() {
+    
   }
   
   private func passCategoriesToMenuBar(categories: [Category]) {
