@@ -23,14 +23,6 @@ class CategoryPagesCollectionView: UICollectionView {
     }
   }
   
-  var products = [[Product]]() {
-    didSet {
-      DispatchQueue.main.async {
-        self.reloadData()
-      }
-    }
-  }
-  
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
     
@@ -71,10 +63,6 @@ class CategoryPagesCollectionView: UICollectionView {
   
   func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
     sendNotificationAboutChangingCategory()
-  }
-  
-  func scrollViewWillBeginDecelerating(_ scrollView: UIScrollView) {
-//    print(contentOffset)
   }
   
   private func sendNotificationAboutChangingCategory() {
