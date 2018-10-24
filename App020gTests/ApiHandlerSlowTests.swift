@@ -80,7 +80,6 @@ class ApiHandlerSlowTests: XCTestCase {
     ApiHandler.shared.fetchFilteredProducts(withFilter: filterRequest) { (catalog) in
       if let catalog = catalog {
         catalogResponse = catalog
-        print(catalogResponse)
         promise.fulfill()
       }
     }
