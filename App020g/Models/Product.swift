@@ -111,8 +111,29 @@ struct ProductResponse: Codable {
   var cities: [City]
 }
 
+struct CodableProduct: Codable {
+  let id: String
+  let name: String
+  let brand: String
+  let priceMin: String
+  let priceMax: String
+  let bind: String
+  let img: String
+  let active: String
+  let available: String
+  let like: String
+  let mark: Int
+  
+  enum CodingKeys: String, CodingKey {
+    case id, name, brand, bind, img, active, like, mark
+    case priceMin = "c_min"
+    case priceMax = "c_max"
+    case available = "aviable"
+  }
+}
+
 struct CatalogResponse: Codable {
   var status: Bool
-  var list: [Product]
+  var list: [CodableProduct]
   var params: [String: String]
 }

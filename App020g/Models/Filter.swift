@@ -33,8 +33,9 @@ struct FilterOption: Codable {
 }
 
 struct FilterRequest {
-  var category: Int
-  var page: Int
+  var category: String
+  var page: String
   var cost: (min: Int, max: Int)?
   var options: [(id: Int, value: Int)]?
+  var sort: String?
 }

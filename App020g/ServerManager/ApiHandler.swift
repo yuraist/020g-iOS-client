@@ -318,5 +318,44 @@ class ApiHandler {
     dataTask.resume()
   }
   
-  
+  func fetchFilteredProducts(withFilter filter: FilterRequest, completion: ((CatalogResponse?) -> Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(nil)
+      return
+    }
+    
+    var queryItems = ["token": token, "appname": appName, "cat": filter.category, "page": filter.page]
+    
+    if let cost = filter.cost {
+      queryItems["cost"] = "\(cost.min)-\(cost.max)"
+    }
+    
+    if let sort = filter.sort {
+      queryItems["sort"] = sort
+    }
+    
+    if let options = filter.options {
+      var optionString = ""
+      for option in options {
+        optionString += "_\(option.id)-\(option.value)_."
+      }
+      queryItems["o"] = optionString
+    }
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/cat_prods_catalog", queryItems: queryItems, method: .get) { (data, _, _) in
+      if let jsonData = data {
+        do {
+          let catalogResponse = try self.decodeObject(CatalogResponse.self, from: jsonData)
+          completion?(catalogResponse)
+        } catch let error {
+          print(error)
+          completion?(nil)
+        }
+      } else {
+        completion?(nil)
+      }
+    }
+    
+    dataTask.resume()
+  }
 }
