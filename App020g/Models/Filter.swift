@@ -31,3 +31,10 @@ struct FilterOption: Codable {
   var count: Int
   var selected: Bool
 }
+
+struct FilterRequest {
+  var category: Int
+  var page: Int
+  var cost: (min: Int, max: Int)?
+  var options: [(id: Int, value: Int)]?
+}
