@@ -10,6 +10,10 @@ import UIKit
 
 class MainViewController: CenterViewController {
   
+  var products = [Int: [Product]]()
+  var lastPages = [Int: Int]()
+  var contentOffsets = [Int: CGPoint]()
+  
   private let itemCellId = "cellId"
   private let menuBar = BarView()
   

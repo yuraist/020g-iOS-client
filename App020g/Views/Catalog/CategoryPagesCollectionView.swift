@@ -93,18 +93,11 @@ extension CategoryPagesCollectionView: UICollectionViewDelegateFlowLayout, UICol
     cell.catalogCollectionView.category = categories[indexPath.item]
     cell.catalogCollectionView.parentViewController = parentViewController
     
-    if let cellContentOffset = contentOffsets[indexPath.item] {
-//      cell.catalogCollectionView.setContentOffset(contentOffset, animated: false)
-      print(cellContentOffset)
-    }
-    
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    if let cell = cell as? CategoryCollectionViewCell {
-      contentOffsets[indexPath.item] = cell.catalogCollectionView.contentOffset
-    }
+    // TODO :- Implement the contentOffset saving
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

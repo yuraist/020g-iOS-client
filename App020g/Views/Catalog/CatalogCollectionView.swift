@@ -19,9 +19,11 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
+  private var noMorePages = false
+  
   var products = [Product]() {
     didSet {
-      reloadCollectionView()
+//      reloadCollectionView()
     }
   }
   
@@ -59,9 +61,24 @@ class CatalogCollectionView: UICollectionView {
       return
     }
     
+    if let loadedProducts = parentViewController?.products[category.cat], let lastPage = parentViewController?.lastPages[category.cat] {
+      products = loadedProducts
+      currentPage = lastPage + 1
+    } else {
+      currentPage = 1
+    }
+    
     ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: currentPage) { (success, newProducts) in
       if let newProducts = newProducts {
-        self.products.append(contentsOf: newProducts)
+        if newProducts.count == 0 {
+          self.noMorePages = true
+        } else {
+          self.products.append(contentsOf: newProducts)
+          self.parentViewController?.products[category.cat] = self.products
+          self.parentViewController?.lastPages[category.cat] = self.currentPage
+          
+          self.reloadCollectionView()
+        }
       }
     }
   }
@@ -95,8 +112,8 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogCollectionViewCell
     cell.item = products[indexPath.item]
     
-    if indexPathIsLast(indexPath) {
-      loadNewProducts()
+    if indexPathIsLast(indexPath) && !noMorePages {
+      fetchProducts()
     }
     
     return cell
