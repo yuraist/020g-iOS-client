@@ -9,7 +9,13 @@
 import UIKit
 
 class CatalogCollectionView: UICollectionView {
+  
   private let cellId = "catalogCell"
+  private var noMorePages = false
+  private var currentPage = 1
+  
+  var products = [Product]()
+  var parentViewController: MainViewController?
   
   var category: Category? {
     didSet {
@@ -19,16 +25,6 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
-  var products = [Product]() {
-    didSet {
-      reloadCollectionView()
-    }
-  }
-  
-  var parentViewController: MainViewController?
-  
-  private var currentPage = 1
-  
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
     registerCell()
@@ -36,6 +32,10 @@ class CatalogCollectionView: UICollectionView {
     registerDataSource()
     setGrayBackgroundColor()
     setupTranslatesAutoresizingMaskIntoConstraintsFalse()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   private func registerCell() {
@@ -59,16 +59,26 @@ class CatalogCollectionView: UICollectionView {
       return
     }
     
+    if let loadedProducts = parentViewController?.products[category.cat], let lastPage = parentViewController?.lastPages[category.cat] {
+      products = loadedProducts
+      currentPage = lastPage + 1
+    } else {
+      currentPage = 1
+    }
+    
     ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: currentPage) { (success, newProducts) in
       if let newProducts = newProducts {
-        self.products.append(contentsOf: newProducts)
+        if newProducts.count == 0 {
+          self.noMorePages = true
+        } else {
+          self.products.append(contentsOf: newProducts)
+          self.parentViewController?.products[category.cat] = self.products
+          self.parentViewController?.lastPages[category.cat] = self.currentPage
+          
+          self.reloadCollectionView()
+        }
       }
     }
-  }
-  
-  private func loadNewProducts() {
-    incrementCurrentPage()
-    fetchProducts()
   }
   
   private func incrementCurrentPage() {
@@ -81,9 +91,6 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
 }
 
 extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
@@ -93,10 +100,13 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogCollectionViewCell
-    cell.item = products[indexPath.item]
     
-    if indexPathIsLast(indexPath) {
-      loadNewProducts()
+    if products.count > indexPath.item {
+      cell.item = products[indexPath.item]
+    }
+    
+    if indexPathIsLast(indexPath) && !noMorePages {
+      fetchProducts()
     }
     
     return cell

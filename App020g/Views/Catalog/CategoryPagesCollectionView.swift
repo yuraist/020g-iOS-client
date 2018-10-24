@@ -90,21 +90,29 @@ extension CategoryPagesCollectionView: UICollectionViewDelegateFlowLayout, UICol
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CategoryCollectionViewCell
     
-    cell.catalogCollectionView.category = categories[indexPath.item]
+    cell.catalogCollectionView.category = nil
+    cell.catalogCollectionView.products = []
+    cell.catalogCollectionView.parentViewController = nil
+    
+    let category = categories[indexPath.item]
+    
+    cell.catalogCollectionView.category = category
     cell.catalogCollectionView.parentViewController = parentViewController
     
-    if let cellContentOffset = contentOffsets[indexPath.item] {
-//      cell.catalogCollectionView.setContentOffset(contentOffset, animated: false)
-      print(cellContentOffset)
+    if let currentOffset = parentViewController?.contentOffsets[category.cat] {
+      cell.catalogCollectionView.contentOffset = currentOffset
+    } else {
+      cell.catalogCollectionView.contentOffset = CGPoint(x: 0, y: 0)
     }
     
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-    if let cell = cell as? CategoryCollectionViewCell {
-      contentOffsets[indexPath.item] = cell.catalogCollectionView.contentOffset
-    }
+    // TODO :- Implement the contentOffset saving
+    let categoryId = categories[indexPath.item].cat
+    let currentOffset = (cell as! CategoryCollectionViewCell).catalogCollectionView.contentOffset
+    parentViewController?.contentOffsets[categoryId] = currentOffset
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
