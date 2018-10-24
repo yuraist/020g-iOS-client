@@ -110,3 +110,9 @@ struct ProductResponse: Codable {
   var breadcrumbs: [Breadcrumb]
   var cities: [City]
 }
+
+struct CatalogResponse: Codable {
+  var status: Bool
+  var list: [Product]
+  var params: [String: String]
+}
