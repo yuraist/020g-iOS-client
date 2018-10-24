@@ -9,7 +9,13 @@
 import UIKit
 
 class CatalogCollectionView: UICollectionView {
+  
   private let cellId = "catalogCell"
+  private var noMorePages = false
+  private var currentPage = 1
+  
+  var products = [Product]()
+  var parentViewController: MainViewController?
   
   var category: Category? {
     didSet {
@@ -19,18 +25,6 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
-  private var noMorePages = false
-  
-  var products = [Product]() {
-    didSet {
-//      reloadCollectionView()
-    }
-  }
-  
-  var parentViewController: MainViewController?
-  
-  private var currentPage = 1
-  
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
     registerCell()
@@ -38,6 +32,10 @@ class CatalogCollectionView: UICollectionView {
     registerDataSource()
     setGrayBackgroundColor()
     setupTranslatesAutoresizingMaskIntoConstraintsFalse()
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   private func registerCell() {
@@ -83,11 +81,6 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
-  private func loadNewProducts() {
-    incrementCurrentPage()
-    fetchProducts()
-  }
-  
   private func incrementCurrentPage() {
     currentPage += 1
   }
@@ -98,9 +91,6 @@ class CatalogCollectionView: UICollectionView {
     }
   }
   
-  required init?(coder aDecoder: NSCoder) {
-    fatalError("init(coder:) has not been implemented")
-  }
 }
 
 extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
