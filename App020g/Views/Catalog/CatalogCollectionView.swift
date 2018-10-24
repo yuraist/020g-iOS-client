@@ -100,7 +100,10 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogCollectionViewCell
-    cell.item = products[indexPath.item]
+    
+    if products.count > indexPath.item {
+      cell.item = products[indexPath.item]
+    }
     
     if indexPathIsLast(indexPath) && !noMorePages {
       fetchProducts()
