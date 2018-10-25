@@ -9,28 +9,21 @@
 import UIKit
 
 class CategoryCollectionViewCell: UICollectionViewCell {
-
-  var products = [Product]() {
-    didSet {
-      catalogCollectionView.products = products
-    }
-  }
   
   let catalogCollectionView = CatalogCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   
   override init(frame: CGRect) {
     super.init(frame: frame)
     
-    backgroundColor = ApplicationColors.buttonBlue
     addCatalogCollectionView()
-    addConstraintsForCatalogCollectionView()
+    setCataloCollectionViewConstraints()
   }
 
   private func addCatalogCollectionView() {
     addSubview(catalogCollectionView)
   }
   
-  private func addConstraintsForCatalogCollectionView() {
+  private func setCataloCollectionViewConstraints() {
     catalogCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
     catalogCollectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     catalogCollectionView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true

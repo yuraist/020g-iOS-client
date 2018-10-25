@@ -11,7 +11,7 @@ import Kingfisher
 
 class CatalogCollectionViewCell: UICollectionViewCell {
   
-  var item: Product? {
+  var product: Product? {
     didSet {
       clearCell()
       setupCellWithProduct()
@@ -109,7 +109,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   }
   
   private func setupCellWithProduct() {
-    if let product = item {
+    if let product = product {
       setProductImage()
       nameLabel.text = product.name
       numberLabel.text = String(product.bind)
@@ -124,7 +124,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   }
   
   private func getImageUrl() -> URL? {
-    guard var imageUrlString = item?.img else {
+    guard var imageUrlString = product?.img else {
       return nil
     }
     
@@ -138,7 +138,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   
   private func getPriceText() -> String {
     var priceString = ""
-    if let cMin = item?.priceMin, let cMax = item?.priceMax {
+    if let cMin = product?.priceMin, let cMax = product?.priceMax {
       if cMin < cMax && cMin != 0 {
         priceString = "от \(cMin) руб."
       } else if cMin == cMax && cMin != 0 {
@@ -151,7 +151,7 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   }
   
   private func setProductAvailableIndicatorColor() {
-    if let available = item?.available, available {
+    if let available = product?.available, available {
       setProductAvailableIndicatorGreen()
     } else {
       setProductAvailableIndicatorRed()

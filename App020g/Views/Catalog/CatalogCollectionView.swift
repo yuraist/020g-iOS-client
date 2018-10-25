@@ -15,23 +15,24 @@ class CatalogCollectionView: UICollectionView {
   private var currentPage = 1
   
   var products = [Product]()
+  
   var parentViewController: MainViewController?
   
   var category: Category? {
     didSet {
       products.removeAll()
-      currentPage = 1
       fetchProducts()
     }
   }
   
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
+    
     registerCell()
     registerDelegate()
     registerDataSource()
     setGrayBackgroundColor()
-    setupTranslatesAutoresizingMaskIntoConstraintsFalse()
+    setTranslatesAutoresizingMaskIntoConstraintsFalse()
   }
   
   required init?(coder aDecoder: NSCoder) {
@@ -50,39 +51,58 @@ class CatalogCollectionView: UICollectionView {
     dataSource = self
   }
   
-  private func setupTranslatesAutoresizingMaskIntoConstraintsFalse() {
-    translatesAutoresizingMaskIntoConstraints = false
+  private func fetchProducts() {
+    if category == nil { return }
+    
+    fetchLoadedProducts()
+    updateCurrentPage()
+    fetchProductsFromApi()
   }
   
-  private func fetchProducts() {
-    guard let category = category else {
-      return
-    }
-    
-    if let loadedProducts = parentViewController?.products[category.cat], let lastPage = parentViewController?.lastPages[category.cat] {
+  private func fetchLoadedProducts() {
+    if let loadedProducts = getLoadedProducts() {
       products = loadedProducts
+    }
+  }
+  
+  private func getLoadedProducts() -> [Product]? {
+    return parentViewController?.products[category!.cat]
+  }
+  
+  private func updateCurrentPage() {
+    if let lastPage = getLastPage() {
       currentPage = lastPage + 1
     } else {
       currentPage = 1
     }
-    
-    ApiHandler.shared.fetchProducts(ofCategory: category.cat, page: currentPage) { (success, newProducts) in
+  }
+  
+  private func getLastPage() -> Int? {
+    return parentViewController?.lastPages[category!.cat]
+  }
+  
+  private func fetchProductsFromApi() {
+    ApiHandler.shared.fetchProducts(ofCategory: category!.cat, page: currentPage) { (_, newProducts) in
+      
       if let newProducts = newProducts {
         if newProducts.count == 0 {
           self.noMorePages = true
         } else {
           self.products.append(contentsOf: newProducts)
-          self.parentViewController?.products[category.cat] = self.products
-          self.parentViewController?.lastPages[category.cat] = self.currentPage
-          
+          self.updateParentViewControllerProducts()
+          self.updateParentViewControllerLastPages()
           self.reloadCollectionView()
         }
       }
     }
   }
   
-  private func incrementCurrentPage() {
-    currentPage += 1
+  private func updateParentViewControllerProducts() {
+    parentViewController?.products[category!.cat] = products
+  }
+  
+  private func updateParentViewControllerLastPages() {
+    parentViewController?.lastPages[category!.cat] = currentPage
   }
   
   private func reloadCollectionView() {
@@ -101,8 +121,8 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! CatalogCollectionViewCell
     
-    if products.count > indexPath.item {
-      cell.item = products[indexPath.item]
+    if thereAreProducts(forIndexPath: indexPath) {
+      cell.product = products[indexPath.item]
     }
     
     if indexPathIsLast(indexPath) && !noMorePages {
@@ -110,6 +130,10 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     }
     
     return cell
+  }
+  
+  private func thereAreProducts(forIndexPath indexPath: IndexPath) -> Bool {
+    return products.count > indexPath.item
   }
   
   private func indexPathIsLast(_ indexPath: IndexPath) -> Bool {
