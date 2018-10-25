@@ -25,12 +25,19 @@ class FilterBarView: UIView {
     return button
   }()
   
+  let sizeSwitch: UISwitch = {
+    let sizeSwitch = UISwitch(frame: .zero)
+    sizeSwitch.isOn = false
+    sizeSwitch.setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    return sizeSwitch
+  }()
+  
   override init(frame: CGRect) {
     super.init(frame: frame)
     
     setWhiteBackgroundColor()
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    addSubviews(filterButton, separatorLineView)
+    addSubviews(sizeSwitch, filterButton, separatorLineView)
     setSubviewsConstraints()
   }
   
@@ -39,8 +46,9 @@ class FilterBarView: UIView {
   }
   
   private func setSubviewsConstraints() {
-    addConstraints(withFormat: "H:[v0(22)]-16-|", views: filterButton)
+    addConstraints(withFormat: "H:[v0(51)]-[v1(22)]-16-|", views: sizeSwitch, filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: filterButton)
+    addConstraints(withFormat: "V:[v0(31)]-5-|", views: sizeSwitch)
     addConstraints(withFormat: "H:|[v0]|", views: separatorLineView)
     addConstraints(withFormat: "V:[v0(1)]|", views: separatorLineView)
   }

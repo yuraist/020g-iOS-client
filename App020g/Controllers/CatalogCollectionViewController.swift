@@ -18,7 +18,11 @@ class CatalogCollectionViewController: UICollectionViewController {
   var filter: FilterRequest?
   var products = [CodableProduct]()
   
-  var isShowingLargeCells = true
+  var isShowingLargeCells = false {
+    didSet {
+      collectionView.collectionViewLayout.invalidateLayout()
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -46,7 +50,13 @@ class CatalogCollectionViewController: UICollectionViewController {
   }
   
   private func setFilterButtonAction() {
+    filterBarView.sizeSwitch.addTarget(self, action: #selector(changeGrid), for: .valueChanged)
     filterBarView.filterButton.addTarget(self, action: #selector(showFilterController), for: .touchUpInside)
+  }
+  
+  @objc
+  private func changeGrid(_ sender: UISwitch) {
+    isShowingLargeCells = sender.isOn
   }
   
   @objc

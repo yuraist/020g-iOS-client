@@ -17,7 +17,6 @@ class FilterParameterTableViewCell: UITableViewCell {
     }
   }
   
-  
   private func clearCell() {
     
   }
