@@ -25,11 +25,20 @@ class FilterBarView: UIView {
     return button
   }()
   
-  let sizeSwitch: UISwitch = {
-    let sizeSwitch = UISwitch(frame: .zero)
-    sizeSwitch.isOn = false
-    sizeSwitch.setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    return sizeSwitch
+  let bigGridButton: UIButton = {
+    let button = UIButton(type: .custom)
+    button.setImage(#imageLiteral(resourceName: "big_grid").withRenderingMode(.alwaysTemplate), for: .normal)
+    button.tintColor = ApplicationColors.darkBlue
+    button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    return button
+  }()
+  
+  let smallGridButton: UIButton = {
+    let button = UIButton(type: .custom)
+    button.setImage(#imageLiteral(resourceName: "small_grid").withRenderingMode(.alwaysTemplate), for: .normal)
+    button.tintColor = ApplicationColors.darkBlue
+    button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    return button
   }()
   
   override init(frame: CGRect) {
@@ -37,7 +46,7 @@ class FilterBarView: UIView {
     
     setWhiteBackgroundColor()
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    addSubviews(sizeSwitch, filterButton, separatorLineView)
+    addSubviews(smallGridButton, bigGridButton, filterButton, separatorLineView)
     setSubviewsConstraints()
   }
   
@@ -46,9 +55,10 @@ class FilterBarView: UIView {
   }
   
   private func setSubviewsConstraints() {
-    addConstraints(withFormat: "H:[v0(51)]-[v1(22)]-16-|", views: sizeSwitch, filterButton)
+    addConstraints(withFormat: "H:[v0(22)]-8-[v1(22)]-8-[v2(22)]-16-|", views: bigGridButton, smallGridButton, filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: filterButton)
-    addConstraints(withFormat: "V:[v0(31)]-5-|", views: sizeSwitch)
+    addConstraints(withFormat: "V:[v0(22)]-10-|", views: bigGridButton)
+    addConstraints(withFormat: "V:[v0(22)]-10-|", views: smallGridButton)
     addConstraints(withFormat: "H:|[v0]|", views: separatorLineView)
     addConstraints(withFormat: "V:[v0(1)]|", views: separatorLineView)
   }

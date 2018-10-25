@@ -50,13 +50,19 @@ class CatalogCollectionViewController: UICollectionViewController {
   }
   
   private func setFilterButtonAction() {
-    filterBarView.sizeSwitch.addTarget(self, action: #selector(changeGrid), for: .valueChanged)
+    filterBarView.bigGridButton.addTarget(self, action: #selector(showLargeGrid), for: .touchUpInside)
+    filterBarView.smallGridButton.addTarget(self, action: #selector(showSmallGrid), for: .touchUpInside)
     filterBarView.filterButton.addTarget(self, action: #selector(showFilterController), for: .touchUpInside)
   }
   
   @objc
-  private func changeGrid(_ sender: UISwitch) {
-    isShowingLargeCells = sender.isOn
+  private func showLargeGrid() {
+    isShowingLargeCells = true
+  }
+  
+  @objc
+  private func showSmallGrid() {
+    isShowingLargeCells = false
   }
   
   @objc
