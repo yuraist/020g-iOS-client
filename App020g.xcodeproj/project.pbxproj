@@ -10,6 +10,7 @@
 		331B7EC981EEF71C2F7A5532 /* Pods_App020g.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */; };
 		BE0218D42181C7E800C8DBEC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */; };
 		BE0218D62182077B00C8DBEC /* FilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D52182077B00C8DBEC /* FilterBarView.swift */; };
+		BE0218D82182207600C8DBEC /* FilterParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */; };
 		BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* BarView.swift */; };
 		BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */; };
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
@@ -95,6 +96,7 @@
 		6A10778BD348057FFF02D613 /* Pods-App020g.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App020g.release.xcconfig"; path = "Pods/Target Support Files/Pods-App020g/Pods-App020g.release.xcconfig"; sourceTree = "<group>"; };
 		BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		BE0218D52182077B00C8DBEC /* FilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBarView.swift; sourceTree = "<group>"; };
+		BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameterTableViewCell.swift; sourceTree = "<group>"; };
 		BE05AA5A21592AEE002EDF38 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -282,10 +284,10 @@
 				BE1DC547214FAADC00E6AF30 /* ForgotPasswordViewController.swift */,
 				BE1DC545214FAA6700E6AF30 /* AskViewController.swift */,
 				BE1DC551214FABCE00E6AF30 /* SearchCollectionViewController.swift */,
-				BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */,
 				BE1DC549214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift */,
 				BE1DC54B214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift */,
 				BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */,
+				BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */,
 				BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */,
 				BE0FF0D4216FC3C200F126BB /* CitiesTableViewController.swift */,
 			);
@@ -385,6 +387,7 @@
 				BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */,
 				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
 				BE0218D52182077B00C8DBEC /* FilterBarView.swift */,
+				BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -628,6 +631,7 @@
 				BE0FF0D5216FC3C200F126BB /* CitiesTableViewController.swift in Sources */,
 				BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */,
 				BE3D1D202159537500A6E9E4 /* BarCollectionViewCell.swift in Sources */,
+				BE0218D82182207600C8DBEC /* FilterParameterTableViewCell.swift in Sources */,
 				BEF1B98D2162088400348A3D /* BarButton.swift in Sources */,
 				BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */,
 				BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */,

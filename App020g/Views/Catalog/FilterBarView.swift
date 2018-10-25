@@ -10,19 +10,19 @@ import UIKit
 
 class FilterBarView: UIView {
   
-  private let filterButton: UIButton = {
-    let button = UIButton(type: .custom)
-    button.setImage(#imageLiteral(resourceName: "filter").withRenderingMode(.alwaysTemplate), for: .normal)
-    button.tintColor = ApplicationColors.darkBlue
-    button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    return button
-  }()
-  
   private let separatorLineView: UIView = {
     let view = UIView()
     view.backgroundColor = ApplicationColors.lightGray
     view.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return view
+  }()
+  
+  let filterButton: UIButton = {
+    let button = UIButton(type: .custom)
+    button.setImage(#imageLiteral(resourceName: "filter").withRenderingMode(.alwaysTemplate), for: .normal)
+    button.tintColor = ApplicationColors.darkBlue
+    button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    return button
   }()
   
   override init(frame: CGRect) {

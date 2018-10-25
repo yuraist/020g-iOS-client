@@ -18,13 +18,16 @@ class CatalogCollectionViewController: UICollectionViewController {
   var filter: FilterRequest?
   var products = [CodableProduct]()
   
+  var isShowingLargeCells = true
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    collectionView.setWhiteBackgroundColor()
+    collectionView.setGrayBackgroundColor()
     setNavigationBarTitle()
     registerCollectionViewCell()
     addFilterBarView()
+    setFilterButtonAction()
     setFilterBarViewConstraints()
     setCollectionViewConstraints()
     fetchProducts()
@@ -40,6 +43,17 @@ class CatalogCollectionViewController: UICollectionViewController {
   
   private func addFilterBarView() {
     view.addSubview(filterBarView)
+  }
+  
+  private func setFilterButtonAction() {
+    filterBarView.filterButton.addTarget(self, action: #selector(showFilterController), for: .touchUpInside)
+  }
+  
+  @objc
+  private func showFilterController() {
+    let filterController = FilterTableViewController()
+    filterController.parentController = self
+    show(filterController, sender: self)
   }
   
   private func setFilterBarViewConstraints() {
@@ -97,7 +111,9 @@ class CatalogCollectionViewController: UICollectionViewController {
 
 extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.size.width/2 - 1, height: collectionView.frame.size.width/2 - 2)
+    let minSize = CGSize(width: collectionView.frame.size.width/2 - 1, height: collectionView.frame.size.width/2 - 2)
+    let bigSize = CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width - 2)
+    return isShowingLargeCells ? bigSize : minSize
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -105,6 +121,6 @@ extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 1
+    return isShowingLargeCells ? 2 : 1
   }
 }
