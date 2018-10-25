@@ -12,6 +12,8 @@ private let reuseIdentifier = "Cell"
 
 class CatalogCollectionViewController: UICollectionViewController {
   
+  private let filterBarView = FilterBarView(frame: .zero)
+  
   var category: CatalogTreeChildCategory?
   var filter: FilterRequest?
   var products = [CodableProduct]()
@@ -22,6 +24,9 @@ class CatalogCollectionViewController: UICollectionViewController {
     collectionView.setWhiteBackgroundColor()
     setNavigationBarTitle()
     registerCollectionViewCell()
+    addFilterBarView()
+    setFilterBarViewConstraints()
+    setCollectionViewConstraints()
     fetchProducts()
   }
   
@@ -31,6 +36,29 @@ class CatalogCollectionViewController: UICollectionViewController {
   
   private func registerCollectionViewCell() {
     collectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+  }
+  
+  private func addFilterBarView() {
+    view.addSubview(filterBarView)
+  }
+  
+  private func setFilterBarViewConstraints() {
+    filterBarView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    filterBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: getTopLayoutGuide()).isActive = true
+    filterBarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    filterBarView.heightAnchor.constraint(equalToConstant: 42).isActive = true
+  }
+  
+  private func setCollectionViewConstraints() {
+    collectionView.setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    collectionView.topAnchor.constraint(equalTo: filterBarView.bottomAnchor).isActive = true
+    collectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    collectionView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+  }
+  
+  private func getTopLayoutGuide() -> CGFloat {
+    return UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.size.height ?? 0)
   }
   
   private func fetchProducts() {

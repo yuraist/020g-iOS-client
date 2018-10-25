@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		331B7EC981EEF71C2F7A5532 /* Pods_App020g.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */; };
 		BE0218D42181C7E800C8DBEC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */; };
+		BE0218D62182077B00C8DBEC /* FilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D52182077B00C8DBEC /* FilterBarView.swift */; };
 		BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* BarView.swift */; };
 		BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */; };
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
@@ -93,6 +94,7 @@
 		62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App020g.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A10778BD348057FFF02D613 /* Pods-App020g.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App020g.release.xcconfig"; path = "Pods/Target Support Files/Pods-App020g/Pods-App020g.release.xcconfig"; sourceTree = "<group>"; };
 		BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
+		BE0218D52182077B00C8DBEC /* FilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBarView.swift; sourceTree = "<group>"; };
 		BE05AA5A21592AEE002EDF38 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -382,6 +384,7 @@
 				BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */,
 				BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */,
 				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
+				BE0218D52182077B00C8DBEC /* FilterBarView.swift */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";
@@ -591,6 +594,7 @@
 				BED20886217F3DC6007EFD01 /* Filter.swift in Sources */,
 				BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */,
 				BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */,
+				BE0218D62182077B00C8DBEC /* FilterBarView.swift in Sources */,
 				BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */,
 				BE19008F21678CC0005069C9 /* UITextFieldExtension.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
