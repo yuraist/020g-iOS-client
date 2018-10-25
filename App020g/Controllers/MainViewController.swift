@@ -10,58 +10,80 @@ import UIKit
 
 class MainViewController: CenterViewController {
   
-  var products = [Int: [Product]]()
-  var lastPages = [Int: Int]()
-  var contentOffsets = [Int: CGPoint]()
+  static let menuBarHeight: CGFloat = 84
   
   private let itemCellId = "cellId"
   private let menuBar = BarView()
   
+  var lastPages = [Int: Int]()
+  var products = [Int: [Product]]()
+  var contentOffsets = [Int: CGPoint]()
   var catalogLastIndecies = [Int: IndexPath]()
   
   private lazy var categoryPagesCollectionView: CategoryPagesCollectionView = {
-    let categoryPagesCollectionView = CategoryPagesCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
-    categoryPagesCollectionView.parentViewController = self
-    return categoryPagesCollectionView
+    let collectionViewLayout = UICollectionViewFlowLayout()
+    let collectionView = CategoryPagesCollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
+    collectionView.parentViewController = self
+    return collectionView
   }()
-  
-  private var totalMenuHeight: CGFloat {
-    return navigationControllerHeight + menuBarHeight + statusBarHeight
-  }
-  
-  private var topLayoutGuideHeight: CGFloat {
-    return statusBarHeight + navigationControllerHeight
-  }
-  
-  private var menuBarHeight: CGFloat {
-    return 84
-  }
-  
-  private var navigationControllerHeight: CGFloat {
-    get {
-      guard let navigationControllerHeight = navigationController?.navigationBar.frame.size.height else {
-        return 0
-      }
-      return navigationControllerHeight
-    }
-  }
-  
-  private var statusBarHeight: CGFloat {
-    return UIApplication.shared.statusBarFrame.size.height
-  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupCollectionView()
-    fetchCatalogKeysAndCategories()
-    setupMenuBar()
-    addCategoryPagesCollectionViewToMenuBarProperty()
+    addCategoryPagesCollectionView()
+    setCollectionViewConstraints()
+    
+    addMenuBar()
+    setMenuBarConstraints()
     setMenuBarButtonAction()
+    
+    fetchCatalogKeysAndCategories()
+    addCategoryPagesCollectionViewToMenuBarProperty()
+    
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    setNavigationItemTitle()
+  private func addCategoryPagesCollectionView() {
+    view.addSubview(categoryPagesCollectionView)
+  }
+  
+  private func setCollectionViewConstraints() {
+    categoryPagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    categoryPagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+    categoryPagesCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    categoryPagesCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -getTotalMenuHeight()).isActive = true
+  }
+  
+  private func getTotalMenuHeight() -> CGFloat {
+    return getNavigationControllerHeight() + MainViewController.menuBarHeight + UIViewController.statusBarHeight
+  }
+  
+  private func getNavigationControllerHeight() -> CGFloat {
+    return navigationController?.navigationBar.frame.size.height ?? 0
+  }
+  
+  private func addMenuBar() {
+    view.addSubview(menuBar)
+  }
+  
+  private func setMenuBarConstraints() {
+    menuBar.topAnchor.constraint(equalTo: view.topAnchor, constant: getTopLayoutGuideHeight()).isActive = true
+    menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+    menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+    menuBar.heightAnchor.constraint(equalToConstant: MainViewController.menuBarHeight).isActive = true
+  }
+  
+  private func getTopLayoutGuideHeight() -> CGFloat {
+    return UIViewController.statusBarHeight + getNavigationControllerHeight()
+  }
+  
+  private func setMenuBarButtonAction() {
+    menuBar.pricesButton.addTarget(self, action: #selector(showCatalogTree), for: .touchUpInside)
+  }
+  
+  @objc
+  private func showCatalogTree() {
+    let catalogTreeController = CatalogTreeTableViewController()
+    show(catalogTreeController, sender: self)
   }
   
   private func fetchCatalogKeysAndCategories() {
@@ -70,56 +92,6 @@ class MainViewController: CenterViewController {
         self.fetchCategories()
       }
     }
-  }
-  
-  // MARK: - Setup menu bar
-  
-  private func setupMenuBar() {
-    addMenuBar()
-    addConstraintsForMenuBar()
-  }
-  
-  private func addMenuBar() {
-    view.addSubview(menuBar)
-  }
-  
-  private func addConstraintsForMenuBar() {
-    menuBar.topAnchor.constraint(equalTo: view.topAnchor, constant: topLayoutGuideHeight).isActive = true
-    menuBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-    menuBar.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    menuBar.heightAnchor.constraint(equalToConstant: menuBarHeight).isActive = true
-  }
-  
-  private func addStartingMenuBarItemIndexPath() {
-    menuBar.selectedItemIndexPath = IndexPath(item: 0, section: 0)
-  }
-  
-  private func addCategoryPagesCollectionViewToMenuBarProperty() {
-    menuBar.catalogCollectionView = categoryPagesCollectionView
-  }
-  
-  // MARK: - Setup navigation controller
-  
-  private func setNavigationItemTitle() {
-    navigationItem.title = "0.20g - агрегатор №1"
-  }
-  
-  // MARK: - Setup collection view
-  
-  private func setupCollectionView() {
-    addCategoryPagesCollectionView()
-    setupCollectionViewTopConstraint()
-  }
-  
-  private func addCategoryPagesCollectionView() {
-    view.addSubview(categoryPagesCollectionView)
-  }
-  
-  private func setupCollectionViewTopConstraint() {
-    categoryPagesCollectionView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    categoryPagesCollectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-    categoryPagesCollectionView.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    categoryPagesCollectionView.heightAnchor.constraint(equalTo: view.heightAnchor, constant: -totalMenuHeight).isActive = true
   }
   
   private func fetchCategories() {
@@ -133,10 +105,6 @@ class MainViewController: CenterViewController {
     }
   }
   
-  private func fetchProducts() {
-    
-  }
-  
   private func passCategoriesToMenuBar(categories: [Category]) {
     menuBar.categories = categories
   }
@@ -145,14 +113,20 @@ class MainViewController: CenterViewController {
     categoryPagesCollectionView.categories = categories
   }
   
-  private func setMenuBarButtonAction() {
-    menuBar.pricesButton.addTarget(self, action: #selector(showCatalogTree), for: .touchUpInside)
+  private func addCategoryPagesCollectionViewToMenuBarProperty() {
+    menuBar.catalogCollectionView = categoryPagesCollectionView
   }
   
-  @objc
-  private func showCatalogTree() {
-    let catalogTreeController = CatalogTreeTableViewController()
-    show(catalogTreeController, sender: self)
+  override func viewWillAppear(_ animated: Bool) {
+    setNavigationItemTitle()
+  }
+  
+  private func setNavigationItemTitle() {
+    navigationItem.title = "0.20g - агрегатор №1"
+  }
+  
+  private func addStartingMenuBarItemIndexPath() {
+    menuBar.selectedItemIndexPath = IndexPath(item: 0, section: 0)
   }
   
   // MARK: - UICollectionViewDataSource
@@ -171,7 +145,7 @@ class MainViewController: CenterViewController {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: view.frame.width, height: view.frame.height - totalMenuHeight)
+    return CGSize(width: view.frame.width, height: view.frame.height - getTotalMenuHeight())
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		331B7EC981EEF71C2F7A5532 /* Pods_App020g.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */; };
+		BE0218D42181C7E800C8DBEC /* UIViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */; };
 		BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* BarView.swift */; };
 		BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */; };
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
@@ -91,6 +92,7 @@
 		5C5FD13B83585B9DE8ACB215 /* Pods-App020g.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App020g.debug.xcconfig"; path = "Pods/Target Support Files/Pods-App020g/Pods-App020g.debug.xcconfig"; sourceTree = "<group>"; };
 		62BDE42DBF0CA10E2333BD10 /* Pods_App020g.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_App020g.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6A10778BD348057FFF02D613 /* Pods-App020g.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-App020g.release.xcconfig"; path = "Pods/Target Support Files/Pods-App020g/Pods-App020g.release.xcconfig"; sourceTree = "<group>"; };
+		BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewControllerExtension.swift; sourceTree = "<group>"; };
 		BE05AA5A21592AEE002EDF38 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -323,6 +325,7 @@
 			isa = PBXGroup;
 			children = (
 				BE1DC563215408C500E6AF30 /* UIViewExtension.swift */,
+				BE0218D32181C7E800C8DBEC /* UIViewControllerExtension.swift */,
 				BEF1B989215F69AB00348A3D /* UIImageViewExtension.swift */,
 				BE19008E21678CC0005069C9 /* UITextFieldExtension.swift */,
 				BEF1B987215F664900348A3D /* URLSessionDataTaskExtension.swift */,
@@ -631,6 +634,7 @@
 				BE1DC5602153EFB700E6AF30 /* TitledInputView.swift in Sources */,
 				BEF6F6A1215E63AA000E4BCB /* MenuViewControllerDelegate.swift in Sources */,
 				BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */,
+				BE0218D42181C7E800C8DBEC /* UIViewControllerExtension.swift in Sources */,
 				BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */,
 				BE19008D21672DB4005069C9 /* User.swift in Sources */,
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
