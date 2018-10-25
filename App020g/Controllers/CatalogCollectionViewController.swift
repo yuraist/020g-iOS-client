@@ -12,46 +12,71 @@ private let reuseIdentifier = "Cell"
 
 class CatalogCollectionViewController: UICollectionViewController {
   
+  var category: CatalogTreeChildCategory?
+  var filter: FilterRequest?
+  var products = [CodableProduct]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    // Uncomment the following line to preserve selection between presentations
-    // self.clearsSelectionOnViewWillAppear = false
-    
-    // Register cell classes
-    self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
-    
-    // Do any additional setup after loading the view.
+    collectionView.setWhiteBackgroundColor()
+    setNavigationBarTitle()
+    registerCollectionViewCell()
+    fetchProducts()
   }
   
-  /*
-   // MARK: - Navigation
-   
-   // In a storyboard-based application, you will often want to do a little preparation before navigation
-   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-   // Get the new view controller using [segue destinationViewController].
-   // Pass the selected object to the new view controller.
-   }
-   */
-  
-  // MARK: UICollectionViewDataSource
-  
-  override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    // #warning Incomplete implementation, return the number of sections
-    return 0
+  private func setNavigationBarTitle() {
+    navigationItem.title = category?.name ?? ""
   }
   
+  private func registerCollectionViewCell() {
+    collectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+  }
+  
+  private func fetchProducts() {
+    guard let category = category else {
+      return
+    }
+    
+    if filter == nil {
+      filter = FilterRequest(category: "\(category.id)", page: "1", cost: nil, options: nil, sort: nil)
+    }
+    
+    ApiHandler.shared.fetchFilteredProducts(withFilter: filter!) { (response) in
+      if let catalogResponse = response {
+        self.products.append(contentsOf: catalogResponse.list)
+        self.reloadCollectionView()
+      }
+    }
+  }
+  
+  private func reloadCollectionView() {
+    DispatchQueue.main.async {
+      self.collectionView.reloadData()
+    }
+  }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    // #warning Incomplete implementation, return the number of items
-    return 0
+    return products.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-    // Configure the cell
-    
+    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatalogCollectionViewCell
+    cell.codableProduct = products[indexPath.item]
     return cell
+  }
+}
+
+extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    return CGSize(width: collectionView.frame.size.width/2 - 1, height: collectionView.frame.size.width/2 - 2)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return 1
   }
 }

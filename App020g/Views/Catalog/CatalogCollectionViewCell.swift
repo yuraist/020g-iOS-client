@@ -18,6 +18,13 @@ class CatalogCollectionViewCell: UICollectionViewCell {
     }
   }
   
+  var codableProduct: CodableProduct? {
+    didSet {
+      clearCell()
+      setupCellWithProduct()
+    }
+  }
+  
   let numberLabel: UILabel = {
     let label = UILabel()
     label.text = "5"
@@ -115,6 +122,12 @@ class CatalogCollectionViewCell: UICollectionViewCell {
       numberLabel.text = String(product.bind)
       priceLabel.text = getPriceText()
       setProductAvailableIndicatorColor()
+    } else if let product = codableProduct {
+      setProductImage()
+      nameLabel.text = product.name
+      numberLabel.text = String(product.bind)
+      priceLabel.text = getPriceText()
+      setProductAvailableIndicatorColor()
     }
   }
   
@@ -124,16 +137,23 @@ class CatalogCollectionViewCell: UICollectionViewCell {
   }
   
   private func getImageUrl() -> URL? {
-    guard var imageUrlString = product?.img else {
+    if var imageUrlString = product?.img {
+      if imageUrlString.hasPrefix("http://020g.ru/ipk/g1") {
+        imageUrlString = imageUrlString.replacingOccurrences(of: "g1", with: "g8")
+      }
+      
+      let url = URL(string: imageUrlString)
+      return url
+    } else if var imageUrlString = codableProduct?.img {
+      if imageUrlString.hasPrefix("http://020g.ru/ipk/g1") {
+        imageUrlString = imageUrlString.replacingOccurrences(of: "g1", with: "g8")
+      }
+      
+      let url = URL(string: imageUrlString)
+      return url
+    } else {
       return nil
     }
-    
-    if imageUrlString.hasPrefix("http://020g.ru/ipk/g1") {
-      imageUrlString = imageUrlString.replacingOccurrences(of: "g1", with: "g8")
-    }
-    
-    let url = URL(string: imageUrlString)
-    return url
   }
   
   private func getPriceText() -> String {
@@ -146,12 +166,25 @@ class CatalogCollectionViewCell: UICollectionViewCell {
       } else if cMin == 0 {
         priceString = "Нет в наличии"
       }
+    } else if let cMinString = codableProduct?.priceMin, let cMaxString = codableProduct?.priceMax {
+      if let cMin = Int(cMinString), let cMax = Int(cMaxString) {
+        if cMin < cMax && cMin != 0 {
+          priceString = "от \(cMin) руб."
+        } else if cMin == cMax && cMin != 0 {
+          priceString = "\(cMin) руб."
+        } else if cMin == 0 {
+          priceString = "Нет в наличии"
+        }
+      }
     }
+    
     return priceString
   }
   
   private func setProductAvailableIndicatorColor() {
     if let available = product?.available, available {
+      setProductAvailableIndicatorGreen()
+    } else if let available = codableProduct?.available, available == "1" {
       setProductAvailableIndicatorGreen()
     } else {
       setProductAvailableIndicatorRed()

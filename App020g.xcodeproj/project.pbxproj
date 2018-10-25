@@ -283,9 +283,9 @@
 				BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */,
 				BE1DC549214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift */,
 				BE1DC54B214FAB4800E6AF30 /* SecondCatalogTreeTableViewController.swift */,
+				BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */,
 				BE1DC54D214FAB6A00E6AF30 /* ProductTableViewController.swift */,
 				BE0FF0D4216FC3C200F126BB /* CitiesTableViewController.swift */,
-				BE1DC54F214FAB7F00E6AF30 /* CatalogCollectionViewController.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
