@@ -50,7 +50,7 @@ class CatalogCollectionViewController: UICollectionViewController {
   }
   
   private func setFilterButtonsActions() {
-    filterBarView.bigGridButton.addTarget(self, action: #selector(showLargeGrid), for: .touchUpInside)
+    filterBarView.largeGridButton.addTarget(self, action: #selector(showLargeGrid), for: .touchUpInside)
     filterBarView.smallGridButton.addTarget(self, action: #selector(showSmallGrid), for: .touchUpInside)
     filterBarView.filterButton.addTarget(self, action: #selector(showFilterController), for: .touchUpInside)
     
@@ -61,11 +61,15 @@ class CatalogCollectionViewController: UICollectionViewController {
   @objc
   private func showLargeGrid() {
     isShowingLargeCells = true
+    filterBarView.largeGridButton.setImage(#imageLiteral(resourceName: "large_grid_filled").withRenderingMode(.alwaysTemplate), for: .normal)
+    filterBarView.smallGridButton.setImage(#imageLiteral(resourceName: "small_grid").withRenderingMode(.alwaysTemplate), for: .normal)
   }
   
   @objc
   private func showSmallGrid() {
     isShowingLargeCells = false
+    filterBarView.largeGridButton.setImage(#imageLiteral(resourceName: "large_grid").withRenderingMode(.alwaysTemplate), for: .normal)
+    filterBarView.smallGridButton.setImage(#imageLiteral(resourceName: "small_grid_filled").withRenderingMode(.alwaysTemplate), for: .normal)
   }
   
   @objc

@@ -27,18 +27,18 @@ class FilterBarView: UIView {
     return button
   }()
   
-  let bigGridButton: UIButton = {
+  let largeGridButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setImage(#imageLiteral(resourceName: "big_grid").withRenderingMode(.alwaysTemplate), for: .normal)
-    button.tintColor = ApplicationColors.darkBlue
+    button.setImage(#imageLiteral(resourceName: "large_grid").withRenderingMode(.alwaysTemplate), for: .normal)
+    button.tintColor = ApplicationColors.buttonBlue
     button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return button
   }()
   
   let smallGridButton: UIButton = {
     let button = UIButton(type: .custom)
-    button.setImage(#imageLiteral(resourceName: "small_grid").withRenderingMode(.alwaysTemplate), for: .normal)
-    button.tintColor = ApplicationColors.darkBlue
+    button.setImage(#imageLiteral(resourceName: "small_grid_filled").withRenderingMode(.alwaysTemplate), for: .normal)
+    button.tintColor = ApplicationColors.buttonBlue
     button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return button
   }()
@@ -48,7 +48,7 @@ class FilterBarView: UIView {
     
     setWhiteBackgroundColor()
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    addSubviews(dropDownSortingMenu, smallGridButton, bigGridButton, filterButton, separatorLineView)
+    addSubviews(dropDownSortingMenu, smallGridButton, largeGridButton, filterButton, separatorLineView)
     setSubviewsConstraints()
   }
   
@@ -62,9 +62,9 @@ class FilterBarView: UIView {
     dropDownSortingMenu.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
     dropDownSortingMenu.heightAnchor.constraint(equalTo: heightAnchor, constant: -4).isActive = true
     
-    addConstraints(withFormat: "H:[v0(22)]-8-[v1(22)]-8-[v2(22)]-16-|", views: bigGridButton, smallGridButton, filterButton)
+    addConstraints(withFormat: "H:[v0(22)]-8-[v1(22)]-8-[v2(22)]-16-|", views: largeGridButton, smallGridButton, filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: filterButton)
-    addConstraints(withFormat: "V:[v0(22)]-10-|", views: bigGridButton)
+    addConstraints(withFormat: "V:[v0(22)]-10-|", views: largeGridButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: smallGridButton)
     addConstraints(withFormat: "H:|[v0]|", views: separatorLineView)
     addConstraints(withFormat: "V:[v0(1)]|", views: separatorLineView)
