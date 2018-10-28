@@ -10,6 +10,8 @@ import UIKit
 
 class FilterBarView: UIView {
   
+  let dropDownSortingMenu = DropDownSortingMenu(frame: .zero)
+  
   private let separatorLineView: UIView = {
     let view = UIView()
     view.backgroundColor = ApplicationColors.lightGray
@@ -46,7 +48,7 @@ class FilterBarView: UIView {
     
     setWhiteBackgroundColor()
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
-    addSubviews(smallGridButton, bigGridButton, filterButton, separatorLineView)
+    addSubviews(dropDownSortingMenu, smallGridButton, bigGridButton, filterButton, separatorLineView)
     setSubviewsConstraints()
   }
   
@@ -55,6 +57,11 @@ class FilterBarView: UIView {
   }
   
   private func setSubviewsConstraints() {
+    dropDownSortingMenu.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
+    dropDownSortingMenu.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    dropDownSortingMenu.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
+    dropDownSortingMenu.heightAnchor.constraint(equalTo: heightAnchor, constant: -4).isActive = true
+    
     addConstraints(withFormat: "H:[v0(22)]-8-[v1(22)]-8-[v2(22)]-16-|", views: bigGridButton, smallGridButton, filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: bigGridButton)

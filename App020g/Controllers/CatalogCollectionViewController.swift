@@ -31,7 +31,7 @@ class CatalogCollectionViewController: UICollectionViewController {
     setNavigationBarTitle()
     registerCollectionViewCell()
     addFilterBarView()
-    setFilterButtonAction()
+    setFilterButtonsActions()
     setFilterBarViewConstraints()
     setCollectionViewConstraints()
     fetchProducts()
@@ -49,10 +49,13 @@ class CatalogCollectionViewController: UICollectionViewController {
     view.addSubview(filterBarView)
   }
   
-  private func setFilterButtonAction() {
+  private func setFilterButtonsActions() {
     filterBarView.bigGridButton.addTarget(self, action: #selector(showLargeGrid), for: .touchUpInside)
     filterBarView.smallGridButton.addTarget(self, action: #selector(showSmallGrid), for: .touchUpInside)
     filterBarView.filterButton.addTarget(self, action: #selector(showFilterController), for: .touchUpInside)
+    
+    let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showSortingTypePicker))
+    filterBarView.dropDownSortingMenu.addGestureRecognizer(tapGesture)
   }
   
   @objc
@@ -70,6 +73,35 @@ class CatalogCollectionViewController: UICollectionViewController {
     let filterController = FilterTableViewController()
     filterController.parentController = self
     show(filterController, sender: self)
+  }
+  
+  @objc
+  private func showSortingTypePicker() {
+    let sortingTypeActionSheet = UIAlertController(title: "Сортировать", message: nil, preferredStyle: .actionSheet)
+    
+    let newFirstAction = UIAlertAction(title: "Сначала новые", style: .default) { [unowned self] _ in
+      self.filterBarView.dropDownSortingMenu.change(sortingType: .newFirst) }
+    let oldFirstAction = UIAlertAction(title: "Сначала старые", style: .default) { [unowned self] _ in
+      self.filterBarView.dropDownSortingMenu.change(sortingType: .oldFirst) }
+    let chipFirstAction = UIAlertAction(title: "Сначала дешевые", style: .default) { [unowned self] _ in
+      self.filterBarView.dropDownSortingMenu.change(sortingType: .chipFirst) }
+    let expensiveFirstAction = UIAlertAction(title: "Сначала дорогие", style: .default) { [unowned self] _ in
+      self.filterBarView.dropDownSortingMenu.change(sortingType: .expensiveFirst) }
+    let groupedFirstAction = UIAlertAction(title: "Сначала сгруппированные", style: .default) { [unowned self] _ in
+      self.filterBarView.dropDownSortingMenu.change(sortingType: .groupedFirst) }
+    let ungroupedFirstAction = UIAlertAction(title: "Сначала несгруппированные", style: .default) { [unowned self] _ in
+      self.filterBarView.dropDownSortingMenu.change(sortingType: .ungroupedFirst) }
+    let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
+    
+    sortingTypeActionSheet.addAction(newFirstAction)
+    sortingTypeActionSheet.addAction(oldFirstAction)
+    sortingTypeActionSheet.addAction(chipFirstAction)
+    sortingTypeActionSheet.addAction(expensiveFirstAction)
+    sortingTypeActionSheet.addAction(groupedFirstAction)
+    sortingTypeActionSheet.addAction(ungroupedFirstAction)
+    sortingTypeActionSheet.addAction(cancelAction)
+    
+    present(sortingTypeActionSheet, animated: true, completion: nil)
   }
   
   private func setFilterBarViewConstraints() {
