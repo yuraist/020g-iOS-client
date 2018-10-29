@@ -12,7 +12,7 @@ class FilterOptionCollectionViewCell: UICollectionViewCell {
   
   var option: FilterOption? {
     didSet {
-      
+      optionLabel.text = option?.name
     }
   }
   

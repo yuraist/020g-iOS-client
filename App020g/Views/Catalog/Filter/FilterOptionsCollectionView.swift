@@ -59,9 +59,16 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
     return cell
   }
   
-  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+  private func estimateCellWidth(forText text: String) -> CGFloat {
+    let textSize = (text as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
     
-    return CGSize(width: 80, height: 32)
+    return textSize.width + 20
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    let optionText = filterOptions[indexPath.row].name
+    let optionTextWidth = estimateCellWidth(forText: optionText)
+    return CGSize(width: optionTextWidth, height: 32)
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -69,6 +76,6 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 2
+    return 4
   }
 }
