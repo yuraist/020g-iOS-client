@@ -18,11 +18,13 @@ class FilterParameterTableViewCell: UITableViewCell {
   }
   
   private func clearCell() {
-    
+    parameterTitleLabel.text = ""
+    filterOptionsCollectionView.filterOptions.removeAll()
   }
   
   private func setupCell() {
     parameterTitleLabel.text = filterParameter?.name
+    filterOptionsCollectionView.filterOptions = filterParameter?.options ?? []
   }
   
   private let parameterTitleLabel = FilterParameterNameLabel(text: "", isMainTitle: true)

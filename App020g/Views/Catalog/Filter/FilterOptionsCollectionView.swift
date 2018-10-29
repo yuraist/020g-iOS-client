@@ -12,7 +12,7 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   private let reuseIdentifier = "cellId"
   
-  var filterOptions: [FilterOption]? {
+  var filterOptions = [FilterOption]() {
     didSet {
       reloadData()
     }
@@ -50,19 +50,16 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return 7
+    return filterOptions.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterOptionCollectionViewCell
-    
+    cell.option = filterOptions[indexPath.item]
     return cell
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    if indexPath.item > 3 {
-      return CGSize(width: 120, height: 32)
-    }
     
     return CGSize(width: 80, height: 32)
   }

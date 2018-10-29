@@ -73,6 +73,10 @@ class FilterTableViewController: UITableViewController {
       return 94
     }
     
+    if let filterOptionsCount = filter?.list[indexPath.row].options?.count {
+      return CGFloat(94 + (filterOptionsCount / 3) * 36)
+    }
+    
     return 164
   }
 }
