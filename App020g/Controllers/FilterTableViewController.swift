@@ -27,7 +27,7 @@ class FilterTableViewController: UITableViewController {
   
   private func registerTableViewCells() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-//    tableView.register(FilterPriceTableViewCell.self, forCellReuseIdentifier: priceCellId)
+    tableView.register(FilterParameterTableViewCell.self, forCellReuseIdentifier: parameterCellId)
   }
   
   private func fetchFilterParameters() {
@@ -52,7 +52,7 @@ class FilterTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
       let cell = FilterPriceTableViewCell(style: .default, reuseIdentifier: priceCellId)
-      
+      cell.selectionStyle = .none
       if let filter = filter {
         if let minPrice = Int(filter.list[0].cost_min_orig!), let maxPrice = Int(filter.list[0].cost_max_orig!) {
           cell.priceRange = (min: minPrice, max: maxPrice)
@@ -62,7 +62,9 @@ class FilterTableViewController: UITableViewController {
       return cell
     }
     
-    let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+    let cell = tableView.dequeueReusableCell(withIdentifier: parameterCellId, for: indexPath) as! FilterParameterTableViewCell
+    cell.selectionStyle = .none
+    cell.filterParameter = filter?.list[indexPath.row]
     return cell
   }
   
@@ -71,6 +73,6 @@ class FilterTableViewController: UITableViewController {
       return 94
     }
     
-    return 44
+    return 94
   }
 }

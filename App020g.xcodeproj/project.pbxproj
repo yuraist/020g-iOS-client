@@ -208,9 +208,9 @@
 			isa = PBXGroup;
 			children = (
 				BE0218D52182077B00C8DBEC /* FilterBarView.swift */,
-				BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */,
-				BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */,
 				BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */,
+				BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */,
+				BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
