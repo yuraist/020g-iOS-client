@@ -13,6 +13,8 @@
 		BE0218D82182207600C8DBEC /* FilterParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */; };
 		BE0218DB2185BAA500C8DBEC /* DropDownSortingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */; };
 		BE0218DD21861BD500C8DBEC /* FilterPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */; };
+		BE0218DF2186F0CB00C8DBEC /* FilterOptionsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218DE2186F0CB00C8DBEC /* FilterOptionsCollectionView.swift */; };
+		BE0218E12186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218E02186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift */; };
 		BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* BarView.swift */; };
 		BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */; };
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
@@ -101,6 +103,8 @@
 		BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameterTableViewCell.swift; sourceTree = "<group>"; };
 		BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownSortingMenu.swift; sourceTree = "<group>"; };
 		BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPriceTableViewCell.swift; sourceTree = "<group>"; };
+		BE0218DE2186F0CB00C8DBEC /* FilterOptionsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionsCollectionView.swift; sourceTree = "<group>"; };
+		BE0218E02186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOptionCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE05AA5A21592AEE002EDF38 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -211,6 +215,8 @@
 				BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */,
 				BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */,
 				BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */,
+				BE0218DE2186F0CB00C8DBEC /* FilterOptionsCollectionView.swift */,
+				BE0218E02186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -610,6 +616,7 @@
 				BEE57E15216CE3BE005C9672 /* ProductDetailCell.swift in Sources */,
 				BED20886217F3DC6007EFD01 /* Filter.swift in Sources */,
 				BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */,
+				BE0218DF2186F0CB00C8DBEC /* FilterOptionsCollectionView.swift in Sources */,
 				BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */,
 				BE0218D62182077B00C8DBEC /* FilterBarView.swift in Sources */,
 				BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */,
@@ -621,6 +628,7 @@
 				BE1DC54E214FAB6A00E6AF30 /* ProductTableViewController.swift in Sources */,
 				BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */,
 				BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */,
+				BE0218E12186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift in Sources */,
 				BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE0FF10B2175A84B00F126BB /* CategoryPagesCollectionView.swift in Sources */,

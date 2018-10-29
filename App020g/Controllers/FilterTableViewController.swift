@@ -73,6 +73,6 @@ class FilterTableViewController: UITableViewController {
       return 94
     }
     
-    return 94
+    return 164
   }
 }
