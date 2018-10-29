@@ -28,7 +28,7 @@ class FilterOptionCollectionViewCell: UICollectionViewCell {
     label.text = "Test 1"
     label.textAlignment = .center
     label.textColor = ApplicationColors.buttonBlue
-    label.layer.cornerRadius = 3
+    label.layer.cornerRadius = 5
     label.layer.masksToBounds = true
     label.layer.borderColor = ApplicationColors.buttonBlue.cgColor
     label.layer.borderWidth = 1
@@ -50,7 +50,7 @@ class FilterOptionCollectionViewCell: UICollectionViewCell {
   private func setOptionLabelConstraints() {
     optionLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     optionLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    optionLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+    optionLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -15).isActive = true
     optionLabel.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
   }
   

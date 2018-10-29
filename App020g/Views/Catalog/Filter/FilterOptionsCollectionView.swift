@@ -60,9 +60,9 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   }
   
   private func estimateCellWidth(forText text: String) -> CGFloat {
-    let textSize = (text as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)])
+    let textSize = (text as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)])
     
-    return textSize.width + 20
+    return textSize.width + 44
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -72,10 +72,10 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return 4
+    return 0
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return 4
+    return 10
   }
 }
