@@ -12,6 +12,7 @@
 		BE0218D62182077B00C8DBEC /* FilterBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D52182077B00C8DBEC /* FilterBarView.swift */; };
 		BE0218D82182207600C8DBEC /* FilterParameterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */; };
 		BE0218DB2185BAA500C8DBEC /* DropDownSortingMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */; };
+		BE0218DD21861BD500C8DBEC /* FilterPriceTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */; };
 		BE05AA5B21592AEE002EDF38 /* BarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE05AA5A21592AEE002EDF38 /* BarView.swift */; };
 		BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */; };
 		BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */; };
@@ -99,6 +100,7 @@
 		BE0218D52182077B00C8DBEC /* FilterBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterBarView.swift; sourceTree = "<group>"; };
 		BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameterTableViewCell.swift; sourceTree = "<group>"; };
 		BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDownSortingMenu.swift; sourceTree = "<group>"; };
+		BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterPriceTableViewCell.swift; sourceTree = "<group>"; };
 		BE05AA5A21592AEE002EDF38 /* BarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarView.swift; sourceTree = "<group>"; };
 		BE0FF0CE216F4F4700F126BB /* BreadcrumbsCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionView.swift; sourceTree = "<group>"; };
 		BE0FF0D0216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BreadcrumbsCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -207,6 +209,7 @@
 			children = (
 				BE0218D52182077B00C8DBEC /* FilterBarView.swift */,
 				BE0218D72182207600C8DBEC /* FilterParameterTableViewCell.swift */,
+				BE0218DC21861BD500C8DBEC /* FilterPriceTableViewCell.swift */,
 				BE0218DA2185BAA500C8DBEC /* DropDownSortingMenu.swift */,
 			);
 			path = Filter;
@@ -610,6 +613,7 @@
 				BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */,
 				BE0218D62182077B00C8DBEC /* FilterBarView.swift in Sources */,
 				BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */,
+				BE0218DD21861BD500C8DBEC /* FilterPriceTableViewCell.swift in Sources */,
 				BE19008F21678CC0005069C9 /* UITextFieldExtension.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
 				BEF6F69D215B9378000E4BCB /* Category.swift in Sources */,
