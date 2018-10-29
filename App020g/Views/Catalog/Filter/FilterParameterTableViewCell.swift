@@ -36,6 +36,8 @@ class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
 
 class FilterParameterTableViewCell: UITableViewCell {
   
+  var parentController: FilterTableViewController?
+  
   var filterParameter: FilterParameter? {
     didSet {
       clearCell()
@@ -45,17 +47,25 @@ class FilterParameterTableViewCell: UITableViewCell {
   
   private func clearCell() {
     parameterTitleLabel.text = ""
+    filterOptionsCollectionView.filterParameter = nil
     filterOptionsCollectionView.filterOptions.removeAll()
   }
   
   private func setupCell() {
     parameterTitleLabel.text = filterParameter?.name
-    filterOptionsCollectionView.filterOptions = filterParameter?.options ?? []
+    filterOptionsCollectionView.filterParameter = filterParameter
+    filterOptionsCollectionView.parentController = parentController
+//    filterOptionsCollectionView.filterOptions = filterParameter?.options ?? []
   }
   
   private let parameterTitleLabel = FilterParameterNameLabel(text: "", isMainTitle: true)
   
-  let filterOptionsCollectionView = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
+  private lazy var filterOptionsCollectionView: FilterOptionsCollectionView = {
+    let cv = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
+    cv.parentController = parentController
+    cv.filterParameter = filterParameter
+    return cv
+  }()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

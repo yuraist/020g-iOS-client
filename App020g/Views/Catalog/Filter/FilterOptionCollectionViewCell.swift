@@ -16,7 +16,7 @@ class FilterOptionCollectionViewCell: UICollectionViewCell {
     }
   }
   
-  override var isSelected: Bool {
+  var isSelectedCell = false {
     didSet {
       changeBackgroundColor()
       changeTextColor()
@@ -55,10 +55,10 @@ class FilterOptionCollectionViewCell: UICollectionViewCell {
   }
   
   private func changeBackgroundColor() {
-    optionLabel.backgroundColor = isSelected ? ApplicationColors.buttonBlue : ApplicationColors.white
+    optionLabel.backgroundColor = isSelectedCell ? ApplicationColors.buttonBlue : ApplicationColors.white
   }
   
   private func changeTextColor() {
-    optionLabel.textColor = isSelected ? ApplicationColors.white : ApplicationColors.buttonBlue
+    optionLabel.textColor = isSelectedCell ? ApplicationColors.white : ApplicationColors.buttonBlue
   }
 }

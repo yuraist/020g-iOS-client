@@ -17,6 +17,8 @@ class FilterTableViewController: UITableViewController {
   var parentController: CatalogCollectionViewController?
   var filter: FilterResponse?
   
+  var selectedParameters = [Int: [Int]]()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -64,6 +66,7 @@ class FilterTableViewController: UITableViewController {
     
     let cell = tableView.dequeueReusableCell(withIdentifier: parameterCellId, for: indexPath) as! FilterParameterTableViewCell
     cell.selectionStyle = .none
+    cell.parentController = self
     cell.filterParameter = filter?.list[indexPath.row]
     return cell
   }

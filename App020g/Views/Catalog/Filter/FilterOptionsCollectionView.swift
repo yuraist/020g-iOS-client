@@ -12,6 +12,20 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   private let reuseIdentifier = "cellId"
   
+  var parentController: FilterTableViewController? {
+    didSet {
+      
+    }
+  }
+  
+  var filterParameter: FilterParameter? {
+    didSet {
+      if let options = filterParameter?.options {
+        filterOptions = options
+      }
+    }
+  }
+  
   var filterOptions = [FilterOption]() {
     didSet {
       reloadData()
@@ -55,7 +69,17 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! FilterOptionCollectionViewCell
-    cell.option = filterOptions[indexPath.item]
+    let option = filterOptions[indexPath.item]
+    
+    cell.isSelectedCell = false
+    cell.option = option
+    
+    if let filterParameterId = filterParameter?.id {
+      if parentController?.selectedParameters[filterParameterId]?.contains(option.value) ?? false {
+        cell.isSelectedCell = true
+      }
+    }
+    
     return cell
   }
   
@@ -77,5 +101,24 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 10
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    if let parent = parentController, let cell = collectionView.cellForItem(at: indexPath) as? FilterOptionCollectionViewCell {
+      cell.isSelectedCell = !cell.isSelectedCell
+      let option = filterOptions[indexPath.item]
+      
+      if let parameterId = filterParameter?.id {
+        if cell.isSelectedCell {
+          if parent.selectedParameters[parameterId] != nil {
+            parent.selectedParameters[parameterId]?.append(option.value)
+          } else {
+            parent.selectedParameters[parameterId] = [option.value]
+          }
+        } else {
+          parent.selectedParameters[parameterId]?.removeAll(where: { $0 == option.value })
+        }
+      }
+    }
   }
 }
