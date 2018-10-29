@@ -73,10 +73,33 @@ class FilterTableViewController: UITableViewController {
       return 94
     }
     
-    if let filterOptionsCount = filter?.list[indexPath.row].options?.count {
-      return CGFloat(94 + (filterOptionsCount / 2) * 46)
+    if let filterOptions = filter?.list[indexPath.row].options {
+      return estimateHeight(forOptions: filterOptions)
     }
     
     return 164
+  }
+  
+  private func estimateHeight(forOptions options: [FilterOption]) -> CGFloat {
+    var lines = 1
+    var maxWidth = CGFloat(292)
+    
+    for option in options {
+      let estimatedOptionWidth = option.name.estimatedWidth() + 15
+      if maxWidth - estimatedOptionWidth < 0 {
+        lines += 1
+        maxWidth = 292
+      }
+      maxWidth -= estimatedOptionWidth
+      
+      if options.last!.value == option.value {
+        if maxWidth < 0 {
+          lines += 1
+        }
+      }
+    }
+    
+    let height = CGFloat(64 + (lines * 46))
+    return height
   }
 }
