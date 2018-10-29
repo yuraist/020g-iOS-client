@@ -100,7 +100,7 @@ class FilterPriceTableViewCell: UITableViewCell {
   private func setConstraintsToSubviews() {
     parameterNameTextLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
     parameterNameTextLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
-    parameterNameTextLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    parameterNameTextLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
     parameterNameTextLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     
     fromLabel.leftAnchor.constraint(equalTo: parameterNameTextLabel.leftAnchor).isActive = true

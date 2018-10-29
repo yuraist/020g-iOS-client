@@ -67,7 +67,7 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let optionText = filterOptions[indexPath.row].name
-    let optionTextWidth = estimateCellWidth(forText: optionText)
+    let optionTextWidth = optionText.estimatedWidth()
     return CGSize(width: optionTextWidth, height: 32)
   }
   

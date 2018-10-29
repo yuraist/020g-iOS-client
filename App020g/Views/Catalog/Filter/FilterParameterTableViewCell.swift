@@ -55,7 +55,7 @@ class FilterParameterTableViewCell: UITableViewCell {
   
   private let parameterTitleLabel = FilterParameterNameLabel(text: "", isMainTitle: true)
   
-  private let filterOptionsCollectionView = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
+  let filterOptionsCollectionView = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -71,12 +71,12 @@ class FilterParameterTableViewCell: UITableViewCell {
   private func setConstraintsForSubviews() {
     parameterTitleLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
     parameterTitleLabel.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
-    parameterTitleLabel.widthAnchor.constraint(equalToConstant: 90).isActive = true
+    parameterTitleLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -32).isActive = true
     parameterTitleLabel.heightAnchor.constraint(equalToConstant: 22).isActive = true
     
     filterOptionsCollectionView.leftAnchor.constraint(equalTo: parameterTitleLabel.leftAnchor).isActive = true
     filterOptionsCollectionView.topAnchor.constraint(equalTo: parameterTitleLabel.bottomAnchor, constant: 8).isActive = true
-    filterOptionsCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+    filterOptionsCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     filterOptionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
   }
 }
