@@ -72,7 +72,8 @@ class ApiHandlerSlowTests: XCTestCase {
   func testfetchCatalogReponse() {
     // given
     let promise = expectation(description: "")
-    let options = [(1, 361), (1, 292), (21, 182)]
+//let options = [(1, 361), (1, 292), (21, 182)]
+    let options = [1: [361, 292], 21: [182]]
     let filterRequest = FilterRequest(category: "143", page: "1", cost: (300, 1000), options: options, sort: nil)
     var catalogResponse: CatalogResponse?
     
@@ -80,6 +81,7 @@ class ApiHandlerSlowTests: XCTestCase {
     ApiHandler.shared.fetchFilteredProducts(withFilter: filterRequest) { (catalog) in
       if let catalog = catalog {
         catalogResponse = catalog
+        print(catalogResponse)
         promise.fulfill()
       }
     }

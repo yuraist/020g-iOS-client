@@ -36,6 +36,6 @@ struct FilterRequest {
   var category: String
   var page: String
   var cost: (min: Int, max: Int)?
-  var options: [(id: Int, value: Int)]?
+  var options: [Int: [Int]]?
   var sort: String?
 }

@@ -336,8 +336,13 @@ class ApiHandler {
     
     if let options = filter.options {
       var optionString = ""
-      for option in options {
-        optionString += "_\(option.id)-\(option.value)_."
+      for (optionId, optionValues) in options {
+        optionString += "_"
+        for value in optionValues {
+          optionString += "\(optionId)-\(value)."
+        }
+        optionString.removeLast()
+        optionString += "_."
       }
       queryItems["o"] = optionString
     }
