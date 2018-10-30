@@ -20,6 +20,7 @@ class CustomLabeledImageView: UIView {
   private let titleLabel: UILabel = {
     let label = UILabel()
     label.textColor = ApplicationColors.white
+    label.font = UIFont.systemFont(ofSize: 14)
     label.textAlignment = .left
     label.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return label
@@ -29,6 +30,9 @@ class CustomLabeledImageView: UIView {
     super.init(frame: .zero)
     
     backgroundColor = ApplicationColors.buttonBlue
+    layer.cornerRadius = 3
+    layer.masksToBounds = true
+    
     imageView.image = image.withRenderingMode(.alwaysTemplate)
     titleLabel.text = title
     
@@ -44,13 +48,13 @@ class CustomLabeledImageView: UIView {
   private func setConstraintsForSubviews() {
     titleLabel.centerXAnchor.constraint(equalTo: centerXAnchor, constant: 15).isActive = true
     titleLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    titleLabel.widthAnchor.constraint(equalToConstant: 40).isActive = true
+    titleLabel.widthAnchor.constraint(equalToConstant: 66).isActive = true
     titleLabel.heightAnchor.constraint(equalToConstant: 20).isActive = true
     
     imageView.rightAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: -8).isActive = true
     imageView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    imageView.widthAnchor.constraint(equalToConstant: 22).isActive = true
-    imageView.heightAnchor.constraint(equalToConstant: 22).isActive = true
+    imageView.widthAnchor.constraint(equalToConstant: 18).isActive = true
+    imageView.heightAnchor.constraint(equalToConstant: 18).isActive = true
   }
 }
 
@@ -75,10 +79,10 @@ class AcceptFilterView: UIView {
   private func setConstraintsForSubviews() {
     cancelView.leftAnchor.constraint(equalTo: leftAnchor, constant: 16).isActive = true
     cancelView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    cancelView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5, constant: -24).isActive = true
+    cancelView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.5, constant: -20).isActive = true
     cancelView.heightAnchor.constraint(equalToConstant: 36).isActive = true
     
-    acceptView.leftAnchor.constraint(equalTo: cancelView.rightAnchor, constant: 16).isActive = true
+    acceptView.leftAnchor.constraint(equalTo: cancelView.rightAnchor, constant: 8).isActive = true
     acceptView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     acceptView.widthAnchor.constraint(equalTo: cancelView.widthAnchor).isActive = true
     acceptView.heightAnchor.constraint(equalToConstant: 36).isActive = true

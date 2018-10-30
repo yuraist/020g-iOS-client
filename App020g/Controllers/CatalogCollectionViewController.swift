@@ -49,6 +49,13 @@ class CatalogCollectionViewController: UICollectionViewController {
     view.addSubview(filterBarView)
   }
   
+  private func setFilterBarViewConstraints() {
+    filterBarView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+    filterBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: getTopLayoutGuide()).isActive = true
+    filterBarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+    filterBarView.heightAnchor.constraint(equalToConstant: 42).isActive = true
+  }
+  
   private func setFilterButtonsActions() {
     filterBarView.largeGridButton.addTarget(self, action: #selector(showLargeGrid), for: .touchUpInside)
     filterBarView.smallGridButton.addTarget(self, action: #selector(showSmallGrid), for: .touchUpInside)
@@ -106,13 +113,6 @@ class CatalogCollectionViewController: UICollectionViewController {
     sortingTypeActionSheet.addAction(cancelAction)
     
     present(sortingTypeActionSheet, animated: true, completion: nil)
-  }
-  
-  private func setFilterBarViewConstraints() {
-    filterBarView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-    filterBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: getTopLayoutGuide()).isActive = true
-    filterBarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-    filterBarView.heightAnchor.constraint(equalToConstant: 42).isActive = true
   }
   
   private func setCollectionViewConstraints() {

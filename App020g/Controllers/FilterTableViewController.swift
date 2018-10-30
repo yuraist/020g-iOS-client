@@ -14,7 +14,7 @@ class FilterTableViewController: UITableViewController {
   private let priceCellId = "priceCell"
   private let parameterCellId = "parameterCell"
   
-  private let acceptFilterView = AcceptFilterView()
+  private let acceptFilterView = AcceptFilterView(frame: .zero)
   
   var parentController: CatalogCollectionViewController?
   var filter: FilterResponse?
@@ -23,12 +23,25 @@ class FilterTableViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    addAcceptFilterView()
-    setConstraintsForAcceptFilterView()
-    
     tableView.setWhiteBackgroundColor()
     registerTableViewCells()
     fetchFilterParameters()
+    
+    addAcceptFilterView()
+    setConstraintsForAcceptFilterView()
+  }
+  
+  private func addAcceptFilterView() {
+    navigationController?.view.addSubview(acceptFilterView)
+  }
+  
+  private func setConstraintsForAcceptFilterView() {
+    if let view = navigationController?.view {
+      acceptFilterView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+      acceptFilterView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+      acceptFilterView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+      acceptFilterView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+    }
   }
   
   private func registerTableViewCells() {
