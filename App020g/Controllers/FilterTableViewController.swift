@@ -14,13 +14,17 @@ class FilterTableViewController: UITableViewController {
   private let priceCellId = "priceCell"
   private let parameterCellId = "parameterCell"
   
+  private let acceptFilterView = AcceptFilterView()
+  
   var parentController: CatalogCollectionViewController?
   var filter: FilterResponse?
-  
   var selectedParameters = [Int: [Int]]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    addAcceptFilterView()
+    setConstraintsForAcceptFilterView()
     
     tableView.setWhiteBackgroundColor()
     registerTableViewCells()
