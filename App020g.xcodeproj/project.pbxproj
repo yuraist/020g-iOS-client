@@ -34,6 +34,7 @@
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
 		BE19008F21678CC0005069C9 /* UITextFieldExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008E21678CC0005069C9 /* UITextFieldExtension.swift */; };
+		BE1B64FA2189BD2D001D7418 /* CustomLabeledImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1B64F92189BD2D001D7418 /* CustomLabeledImageView.swift */; };
 		BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */; };
 		BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */; };
 		BE1DC531214FA1D400E6AF30 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BE1DC530214FA1D400E6AF30 /* Assets.xcassets */; };
@@ -129,6 +130,7 @@
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		BE19008E21678CC0005069C9 /* UITextFieldExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldExtension.swift; sourceTree = "<group>"; };
+		BE1B64F92189BD2D001D7418 /* CustomLabeledImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLabeledImageView.swift; sourceTree = "<group>"; };
 		BE1DC526214FA1D300E6AF30 /* App020g.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = App020g.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BE1DC529214FA1D300E6AF30 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BE1DC52B214FA1D300E6AF30 /* ContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerViewController.swift; sourceTree = "<group>"; };
@@ -220,6 +222,7 @@
 				BE0218DE2186F0CB00C8DBEC /* FilterOptionsCollectionView.swift */,
 				BE0218E02186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift */,
 				BE0218E22188819700C8DBEC /* AcceptFilterView.swift */,
+				BE1B64F92189BD2D001D7418 /* CustomLabeledImageView.swift */,
 			);
 			path = Filter;
 			sourceTree = "<group>";
@@ -672,6 +675,7 @@
 				BE0218D42181C7E800C8DBEC /* UIViewControllerExtension.swift in Sources */,
 				BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */,
 				BE19008D21672DB4005069C9 /* User.swift in Sources */,
+				BE1B64FA2189BD2D001D7418 /* CustomLabeledImageView.swift in Sources */,
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE0FF0FB2174702600F126BB /* ImageIndicatorCollectionView.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,

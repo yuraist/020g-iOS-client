@@ -40,7 +40,7 @@ class FilterTableViewController: UITableViewController {
       acceptFilterView.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
       acceptFilterView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
       acceptFilterView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-      acceptFilterView.heightAnchor.constraint(equalToConstant: 44).isActive = true
+      acceptFilterView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
   }
   
