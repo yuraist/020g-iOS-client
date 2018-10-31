@@ -69,7 +69,7 @@ class ApiHandlerSlowTests: XCTestCase {
     XCTAssertNotNil(filterResponse)
   }
   
-  func testfetchCatalogReponse() {
+  func testFetchCatalogReponse() {
     // given
     let promise = expectation(description: "")
 //let options = [(1, 361), (1, 292), (21, 182)]
@@ -88,5 +88,27 @@ class ApiHandlerSlowTests: XCTestCase {
     // then
     waitForExpectations(timeout: 5, handler: nil)
     XCTAssertNotNil(catalogResponse)
+  }
+  
+  func testGetFilterCount() {
+    // given
+    let filterRequest = FilterRequest(category: "401",
+                                      page: "1",
+                                      cost: nil,
+                                      options: Optional([21: [244], 1: [4]]),
+                                      sort: nil)
+    
+    let promise = expectation(description: "")
+    var filterCount = 0
+    
+    // when
+    ApiHandler.shared.getFilterCount(filter: filterRequest) { count in
+      filterCount = count
+      print(count)
+      promise.fulfill()
+    }
+    
+    waitForExpectations(timeout: 5, handler: nil)
+    XCTAssertNotEqual(filterCount, 0)
   }
 }

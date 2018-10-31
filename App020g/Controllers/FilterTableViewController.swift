@@ -18,7 +18,22 @@ class FilterTableViewController: UITableViewController {
   
   var parentController: CatalogCollectionViewController?
   var filter: FilterResponse?
-  var selectedParameters = [Int: [Int]]()
+  
+  var selectedCost: (min: Int, max: Int)? {
+    didSet {
+      if let newFilterRequest = createNewFilterRequest() {
+        getFilterCount(forFilterRequest: newFilterRequest)
+      }
+    }
+  }
+  
+  var selectedParameters = [Int: [Int]]() {
+    didSet {
+      if let newFilterRequest = createNewFilterRequest() {
+        getFilterCount(forFilterRequest: newFilterRequest)
+      }
+    }
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -68,6 +83,19 @@ class FilterTableViewController: UITableViewController {
   private func registerTableViewCells() {
     tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
     tableView.register(FilterParameterTableViewCell.self, forCellReuseIdentifier: parameterCellId)
+  }
+  
+  private func createNewFilterRequest() -> FilterRequest? {
+    guard let category = parentController?.category else {
+      return nil
+    }
+    
+    let filterRequest = FilterRequest(category: "\(category.id)", page: "1", cost: selectedCost, options: selectedParameters, sort: nil)
+    return filterRequest
+  }
+  
+  private func getFilterCount(forFilterRequest filter: FilterRequest) {
+    print(filter)
   }
   
   private func fetchFilterParameters() {

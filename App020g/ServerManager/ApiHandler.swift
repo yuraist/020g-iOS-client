@@ -363,4 +363,51 @@ class ApiHandler {
     
     dataTask.resume()
   }
+  
+  func getFilterCount(filter: FilterRequest, completion: ((Int)->Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(0)
+      return
+    }
+    
+    var queryItems = ["token": token, "appname": appName, "cat": filter.category]
+    
+    if let minCost = filter.cost?.min, let maxCost = filter.cost?.max {
+      queryItems["min_cost"] = String(minCost)
+      queryItems["max_cost"] = String(maxCost)
+    }
+    
+    if let options = filter.options {
+      var optionString = ""
+      for (optionId, optionValues) in options {
+        optionString += "_"
+        for value in optionValues {
+          optionString += "\(optionId)-\(value)."
+        }
+        optionString.removeLast()
+        optionString += "_."
+      }
+      queryItems["o"] = optionString
+    }
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/get_filter_count", queryItems: queryItems, method: .get) { (data, _, _) in
+      if let jsonData = data {
+        do {
+          let jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: []) as! [String: Any]
+          
+          if let count = jsonObject["count"] as? Int {
+            completion?(count)
+            return
+          } else {
+            completion?(0)
+          }
+        } catch let error {
+          print(error)
+          completion?(0)
+        }
+      }
+    }
+    
+    dataTask.resume()
+  }
 }
