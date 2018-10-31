@@ -32,9 +32,10 @@ class FilterPriceTableViewCell: UITableViewCell {
     return label
   }()
   
-  private let priceFromTextField: UITextField = {
+  let priceFromTextField: UITextField = {
     let tf = UITextField(frame: .zero)
     tf.textAlignment = .right
+    tf.keyboardType = .numberPad
     tf.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return tf
   }()
@@ -46,9 +47,10 @@ class FilterPriceTableViewCell: UITableViewCell {
     return view
   }()
   
-  private let priceToTextField: UITextField = {
+  let priceToTextField: UITextField = {
     let tf = UITextField(frame: .zero)
     tf.textAlignment = .right
+    tf.keyboardType = .numberPad
     tf.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return tf
   }()

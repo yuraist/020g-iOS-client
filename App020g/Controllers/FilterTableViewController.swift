@@ -132,12 +132,13 @@ class FilterTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
       let cell = FilterPriceTableViewCell(style: .default, reuseIdentifier: priceCellId)
-      cell.selectionStyle = .none
       
-      if let filter = filter {
-        if let minPrice = Int(filter.list[0].cost_min_orig!), let maxPrice = Int(filter.list[0].cost_max_orig!) {
-          cell.priceRange = (min: minPrice, max: maxPrice)
-        }
+      cell.selectionStyle = .none
+      cell.priceFromTextField.delegate = self
+      cell.priceToTextField.delegate = self
+      
+      if filter != nil {
+        cell.priceRange = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
       }
       
       return cell
@@ -148,6 +149,14 @@ class FilterTableViewController: UITableViewController {
     cell.parentController = self
     cell.filterParameter = filter?.list[indexPath.row]
     return cell
+  }
+  
+  private func getOriginalMinPrice() -> Int {
+    return Int(filter?.list[0].cost_min_orig ?? "0") ?? 0
+  }
+  
+  private func getOriginalMaxPrice() -> Int {
+    return Int(filter?.list[0].cost_max_orig ?? "0") ?? 0
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -183,5 +192,31 @@ class FilterTableViewController: UITableViewController {
     
     let height = CGFloat(64 + (lines * 46))
     return height
+  }
+}
+
+extension FilterTableViewController: UITextFieldDelegate {
+  func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+    return Int(string) != nil
+  }
+  
+  func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+    textField.resignFirstResponder()
+    
+    if selectedCost == nil {
+      selectedCost = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
+    }
+    
+    if textField.placeholder == "\(getOriginalMinPrice())" {
+      if let selectedMin = Int(textField.text!) {
+        selectedCost?.min = selectedMin
+      }
+    } else {
+      if let selectedMax = Int(textField.text!) {
+        selectedCost?.max = selectedMax
+      }
+    }
+    
+    return true
   }
 }
