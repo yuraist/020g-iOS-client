@@ -133,6 +133,7 @@ class FilterTableViewController: UITableViewController {
     if indexPath.row == 0 {
       let cell = FilterPriceTableViewCell(style: .default, reuseIdentifier: priceCellId)
       cell.selectionStyle = .none
+      
       if let filter = filter {
         if let minPrice = Int(filter.list[0].cost_min_orig!), let maxPrice = Int(filter.list[0].cost_max_orig!) {
           cell.priceRange = (min: minPrice, max: maxPrice)
