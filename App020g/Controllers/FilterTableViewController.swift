@@ -45,6 +45,10 @@ class FilterTableViewController: UITableViewController {
     addAcceptFilterView()
     setConstraintsForAcceptFilterView()
     setActionsForAcceptFilterViewButtons()
+    
+    if let filterRequest = createNewFilterRequest() {
+      getFilterCount(forFilterRequest: filterRequest)
+    }
   }
   
   private func addAcceptFilterView() {
@@ -95,7 +99,15 @@ class FilterTableViewController: UITableViewController {
   }
   
   private func getFilterCount(forFilterRequest filter: FilterRequest) {
-    print(filter)
+    ApiHandler.shared.getFilterCount(filter: filter) { (count) in
+      DispatchQueue.main.async {
+        self.updateNavigationTitle(withCount: count)
+      }
+    }
+  }
+  
+  private func updateNavigationTitle(withCount count: Int) {
+    navigationItem.title = "Фильтр - \(count) товаров"
   }
   
   private func fetchFilterParameters() {
