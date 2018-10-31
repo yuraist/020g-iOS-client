@@ -141,6 +141,11 @@ class FilterTableViewController: UITableViewController {
         cell.priceRange = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
       }
       
+      if let selectedCost = selectedCost {
+        cell.priceFromTextField.text = String(selectedCost.min)
+        cell.priceToTextField.text = String(selectedCost.max)
+      }
+      
       return cell
     }
     
