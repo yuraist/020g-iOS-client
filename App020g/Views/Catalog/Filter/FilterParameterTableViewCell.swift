@@ -55,7 +55,6 @@ class FilterParameterTableViewCell: UITableViewCell {
     parameterTitleLabel.text = filterParameter?.name
     filterOptionsCollectionView.filterParameter = filterParameter
     filterOptionsCollectionView.parentController = parentController
-//    filterOptionsCollectionView.filterOptions = filterParameter?.options ?? []
   }
   
   private let parameterTitleLabel = FilterParameterNameLabel(text: "", isMainTitle: true)

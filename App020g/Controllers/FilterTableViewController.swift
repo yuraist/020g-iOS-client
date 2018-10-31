@@ -29,6 +29,7 @@ class FilterTableViewController: UITableViewController {
     
     addAcceptFilterView()
     setConstraintsForAcceptFilterView()
+    setActionsForAcceptFilterViewButtons()
   }
   
   private func addAcceptFilterView() {
@@ -42,6 +43,26 @@ class FilterTableViewController: UITableViewController {
       acceptFilterView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
       acceptFilterView.heightAnchor.constraint(equalToConstant: 60).isActive = true
     }
+  }
+  
+  func setActionsForAcceptFilterViewButtons() {
+    let acceptGesture = UITapGestureRecognizer(target: self, action: #selector(acceptFilterParameters))
+    let cancelGesture = UITapGestureRecognizer(target: self, action: #selector(clearFilter))
+    
+    acceptFilterView.acceptView.addGestureRecognizer(acceptGesture)
+    acceptFilterView.cancelView.addGestureRecognizer(cancelGesture)
+  }
+  
+  @objc
+  func clearFilter() {
+    selectedParameters.removeAll()
+    tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
+    acceptFilterView.showOnlyAcceptView()
+  }
+  
+  @objc
+  func acceptFilterParameters() {
+    print("Accept filter parameters")
   }
   
   private func registerTableViewCells() {

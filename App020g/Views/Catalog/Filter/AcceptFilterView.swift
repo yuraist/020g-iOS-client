@@ -10,8 +10,8 @@ import UIKit
 
 class AcceptFilterView: UIView {
   
-  private let acceptView = CustomLabeledImageView(withImage: #imageLiteral(resourceName: "ok"), andTitle: "Готово")
-  private let cancelView = CustomLabeledImageView(withImage: #imageLiteral(resourceName: "cancel"), andTitle: "Очистить")
+  let acceptView = CustomLabeledImageView(withImage: #imageLiteral(resourceName: "ok"), andTitle: "Готово")
+  let cancelView = CustomLabeledImageView(withImage: #imageLiteral(resourceName: "cancel"), andTitle: "Очистить")
   
   private var acceptViewWidthAnchor: NSLayoutConstraint?
   private var acceptViewLeftAnchor: NSLayoutConstraint?
