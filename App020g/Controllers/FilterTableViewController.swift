@@ -14,7 +14,7 @@ class FilterTableViewController: UITableViewController {
   private let priceCellId = "priceCell"
   private let parameterCellId = "parameterCell"
   
-  private let acceptFilterView = AcceptFilterView(frame: .zero)
+  let acceptFilterView = AcceptFilterView(frame: .zero)
   
   var parentController: CatalogCollectionViewController?
   var filter: FilterResponse?

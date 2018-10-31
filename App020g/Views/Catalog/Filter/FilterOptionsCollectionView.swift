@@ -12,11 +12,7 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   private let reuseIdentifier = "cellId"
   
-  var parentController: FilterTableViewController? {
-    didSet {
-      
-    }
-  }
+  var parentController: FilterTableViewController?
   
   var filterParameter: FilterParameter? {
     didSet {
@@ -117,7 +113,16 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
           }
         } else {
           parent.selectedParameters[parameterId]?.removeAll(where: { $0 == option.value })
+          if parent.selectedParameters[parameterId]?.count == 0 {
+            parent.selectedParameters.removeValue(forKey: parameterId)
+          }
         }
+      }
+      
+      if parent.selectedParameters.count == 0 {
+        parent.acceptFilterView.showOnlyAcceptView()
+      } else {
+        parent.acceptFilterView.showTwoButtons()
       }
     }
   }
