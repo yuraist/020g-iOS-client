@@ -21,6 +21,12 @@ class FilterTableViewController: UITableViewController {
   
   var selectedCost: (min: Int, max: Int)? {
     didSet {
+      if selectedCost != nil {
+        acceptFilterView.showTwoButtons()
+      } else {
+        acceptFilterView.showOnlyAcceptView()
+      }
+      
       if let newFilterRequest = createNewFilterRequest() {
         getFilterCount(forFilterRequest: newFilterRequest)
       }
@@ -75,6 +81,8 @@ class FilterTableViewController: UITableViewController {
   @objc
   func clearFilter() {
     selectedParameters.removeAll()
+    selectedCost = nil
+    
     tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
     acceptFilterView.showOnlyAcceptView()
   }
@@ -201,8 +209,9 @@ class FilterTableViewController: UITableViewController {
 }
 
 extension FilterTableViewController: UITextFieldDelegate {
+  
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
-    return Int(string) != nil
+    return Int(string) != nil || range.length > 0
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
