@@ -15,7 +15,13 @@ class CatalogCollectionViewController: UICollectionViewController {
   private let filterBarView = FilterBarView(frame: .zero)
   
   var category: CatalogTreeChildCategory?
-  var filter: FilterRequest?
+  var filter: FilterRequest? {
+    didSet {
+      products.removeAll()
+      fetchProducts()
+    }
+  }
+  
   var products = [CodableProduct]()
   
   var isShowingLargeCells = false {

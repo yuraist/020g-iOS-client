@@ -89,7 +89,11 @@ class FilterTableViewController: UITableViewController {
   
   @objc
   func acceptFilterParameters() {
-    print("Accept filter parameters")
+    if let filterRequest = createNewFilterRequest() {
+      parentController?.filter = filterRequest
+      acceptFilterView.removeFromSuperview()
+      navigationController?.popViewController(animated: true)
+    }
   }
   
   private func registerTableViewCells() {
