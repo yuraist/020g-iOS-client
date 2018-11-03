@@ -15,10 +15,18 @@ class CatalogCollectionViewController: UICollectionViewController {
   private let filterBarView = FilterBarView(frame: .zero)
   
   var category: CatalogTreeChildCategory?
+  
   var filter: FilterRequest? {
     didSet {
-      products.removeAll()
+      products = []
       fetchProducts()
+    }
+  }
+  
+  var sorting: SortingType = .chipFirst {
+    didSet {
+      filterBarView.dropDownSortingMenu.change(sortingType: sorting)
+      filter?.sort = sorting.rawValue
     }
   }
   
@@ -97,17 +105,24 @@ class CatalogCollectionViewController: UICollectionViewController {
     let sortingTypeActionSheet = UIAlertController(title: "Сортировать", message: nil, preferredStyle: .actionSheet)
     
     let newFirstAction = UIAlertAction(title: "Сначала новые", style: .default) { [unowned self] _ in
-      self.filterBarView.dropDownSortingMenu.change(sortingType: .newFirst) }
+      self.sorting = .newFirst
+    }
     let oldFirstAction = UIAlertAction(title: "Сначала старые", style: .default) { [unowned self] _ in
-      self.filterBarView.dropDownSortingMenu.change(sortingType: .oldFirst) }
+      self.sorting = .oldFirst
+    }
     let chipFirstAction = UIAlertAction(title: "Сначала дешевые", style: .default) { [unowned self] _ in
-      self.filterBarView.dropDownSortingMenu.change(sortingType: .chipFirst) }
+      self.sorting = .chipFirst
+    }
     let expensiveFirstAction = UIAlertAction(title: "Сначала дорогие", style: .default) { [unowned self] _ in
-      self.filterBarView.dropDownSortingMenu.change(sortingType: .expensiveFirst) }
+      self.sorting = .expensiveFirst
+    }
     let groupedFirstAction = UIAlertAction(title: "Сначала сгруппированные", style: .default) { [unowned self] _ in
-      self.filterBarView.dropDownSortingMenu.change(sortingType: .groupedFirst) }
+      self.sorting = .groupedFirst
+    }
     let ungroupedFirstAction = UIAlertAction(title: "Сначала несгруппированные", style: .default) { [unowned self] _ in
-      self.filterBarView.dropDownSortingMenu.change(sortingType: .ungroupedFirst) }
+      self.sorting = .ungroupedFirst
+    }
+    
     let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
     
     sortingTypeActionSheet.addAction(newFirstAction)

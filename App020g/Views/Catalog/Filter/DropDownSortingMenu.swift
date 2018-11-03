@@ -11,8 +11,8 @@ import UIKit
 enum SortingType: String {
   case newFirst = "upd-1"
   case oldFirst = "upd-0"
-  case chipFirst = "cst-1"
-  case expensiveFirst = "cst-0"
+  case chipFirst = "cst-0"
+  case expensiveFirst = "cst-1"
   case groupedFirst = "pop-1"
   case ungroupedFirst = "pop-0"
 }
@@ -21,8 +21,8 @@ class DropDownSortingMenu: UIView {
   
   private let sortingTitles: [SortingType: String] = [.newFirst: "Сначала новые",
                                                        .oldFirst: "Сначала старые",
-                                                       .chipFirst: "Сначала дорогие",
-                                                       .expensiveFirst: "Сначала дешевые",
+                                                       .chipFirst: "Сначала дешевые",
+                                                       .expensiveFirst: "Сначала дорогие",
                                                        .groupedFirst: "Сначала сгруппированные",
                                                        .ungroupedFirst: "Сначала несгруппированные"]
   
