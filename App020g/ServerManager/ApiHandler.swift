@@ -135,10 +135,13 @@ class ApiHandler {
               shops.append(Shop(withDictionary: jsonShop))
             }
             completion?(true, shops)
+            return
           }
           completion?(false, nil)
+          return
         } catch {
           completion?(false, nil)
+          return
         }
       }
     }

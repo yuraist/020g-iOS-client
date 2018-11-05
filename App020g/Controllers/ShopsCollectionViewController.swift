@@ -14,6 +14,8 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
   private let cellId = "shopListCellId"
   var collectionView: UICollectionView?
   
+  private var viewModel: ShopsViewModel
+  
   var shops = [Shop]() {
     didSet {
       DispatchQueue.main.async {
@@ -32,6 +34,15 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
     }
   }
   
+  init(viewModel: ShopsViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -41,7 +52,13 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
     setNavigationTitle()
     setCollectionViewDelegateAndDataSource()
     registerCollectionViewCell()
-    fetchShops()
+    
+    viewModel.fetch { [unowned self] in
+      DispatchQueue.main.async {
+        self.reloadCollectionView()
+        self.updateCollectionViewLayout()
+      }
+    }
   }
   
   private func createAndAddCollectionView() {
@@ -94,16 +111,18 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
   // MARK: - Collection view data source
 
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return shops.count
+    return viewModel.shops.count
   }
   
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShopCollectionViewCell
-    cell.shop = shops[indexPath.item]
+    
+    cell.shop = viewModel.shops[indexPath.item]
     cell.contactButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
     if cell.shop?.vkGroup != nil {
       cell.vkGroupButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
     }
+    
     return cell
   }
   
@@ -115,7 +134,7 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    let cellHeight = shops[indexPath.item].cellHeight
+    let cellHeight = viewModel.shops[indexPath.item].cellHeight
     return CGSize(width: view.frame.width, height: cellHeight)
   }
   
