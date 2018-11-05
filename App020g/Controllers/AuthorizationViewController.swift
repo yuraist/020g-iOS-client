@@ -110,10 +110,35 @@ class AuthorizationViewController: UIViewController {
   
   private func prepareDataAndSendLoginRequest() {
     if submitFormButtonIsLogin() {
-      loginRequest(with: viewModel.signInData)
+      viewModel.login { [unowned self] (success) in
+        DispatchQueue.main.async {
+          if success {
+            self.showSuccessAuthorizationAlert()
+          } else {
+            self.showFailureAuthorizationAlert()
+          }
+        }
+      }
     } else {
-      loginRequest(with: viewModel.signUpData)
+      viewModel.signUp { (success) in
+        DispatchQueue.main.async {
+          if success {
+            self.showSuccessAuthorizationAlert()
+          } else {
+            self.showFailureAuthorizationAlert()
+          }
+        }
+      }
     }
+  }
+  
+  private func showSuccessAuthorizationAlert() {
+    self.showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")
+  }
+  
+  private func showFailureAuthorizationAlert() {
+    self.showAuthorizationAlert(title: "Что-то пошло не так",
+                                text: "Проверьте правильность введенных данных. Если вы забыли пароль, то нажмите \"Напомнить пароль\" или создайте новый акккаунт.")
   }
   
   private func addHideKeyboardActionWhenTappedOutsideInputContainer() {

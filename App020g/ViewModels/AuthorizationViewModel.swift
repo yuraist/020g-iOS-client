@@ -48,6 +48,18 @@ class AuthorizationViewModel {
 // MARK: - Public methods
 extension AuthorizationViewModel {
   
+  func login(completion: @escaping (Bool) -> Void) {
+    serverManager.authorize(login: true, data: signInData) { (success) in
+      completion(success)
+    }
+  }
+  
+  func signUp(completion: @escaping (Bool) -> Void) {
+    serverManager.authorize(login: false, data: signUpData) { (success) in
+      completion(success)
+    }
+  }
+  
   func update(email: String) {
     if stringHasValidLength(email) {
       self.email.value = handled(email: email)
