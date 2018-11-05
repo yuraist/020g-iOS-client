@@ -20,8 +20,8 @@ class RecallPasswordView: UIView {
     return label
   }()
   
-  let emailTextField: StandardTextField = {
-    let tf = StandardTextField(placeholder: "Email", isSecureTextEntry: false)
+  let emailTextField: TextField = {
+    let tf = TextField(placeholder: "Email", isSecureTextEntry: false)
     return tf
   }()
   

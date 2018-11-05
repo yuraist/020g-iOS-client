@@ -12,10 +12,9 @@ class BarView: UIView {
   
   private let cellId = "menuBarCellId"
   
-  let pricesButton = StandardButton(title: "Каталог цен")
-  
-  var catalogCollectionView: CategoryPagesCollectionView?
-  var height: CGFloat { return frame.size.height }
+  private var height: CGFloat {
+    return frame.size.height
+  }
   
   var selectedItemIndexPath = IndexPath(item: 0, section: 0) {
     didSet {
@@ -31,12 +30,15 @@ class BarView: UIView {
     }
   }
   
-  let centerButtonView: UIView = {
+  private let centerButtonView: UIView = {
     let view = UIView()
     view.backgroundColor = ApplicationColors.white
     view.translatesAutoresizingMaskIntoConstraints = false
     return view
   }()
+  
+  var catalogCollectionView: CategoryPagesCollectionView?
+  let pricesButton = StandardButton(title: "Каталог цен")
   
   let collectionView: UICollectionView = {
     let cv = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())

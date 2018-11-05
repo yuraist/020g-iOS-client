@@ -13,25 +13,8 @@ class AuthorizationViewController: UIViewController {
   private let loginInputContainerView = LoginInputContainerView(frame: .zero)
   private var loginInputContainerViewHeightAnchor: NSLayoutConstraint?
   
-  private let switchModeButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setTitle("Зарегистрироваться", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.contentHorizontalAlignment = .left
-    button.setTitleColor(ApplicationColors.buttonBlue, for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
-  
-  private let recallPasswordButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setTitle("Напомнить пароль", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.contentHorizontalAlignment = .right
-    button.setTitleColor(ApplicationColors.buttonGray, for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
+  private let switchModeButton = AccessoryButton(title: "Зарегистрироваться", contentAlignment: .left)
+  private let recallPasswordButton = AccessoryButton(title: "Напомнить пароль", contentAlignment: .right)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -128,15 +111,24 @@ class AuthorizationViewController: UIViewController {
     ApiHandler.shared.authorize(login: submitFormButtonIsLogin(), data: data) { (success) in
       if success {
         DispatchQueue.main.async {
-          let alert = UIAlertController(title: "Авторизован", message: "Авторизация успешно выполнена", preferredStyle: .alert)
-          let alertAction = UIAlertAction(title: "Ok", style: .default, handler: { action in
-            self.loginInputContainerView.clearTextFields()
-          })
-          alert.addAction(alertAction)
-          self.present(alert, animated: true, completion: nil)
+          self.showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")
+        }
+      } else {
+        DispatchQueue.main.async {
+          self.showAuthorizationAlert(title: "Что-то пошло не так",
+                                      text: "Проверьте правильность введенных данных. Если вы забыли пароль, то нажмите \"Напомнить пароль\" или создайте новый акккаунт.")
         }
       }
     }
+  }
+  
+  private func showAuthorizationAlert(title: String, text: String) {
+    let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "Ок", style: .default, handler: { action in
+      self.loginInputContainerView.clearTextFields()
+    })
+    alert.addAction(alertAction)
+    self.present(alert, animated: true, completion: nil)
   }
   
   private func getValidLoginData() -> [String: String] {
@@ -205,7 +197,7 @@ class AuthorizationViewController: UIViewController {
   private func changeNavigationItemTitle() {
     navigationItem.title = loginInputContainerView.isSignUpView ? "Регистрация" : "Вход"
   }
- 
+  
   private func changeSwitchingModeButtonTitle() {
     switchModeButton.setTitle(loginInputContainerView.isSignUpView ? "Войти" : "Зарегистрироваться", for: .normal)
   }

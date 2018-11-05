@@ -1,5 +1,5 @@
 //
-//  StandardTextField.swift
+//  TextField.swift
 //  020g
 //
 //  Created by Юрий Истомин on 17/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class StandardTextField: UITextField {
+class TextField: UITextField {
   
   var textFieldHeightAnchor: NSLayoutConstraint?
   

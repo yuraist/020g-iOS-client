@@ -32,6 +32,7 @@
 		BE0FF1172177596F00F126BB /* SecondCatalogTreeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE0FF1162177596F00F126BB /* SecondCatalogTreeCell.swift */; };
 		BE11CB7A218A009400BB83EF /* FilterParameterNameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB79218A009400BB83EF /* FilterParameterNameLabel.swift */; };
 		BE11CB7D2190ADED00BB83EF /* ShopsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB7C2190ADED00BB83EF /* ShopsViewModel.swift */; };
+		BE11CB7F2190CC8200BB83EF /* AccessoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB7E2190CC8200BB83EF /* AccessoryButton.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -52,7 +53,7 @@
 		BE1DC552214FABCE00E6AF30 /* SearchCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC551214FABCE00E6AF30 /* SearchCollectionViewController.swift */; };
 		BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */; };
 		BE1DC556214FAE3800E6AF30 /* LoginInputContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */; };
-		BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55721500AF700E6AF30 /* StandardTextField.swift */; };
+		BE1DC55821500AF700E6AF30 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55721500AF700E6AF30 /* TextField.swift */; };
 		BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC559215221E200E6AF30 /* SeparatorView.swift */; };
 		BE1DC55C2152225D00E6AF30 /* StandardButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55B2152225D00E6AF30 /* StandardButton.swift */; };
 		BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */; };
@@ -130,6 +131,7 @@
 		BE0FF1162177596F00F126BB /* SecondCatalogTreeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondCatalogTreeCell.swift; sourceTree = "<group>"; };
 		BE11CB79218A009400BB83EF /* FilterParameterNameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameterNameLabel.swift; sourceTree = "<group>"; };
 		BE11CB7C2190ADED00BB83EF /* ShopsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsViewModel.swift; sourceTree = "<group>"; };
+		BE11CB7E2190CC8200BB83EF /* AccessoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryButton.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -151,7 +153,7 @@
 		BE1DC551214FABCE00E6AF30 /* SearchCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCollectionViewController.swift; sourceTree = "<group>"; };
 		BE1DC553214FABE300E6AF30 /* FilterTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTableViewController.swift; sourceTree = "<group>"; };
 		BE1DC555214FAE3800E6AF30 /* LoginInputContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInputContainerView.swift; sourceTree = "<group>"; };
-		BE1DC55721500AF700E6AF30 /* StandardTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardTextField.swift; sourceTree = "<group>"; };
+		BE1DC55721500AF700E6AF30 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		BE1DC559215221E200E6AF30 /* SeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorView.swift; sourceTree = "<group>"; };
 		BE1DC55B2152225D00E6AF30 /* StandardButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardButton.swift; sourceTree = "<group>"; };
 		BE1DC55D2153E8A600E6AF30 /* RecallPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecallPasswordView.swift; sourceTree = "<group>"; };
@@ -393,10 +395,11 @@
 		BEE57E0C216C9071005C9672 /* CustomInputs */ = {
 			isa = PBXGroup;
 			children = (
-				BE1DC55721500AF700E6AF30 /* StandardTextField.swift */,
+				BE1DC55721500AF700E6AF30 /* TextField.swift */,
 				BE1DC55F2153EFB700E6AF30 /* TitledInputView.swift */,
 				BE1DC559215221E200E6AF30 /* SeparatorView.swift */,
 				BE1DC55B2152225D00E6AF30 /* StandardButton.swift */,
+				BE11CB7E2190CC8200BB83EF /* AccessoryButton.swift */,
 			);
 			path = CustomInputs;
 			sourceTree = "<group>";
@@ -652,7 +655,7 @@
 				BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE0FF10B2175A84B00F126BB /* CategoryPagesCollectionView.swift in Sources */,
-				BE1DC55821500AF700E6AF30 /* StandardTextField.swift in Sources */,
+				BE1DC55821500AF700E6AF30 /* TextField.swift in Sources */,
 				BEF6F69F215CC144000E4BCB /* Product.swift in Sources */,
 				BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */,
 				BE0FF10D2177212100F126BB /* CatalogCategory.swift in Sources */,
@@ -695,6 +698,7 @@
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE0FF0FB2174702600F126BB /* ImageIndicatorCollectionView.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
+				BE11CB7F2190CC8200BB83EF /* AccessoryButton.swift in Sources */,
 				BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */,
 				BE0218DB2185BAA500C8DBEC /* DropDownSortingMenu.swift in Sources */,
 				BEF1B99321620B3300348A3D /* CatalogCollectionView.swift in Sources */,

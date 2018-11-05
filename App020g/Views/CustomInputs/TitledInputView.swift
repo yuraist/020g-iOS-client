@@ -18,8 +18,8 @@ class TitledInputView: UIView {
     return label
   }()
   
-  let textField: StandardTextField = {
-    let tf = StandardTextField(placeholder: "Чтобы мы знали как к Вам обращаться", isSecureTextEntry: false)
+  let textField: TextField = {
+    let tf = TextField(placeholder: "Чтобы мы знали как к Вам обращаться", isSecureTextEntry: false)
     return tf
   }()
   
