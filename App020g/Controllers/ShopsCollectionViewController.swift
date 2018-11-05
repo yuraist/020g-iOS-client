@@ -52,13 +52,7 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
     setNavigationTitle()
     setCollectionViewDelegateAndDataSource()
     registerCollectionViewCell()
-    
-    viewModel.fetch { [unowned self] in
-      DispatchQueue.main.async {
-        self.reloadCollectionView()
-        self.updateCollectionViewLayout()
-      }
-    }
+    fetchShops()
   }
   
   private func createAndAddCollectionView() {
@@ -87,14 +81,6 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
     collectionView?.register(ShopCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
   }
   
-  private func fetchShops() {
-    ApiHandler.shared.fetchShops { (success, shops) in
-      if let shops = shops {
-          self.shops = shops
-      }
-    }
-  }
-  
   private func reloadCollectionView() {
     updateCollectionViewData()
   }
@@ -107,9 +93,19 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
     collectionView?.collectionViewLayout.invalidateLayout()
   }
   
-  
-  // MARK: - Collection view data source
+  private func fetchShops() {
+    viewModel.fetch { [unowned self] in
+      DispatchQueue.main.async {
+        self.reloadCollectionView()
+        self.updateCollectionViewLayout()
+      }
+    }
+  }
+}
 
+// MARK: - Collection view data source
+
+extension ShopsCollectionViewController {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewModel.shops.count
   }
@@ -118,7 +114,9 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! ShopCollectionViewCell
     
     cell.shop = viewModel.shops[indexPath.item]
+    
     cell.contactButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
+    
     if cell.shop?.vkGroup != nil {
       cell.vkGroupButton.addTarget(self, action: #selector(openContactInSafari(sender:)), for: .touchUpInside)
     }
