@@ -52,7 +52,8 @@ class CenterViewController: UIViewController {
   }
   
   @objc private func showSearchCollectionViewController() {
-    
+    let searchViewController = SearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    show(searchViewController, sender: self)
   }
   
   @objc private func showMenu() {
