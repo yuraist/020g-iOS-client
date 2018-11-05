@@ -173,21 +173,6 @@ class AuthorizationViewController: UIViewController {
     }
   }
   
-  private func loginRequest(with data: [String: String]) {
-    ServerManager.shared.authorize(login: submitFormButtonIsLogin(), data: data) { (success) in
-      if success {
-        DispatchQueue.main.async {
-          self.showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")
-        }
-      } else {
-        DispatchQueue.main.async {
-          self.showAuthorizationAlert(title: "Что-то пошло не так",
-                                      text: "Проверьте правильность введенных данных. Если вы забыли пароль, то нажмите \"Напомнить пароль\" или создайте новый акккаунт.")
-        }
-      }
-    }
-  }
-  
   private func showAuthorizationAlert(title: String, text: String) {
     let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
     let alertAction = UIAlertAction(title: "Ок", style: .default, handler: { action in
@@ -197,53 +182,8 @@ class AuthorizationViewController: UIViewController {
     self.present(alert, animated: true, completion: nil)
   }
   
-  private func getValidLoginData() -> [String: String] {
-    let email = loginInputContainerView.emailTextField.text!
-    let password = loginInputContainerView.passwordTextField.text!
-    let data = ["login": email, "password": password, "key": ApiKeys.token!]
-    return data
-  }
-  
-  private func getValidSignUpData() -> [String: String] {
-    var data = [String: String]()
-    
-    data["key"] = ApiKeys.token!
-    data["email"] = loginInputContainerView.getEmailTextFieldData()
-    data["name"] = loginInputContainerView.getNameTextFieldHandledData()
-    data["password"] = loginInputContainerView.getPasswordTextFieldData()
-    
-    if let phoneNumber = loginInputContainerView.phoneTextField.text, phoneNumber != "" {
-      data["phone"] = loginInputContainerView.getPhoneNumberTextFieldHandledData()
-    }
-    
-    return data
-  }
-  
-  private func formIsValid() -> Bool {
-    if submitFormButtonIsLogin() {
-      return loginInputContainerView.emailTextField.isValid && loginInputContainerView.passwordTextField.isValid
-    } else {
-      var result = loginInputContainerView.emailTextField.isValid &&
-        loginInputContainerView.nameTextField.isValid &&
-        loginInputContainerView.phoneTextField.isValid &&
-        loginInputContainerView.passwordTextField.isValid &&
-        loginInputContainerView.repeatPasswordTextField.isValid
-      result = result && (loginInputContainerView.passwordTextField.text == loginInputContainerView.repeatPasswordTextField.text)
-      return result
-    }
-  }
-  
   private func submitFormButtonIsLogin() -> Bool {
     return loginInputContainerView.loginButton.title == "Войти"
-  }
-  
-  private func showAlertMessage() {
-    let alert = UIAlertController(title: "Ошибка",
-                                  message: "Вы ввели данные неверно. Пожалуйста, проверьте правильность введенных вами данных и попробуйте снова.", preferredStyle: .alert)
-    
-    let alertAction = UIAlertAction(title: "Хорошо", style: .default, handler: nil)
-    alert.addAction(alertAction)
-    present(alert, animated: true, completion: nil)
   }
   
   @objc
