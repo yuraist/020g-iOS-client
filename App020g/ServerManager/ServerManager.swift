@@ -13,10 +13,10 @@ enum HTTPMethod: String {
   case post = "POST"
 }
 
-class ApiHandler {
+class ServerManager {
   
   let appName = "020g"
-  static let shared = ApiHandler()
+  static let shared = ServerManager()
   
   
   func checkKeys(success: ((Bool)->Void)?) {
@@ -135,10 +135,13 @@ class ApiHandler {
               shops.append(Shop(withDictionary: jsonShop))
             }
             completion?(true, shops)
+            return
           }
           completion?(false, nil)
+          return
         } catch {
           completion?(false, nil)
+          return
         }
       }
     }

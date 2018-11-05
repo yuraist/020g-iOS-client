@@ -13,40 +13,36 @@ class AuthorizationViewController: UIViewController {
   private let loginInputContainerView = LoginInputContainerView(frame: .zero)
   private var loginInputContainerViewHeightAnchor: NSLayoutConstraint?
   
-  private let switchModeButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setTitle("Зарегистрироваться", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.contentHorizontalAlignment = .left
-    button.setTitleColor(ApplicationColors.buttonBlue, for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
+  private let switchModeButton = AccessoryButton(title: "Зарегистрироваться", contentAlignment: .left)
+  private let recallPasswordButton = AccessoryButton(title: "Напомнить пароль", contentAlignment: .right)
   
-  private let recallPasswordButton: UIButton = {
-    let button = UIButton(type: .system)
-    button.setTitle("Напомнить пароль", for: .normal)
-    button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
-    button.contentHorizontalAlignment = .right
-    button.setTitleColor(ApplicationColors.buttonGray, for: .normal)
-    button.translatesAutoresizingMaskIntoConstraints = false
-    return button
-  }()
+  private var viewModel: AuthorizationViewModel
+  
+  init(viewModel: AuthorizationViewModel) {
+    self.viewModel = viewModel
+    super.init(nibName: nil, bundle: nil)
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
+  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setGrayBackgroundColorToView()
+    
+    view.setGrayBackgroundColor()
     setupNavigationControllerAppearance()
     setupNavigationItem()
-    setControllerAsTextFieldsDelegate()
+    
     addSubviews()
     setupConstraintsToSubviews()
+    
+    setControllerAsTextFieldsDelegate()
+    
     setupButtonTargets()
     addHideKeyboardActionWhenTappedOutsideInputContainer()
-  }
-  
-  private func setGrayBackgroundColorToView() {
-    view.backgroundColor = ApplicationColors.gray
+    
+    bindTextFields()
   }
   
   private func setupNavigationControllerAppearance() {
@@ -98,95 +94,100 @@ class AuthorizationViewController: UIViewController {
     recallPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
   }
   
-  private func addHideKeyboardActionWhenTappedOutsideInputContainer() {
-    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
-    view.addGestureRecognizer(gestureRecognizer)
-  }
   
-  @objc private func login() {
-    if formIsValid() {
+  @objc
+  private func login() {
+    let type: FormType = submitFormButtonIsLogin() ? .signIn : .signUp
+    
+    switch viewModel.validate(formOfType: type) {
+    case .valid:
       hideKeyboard()
       prepareDataAndSendLoginRequest()
-    } else {
-      showAlertMessage()
+    case .invalid(let error):
+      showAuthorizationAlert(title: "Ошибка", text: error)
     }
   }
   
   private func prepareDataAndSendLoginRequest() {
-    var data = [String: String]()
-    
     if submitFormButtonIsLogin() {
-      data = getValidLoginData()
-    } else {
-      data = getValidSignUpData()
-    }
-    
-    loginRequest(with: data)
-  }
-  
-  private func loginRequest(with data: [String: String]) {
-    ApiHandler.shared.authorize(login: submitFormButtonIsLogin(), data: data) { (success) in
-      if success {
+      viewModel.login { [unowned self] (success) in
         DispatchQueue.main.async {
-          let alert = UIAlertController(title: "Авторизован", message: "Авторизация успешно выполнена", preferredStyle: .alert)
-          let alertAction = UIAlertAction(title: "Ok", style: .default, handler: { action in
-            self.loginInputContainerView.clearTextFields()
-          })
-          alert.addAction(alertAction)
-          self.present(alert, animated: true, completion: nil)
+          if success {
+            self.showSuccessAuthorizationAlert()
+          } else {
+            self.showFailureAuthorizationAlert()
+          }
+        }
+      }
+    } else {
+      viewModel.signUp { (success) in
+        DispatchQueue.main.async {
+          if success {
+            self.showSuccessAuthorizationAlert()
+          } else {
+            self.showFailureAuthorizationAlert()
+          }
         }
       }
     }
   }
   
-  private func getValidLoginData() -> [String: String] {
-    let email = loginInputContainerView.emailTextField.text!
-    let password = loginInputContainerView.passwordTextField.text!
-    let data = ["login": email, "password": password, "key": ApiKeys.token!]
-    return data
+  private func showSuccessAuthorizationAlert() {
+    self.showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")
   }
   
-  private func getValidSignUpData() -> [String: String] {
-    var data = [String: String]()
-    
-    data["key"] = ApiKeys.token!
-    data["email"] = loginInputContainerView.getEmailTextFieldData()
-    data["name"] = loginInputContainerView.getNameTextFieldHandledData()
-    data["password"] = loginInputContainerView.getPasswordTextFieldData()
-    
-    if let phoneNumber = loginInputContainerView.phoneTextField.text, phoneNumber != "" {
-      data["phone"] = loginInputContainerView.getPhoneNumberTextFieldHandledData()
-    }
-    
-    return data
+  private func showFailureAuthorizationAlert() {
+    self.showAuthorizationAlert(title: "Что-то пошло не так",
+                                text: "Проверьте правильность введенных данных. Если вы забыли пароль, то нажмите \"Напомнить пароль\" или создайте новый акккаунт.")
   }
   
-  private func formIsValid() -> Bool {
-    if submitFormButtonIsLogin() {
-      return loginInputContainerView.emailTextField.isValid && loginInputContainerView.passwordTextField.isValid
-    } else {
-      var result = loginInputContainerView.emailTextField.isValid &&
-        loginInputContainerView.nameTextField.isValid &&
-        loginInputContainerView.phoneTextField.isValid &&
-        loginInputContainerView.passwordTextField.isValid &&
-        loginInputContainerView.repeatPasswordTextField.isValid
-      result = result && (loginInputContainerView.passwordTextField.text == loginInputContainerView.repeatPasswordTextField.text)
-      return result
+  private func addHideKeyboardActionWhenTappedOutsideInputContainer() {
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
+    view.addGestureRecognizer(gestureRecognizer)
+  }
+  
+  @objc
+  private func hideKeyboardAction() {
+    view.endEditing(true)
+  }
+  
+  private func bindTextFields() {
+    viewModel.phoneNumber.bind { [unowned self] in
+      self.loginInputContainerView.phoneTextField.text = $0
     }
+    
+    viewModel.email.bind { [unowned self] in
+      self.loginInputContainerView.emailTextField.text = $0
+    }
+    
+    viewModel.name.bind { [unowned self] in
+      self.loginInputContainerView.nameTextField.text = $0
+    }
+    
+    viewModel.password.bind { [unowned self] in
+      self.loginInputContainerView.passwordTextField.text = $0
+    }
+    
+    viewModel.repeatPassword.bind { [unowned self] in
+      self.loginInputContainerView.repeatPasswordTextField.text = $0
+    }
+  }
+  
+  private func showAuthorizationAlert(title: String, text: String) {
+    let alert = UIAlertController(title: title, message: text, preferredStyle: .alert)
+    let alertAction = UIAlertAction(title: "Ок", style: .default, handler: { action in
+      self.loginInputContainerView.clearTextFields()
+    })
+    alert.addAction(alertAction)
+    self.present(alert, animated: true, completion: nil)
   }
   
   private func submitFormButtonIsLogin() -> Bool {
     return loginInputContainerView.loginButton.title == "Войти"
   }
   
-  private func showAlertMessage() {
-    let alert = UIAlertController(title: "Ошибка", message: "Вы ввели данные неверно. Пожалуйста, проверьте правильность введенных вами данных и попробуйте снова.", preferredStyle: .alert)
-    let alertAction = UIAlertAction(title: "Хорошо", style: .default, handler: nil)
-    alert.addAction(alertAction)
-    present(alert, animated: true, completion: nil)
-  }
-  
-  @objc private func changeFormMode() {
+  @objc
+  private func changeFormMode() {
     loginInputContainerView.changeContainerViewMode()
     
     changeNavigationItemTitle()
@@ -194,18 +195,20 @@ class AuthorizationViewController: UIViewController {
     changeLayoutsOfContainerView()
   }
   
-  @objc private func forgotPassword() {
+  @objc
+  private func forgotPassword() {
     show(ForgotPasswordViewController(), sender: self)
   }
   
-  @objc private func dismissController() {
+  @objc
+  private func dismissController() {
     dismiss(animated: true, completion: nil)
   }
   
   private func changeNavigationItemTitle() {
     navigationItem.title = loginInputContainerView.isSignUpView ? "Регистрация" : "Вход"
   }
- 
+  
   private func changeSwitchingModeButtonTitle() {
     switchModeButton.setTitle(loginInputContainerView.isSignUpView ? "Войти" : "Зарегистрироваться", for: .normal)
   }
@@ -222,16 +225,21 @@ extension AuthorizationViewController: UITextFieldDelegate {
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
+    let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+    
     if textField.isPhoneNumberField {
-      textField.handlePhoneNumberField(withReplacingString: string, in: range)
-      return false
+      viewModel.update(phoneNumber: newString)
+    } else if textField.isEmailField {
+      viewModel.update(email: newString)
+    } else if textField.isNameField {
+      viewModel.update(name: newString)
+    } else if textField.isPasswordField {
+      viewModel.update(password: newString)
+    } else {
+      viewModel.update(repeatedPassword: newString)
     }
     
-    if (textField.isEmailField || textField.isNameField) && string == " " {
-      return false
-    }
-    
-    return textField.textLengthIsValid || string.count < 1
+    return false
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -246,10 +254,6 @@ extension AuthorizationViewController: UITextFieldDelegate {
   
   private func hideKeyboard() {
     loginInputContainerView.endEditing(true)
-  }
-  
-  @objc private func hideKeyboardAction() {
-    view.endEditing(true)
   }
   
 }

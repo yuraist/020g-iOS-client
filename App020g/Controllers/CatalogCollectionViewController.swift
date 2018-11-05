@@ -157,7 +157,7 @@ class CatalogCollectionViewController: UICollectionViewController {
       filter = FilterRequest(category: "\(category.id)", page: "1", cost: nil, options: nil, sort: nil)
     }
     
-    ApiHandler.shared.fetchFilteredProducts(withFilter: filter!) { (response) in
+    ServerManager.shared.fetchFilteredProducts(withFilter: filter!) { (response) in
       if let catalogResponse = response {
         self.products.append(contentsOf: catalogResponse.list)
         self.reloadCollectionView()

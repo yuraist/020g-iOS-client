@@ -22,15 +22,15 @@ class LoginInputContainerView: UIView {
   }
   
   // Text fields and button for singing up and loggin in
-  let emailTextField = StandardTextField(placeholder: "Email", isSecureTextEntry: false)
+  let emailTextField = TextField(placeholder: "Email", isSecureTextEntry: false)
   let emailSeparatorView = SeparatorView()
-  let nameTextField = StandardTextField(placeholder: "Имя", isSecureTextEntry: false)
+  let nameTextField = TextField(placeholder: "Имя", isSecureTextEntry: false)
   let nameSeparatorView = SeparatorView()
-  let phoneTextField = StandardTextField(placeholder: "Телефон (не обязательно)", isSecureTextEntry: false)
+  let phoneTextField = TextField(placeholder: "Телефон (не обязательно)", isSecureTextEntry: false)
   let phoneSeparatorView = SeparatorView()
-  let passwordTextField = StandardTextField(placeholder: "Пароль", isSecureTextEntry: true)
+  let passwordTextField = TextField(placeholder: "Пароль", isSecureTextEntry: true)
   let passwordSeparatorView = SeparatorView()
-  let repeatPasswordTextField = StandardTextField(placeholder: "Повторите пароль", isSecureTextEntry: true)
+  let repeatPasswordTextField = TextField(placeholder: "Повторите пароль", isSecureTextEntry: true)
   let repeatPasswordSeparatorView = SeparatorView()
   
   let loginButton: StandardButton = {
@@ -45,7 +45,7 @@ class LoginInputContainerView: UIView {
   var repeatPasswordTextFieldHeightAnchor: NSLayoutConstraint?
   
   // Array of fields for changing the firstResponder when user's printing
-  var inputs: [StandardTextField]
+  var inputs: [TextField]
   
   override init(frame: CGRect) {
     self.inputs = [emailTextField, nameTextField, phoneTextField, passwordTextField, repeatPasswordTextField]

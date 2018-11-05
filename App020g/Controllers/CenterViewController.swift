@@ -48,11 +48,14 @@ class CenterViewController: UIViewController {
   }
   
   @objc private func showAuthorizationViewController() {
-    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+    let authViewModel = AuthorizationViewModel(manager: ServerManager())
+    let authController = AuthorizationViewController(viewModel: authViewModel)
+    present(UINavigationController(rootViewController: authController), animated: true, completion: nil)
   }
   
   @objc private func showSearchCollectionViewController() {
-    
+    let searchViewController = SearchCollectionViewController(collectionViewLayout: UICollectionViewFlowLayout())
+    show(searchViewController, sender: self)
   }
   
   @objc private func showMenu() {

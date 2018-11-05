@@ -203,7 +203,9 @@ extension ContainerViewController: MenuViewControllerDelegate {
   }
   
   private func showAuthorizationViewController() {
-    present(UINavigationController(rootViewController: AuthorizationViewController()), animated: true, completion: nil)
+    let authViewModel = AuthorizationViewModel(manager: ServerManager())
+    let authController = AuthorizationViewController(viewModel: authViewModel)
+    present(UINavigationController(rootViewController: authController), animated: true, completion: nil)
   }
   
   private func showShopListTableViewController() {
@@ -211,7 +213,9 @@ extension ContainerViewController: MenuViewControllerDelegate {
   }
   
   private func initializeShopListTableViewController() -> ShopsCollectionViewController {
-    let shopListTableViewController = ShopsCollectionViewController()
+    let serverManager = ServerManager()
+    let shopsViewModel = ShopsViewModel(manager: serverManager)
+    let shopListTableViewController = ShopsCollectionViewController(viewModel: shopsViewModel)
     shopListTableViewController.delegate = self
     return shopListTableViewController
   }

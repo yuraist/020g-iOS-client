@@ -52,7 +52,7 @@ class SecondCatalogTreeTableViewController: UITableViewController {
   }
   
   private func fetchCategoriesTree() {
-    ApiHandler.shared.fetchCatalogTree(byCategory: parentCategory.id) { (success, tree) in
+    ServerManager.shared.fetchCatalogTree(byCategory: parentCategory.id) { (success, tree) in
       if let tree = tree {
         self.catalogTree = tree
       }

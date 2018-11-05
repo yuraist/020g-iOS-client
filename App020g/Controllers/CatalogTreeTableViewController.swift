@@ -39,7 +39,7 @@ class CatalogTreeTableViewController: UITableViewController {
   }
   
   private func fetchCatalogOfCategories() {
-    ApiHandler.shared.fetchCatalogTreeCategories { (success, catalogCategories) in
+    ServerManager.shared.fetchCatalogTreeCategories { (success, catalogCategories) in
       if let catalogCategories = catalogCategories?.categories {
         self.categories = catalogCategories
       }
