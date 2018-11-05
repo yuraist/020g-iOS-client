@@ -18,6 +18,11 @@ class ShopsViewModel {
     self.apiHandler = handler
   }
   
+}
+
+// MARK :- Public methods
+
+extension ShopsViewModel {
   func fetch(completion: @escaping () -> Void) {
     apiHandler.fetchShops { [weak self] (success, shops) in
       self?.shops = shops ?? []
