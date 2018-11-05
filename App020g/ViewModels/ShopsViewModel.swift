@@ -10,12 +10,12 @@ import Foundation
 
 class ShopsViewModel {
   
-  private let apiHandler: ApiHandler
+  private let serverManager: ServerManager
   
   var shops: [Shop] = []
   
-  init(handler: ApiHandler) {
-    self.apiHandler = handler
+  init(manager: ServerManager) {
+    self.serverManager = manager
   }
   
 }
@@ -24,7 +24,7 @@ class ShopsViewModel {
 
 extension ShopsViewModel {
   func fetch(completion: @escaping () -> Void) {
-    apiHandler.fetchShops { [weak self] (success, shops) in
+    serverManager.fetchShops { [weak self] (success, shops) in
       self?.shops = shops ?? []
       completion()
     }

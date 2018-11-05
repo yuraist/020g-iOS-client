@@ -33,6 +33,7 @@
 		BE11CB7A218A009400BB83EF /* FilterParameterNameLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB79218A009400BB83EF /* FilterParameterNameLabel.swift */; };
 		BE11CB7D2190ADED00BB83EF /* ShopsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB7C2190ADED00BB83EF /* ShopsViewModel.swift */; };
 		BE11CB7F2190CC8200BB83EF /* AccessoryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB7E2190CC8200BB83EF /* AccessoryButton.swift */; };
+		BE11CB812190CF7C00BB83EF /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE11CB802190CF7C00BB83EF /* AuthorizationViewModel.swift */; };
 		BE1900852163D121005069C9 /* ShopCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */; };
 		BE19008B2165C163005069C9 /* SelectedCellLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008A2165C163005069C9 /* SelectedCellLineView.swift */; };
 		BE19008D21672DB4005069C9 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE19008C21672DB4005069C9 /* User.swift */; };
@@ -80,7 +81,7 @@
 		BEF1B99321620B3300348A3D /* CatalogCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */; };
 		BEF1B995216247F800348A3D /* Shop.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF1B994216247F800348A3D /* Shop.swift */; };
 		BEF6F697215AA816000E4BCB /* ShopsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F696215AA816000E4BCB /* ShopsCollectionViewController.swift */; };
-		BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F698215B35E1000E4BCB /* ApiHandler.swift */; };
+		BEF6F699215B35E1000E4BCB /* ServerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F698215B35E1000E4BCB /* ServerManager.swift */; };
 		BEF6F69B215B36F3000E4BCB /* ApiKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */; };
 		BEF6F69D215B9378000E4BCB /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69C215B9378000E4BCB /* Category.swift */; };
 		BEF6F69F215CC144000E4BCB /* Product.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEF6F69E215CC144000E4BCB /* Product.swift */; };
@@ -132,6 +133,7 @@
 		BE11CB79218A009400BB83EF /* FilterParameterNameLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterParameterNameLabel.swift; sourceTree = "<group>"; };
 		BE11CB7C2190ADED00BB83EF /* ShopsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsViewModel.swift; sourceTree = "<group>"; };
 		BE11CB7E2190CC8200BB83EF /* AccessoryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessoryButton.swift; sourceTree = "<group>"; };
+		BE11CB802190CF7C00BB83EF /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		BE1900842163D121005069C9 /* ShopCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE19008A2165C163005069C9 /* SelectedCellLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectedCellLineView.swift; sourceTree = "<group>"; };
 		BE19008C21672DB4005069C9 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
@@ -180,7 +182,7 @@
 		BEF1B99221620B3300348A3D /* CatalogCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionView.swift; sourceTree = "<group>"; };
 		BEF1B994216247F800348A3D /* Shop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Shop.swift; sourceTree = "<group>"; };
 		BEF6F696215AA816000E4BCB /* ShopsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopsCollectionViewController.swift; sourceTree = "<group>"; };
-		BEF6F698215B35E1000E4BCB /* ApiHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiHandler.swift; sourceTree = "<group>"; };
+		BEF6F698215B35E1000E4BCB /* ServerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServerManager.swift; sourceTree = "<group>"; };
 		BEF6F69A215B36F3000E4BCB /* ApiKeys.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeys.swift; sourceTree = "<group>"; };
 		BEF6F69C215B9378000E4BCB /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		BEF6F69E215CC144000E4BCB /* Product.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Product.swift; sourceTree = "<group>"; };
@@ -257,6 +259,7 @@
 			isa = PBXGroup;
 			children = (
 				BE11CB7C2190ADED00BB83EF /* ShopsViewModel.swift */,
+				BE11CB802190CF7C00BB83EF /* AuthorizationViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -471,7 +474,7 @@
 		BEF6F6A2215F5CCE000E4BCB /* ServerManager */ = {
 			isa = PBXGroup;
 			children = (
-				BEF6F698215B35E1000E4BCB /* ApiHandler.swift */,
+				BEF6F698215B35E1000E4BCB /* ServerManager.swift */,
 			);
 			path = ServerManager;
 			sourceTree = "<group>";
@@ -652,7 +655,7 @@
 				BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */,
 				BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */,
 				BE0218E12186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift in Sources */,
-				BEF6F699215B35E1000E4BCB /* ApiHandler.swift in Sources */,
+				BEF6F699215B35E1000E4BCB /* ServerManager.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE0FF10B2175A84B00F126BB /* CategoryPagesCollectionView.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* TextField.swift in Sources */,
@@ -675,6 +678,7 @@
 				BE0FF11121772FA900F126BB /* CatalogTree.swift in Sources */,
 				BEF1B991216208EA00348A3D /* CategoryCollectionViewCell.swift in Sources */,
 				BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */,
+				BE11CB812190CF7C00BB83EF /* AuthorizationViewModel.swift in Sources */,
 				BE0FF0D5216FC3C200F126BB /* CitiesTableViewController.swift in Sources */,
 				BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */,
 				BE0218E32188819700C8DBEC /* AcceptFilterView.swift in Sources */,

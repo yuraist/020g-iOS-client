@@ -97,7 +97,7 @@ class AskViewController: UIViewController {
     if formIsValid() {
       let data = getData()
       print(data)
-      ApiHandler.shared.askQuestion(data: data) {
+      ServerManager.shared.askQuestion(data: data) {
         DispatchQueue.main.async {
           self.clearInputs()
           self.showSuccessAlert()
@@ -168,7 +168,7 @@ class AskViewController: UIViewController {
   }
   
   private func fillInputsIfUserIsLoggedIn() {
-    ApiHandler.shared.getUserInfo { (success, user) in
+    ServerManager.shared.getUserInfo { (success, user) in
       if let user = user {
         DispatchQueue.main.async {
           self.fillInputs(withUser: user)

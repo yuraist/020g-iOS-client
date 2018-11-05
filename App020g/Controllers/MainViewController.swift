@@ -87,7 +87,7 @@ class MainViewController: CenterViewController {
   }
   
   private func fetchCatalogKeysAndCategories() {
-    ApiHandler.shared.checkKeys { (success) in
+    ServerManager.shared.checkKeys { (success) in
       if success {
         self.fetchCategories()
       }
@@ -95,7 +95,7 @@ class MainViewController: CenterViewController {
   }
   
   private func fetchCategories() {
-    ApiHandler.shared.fetchCatalogCategories() { (success, categories) in
+    ServerManager.shared.fetchCatalogCategories() { (success, categories) in
       if success {
         if let categories = categories {
           self.passCategoriesToMenuBar(categories: categories)

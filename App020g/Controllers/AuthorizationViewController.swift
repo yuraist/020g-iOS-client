@@ -18,18 +18,18 @@ class AuthorizationViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    setGrayBackgroundColorToView()
+    
+    view.setGrayBackgroundColor()
     setupNavigationControllerAppearance()
     setupNavigationItem()
-    setControllerAsTextFieldsDelegate()
+    
     addSubviews()
     setupConstraintsToSubviews()
+    
+    setControllerAsTextFieldsDelegate()
+    
     setupButtonTargets()
     addHideKeyboardActionWhenTappedOutsideInputContainer()
-  }
-  
-  private func setGrayBackgroundColorToView() {
-    view.backgroundColor = ApplicationColors.gray
   }
   
   private func setupNavigationControllerAppearance() {
@@ -86,7 +86,8 @@ class AuthorizationViewController: UIViewController {
     view.addGestureRecognizer(gestureRecognizer)
   }
   
-  @objc private func login() {
+  @objc
+  private func login() {
     if formIsValid() {
       hideKeyboard()
       prepareDataAndSendLoginRequest()
@@ -108,7 +109,7 @@ class AuthorizationViewController: UIViewController {
   }
   
   private func loginRequest(with data: [String: String]) {
-    ApiHandler.shared.authorize(login: submitFormButtonIsLogin(), data: data) { (success) in
+    ServerManager.shared.authorize(login: submitFormButtonIsLogin(), data: data) { (success) in
       if success {
         DispatchQueue.main.async {
           self.showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")

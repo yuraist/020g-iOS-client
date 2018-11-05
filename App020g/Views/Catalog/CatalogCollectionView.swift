@@ -82,7 +82,7 @@ class CatalogCollectionView: UICollectionView {
   }
   
   private func fetchProductsFromApi() {
-    ApiHandler.shared.fetchProducts(ofCategory: category!.cat, page: currentPage) { (_, newProducts) in
+    ServerManager.shared.fetchProducts(ofCategory: category!.cat, page: currentPage) { (_, newProducts) in
       
       if let newProducts = newProducts {
         if newProducts.count == 0 {
@@ -156,7 +156,7 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
     let item = indexPath.item
     let product = products[item]
     let productId = product.id
-    ApiHandler.shared.getProduct(withId: productId) { (success, productResponse) in
+    ServerManager.shared.getProduct(withId: productId) { (success, productResponse) in
       if let productResponse = productResponse {
         DispatchQueue.main.async {
           self.showProductTableViewController(productResponse: productResponse)

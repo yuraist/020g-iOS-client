@@ -211,8 +211,8 @@ extension ContainerViewController: MenuViewControllerDelegate {
   }
   
   private func initializeShopListTableViewController() -> ShopsCollectionViewController {
-    let apiHandler = ApiHandler()
-    let shopsViewModel = ShopsViewModel(handler: apiHandler)
+    let serverManager = ServerManager()
+    let shopsViewModel = ShopsViewModel(manager: serverManager)
     let shopListTableViewController = ShopsCollectionViewController(viewModel: shopsViewModel)
     shopListTableViewController.delegate = self
     return shopListTableViewController

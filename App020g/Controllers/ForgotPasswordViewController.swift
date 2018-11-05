@@ -63,7 +63,7 @@ class ForgotPasswordViewController: UIViewController {
     if inputContainerView.emailTextField.emailFieldIsValid {
       var data = ["email": inputContainerView.emailTextField.text!]
       data["key"] = ApiKeys.token!
-      ApiHandler.shared.restorePassword(data: data) {
+      ServerManager.shared.restorePassword(data: data) {
         DispatchQueue.main.async {
           self.clearInput()
           self.showSuccessMessageAlert()

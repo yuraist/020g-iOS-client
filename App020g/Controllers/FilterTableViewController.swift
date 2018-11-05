@@ -111,7 +111,7 @@ class FilterTableViewController: UITableViewController {
   }
   
   private func getFilterCount(forFilterRequest filter: FilterRequest) {
-    ApiHandler.shared.getFilterCount(filter: filter) { (count) in
+    ServerManager.shared.getFilterCount(filter: filter) { (count) in
       DispatchQueue.main.async {
         self.updateNavigationTitle(withCount: count)
       }
@@ -127,7 +127,7 @@ class FilterTableViewController: UITableViewController {
       return
     }
     
-    ApiHandler.shared.fetchFilter(forCategoryId: category.id) { (filterResponse) in
+    ServerManager.shared.fetchFilter(forCategoryId: category.id) { (filterResponse) in
       if let response = filterResponse {
         self.filter = response
         DispatchQueue.main.async {
