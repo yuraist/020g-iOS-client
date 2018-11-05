@@ -28,6 +28,16 @@ class Observable<T> {
   }
 }
 
+enum FormValidationState {
+  case valid
+  case invalid(String)
+}
+
+enum FormType {
+  case signIn
+  case signUp
+}
+
 class AuthorizationViewModel {
   
   private let serverManager: ServerManager
@@ -35,7 +45,10 @@ class AuthorizationViewModel {
   var email = Observable("")
   var name = Observable("")
   var password = Observable("")
+  var repeatPassword = Observable("")
   var phoneNumber = Observable("")
+  
+  
   
   init(manager: ServerManager) {
     self.serverManager = manager
@@ -46,7 +59,23 @@ class AuthorizationViewModel {
 extension AuthorizationViewModel {
   
   func update(email: String) {
-    self.email.value = email
+    if stringHasValidLength(email) {
+      self.email.value = handled(email: email)
+    }
+  }
+  
+  func update(name: String) {
+    if stringHasValidLength(name) {
+      self.name.value = handled(name: name)
+    }
+  }
+  
+  func update(password: String) {
+    self.password.value = password
+  }
+  
+  func update(repeatedPassword: String) {
+    self.repeatPassword.value = repeatedPassword
   }
   
   func update(phoneNumber: String) {
@@ -99,6 +128,36 @@ extension AuthorizationViewModel {
     
     self.phoneNumber.value = newString
   }
+  
+  func validate(formOfType type: FormType) -> FormValidationState {
+    switch type {
+    case .signIn:
+      if !validate(email: email.value) {
+        return .invalid("Введен недействительный Email")
+      }
+      if password.value == "" {
+        return .invalid("Введите пароль")
+      }
+      return .valid
+    case .signUp:
+      if !validate(email: email.value) {
+        return .invalid("Введен недействительный Email")
+      }
+      if name.value == "" {
+        return .invalid("Введите имя")
+      }
+      if password.value == "" {
+        return .invalid("Введите пароль")
+      }
+      if repeatPassword.value == "" {
+        return .invalid("Введите пароль повторно")
+      }
+      if password.value != repeatPassword.value {
+        return .invalid("Пароли не совпадают")
+      }
+      return .valid
+    }
+  }
 }
 
 // MARK: - Private methods
@@ -110,5 +169,15 @@ extension AuthorizationViewModel {
     return regex.firstMatch(in: email, options: [], range: NSRange(location: 0, length: email.count)) != nil
   }
   
+  private func stringHasValidLength(_ str: String) -> Bool {
+    return str.count >= 0 && str.count < 32
+  }
   
+  private func handled(email: String) -> String {
+    return email.components(separatedBy: " ").joined()
+  }
+  
+  private func handled(name: String) -> String {
+    return name.components(separatedBy: " ").joined()
+  }
 }

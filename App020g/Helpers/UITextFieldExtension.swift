@@ -31,6 +31,14 @@ extension UITextField {
     return placeholder == "Имя"
   }
   
+  var isPasswordField: Bool {
+    return placeholder == "Пароль"
+  }
+  
+  var isRepeatPasswordField: Bool {
+    return placeholder == "Повторите пароль"
+  }
+  
   var textLengthIsValid: Bool {
     if let text = text {
       return text.count >= 0 && text.count < 32

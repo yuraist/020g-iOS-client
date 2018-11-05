@@ -42,9 +42,7 @@ class AuthorizationViewController: UIViewController {
     setupButtonTargets()
     addHideKeyboardActionWhenTappedOutsideInputContainer()
     
-    viewModel.phoneNumber.bind { [unowned self] in
-      self.loginInputContainerView.phoneTextField.text = $0
-    }
+    bindTextFields()
   }
   
   private func setupNavigationControllerAppearance() {
@@ -96,18 +94,17 @@ class AuthorizationViewController: UIViewController {
     recallPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
   }
   
-  private func addHideKeyboardActionWhenTappedOutsideInputContainer() {
-    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
-    view.addGestureRecognizer(gestureRecognizer)
-  }
   
   @objc
   private func login() {
-    if formIsValid() {
+    let type: FormType = submitFormButtonIsLogin() ? .signIn : .signUp
+    
+    switch viewModel.validate(formOfType: type) {
+    case .valid:
       hideKeyboard()
       prepareDataAndSendLoginRequest()
-    } else {
-      showAlertMessage()
+    case .invalid(let error):
+      showAuthorizationAlert(title: "Ошибка", text: error)
     }
   }
   
@@ -121,6 +118,38 @@ class AuthorizationViewController: UIViewController {
     }
     
     loginRequest(with: data)
+  }
+  
+  private func addHideKeyboardActionWhenTappedOutsideInputContainer() {
+    let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(hideKeyboardAction))
+    view.addGestureRecognizer(gestureRecognizer)
+  }
+  
+  @objc
+  private func hideKeyboardAction() {
+    view.endEditing(true)
+  }
+  
+  private func bindTextFields() {
+    viewModel.phoneNumber.bind { [unowned self] in
+      self.loginInputContainerView.phoneTextField.text = $0
+    }
+    
+    viewModel.email.bind { [unowned self] in
+      self.loginInputContainerView.emailTextField.text = $0
+    }
+    
+    viewModel.name.bind { [unowned self] in
+      self.loginInputContainerView.nameTextField.text = $0
+    }
+    
+    viewModel.password.bind { [unowned self] in
+      self.loginInputContainerView.passwordTextField.text = $0
+    }
+    
+    viewModel.repeatPassword.bind { [unowned self] in
+      self.loginInputContainerView.repeatPasswordTextField.text = $0
+    }
   }
   
   private func loginRequest(with data: [String: String]) {
@@ -188,7 +217,9 @@ class AuthorizationViewController: UIViewController {
   }
   
   private func showAlertMessage() {
-    let alert = UIAlertController(title: "Ошибка", message: "Вы ввели данные неверно. Пожалуйста, проверьте правильность введенных вами данных и попробуйте снова.", preferredStyle: .alert)
+    let alert = UIAlertController(title: "Ошибка",
+                                  message: "Вы ввели данные неверно. Пожалуйста, проверьте правильность введенных вами данных и попробуйте снова.", preferredStyle: .alert)
+    
     let alertAction = UIAlertAction(title: "Хорошо", style: .default, handler: nil)
     alert.addAction(alertAction)
     present(alert, animated: true, completion: nil)
@@ -233,18 +264,21 @@ extension AuthorizationViewController: UITextFieldDelegate {
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     
+    let newString = (textField.text! as NSString).replacingCharacters(in: range, with: string)
+    
     if textField.isPhoneNumberField {
-//      textField.handlePhoneNumberField(withReplacingString: string, in: range)
-      let phoneNumber = (textField.text! as NSString).replacingCharacters(in: range, with: string)
-      viewModel.update(phoneNumber: phoneNumber)
-      return false
+      viewModel.update(phoneNumber: newString)
+    } else if textField.isEmailField {
+      viewModel.update(email: newString)
+    } else if textField.isNameField {
+      viewModel.update(name: newString)
+    } else if textField.isPasswordField {
+      viewModel.update(password: newString)
+    } else {
+      viewModel.update(repeatedPassword: newString)
     }
     
-    if (textField.isEmailField || textField.isNameField) && string == " " {
-      return false
-    }
-    
-    return textField.textLengthIsValid || string.count < 1
+    return false
   }
   
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
@@ -259,11 +293,6 @@ extension AuthorizationViewController: UITextFieldDelegate {
   
   private func hideKeyboard() {
     loginInputContainerView.endEditing(true)
-  }
-  
-  @objc
-  private func hideKeyboardAction() {
-    view.endEditing(true)
   }
   
 }
