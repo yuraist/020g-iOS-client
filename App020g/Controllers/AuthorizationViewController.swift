@@ -109,15 +109,11 @@ class AuthorizationViewController: UIViewController {
   }
   
   private func prepareDataAndSendLoginRequest() {
-    var data = [String: String]()
-    
     if submitFormButtonIsLogin() {
-      data = getValidLoginData()
+      loginRequest(with: viewModel.signInData)
     } else {
-      data = getValidSignUpData()
+      loginRequest(with: viewModel.signUpData)
     }
-    
-    loginRequest(with: data)
   }
   
   private func addHideKeyboardActionWhenTappedOutsideInputContainer() {

@@ -48,7 +48,17 @@ class AuthorizationViewModel {
   var repeatPassword = Observable("")
   var phoneNumber = Observable("")
   
+  var signInData: [String: String] {
+    return ["login": email.value, "password": password.value, "key": ApiKeys.token!]
+  }
   
+  var signUpData: [String: String] {
+    return ["email": email.value,
+            "name": name.value,
+            "phone": phoneNumber.value,
+            "password": password.value,
+            "key": ApiKeys.token!]
+  }
   
   init(manager: ServerManager) {
     self.serverManager = manager
