@@ -72,6 +72,7 @@
 		BEE1EC5A2190F373005FD245 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE1EC592190F373005FD245 /* Observable.swift */; };
 		BEE1EC5E2191EAFD005FD245 /* Search.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE1EC5D2191EAFD005FD245 /* Search.swift */; };
 		BEE1EC602191F558005FD245 /* SearchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE1EC5F2191F558005FD245 /* SearchViewModel.swift */; };
+		BEE1EC6321921AE7005FD245 /* SearchBreadcrumbsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE1EC6221921AE7005FD245 /* SearchBreadcrumbsCell.swift */; };
 		BEE57E07216C8346005C9672 /* ProductImageCarouselTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */; };
 		BEE57E09216C9017005C9672 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E08216C9017005C9672 /* ImageCollectionViewCell.swift */; };
 		BEE57E13216CB711005C9672 /* ProductPriceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE57E12216CB711005C9672 /* ProductPriceCell.swift */; };
@@ -176,6 +177,7 @@
 		BEE1EC592190F373005FD245 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
 		BEE1EC5D2191EAFD005FD245 /* Search.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Search.swift; sourceTree = "<group>"; };
 		BEE1EC5F2191F558005FD245 /* SearchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewModel.swift; sourceTree = "<group>"; };
+		BEE1EC6221921AE7005FD245 /* SearchBreadcrumbsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBreadcrumbsCell.swift; sourceTree = "<group>"; };
 		BEE57E06216C8346005C9672 /* ProductImageCarouselTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductImageCarouselTableViewCell.swift; sourceTree = "<group>"; };
 		BEE57E08216C9017005C9672 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEE57E12216CB711005C9672 /* ProductPriceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductPriceCell.swift; sourceTree = "<group>"; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */,
+				BEE1EC6121921AD3005FD245 /* Search */,
 				BE0FF1132177475300F126BB /* CatalogTree */,
 				BEE57E0B216C9055005C9672 /* InputContainers */,
 				BEE57E0C216C9071005C9672 /* CustomInputs */,
@@ -392,6 +395,14 @@
 				BEE1EC592190F373005FD245 /* Observable.swift */,
 			);
 			path = Helpers;
+			sourceTree = "<group>";
+		};
+		BEE1EC6121921AD3005FD245 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				BEE1EC6221921AE7005FD245 /* SearchBreadcrumbsCell.swift */,
+			);
+			path = Search;
 			sourceTree = "<group>";
 		};
 		BEE57E0B216C9055005C9672 /* InputContainers */ = {
@@ -723,6 +734,7 @@
 				BEF1B98F216208B100348A3D /* CustomBarButtonItem.swift in Sources */,
 				BE1DC55A215221E200E6AF30 /* SeparatorView.swift in Sources */,
 				BE1DC54A214FAB3A00E6AF30 /* CatalogTreeTableViewController.swift in Sources */,
+				BEE1EC6321921AE7005FD245 /* SearchBreadcrumbsCell.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
 				BEE57E13216CB711005C9672 /* ProductPriceCell.swift in Sources */,
 				BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */,

@@ -16,24 +16,20 @@ class SearchViewModel {
   var categories = [SearchCategory]()
   var products = [SearchProduct]()
   
-  var queryRequest = Observable("")
-  
   private var currentPage = 0
   var selectedCategory: SearchCategory? = .none
 }
 
 extension SearchViewModel {
-  func update(query: String) {
-    queryRequest.value = query
-  }
   
-  func search() {
-    serverManager.search(query: queryRequest.value, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
+  func search(query: String, completion: @escaping () -> Void) {
+    serverManager.search(query: query, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
       if let searchResponse = response {
         self.products = searchResponse.list
         self.categories = searchResponse.cats
         self.breadcrumbs = searchResponse.breadcrumbs
       }
+      completion()
     }
   }
   

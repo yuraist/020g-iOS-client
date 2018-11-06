@@ -22,6 +22,8 @@ class SearchViewController: UITableViewController {
     setupSearchController()
     setupTableViewAppearance()
     registerTableViewCells()
+    
+    addSearchQueryListener()
   }
   
   private func setNavigationBarTitle() {
@@ -55,21 +57,60 @@ class SearchViewController: UITableViewController {
   private func registerTableViewCells() {
     
   }
+  
+  private func addSearchQueryListener() {
+    
+  }
 }
 
 extension SearchViewController {
-//  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//    return 3
-//  }
-//  
-//  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//
-//  }
+  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 3
+  }
+  
+  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    if indexPath.row == 0 {
+      let cell = SearchBreadcrumbsCell(reuseIdentifier: "")
+      cell.breadcrumbsView.breadcrumbs = viewModel.breadcrumbs
+      return cell
+    } else if indexPath.row == 1 {
+      let cell = UITableViewCell(style: .default, reuseIdentifier: "1")
+      cell.textLabel?.text = "\(viewModel.categories)"
+      return cell
+    } else {
+      let cell = UITableViewCell(style: .default, reuseIdentifier: "2")
+      cell.textLabel?.text = "\(viewModel.products)"
+      return cell
+    }
+  }
+  
+  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if indexPath.row == 0 {
+      return 30
+    } else if indexPath.row == 2 {
+      return view.frame.size.height
+    }
+    
+    return 44
+  }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
+  
   func updateSearchResults(for searchController: UISearchController) {
-    // TODO
-    
+    if let searchQuery = getValidQueryString(for: searchController) {
+      viewModel.search(query: searchQuery) { [unowned self] in
+        DispatchQueue.main.async {
+          self.tableView.reloadData()
+        }
+      }
+    }
+  }
+  
+  private func getValidQueryString(for searchController: UISearchController) -> String? {
+    if let searchQuery = searchController.searchBar.text, searchQuery.count > 0 {
+      return searchQuery
+    }
+    return nil
   }
 }

@@ -19,7 +19,7 @@ class BreadcrumbsCollectionView: UICollectionView, UICollectionViewDelegate, UIC
   
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
-    setWhiteBackgroundColor()
+    setGrayBackgroundColor()
     setDelegate()
     setDataSource()
     registerCell()
