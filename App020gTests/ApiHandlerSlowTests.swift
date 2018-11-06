@@ -14,7 +14,7 @@ class ApiHandlerSlowTests: XCTestCase {
   func testFetchCatalogCategories() {
     // given
     let promise = expectation(description: "Get categories")
-    let handler = ApiHandler.shared
+    let handler = ServerManager.shared
     var categoriesObject: CatalogCategories?
     
     // when
@@ -33,7 +33,7 @@ class ApiHandlerSlowTests: XCTestCase {
   func testFetchCatalogTreeByCategories() {
     // given
     let promise = expectation(description: "Get subcategories")
-    let handler = ApiHandler.shared
+    let handler = ServerManager.shared
     var catalogTree: CatalogTree?
     
     // when
@@ -56,7 +56,7 @@ class ApiHandlerSlowTests: XCTestCase {
     var filterResponse: FilterResponse?
     
     // when
-    ApiHandler.shared.fetchFilter(forCategoryId: categoryId) { (filter) in
+    ServerManager.shared.fetchFilter(forCategoryId: categoryId) { (filter) in
       if let filter = filter {
         print(filter)
         filterResponse = filter
@@ -78,7 +78,7 @@ class ApiHandlerSlowTests: XCTestCase {
     var catalogResponse: CatalogResponse?
     
     // when
-    ApiHandler.shared.fetchFilteredProducts(withFilter: filterRequest) { (catalog) in
+    ServerManager.shared.fetchFilteredProducts(withFilter: filterRequest) { (catalog) in
       if let catalog = catalog {
         catalogResponse = catalog
         promise.fulfill()
@@ -102,7 +102,7 @@ class ApiHandlerSlowTests: XCTestCase {
     var filterCount = 0
     
     // when
-    ApiHandler.shared.getFilterCount(filter: filterRequest) { count in
+    ServerManager.shared.getFilterCount(filter: filterRequest) { count in
       filterCount = count
       print(count)
       promise.fulfill()
@@ -110,5 +110,22 @@ class ApiHandlerSlowTests: XCTestCase {
     
     waitForExpectations(timeout: 5, handler: nil)
     XCTAssertNotEqual(filterCount, 0)
+  }
+  
+  func testSearch() {
+    // given
+    let promise = expectation(description: "")
+    var searchResponse: SearchResponse? = .none
+    
+    // when
+    ServerManager.shared.search(query: "авто", page: nil, category: nil) { (response) in
+      searchResponse = response
+//      print(searchResponse)
+      promise.fulfill()
+    }
+    
+    // then
+    waitForExpectations(timeout: 5, handler: nil)
+    XCTAssertNotNil(searchResponse)
   }
 }

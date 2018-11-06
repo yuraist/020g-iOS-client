@@ -413,4 +413,40 @@ class ServerManager {
     
     dataTask.resume()
   }
+  
+  func search(query: String, page: Int?, category: Int?, completion: ((SearchResponse?) -> Void)?) {
+    guard let token = ApiKeys.token else {
+      completion?(nil)
+      return
+    }
+    
+    var queryItems = ["token": token, "query": query]
+    
+    if let category = category {
+      queryItems["cat"] = String(category)
+    }
+    
+    if let page = page {
+      queryItems["page"] = String(page)
+    }
+    
+    let dataTask = URLSessionDataTask.getDefaultDataTask(forPath: "/abpro/search", queryItems: queryItems, method: .get) { (data, _, _) in
+      if let jsonData = data {
+        do {
+          let searchResponse = try self.decodeObject(SearchResponse.self, from: jsonData)
+          completion?(searchResponse)
+          return
+        } catch let error {
+          completion?(nil)
+          print(error)
+          return
+        }
+      } else {
+        completion?(nil)
+        return
+      }
+    }
+    
+    dataTask.resume()
+  }
 }
