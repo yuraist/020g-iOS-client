@@ -17,6 +17,6 @@ extension UIColor {
 extension String {
   public func estimatedWidth() -> CGFloat {
     let textSize = (self as NSString).size(withAttributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 17)])
-    return textSize.width + 22
+    return textSize.width + 32
   }
 }

@@ -80,11 +80,36 @@ extension SearchViewController {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.row == 0 {
       return 30
+    } else if indexPath.row == 1 {
+      return estimatedCategoriesCollectionViewHeight()
     } else if indexPath.row == 2 {
       return view.frame.size.height
     }
     
     return 180
+  }
+  
+  private func estimatedCategoriesCollectionViewHeight() -> CGFloat {
+    let top = 8
+    let bottom = 8
+    let lineHeight = 38
+    let interlineOffset = 8
+    
+    var width = CGFloat(view.frame.width - 16)
+    var lines = 1
+    
+    for category in viewModel.categories {
+      let categoryWidth = category.text.estimatedWidth()
+      if width - categoryWidth < 0 {
+        lines += 1
+        width = 304 - categoryWidth
+      } else {
+        width -= categoryWidth
+      }
+    }
+    
+    let estimatedHeight = CGFloat(lineHeight * lines + interlineOffset * (lines - 1) + top + bottom)
+    return estimatedHeight
   }
   
   private func reloadTableViewAsynchronously() {
