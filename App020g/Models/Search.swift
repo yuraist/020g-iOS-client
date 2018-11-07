@@ -37,5 +37,9 @@ struct SearchCategory: Codable {
   var id: Int
   var name: String
   var cnt: String
+  
+  var text: String {
+    return "\(name) \(cnt)"
+  }
 }
 

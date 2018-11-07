@@ -44,7 +44,7 @@ class SearchCategoryCollectionViewCell: UICollectionViewCell {
   private func setConstraintsForSubviews() {
     bubbleView.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     bubbleView.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    bubbleView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.96).isActive = true
+    bubbleView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     bubbleView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     
     label.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
