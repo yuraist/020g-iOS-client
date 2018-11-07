@@ -63,6 +63,9 @@
 		BE1DC564215408C500E6AF30 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE1DC563215408C500E6AF30 /* UIViewExtension.swift */; };
 		BE3D1D202159537500A6E9E4 /* BarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D1F2159537500A6E9E4 /* BarCollectionViewCell.swift */; };
 		BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */; };
+		BE7CE7182192C99B00BDE049 /* SearchCategoriesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CE7172192C99B00BDE049 /* SearchCategoriesCell.swift */; };
+		BE7CE71A2192C9DF00BDE049 /* SearchCategoriesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CE7192192C9DF00BDE049 /* SearchCategoriesCollectionView.swift */; };
+		BE7CE71C2192C9EE00BDE049 /* SearchCategoryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CE71B2192C9EE00BDE049 /* SearchCategoryCollectionViewCell.swift */; };
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainViewController.swift */; };
@@ -168,6 +171,9 @@
 		BE1DC563215408C500E6AF30 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		BE3D1D1F2159537500A6E9E4 /* BarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BarCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogCollectionViewCell.swift; sourceTree = "<group>"; };
+		BE7CE7172192C99B00BDE049 /* SearchCategoriesCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategoriesCell.swift; sourceTree = "<group>"; };
+		BE7CE7192192C9DF00BDE049 /* SearchCategoriesCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategoriesCollectionView.swift; sourceTree = "<group>"; };
+		BE7CE71B2192C9EE00BDE049 /* SearchCategoryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategoryCollectionViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -401,6 +407,9 @@
 			isa = PBXGroup;
 			children = (
 				BEE1EC6221921AE7005FD245 /* SearchBreadcrumbsCell.swift */,
+				BE7CE7172192C99B00BDE049 /* SearchCategoriesCell.swift */,
+				BE7CE7192192C9DF00BDE049 /* SearchCategoriesCollectionView.swift */,
+				BE7CE71B2192C9EE00BDE049 /* SearchCategoryCollectionViewCell.swift */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -669,6 +678,7 @@
 				BE0FF0D1216F4F5100F126BB /* BreadcrumbsCollectionViewCell.swift in Sources */,
 				BE0218DD21861BD500C8DBEC /* FilterPriceTableViewCell.swift in Sources */,
 				BE19008F21678CC0005069C9 /* UITextFieldExtension.swift in Sources */,
+				BE7CE71A2192C9DF00BDE049 /* SearchCategoriesCollectionView.swift in Sources */,
 				BE1DC544214FAA3900E6AF30 /* AuthorizationViewController.swift in Sources */,
 				BEF6F69D215B9378000E4BCB /* Category.swift in Sources */,
 				BE0FF0CF216F4F4700F126BB /* BreadcrumbsCollectionView.swift in Sources */,
@@ -724,6 +734,7 @@
 				BE1B64FA2189BD2D001D7418 /* CustomLabeledImageView.swift in Sources */,
 				BE1DC554214FABE300E6AF30 /* FilterTableViewController.swift in Sources */,
 				BE0FF0FB2174702600F126BB /* ImageIndicatorCollectionView.swift in Sources */,
+				BE7CE7182192C99B00BDE049 /* SearchCategoriesCell.swift in Sources */,
 				BE1DC542214FA61E00E6AF30 /* Helpers.swift in Sources */,
 				BE11CB7F2190CC8200BB83EF /* AccessoryButton.swift in Sources */,
 				BEF1B988215F664900348A3D /* URLSessionDataTaskExtension.swift in Sources */,
@@ -737,6 +748,7 @@
 				BEE1EC6321921AE7005FD245 /* SearchBreadcrumbsCell.swift in Sources */,
 				BE1DC52A214FA1D300E6AF30 /* AppDelegate.swift in Sources */,
 				BEE57E13216CB711005C9672 /* ProductPriceCell.swift in Sources */,
+				BE7CE71C2192C9EE00BDE049 /* SearchCategoryCollectionViewCell.swift in Sources */,
 				BE1DC55E2153E8A600E6AF30 /* RecallPasswordView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

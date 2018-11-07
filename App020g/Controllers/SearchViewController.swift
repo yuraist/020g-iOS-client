@@ -10,9 +10,8 @@ import UIKit
 
 class SearchViewController: UITableViewController {
   
+  private let searchController = UISearchController(searchResultsController: nil)
   private let viewModel = SearchViewModel()
-  
-  let searchController = UISearchController(searchResultsController: nil)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -21,9 +20,6 @@ class SearchViewController: UITableViewController {
     setNavigationBarTitle()
     setupSearchController()
     setupTableViewAppearance()
-    registerTableViewCells()
-    
-    addSearchQueryListener()
   }
   
   private func setNavigationBarTitle() {
@@ -52,14 +48,6 @@ class SearchViewController: UITableViewController {
   
   private func setupTableViewAppearance() {
     tableView.separatorStyle = .none
-  }
-  
-  private func registerTableViewCells() {
-    
-  }
-  
-  private func addSearchQueryListener() {
-    
   }
 }
 
@@ -93,17 +81,23 @@ extension SearchViewController {
     
     return 44
   }
+  
+  private func reloadTableViewAsynchronously() {
+    DispatchQueue.main.async {
+      self.tableView.reloadData()
+    }
+  }
 }
 
 extension SearchViewController: UISearchResultsUpdating {
   
   func updateSearchResults(for searchController: UISearchController) {
-    if let searchQuery = getValidQueryString(for: searchController) {
-      viewModel.search(query: searchQuery) { [unowned self] in
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
-      }
+    guard let searchQuery = getValidQueryString(for: searchController) else {
+      return
+    }
+    
+    viewModel.search(query: searchQuery) { [unowned self] in
+      self.reloadTableViewAsynchronously()
     }
   }
   

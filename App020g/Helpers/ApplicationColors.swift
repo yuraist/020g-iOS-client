@@ -16,6 +16,7 @@ enum ApplicationColors {
   static let green =        UIColor.rgb(22, 199, 46)
   static let lighterGreen = UIColor.rgb(209, 250, 215)
   static let lightGreen =   UIColor.rgb(102, 238, 120)
+  static let salate =       UIColor.rgb(92, 98, 82)
   static let red =          UIColor.rgb(232, 58, 48)
   static let lighterRed =   UIColor.rgb(250, 211, 209)
   static let lightRed =     UIColor.rgb(244, 160, 156)
