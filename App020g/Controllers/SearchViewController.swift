@@ -58,14 +58,19 @@ extension SearchViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.row == 0 {
+      
       let cell = SearchBreadcrumbsCell(reuseIdentifier: "")
       cell.breadcrumbsView.breadcrumbs = viewModel.breadcrumbs
       return cell
+      
     } else if indexPath.row == 1 {
-      let cell = UITableViewCell(style: .default, reuseIdentifier: "1")
-      cell.textLabel?.text = "\(viewModel.categories)"
+      
+      let cell = SearchCategoriesCell(reuseIdentifier: nil)
+      cell.categoriesCollectionView.categories = viewModel.categories
       return cell
+      
     } else {
+      
       let cell = UITableViewCell(style: .default, reuseIdentifier: "2")
       cell.textLabel?.text = "\(viewModel.products)"
       return cell
@@ -79,7 +84,7 @@ extension SearchViewController {
       return view.frame.size.height
     }
     
-    return 44
+    return 180
   }
   
   private func reloadTableViewAsynchronously() {
