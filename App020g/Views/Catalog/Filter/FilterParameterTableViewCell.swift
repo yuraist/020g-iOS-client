@@ -7,32 +7,7 @@
 //
 
 import UIKit
-
-class LeftAlignedCollectionViewFlowLayout: UICollectionViewFlowLayout {
-  
-  override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-    let attributes = super.layoutAttributesForElements(in: rect)
-    
-    var leftMargin = sectionInset.left
-    var maxY: CGFloat = -1.0
-    attributes?.forEach { layoutAttribute in
-      guard layoutAttribute.representedElementCategory == .cell else {
-        return
-      }
-      
-      if layoutAttribute.frame.origin.y >= maxY {
-        leftMargin = sectionInset.left
-      }
-      
-      layoutAttribute.frame.origin.x = leftMargin
-      
-      leftMargin += layoutAttribute.frame.width + minimumInteritemSpacing
-      maxY = max(layoutAttribute.frame.maxY , maxY)
-    }
-    
-    return attributes
-  }
-}
+import DGCollectionViewLeftAlignFlowLayout
 
 class FilterParameterTableViewCell: UITableViewCell {
   
@@ -60,7 +35,8 @@ class FilterParameterTableViewCell: UITableViewCell {
   private let parameterTitleLabel = FilterParameterNameLabel(text: "", isMainTitle: true)
   
   private lazy var filterOptionsCollectionView: FilterOptionsCollectionView = {
-    let cv = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: LeftAlignedCollectionViewFlowLayout())
+    let layout = DGCollectionViewLeftAlignFlowLayout()
+    let cv = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: layout)
     cv.parentController = parentController
     cv.filterParameter = filterParameter
     return cv
