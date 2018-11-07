@@ -65,14 +65,14 @@ extension SearchViewController {
       
     } else if indexPath.row == 1 {
       
-      let cell = SearchCategoriesCell(reuseIdentifier: nil)
+      let cell = SearchCategoriesTableViewCell(reuseIdentifier: nil)
       cell.categoriesCollectionView.categories = viewModel.categories
       return cell
       
     } else {
       
-      let cell = UITableViewCell(style: .default, reuseIdentifier: "2")
-      cell.textLabel?.text = "\(viewModel.products)"
+      let cell = SearchCatalogTableViewCell(reuseIdentifier: nil)
+      cell.catalogCollectionView.products = viewModel.products
       return cell
     }
   }

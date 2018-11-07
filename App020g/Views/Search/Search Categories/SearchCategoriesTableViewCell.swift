@@ -1,5 +1,5 @@
 //
-//  SearchCategoriesCell.swift
+//  SearchCategoriesTableViewCell.swift
 //  App020g
 //
 //  Created by Юрий Истомин on 07/11/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchCategoriesCell: UITableViewCell {
+class SearchCategoriesTableViewCell: UITableViewCell {
   
   let categoriesCollectionView = SearchCategoriesCollectionView()
   
