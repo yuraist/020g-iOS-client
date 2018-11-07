@@ -28,8 +28,8 @@ class SearchCategoriesCell: UITableViewCell {
   }
   
   private func setConstraintsForCollectionView() {
-    addConstraints(withFormat: "H:|-[v0]-|", views: categoriesCollectionView)
-    addConstraints(withFormat: "V:|-[v0]-|", views: categoriesCollectionView)
+    addConstraints(withFormat: "H:|[v0]|", views: categoriesCollectionView)
+    addConstraints(withFormat: "V:|[v0]|", views: categoriesCollectionView)
   }
   
 }

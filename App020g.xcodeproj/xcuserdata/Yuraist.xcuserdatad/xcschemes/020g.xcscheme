@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "1000"
+   LastUpgradeVersion = "1010"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -32,7 +32,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "BE0FF0D92170705C00F126BB"
+               BlueprintIdentifier = "BE0FF0FF2175A45700F126BB"
                BuildableName = "App020gTests.xctest"
                BlueprintName = "App020gTests"
                ReferencedContainer = "container:App020g.xcodeproj">

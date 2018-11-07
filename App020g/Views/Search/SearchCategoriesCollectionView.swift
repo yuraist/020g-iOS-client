@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DGCollectionViewLeftAlignFlowLayout
 
 class SearchCategoriesCollectionView: UICollectionView {
   
@@ -21,7 +22,7 @@ class SearchCategoriesCollectionView: UICollectionView {
   }
   
   init() {
-    let layout = UICollectionViewFlowLayout()
+    let layout = DGCollectionViewLeftAlignFlowLayout()
     super.init(frame: .zero, collectionViewLayout: layout)
     
     setTranslatesAutoresizingMaskIntoConstraintsFalse()
@@ -64,11 +65,21 @@ extension SearchCategoriesCollectionView: UICollectionViewDataSource, UICollecti
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-    return CGSize(width: collectionView.frame.width / 2 - 5, height: 38)
+    let category = categories[indexPath.item]
+    let width = category.text.estimatedWidth()
+    return CGSize(width: width, height: 38)
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return 4
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
     return 8
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
   }
   
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

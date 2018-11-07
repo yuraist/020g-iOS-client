@@ -7,4 +7,5 @@ target 'App020g' do
 
   # Pods for App020g
   pod 'Kingfisher', '~> 4.0'
+  pod 'DGCollectionViewLeftAlignFlowLayout'
 end
