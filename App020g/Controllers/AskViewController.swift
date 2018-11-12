@@ -194,6 +194,11 @@ extension AskViewController: UITextFieldDelegate {
       textField.handlePhoneNumberField(withReplacingString: string, in: range)
       return false
     }
+    
+    if string == " " {
+      return false
+    }
+    
     return textField.textLengthIsValid || string.count < 1
   }
   
