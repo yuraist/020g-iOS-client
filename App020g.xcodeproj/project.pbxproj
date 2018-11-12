@@ -73,6 +73,7 @@
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
+		BEAE7EA62199BB06002A6C48 /* CatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAE7EA52199BB06002A6C48 /* CatalogViewModel.swift */; };
 		BEC49823216B49140058347E /* ShopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC49822216B49140058347E /* ShopLabel.swift */; };
 		BED20886217F3DC6007EFD01 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED20885217F3DC6007EFD01 /* Filter.swift */; };
 		BEE1EC5A2190F373005FD245 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE1EC592190F373005FD245 /* Observable.swift */; };
@@ -184,6 +185,7 @@
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
+		BEAE7EA52199BB06002A6C48 /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
 		BEC49822216B49140058347E /* ShopLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopLabel.swift; sourceTree = "<group>"; };
 		BED20885217F3DC6007EFD01 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		BEE1EC592190F373005FD245 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -281,6 +283,7 @@
 				BE11CB7C2190ADED00BB83EF /* ShopsViewModel.swift */,
 				BE11CB802190CF7C00BB83EF /* AuthorizationViewModel.swift */,
 				BEE1EC5F2191F558005FD245 /* SearchViewModel.swift */,
+				BEAE7EA52199BB06002A6C48 /* CatalogViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -721,6 +724,7 @@
 				BEF6F69F215CC144000E4BCB /* Product.swift in Sources */,
 				BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */,
 				BE0FF10D2177212100F126BB /* CatalogCategory.swift in Sources */,
+				BEAE7EA62199BB06002A6C48 /* CatalogViewModel.swift in Sources */,
 				BE0FF1152177476C00F126BB /* CatalogTreeBaseCell.swift in Sources */,
 				BE1DC52C214FA1D300E6AF30 /* ContainerViewController.swift in Sources */,
 				BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */,

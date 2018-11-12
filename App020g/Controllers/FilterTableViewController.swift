@@ -46,7 +46,10 @@ class FilterTableViewController: UITableViewController {
     
     tableView.setWhiteBackgroundColor()
     registerTableViewCells()
-    fetchFilterParameters()
+    
+    if filter == nil {
+      fetchFilterParameters()
+    }
     
     addAcceptFilterView()
     setConstraintsForAcceptFilterView()
@@ -95,7 +98,7 @@ class FilterTableViewController: UITableViewController {
   @objc
   func acceptFilterParameters() {
     if let filterRequest = createNewFilterRequest() {
-      parentController?.update(filter: filterRequest)
+//      parentController?.update(filter: filterRequest)
       navigationController?.popViewController(animated: true)
     }
   }
@@ -106,11 +109,11 @@ class FilterTableViewController: UITableViewController {
   }
   
   private func createNewFilterRequest() -> FilterRequest? {
-    guard let category = parentController?.category else {
+    guard let category = parentController?.viewModel.filter.category else {
       return nil
     }
     
-    let filterRequest = FilterRequest(category: "\(category.id)", page: "1", cost: selectedCost, options: selectedParameters, sort: nil)
+    let filterRequest = FilterRequest(category: category, page: "1", cost: selectedCost, options: selectedParameters, sort: nil)
     return filterRequest
   }
   
@@ -127,11 +130,11 @@ class FilterTableViewController: UITableViewController {
   }
   
   private func fetchFilterParameters() {
-    guard let category = parentController?.category else {
+    guard let category = parentController?.viewModel.filter.category else {
       return
     }
     
-    ServerManager.shared.fetchFilter(forCategoryId: category.id) { (filterResponse) in
+    ServerManager.shared.fetchFilter(forCategoryId: Int(category)!) { (filterResponse) in
       if let response = filterResponse {
         self.filter = response
         DispatchQueue.main.async {

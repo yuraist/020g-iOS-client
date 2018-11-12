@@ -14,32 +14,21 @@ class CatalogCollectionViewController: UICollectionViewController {
   
   private let filterBarView = FilterBarView(frame: .zero)
   
-  var category: CatalogTreeChildCategory?
-  
-  var filter: FilterRequest? {
-    didSet {
-      fetchProducts()
-    }
-  }
-  
-  func update(filter newFilter: FilterRequest) {
-    products.removeAll()
-    filter = newFilter
-  }
-  
-  var sorting: SortingType = .chipFirst {
-    didSet {
-      filterBarView.dropDownSortingMenu.change(sortingType: sorting)
-      filter?.sort = sorting.rawValue
-    }
-  }
-  
-  var products = [CodableProduct]()
+  var viewModel: CatalogViewModel
   
   var isShowingLargeCells = false {
     didSet {
       collectionView.collectionViewLayout.invalidateLayout()
     }
+  }
+  
+  init(_ viewModel: CatalogViewModel) {
+    self.viewModel = viewModel
+    super.init(collectionViewLayout: UICollectionViewFlowLayout())
+  }
+  
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   override func viewDidLoad() {
@@ -52,11 +41,23 @@ class CatalogCollectionViewController: UICollectionViewController {
     setFilterButtonsActions()
     setFilterBarViewConstraints()
     setCollectionViewConstraints()
+    
+    setupViewModelObserving()
     fetchProducts()
   }
   
+  private func setupViewModelObserving() {
+    viewModel.products.bind { [unowned self] (products) in
+      self.reloadCollectionView()
+    }
+  }
+  
+  private func fetchProducts() {
+    viewModel.fetchNewProducts()
+  }
+  
   private func setNavigationBarTitle() {
-    navigationItem.title = category?.name ?? ""
+    // TODO :- Add category name into the navigation bar title
   }
   
   private func registerCollectionViewCell() {
@@ -109,22 +110,22 @@ class CatalogCollectionViewController: UICollectionViewController {
     let sortingTypeActionSheet = UIAlertController(title: "Сортировать", message: nil, preferredStyle: .actionSheet)
     
     let newFirstAction = UIAlertAction(title: "Сначала новые", style: .default) { [unowned self] _ in
-      self.sorting = .newFirst
+      self.viewModel.sorting = .newFirst
     }
     let oldFirstAction = UIAlertAction(title: "Сначала старые", style: .default) { [unowned self] _ in
-      self.sorting = .oldFirst
+      self.viewModel.sorting = .oldFirst
     }
     let chipFirstAction = UIAlertAction(title: "Сначала дешевые", style: .default) { [unowned self] _ in
-      self.sorting = .chipFirst
+      self.viewModel.sorting = .chipFirst
     }
     let expensiveFirstAction = UIAlertAction(title: "Сначала дорогие", style: .default) { [unowned self] _ in
-      self.sorting = .expensiveFirst
+      self.viewModel.sorting = .expensiveFirst
     }
     let groupedFirstAction = UIAlertAction(title: "Сначала сгруппированные", style: .default) { [unowned self] _ in
-      self.sorting = .groupedFirst
+      self.viewModel.sorting = .groupedFirst
     }
     let ungroupedFirstAction = UIAlertAction(title: "Сначала несгруппированные", style: .default) { [unowned self] _ in
-      self.sorting = .ungroupedFirst
+      self.viewModel.sorting = .ungroupedFirst
     }
     
     let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
@@ -152,23 +153,6 @@ class CatalogCollectionViewController: UICollectionViewController {
     return UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.size.height ?? 0)
   }
   
-  private func fetchProducts() {
-    guard let category = category else {
-      return
-    }
-    
-    if filter == nil {
-      filter = FilterRequest(category: "\(category.id)", page: "1", cost: nil, options: nil, sort: nil)
-    }
-    
-    ServerManager.shared.fetchFilteredProducts(withFilter: filter!) { (response) in
-      if let catalogResponse = response {
-        self.products.append(contentsOf: catalogResponse.list)
-        self.reloadCollectionView()
-      }
-    }
-  }
-  
   private func reloadCollectionView() {
     DispatchQueue.main.async {
       self.collectionView.reloadData()
@@ -176,41 +160,30 @@ class CatalogCollectionViewController: UICollectionViewController {
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return products.count
+    return viewModel.numberOfProducts
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatalogCollectionViewCell
-    cell.codableProduct = products[indexPath.item]
+    cell.codableProduct = viewModel.products.value[indexPath.item]
     
     if last(index: indexPath) {
-      incrementFilterPage()
-      fetchProducts()
+      viewModel.fetchNextPage()
     }
     
     return cell
   }
   
   private func last(index indexPath: IndexPath) -> Bool {
-    return indexPath.item == products.count - 1
-  }
-  
-  private func incrementFilterPage() {
-    if filter != nil {
-      filter!.page = String(Int(filter!.page)! + 1)
-    }
+    return indexPath.item == viewModel.numberOfProducts - 1
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    let item = indexPath.item
-    let product = products[item]
-    let productId = Int(product.id)!
+    let product = viewModel.getProduct(at: indexPath)
     
-    ServerManager.shared.getProduct(withId: productId) { (success, productResponse) in
-      if let productResponse = productResponse {
-        DispatchQueue.main.async {
-          self.showProductTableViewController(productResponse: productResponse)
-        }
+    viewModel.fetch(selectedProduct: product) { [unowned self] (product) in
+      if let product = product {
+        self.showProductTableViewController(productResponse: product)
       }
     }
   }
