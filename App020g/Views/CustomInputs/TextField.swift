@@ -15,6 +15,7 @@ class TextField: UITextField {
   init(placeholder: String, isSecureTextEntry: Bool) {
     super.init(frame: .zero)
     
+    self.returnKeyType = .done
     self.placeholder = placeholder
     self.isSecureTextEntry = isSecureTextEntry
     self.translatesAutoresizingMaskIntoConstraints = false

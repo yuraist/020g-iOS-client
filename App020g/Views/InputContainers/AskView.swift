@@ -36,6 +36,7 @@ class AskView: UIView {
   
   let textView: UITextView = {
     let tv = UITextView()
+    tv.returnKeyType = .done
     tv.textColor = ApplicationColors.lightGray
     tv.font = UIFont.systemFont(ofSize: 12, weight: .bold)
     tv.translatesAutoresizingMaskIntoConstraints = false

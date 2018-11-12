@@ -220,6 +220,11 @@ extension AskViewController: UITextViewDelegate {
   
   func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
     
+    if text == "\n" {
+      textView.resignFirstResponder()
+      return false
+    }
+    
     let textViewString = textView.text as NSString
     let newString = textViewString.replacingCharacters(in: range, with: text)
     
