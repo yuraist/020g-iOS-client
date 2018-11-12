@@ -59,6 +59,16 @@ class SecondCatalogTreeTableViewController: UITableViewController {
     }
   }
   
+  private func showAllCategories() {
+    if let tree = catalogTree?.tree {
+      for i in 0..<tree.count {
+        if tree[i].hasTree && !tree[i].isShowingTree {
+          showTree(withCategory: tree[i], after: i)
+        }
+      }
+    }
+  }
+  
   private func reloadTableViewAsync() {
     DispatchQueue.main.async {
       self.tableView.reloadData()

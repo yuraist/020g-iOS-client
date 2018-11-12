@@ -180,6 +180,25 @@ class CatalogCollectionViewController: UICollectionViewController {
     cell.codableProduct = products[indexPath.item]
     return cell
   }
+  
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let item = indexPath.item
+    let product = products[item]
+    let productId = Int(product.id)!
+    
+    ServerManager.shared.getProduct(withId: productId) { (success, productResponse) in
+      if let productResponse = productResponse {
+        DispatchQueue.main.async {
+          self.showProductTableViewController(productResponse: productResponse)
+        }
+      }
+    }
+  }
+  
+  private func showProductTableViewController(productResponse: ProductResponse) {
+    let productTableViewController = ProductTableViewController(response: productResponse)
+    show(productTableViewController, sender: self)
+  }
 }
 
 extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
