@@ -193,26 +193,26 @@ class FilterTableViewController: UITableViewController {
   }
   
   private func estimateHeight(forOptions options: [FilterOption]) -> CGFloat {
+    let top = 48
+    let bottom = 20
+    let lineHeight = 32
+    let interlineOffset = 10
+    
+    var width = CGFloat(view.frame.width - 32)
     var lines = 1
-    var maxWidth = CGFloat(292)
     
     for option in options {
       let estimatedOptionWidth = option.name.estimatedWidth() + 15
-      if maxWidth - estimatedOptionWidth < 0 {
+      if width - estimatedOptionWidth < 0 {
         lines += 1
-        maxWidth = 292
-      }
-      maxWidth -= estimatedOptionWidth
-      
-      if options.last!.value == option.value {
-        if maxWidth < 0 {
-          lines += 1
-        }
+        width = 304 - estimatedOptionWidth
+      } else {
+        width -= estimatedOptionWidth
       }
     }
     
-    let height = CGFloat(64 + (lines * 46))
-    return height
+    let estimatedHeight = CGFloat(lineHeight * lines + interlineOffset * (lines - 1) + top + bottom)
+    return estimatedHeight
   }
 }
 
