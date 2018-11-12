@@ -102,22 +102,22 @@ class CatalogCollectionViewController: UICollectionViewController {
     let sortingTypeActionSheet = UIAlertController(title: "Сортировать", message: nil, preferredStyle: .actionSheet)
     
     let newFirstAction = UIAlertAction(title: "Сначала новые", style: .default) { [unowned self] _ in
-      self.viewModel.sorting = .newFirst
+      self.viewModel.sorting.value = .newFirst
     }
     let oldFirstAction = UIAlertAction(title: "Сначала старые", style: .default) { [unowned self] _ in
-      self.viewModel.sorting = .oldFirst
+      self.viewModel.sorting.value = .oldFirst
     }
     let chipFirstAction = UIAlertAction(title: "Сначала дешевые", style: .default) { [unowned self] _ in
-      self.viewModel.sorting = .chipFirst
+      self.viewModel.sorting.value = .chipFirst
     }
     let expensiveFirstAction = UIAlertAction(title: "Сначала дорогие", style: .default) { [unowned self] _ in
-      self.viewModel.sorting = .expensiveFirst
+      self.viewModel.sorting.value = .expensiveFirst
     }
     let groupedFirstAction = UIAlertAction(title: "Сначала сгруппированные", style: .default) { [unowned self] _ in
-      self.viewModel.sorting = .groupedFirst
+      self.viewModel.sorting.value = .groupedFirst
     }
     let ungroupedFirstAction = UIAlertAction(title: "Сначала несгруппированные", style: .default) { [unowned self] _ in
-      self.viewModel.sorting = .ungroupedFirst
+      self.viewModel.sorting.value = .ungroupedFirst
     }
     
     let cancelAction = UIAlertAction(title: "Отменить", style: .cancel, handler: nil)
@@ -146,8 +146,27 @@ class CatalogCollectionViewController: UICollectionViewController {
   }
   
   private func setupViewModelObserving() {
+    observeProductsChanges()
+    observeSortingTypeChanges()
+  }
+  
+  private func observeProductsChanges() {
     viewModel.products.bind { [unowned self] (products) in
-      self.reloadCollectionView()
+      DispatchQueue.main.async {
+        self.reloadCollectionView()
+      }
+    }
+  }
+  
+  private func reloadCollectionView() {
+    collectionView.reloadData()
+  }
+  
+  private func observeSortingTypeChanges() {
+    viewModel.sorting.bind { [unowned self] (sortingType) in
+      self.viewModel.filter.sort = sortingType.rawValue
+      self.changeDropDownMenu(sortingType: sortingType)
+      self.fetchProducts()
     }
   }
   
@@ -155,13 +174,14 @@ class CatalogCollectionViewController: UICollectionViewController {
     viewModel.fetchNewProducts()
   }
   
-  
-  private func reloadCollectionView() {
-    DispatchQueue.main.async {
-      self.collectionView.reloadData()
-    }
+  private func changeDropDownMenu(sortingType sorting: SortingType) {
+    filterBarView.dropDownSortingMenu.change(sortingType: sorting)
+    scrollCollectionViewToTop()
   }
   
+  private func scrollCollectionViewToTop() {
+    collectionView.contentOffset = CGPoint(x: 0, y: 0)
+  }
 }
 
 // MARK: - Data Source

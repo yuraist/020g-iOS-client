@@ -11,7 +11,7 @@ import Foundation
 class CatalogViewModel {
   
   var filter: FilterRequest
-  var sorting: SortingType = .chipFirst
+  var sorting: Observable<SortingType>
   var products: Observable<[CodableProduct]>
   
   var numberOfProducts: Int {
@@ -20,6 +20,7 @@ class CatalogViewModel {
   
   init(_ filterRequest: FilterRequest) {
     filter = filterRequest
+    sorting = Observable(SortingType.chipFirst)
     products = Observable([CodableProduct]())
   }
   
