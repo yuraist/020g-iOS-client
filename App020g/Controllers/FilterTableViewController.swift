@@ -57,6 +57,11 @@ class FilterTableViewController: UITableViewController {
     }
   }
   
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
+    acceptFilterView.removeFromSuperview()
+  }
+  
   private func addAcceptFilterView() {
     navigationController?.view.addSubview(acceptFilterView)
   }
@@ -90,8 +95,7 @@ class FilterTableViewController: UITableViewController {
   @objc
   func acceptFilterParameters() {
     if let filterRequest = createNewFilterRequest() {
-      parentController?.filter = filterRequest
-      acceptFilterView.removeFromSuperview()
+      parentController?.update(filter: filterRequest)
       navigationController?.popViewController(animated: true)
     }
   }

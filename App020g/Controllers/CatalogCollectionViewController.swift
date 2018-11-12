@@ -18,9 +18,13 @@ class CatalogCollectionViewController: UICollectionViewController {
   
   var filter: FilterRequest? {
     didSet {
-      products = []
       fetchProducts()
     }
+  }
+  
+  func update(filter newFilter: FilterRequest) {
+    products.removeAll()
+    filter = newFilter
   }
   
   var sorting: SortingType = .chipFirst {
@@ -178,7 +182,23 @@ class CatalogCollectionViewController: UICollectionViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath) as! CatalogCollectionViewCell
     cell.codableProduct = products[indexPath.item]
+    
+    if last(index: indexPath) {
+      incrementFilterPage()
+      fetchProducts()
+    }
+    
     return cell
+  }
+  
+  private func last(index indexPath: IndexPath) -> Bool {
+    return indexPath.item == products.count - 1
+  }
+  
+  private func incrementFilterPage() {
+    if filter != nil {
+      filter!.page = String(Int(filter!.page)! + 1)
+    }
   }
   
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
