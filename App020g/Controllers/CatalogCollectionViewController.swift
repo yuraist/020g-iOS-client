@@ -36,32 +36,20 @@ class CatalogCollectionViewController: UICollectionViewController {
     
     collectionView.setGrayBackgroundColor()
     setNavigationBarTitle()
-    registerCollectionViewCell()
+    
     addFilterBarView()
     setFilterButtonsActions()
     setFilterBarViewConstraints()
+    
+    registerCollectionViewCell()
     setCollectionViewConstraints()
     
     setupViewModelObserving()
     fetchProducts()
   }
   
-  private func setupViewModelObserving() {
-    viewModel.products.bind { [unowned self] (products) in
-      self.reloadCollectionView()
-    }
-  }
-  
-  private func fetchProducts() {
-    viewModel.fetchNewProducts()
-  }
-  
   private func setNavigationBarTitle() {
     // TODO :- Add category name into the navigation bar title
-  }
-  
-  private func registerCollectionViewCell() {
-    collectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
   }
   
   private func addFilterBarView() {
@@ -73,6 +61,10 @@ class CatalogCollectionViewController: UICollectionViewController {
     filterBarView.topAnchor.constraint(equalTo: view.topAnchor, constant: getTopLayoutGuide()).isActive = true
     filterBarView.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
     filterBarView.heightAnchor.constraint(equalToConstant: 42).isActive = true
+  }
+  
+  private func getTopLayoutGuide() -> CGFloat {
+    return UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.size.height ?? 0)
   }
   
   private func setFilterButtonsActions() {
@@ -141,6 +133,10 @@ class CatalogCollectionViewController: UICollectionViewController {
     present(sortingTypeActionSheet, animated: true, completion: nil)
   }
   
+  private func registerCollectionViewCell() {
+    collectionView.register(CatalogCollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+  }
+  
   private func setCollectionViewConstraints() {
     collectionView.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     collectionView.topAnchor.constraint(equalTo: filterBarView.bottomAnchor).isActive = true
@@ -149,15 +145,28 @@ class CatalogCollectionViewController: UICollectionViewController {
     collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
   }
   
-  private func getTopLayoutGuide() -> CGFloat {
-    return UIApplication.shared.statusBarFrame.size.height + (navigationController?.navigationBar.frame.size.height ?? 0)
+  private func setupViewModelObserving() {
+    viewModel.products.bind { [unowned self] (products) in
+      self.reloadCollectionView()
+    }
   }
+  
+  private func fetchProducts() {
+    viewModel.fetchNewProducts()
+  }
+  
   
   private func reloadCollectionView() {
     DispatchQueue.main.async {
       self.collectionView.reloadData()
     }
   }
+  
+}
+
+// MARK: - Data Source
+
+extension CatalogCollectionViewController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewModel.numberOfProducts
@@ -193,6 +202,8 @@ class CatalogCollectionViewController: UICollectionViewController {
     show(productTableViewController, sender: self)
   }
 }
+
+// MARK: - Delegate Flow Layout
 
 extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
