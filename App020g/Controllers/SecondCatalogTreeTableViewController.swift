@@ -17,7 +17,7 @@ class SecondCatalogTreeTableViewController: UITableViewController {
   
   var catalogTree: CatalogTree? {
     didSet {
-      reloadTableView()
+      reloadTableViewAsync()
     }
   }
   
@@ -59,7 +59,7 @@ class SecondCatalogTreeTableViewController: UITableViewController {
     }
   }
   
-  private func reloadTableView() {
+  private func reloadTableViewAsync() {
     DispatchQueue.main.async {
       self.tableView.reloadData()
     }
