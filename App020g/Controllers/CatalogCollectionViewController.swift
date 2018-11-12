@@ -48,6 +48,18 @@ class CatalogCollectionViewController: UICollectionViewController {
     fetchProducts()
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    if viewModel.filter.options != nil {
+      let filledFilterImage = #imageLiteral(resourceName: "filter_filled").withRenderingMode(.alwaysTemplate)
+      filterBarView.filterButton.setImage(filledFilterImage, for: .normal)
+    } else {
+      let filledFilterImage = #imageLiteral(resourceName: "filter").withRenderingMode(.alwaysTemplate)
+      filterBarView.filterButton.setImage(filledFilterImage, for: .normal)
+    }
+  }
+  
   private func setNavigationBarTitle() {
     // TODO :- Add category name into the navigation bar title
   }

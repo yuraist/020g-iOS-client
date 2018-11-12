@@ -22,7 +22,7 @@ class FilterBarView: UIView {
   let filterButton: UIButton = {
     let button = UIButton(type: .custom)
     button.setImage(#imageLiteral(resourceName: "filter").withRenderingMode(.alwaysTemplate), for: .normal)
-    button.tintColor = ApplicationColors.darkBlue
+    button.tintColor = ApplicationColors.buttonBlue
     button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return button
   }()
