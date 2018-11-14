@@ -71,7 +71,7 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
     cell.option = option
     
     if let filterParameterId = filterParameter?.id {
-      if parentController?.selectedParameters[filterParameterId]?.contains(option.value) ?? false {
+      if parentController?.viewModel.selectedParameters[filterParameterId]?.contains(option.value) ?? false {
         cell.isSelectedCell = true
       }
     }
@@ -106,20 +106,20 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
       
       if let parameterId = filterParameter?.id {
         if cell.isSelectedCell {
-          if parent.selectedParameters[parameterId] != nil {
-            parent.selectedParameters[parameterId]?.append(option.value)
+          if parent.viewModel.selectedParameters[parameterId] != nil {
+            parent.viewModel.selectedParameters[parameterId]?.append(option.value)
           } else {
-            parent.selectedParameters[parameterId] = [option.value]
+            parent.viewModel.selectedParameters[parameterId] = [option.value]
           }
         } else {
-          parent.selectedParameters[parameterId]?.removeAll(where: { $0 == option.value })
-          if parent.selectedParameters[parameterId]?.count == 0 {
-            parent.selectedParameters.removeValue(forKey: parameterId)
+          parent.viewModel.selectedParameters[parameterId]?.removeAll(where: { $0 == option.value })
+          if parent.viewModel.selectedParameters[parameterId]?.count == 0 {
+            parent.viewModel.selectedParameters.removeValue(forKey: parameterId)
           }
         }
       }
       
-      if parent.selectedParameters.count == 0 {
+      if parent.viewModel.selectedParameters.count == 0 {
         parent.acceptFilterView.showOnlyAcceptView()
       } else {
         parent.acceptFilterView.showTwoButtons()

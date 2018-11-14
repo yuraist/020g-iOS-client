@@ -13,32 +13,19 @@ class FilterTableViewController: UITableViewController {
   private let cellId = "cell"
   private let priceCellId = "priceCell"
   private let parameterCellId = "parameterCell"
-  
+
+  var viewModel: FilterViewModel
+
   let acceptFilterView = AcceptFilterView(frame: .zero)
-  
   var parentController: CatalogCollectionViewController?
-  var filter: FilterResponse?
-  
-  var selectedCost: (min: Int, max: Int)? {
-    didSet {
-      if selectedCost != nil {
-        acceptFilterView.showTwoButtons()
-      } else {
-        acceptFilterView.showOnlyAcceptView()
-      }
-      
-      if let newFilterRequest = createNewFilterRequest() {
-        getFilterCount(forFilterRequest: newFilterRequest)
-      }
-    }
+
+  init(viewModel: FilterViewModel) {
+    self.viewModel = viewModel
+    super.init(style: .plain)
   }
   
-  var selectedParameters = [Int: [Int]]() {
-    didSet {
-      if let newFilterRequest = createNewFilterRequest() {
-        getFilterCount(forFilterRequest: newFilterRequest)
-      }
-    }
+  required init?(coder aDecoder: NSCoder) {
+    fatalError("init(coder:) has not been implemented")
   }
   
   override func viewDidLoad() {
@@ -47,17 +34,16 @@ class FilterTableViewController: UITableViewController {
     tableView.setWhiteBackgroundColor()
     registerTableViewCells()
     
-    if filter == nil {
-      fetchFilterParameters()
-    }
-    
     addAcceptFilterView()
     setConstraintsForAcceptFilterView()
     setActionsForAcceptFilterViewButtons()
     
-    if let filterRequest = createNewFilterRequest() {
-      getFilterCount(forFilterRequest: filterRequest)
-    }
+    setupViewModelObserving()
+  }
+  
+  private func registerTableViewCells() {
+    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+    tableView.register(FilterParameterTableViewCell.self, forCellReuseIdentifier: parameterCellId)
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -88,8 +74,8 @@ class FilterTableViewController: UITableViewController {
   
   @objc
   func clearFilter() {
-    selectedParameters.removeAll()
-    selectedCost = nil
+    viewModel.selectedParameters = [:]
+    viewModel.selectedCost = nil
     
     tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
     acceptFilterView.showOnlyAcceptView()
@@ -97,31 +83,13 @@ class FilterTableViewController: UITableViewController {
   
   @objc
   func acceptFilterParameters() {
-    if let filterRequest = createNewFilterRequest() {
-//      parentController?.update(filter: filterRequest)
-      navigationController?.popViewController(animated: true)
-    }
+    parentController?.viewModel.filter = viewModel.filterRequest
+    navigationController?.popViewController(animated: true)
   }
   
-  private func registerTableViewCells() {
-    tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
-    tableView.register(FilterParameterTableViewCell.self, forCellReuseIdentifier: parameterCellId)
-  }
-  
-  private func createNewFilterRequest() -> FilterRequest? {
-    guard let category = parentController?.viewModel.filter.category else {
-      return nil
-    }
-    
-    let filterRequest = FilterRequest(category: category, page: "1", cost: selectedCost, options: selectedParameters, sort: nil)
-    return filterRequest
-  }
-  
-  private func getFilterCount(forFilterRequest filter: FilterRequest) {
-    ServerManager.shared.getFilterCount(filter: filter) { (count) in
-      DispatchQueue.main.async {
-        self.updateNavigationTitle(withCount: count)
-      }
+  private func setupViewModelObserving() {
+    viewModel.filterCount.bind { [unowned self] (count) in
+      self.updateNavigationTitle(withCount: count)
     }
   }
   
@@ -129,23 +97,12 @@ class FilterTableViewController: UITableViewController {
     navigationItem.title = "Фильтр - \(count) товаров"
   }
   
-  private func fetchFilterParameters() {
-    guard let category = parentController?.viewModel.filter.category else {
-      return
-    }
-    
-    ServerManager.shared.fetchFilter(forCategoryId: Int(category)!) { (filterResponse) in
-      if let response = filterResponse {
-        self.filter = response
-        DispatchQueue.main.async {
-          self.tableView.reloadData()
-        }
-      }
-    }
+  private func reloadTableViewData() {
+    tableView.reloadData()
   }
   
   override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return filter?.list.count ?? 0
+    return viewModel.filterResponse.list.count
   }
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -156,11 +113,9 @@ class FilterTableViewController: UITableViewController {
       cell.priceFromTextField.delegate = self
       cell.priceToTextField.delegate = self
       
-      if filter != nil {
-        cell.priceRange = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
-      }
+      cell.priceRange = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
       
-      if let selectedCost = selectedCost {
+      if let selectedCost = viewModel.selectedCost {
         cell.priceFromTextField.text = String(selectedCost.min)
         cell.priceToTextField.text = String(selectedCost.max)
       }
@@ -171,16 +126,16 @@ class FilterTableViewController: UITableViewController {
     let cell = tableView.dequeueReusableCell(withIdentifier: parameterCellId, for: indexPath) as! FilterParameterTableViewCell
     cell.selectionStyle = .none
     cell.parentController = self
-    cell.filterParameter = filter?.list[indexPath.row]
+    cell.filterParameter = viewModel.filterResponse.list[indexPath.row]
     return cell
   }
   
   private func getOriginalMinPrice() -> Int {
-    return Int(filter?.list[0].cost_min_orig ?? "0") ?? 0
+    return Int(viewModel.filterResponse.list[0].cost_min_orig ?? "0") ?? 0
   }
   
   private func getOriginalMaxPrice() -> Int {
-    return Int(filter?.list[0].cost_max_orig ?? "0") ?? 0
+    return Int(viewModel.filterResponse.list[0].cost_max_orig ?? "0") ?? 0
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -188,7 +143,7 @@ class FilterTableViewController: UITableViewController {
       return 94
     }
     
-    if let filterOptions = filter?.list[indexPath.row].options {
+    if let filterOptions = viewModel.filterResponse.list[indexPath.row].options {
       return estimateHeight(forOptions: filterOptions)
     }
     
@@ -228,17 +183,17 @@ extension FilterTableViewController: UITextFieldDelegate {
   func textFieldShouldReturn(_ textField: UITextField) -> Bool {
     textField.resignFirstResponder()
     
-    if selectedCost == nil {
-      selectedCost = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
+    if viewModel.selectedCost == nil {
+      viewModel.selectedCost = (min: getOriginalMinPrice(), max: getOriginalMaxPrice())
     }
     
     if textField.placeholder == "\(getOriginalMinPrice())" {
       if let selectedMin = Int(textField.text!) {
-        selectedCost?.min = selectedMin
+        viewModel.selectedCost?.min = selectedMin
       }
     } else {
       if let selectedMax = Int(textField.text!) {
-        selectedCost?.max = selectedMax
+        viewModel.selectedCost?.max = selectedMax
       }
     }
     

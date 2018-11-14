@@ -74,6 +74,7 @@
 		BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainViewController.swift */; };
 		BEA2FFAD215502A400E5C6FA /* CenterViewControllerDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */; };
 		BEAE7EA62199BB06002A6C48 /* CatalogViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAE7EA52199BB06002A6C48 /* CatalogViewModel.swift */; };
+		BEAE7EA8219C0533002A6C48 /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEAE7EA7219C0533002A6C48 /* FilterViewModel.swift */; };
 		BEC49823216B49140058347E /* ShopLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEC49822216B49140058347E /* ShopLabel.swift */; };
 		BED20886217F3DC6007EFD01 /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = BED20885217F3DC6007EFD01 /* Filter.swift */; };
 		BEE1EC5A2190F373005FD245 /* Observable.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEE1EC592190F373005FD245 /* Observable.swift */; };
@@ -186,6 +187,7 @@
 		BEA2FFAA215500C000E5C6FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterViewControllerDelegate.swift; sourceTree = "<group>"; };
 		BEAE7EA52199BB06002A6C48 /* CatalogViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatalogViewModel.swift; sourceTree = "<group>"; };
+		BEAE7EA7219C0533002A6C48 /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		BEC49822216B49140058347E /* ShopLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopLabel.swift; sourceTree = "<group>"; };
 		BED20885217F3DC6007EFD01 /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		BEE1EC592190F373005FD245 /* Observable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Observable.swift; sourceTree = "<group>"; };
@@ -490,6 +492,7 @@
 				BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */,
 				BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */,
 				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
+				BEAE7EA7219C0533002A6C48 /* FilterViewModel.swift */,
 				BE0218D92185BA8500C8DBEC /* Filter */,
 			);
 			path = Catalog;
@@ -720,6 +723,7 @@
 				BEE1EC602191F558005FD245 /* SearchViewModel.swift in Sources */,
 				BE1DC550214FAB7F00E6AF30 /* CatalogCollectionViewController.swift in Sources */,
 				BE0FF10B2175A84B00F126BB /* CategoryPagesCollectionView.swift in Sources */,
+				BEAE7EA8219C0533002A6C48 /* FilterViewModel.swift in Sources */,
 				BE1DC55821500AF700E6AF30 /* TextField.swift in Sources */,
 				BEF6F69F215CC144000E4BCB /* Product.swift in Sources */,
 				BE3D1D22215954DD00A6E9E4 /* CatalogCollectionViewCell.swift in Sources */,

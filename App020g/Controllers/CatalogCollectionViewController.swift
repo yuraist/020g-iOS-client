@@ -104,9 +104,18 @@ class CatalogCollectionViewController: UICollectionViewController {
   
   @objc
   private func showFilterController() {
-    let filterController = FilterTableViewController()
-    filterController.parentController = self
-    show(filterController, sender: self)
+    
+    ServerManager.shared.fetchFilter(forCategoryId: Int(viewModel.filter.category)!) { [unowned self] (response) in
+      if response != nil {
+        DispatchQueue.main.async {
+          let filterViewModel = FilterViewModel(filterResponse: response!, categoryId: Int(self.viewModel.filter.category)!, sortingType: self.viewModel.sorting.value)
+          let filterController = FilterTableViewController(viewModel: filterViewModel)
+          filterController.parentController = self
+          
+          self.show(filterController, sender: self)
+        }
+      }
+    }
   }
   
   @objc
