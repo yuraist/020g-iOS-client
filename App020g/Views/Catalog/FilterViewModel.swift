@@ -45,6 +45,7 @@ class FilterViewModel {
     self.selectedParameters = filterRequest.options ?? [:]
     self.filterCount = Observable(0)
     self.sortingType = sortingType
+    self.updateFilterCount()
   }
   
 }

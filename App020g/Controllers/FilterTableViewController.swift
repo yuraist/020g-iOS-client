@@ -89,7 +89,9 @@ class FilterTableViewController: UITableViewController {
   
   private func setupViewModelObserving() {
     viewModel.filterCount.bind { [unowned self] (count) in
-      self.updateNavigationTitle(withCount: count)
+      DispatchQueue.main.async {
+        self.updateNavigationTitle(withCount: count)
+      }
     }
   }
   
