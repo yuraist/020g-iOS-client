@@ -61,7 +61,7 @@ class CatalogCollectionViewController: UICollectionViewController {
   }
   
   private func setNavigationBarTitle() {
-    // TODO :- Add category name into the navigation bar title
+    navigationItem.title = viewModel.categoryName
   }
   
   private func addFilterBarView() {

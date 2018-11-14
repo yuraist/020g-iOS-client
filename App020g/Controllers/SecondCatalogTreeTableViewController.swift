@@ -137,7 +137,7 @@ class SecondCatalogTreeTableViewController: UITableViewController {
   
   private func showCatalog(withCategory category: CatalogTreeChildCategory) {
     let filterRequest = FilterRequest(category: String(category.id), page: "1", cost: nil, options: nil, sort: nil)
-    let catalogViewModel = CatalogViewModel(filterRequest)
+    let catalogViewModel = CatalogViewModel(filterRequest, categoryName: category.name)
     let catalogViewController = CatalogCollectionViewController(catalogViewModel)
     show(catalogViewController, sender: self)
   }

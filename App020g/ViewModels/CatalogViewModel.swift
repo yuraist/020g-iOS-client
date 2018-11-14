@@ -11,6 +11,7 @@ import Foundation
 class CatalogViewModel {
   
   var filter: FilterRequest
+  var categoryName: String
   var sorting: Observable<SortingType>
   var products: Observable<[CodableProduct]>
   
@@ -18,8 +19,9 @@ class CatalogViewModel {
     return products.value.count
   }
   
-  init(_ filterRequest: FilterRequest) {
+  init(_ filterRequest: FilterRequest, categoryName category: String) {
     filter = filterRequest
+    categoryName = category
     sorting = Observable(SortingType.chipFirst)
     products = Observable([CodableProduct]())
   }
