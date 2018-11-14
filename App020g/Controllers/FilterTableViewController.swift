@@ -83,7 +83,7 @@ class FilterTableViewController: UITableViewController {
   
   @objc
   func acceptFilterParameters() {
-    parentController?.viewModel.filter = viewModel.filterRequest
+    parentController?.update(filter: viewModel.filterRequest)
     navigationController?.popViewController(animated: true)
   }
   

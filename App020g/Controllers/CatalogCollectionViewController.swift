@@ -203,7 +203,12 @@ class CatalogCollectionViewController: UICollectionViewController {
   private func scrollCollectionViewToTop() {
     collectionView.contentOffset = CGPoint(x: 0, y: 0)
   }
-}
+  
+  func update(filter: FilterRequest) {
+    viewModel.filter = filter
+    fetchProducts()
+  }
+ }
 
 // MARK: - Data Source
 
