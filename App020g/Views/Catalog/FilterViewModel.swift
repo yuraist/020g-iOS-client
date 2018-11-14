@@ -39,10 +39,10 @@ class FilterViewModel {
   
   private var categoryId: Int
   
-  init(filterResponse: FilterResponse, categoryId: Int, sortingType: SortingType) {
+  init(filterResponse: FilterResponse, categoryId: Int, sortingType: SortingType, filterRequest: FilterRequest) {
     self.filterResponse = filterResponse
     self.categoryId = categoryId
-    self.selectedParameters = [:]
+    self.selectedParameters = filterRequest.options ?? [:]
     self.filterCount = Observable(0)
     self.sortingType = sortingType
   }

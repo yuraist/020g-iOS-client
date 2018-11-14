@@ -108,7 +108,7 @@ class CatalogCollectionViewController: UICollectionViewController {
     ServerManager.shared.fetchFilter(forCategoryId: Int(viewModel.filter.category)!) { [unowned self] (response) in
       if response != nil {
         DispatchQueue.main.async {
-          let filterViewModel = FilterViewModel(filterResponse: response!, categoryId: Int(self.viewModel.filter.category)!, sortingType: self.viewModel.sorting.value)
+          let filterViewModel = FilterViewModel(filterResponse: response!, categoryId: Int(self.viewModel.filter.category)!, sortingType: self.viewModel.sorting.value, filterRequest: self.viewModel.filter)
           let filterController = FilterTableViewController(viewModel: filterViewModel)
           filterController.parentController = self
           
