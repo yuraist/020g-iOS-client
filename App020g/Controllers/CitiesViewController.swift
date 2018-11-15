@@ -1,5 +1,5 @@
 //
-//  CitiesTableViewController.swift
+//  CitiesViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 11/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CitiesTableViewController: UITableViewController {
+class CitiesViewController: UITableViewController {
   
   private let cellId = "cellId"
   var cities = [City]() {
@@ -17,7 +17,7 @@ class CitiesTableViewController: UITableViewController {
     }
   }
   
-  var productController: ProductTableViewController?
+  var productController: ProductViewController?
   
   override func viewDidLoad() {
     super.viewDidLoad()

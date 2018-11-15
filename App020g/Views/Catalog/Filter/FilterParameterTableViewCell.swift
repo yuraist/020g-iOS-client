@@ -11,7 +11,7 @@ import DGCollectionViewLeftAlignFlowLayout
 
 class FilterParameterTableViewCell: UITableViewCell {
   
-  var parentController: FilterTableViewController?
+  var parentController: FilterViewController?
   
   var filterParameter: FilterParameter? {
     didSet {

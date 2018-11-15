@@ -1,5 +1,5 @@
 //
-//  FilterTableViewController.swift
+//  FilterViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 17/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class FilterTableViewController: UITableViewController {
+class FilterViewController: UITableViewController {
   
   private let cellId = "cell"
   private let priceCellId = "priceCell"
@@ -17,7 +17,7 @@ class FilterTableViewController: UITableViewController {
   var viewModel: FilterViewModel
 
   let acceptFilterView = AcceptFilterView(frame: .zero)
-  var parentController: CatalogCollectionViewController?
+  var parentController: CatalogViewController?
 
   init(viewModel: FilterViewModel) {
     self.viewModel = viewModel
@@ -176,7 +176,7 @@ class FilterTableViewController: UITableViewController {
   }
 }
 
-extension FilterTableViewController: UITextFieldDelegate {
+extension FilterViewController: UITextFieldDelegate {
   
   func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
     return Int(string) != nil || range.length > 0

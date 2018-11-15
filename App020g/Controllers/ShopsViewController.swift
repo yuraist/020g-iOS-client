@@ -1,5 +1,5 @@
 //
-//  ShopsCollectionViewController.swift
+//  ShopsViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 25/09/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ShopsCollectionViewController: CenterViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
+class ShopsViewController: CenterViewController, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout, UICollectionViewDataSource {
   
   private let cellId = "shopListCellId"
   var collectionView: UICollectionView?
@@ -105,7 +105,7 @@ class ShopsCollectionViewController: CenterViewController, UICollectionViewDeleg
 
 // MARK: - Collection view data source
 
-extension ShopsCollectionViewController {
+extension ShopsViewController {
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewModel.shops.count
   }

@@ -12,7 +12,7 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
   
   private let reuseIdentifier = "cellId"
   
-  var parentController: FilterTableViewController?
+  var parentController: FilterViewController?
   
   var filterParameter: FilterParameter? {
     didSet {

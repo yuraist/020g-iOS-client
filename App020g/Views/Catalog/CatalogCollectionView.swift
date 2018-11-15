@@ -166,7 +166,7 @@ extension CatalogCollectionView: UICollectionViewDelegate, UICollectionViewDataS
   }
   
   private func showProductTableViewController(productResponse: ProductResponse) {
-    let productTableViewController = ProductTableViewController(response: productResponse)
+    let productTableViewController = ProductViewController(response: productResponse)
     parentViewController?.show(productTableViewController, sender: parentViewController)
   }
 }

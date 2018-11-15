@@ -1,5 +1,5 @@
 //
-//  SecondCatalogTreeTableViewController.swift
+//  SecondCatalogTreeViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 17/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondCatalogTreeTableViewController: UITableViewController {
+class SecondCatalogTreeViewController: UITableViewController {
 
   private let secondCell = "second"
   private let baseCell = "base"
@@ -138,7 +138,7 @@ class SecondCatalogTreeTableViewController: UITableViewController {
   private func showCatalog(withCategory category: CatalogTreeChildCategory) {
     let filterRequest = FilterRequest(category: String(category.id), page: "1", cost: nil, options: nil, sort: nil)
     let catalogViewModel = CatalogViewModel(filterRequest, categoryName: category.name)
-    let catalogViewController = CatalogCollectionViewController(catalogViewModel)
+    let catalogViewController = CatalogViewController(catalogViewModel)
     show(catalogViewController, sender: self)
   }
 }

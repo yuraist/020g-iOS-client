@@ -79,7 +79,7 @@ extension SearchViewController {
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if indexPath.row == 0 {
-      return 30
+      return 32
     } else if indexPath.row == 1 {
       return estimatedCategoriesCollectionViewHeight()
     } else if indexPath.row == 2 {

@@ -1,5 +1,5 @@
 //
-//  CatalogCollectionViewController.swift
+//  CatalogViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 17/09/2018.
@@ -10,7 +10,7 @@ import UIKit
 
 private let reuseIdentifier = "Cell"
 
-class CatalogCollectionViewController: UICollectionViewController {
+class CatalogViewController: UICollectionViewController {
   
   private let filterBarView = FilterBarView(frame: .zero)
   
@@ -109,7 +109,7 @@ class CatalogCollectionViewController: UICollectionViewController {
       if response != nil {
         DispatchQueue.main.async {
           let filterViewModel = FilterViewModel(filterResponse: response!, categoryId: Int(self.viewModel.filter.category)!, sortingType: self.viewModel.sorting.value, filterRequest: self.viewModel.filter)
-          let filterController = FilterTableViewController(viewModel: filterViewModel)
+          let filterController = FilterViewController(viewModel: filterViewModel)
           filterController.parentController = self
           
           self.show(filterController, sender: self)
@@ -212,7 +212,7 @@ class CatalogCollectionViewController: UICollectionViewController {
 
 // MARK: - Data Source
 
-extension CatalogCollectionViewController {
+extension CatalogViewController {
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
     return viewModel.numberOfProducts
@@ -244,14 +244,14 @@ extension CatalogCollectionViewController {
   }
   
   private func showProductTableViewController(productResponse: ProductResponse) {
-    let productTableViewController = ProductTableViewController(response: productResponse)
+    let productTableViewController = ProductViewController(response: productResponse)
     show(productTableViewController, sender: self)
   }
 }
 
 // MARK: - Delegate Flow Layout
 
-extension CatalogCollectionViewController: UICollectionViewDelegateFlowLayout {
+extension CatalogViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     let minSize = CGSize(width: collectionView.frame.size.width/2 - 1, height: collectionView.frame.size.width/2 - 2)
     let bigSize = CGSize(width: collectionView.frame.size.width, height: collectionView.frame.size.width - 2)

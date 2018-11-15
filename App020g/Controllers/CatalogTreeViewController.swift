@@ -1,5 +1,5 @@
 //
-//  CatalogTreeTableViewController.swift
+//  CatalogTreeViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 17/09/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class CatalogTreeTableViewController: UITableViewController {
+class CatalogTreeViewController: UITableViewController {
   private let cellId = "categoryCell"
   
   var categories = [CatalogCategory]() {
@@ -68,7 +68,7 @@ class CatalogTreeTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    let destinationContrller = SecondCatalogTreeTableViewController(withCategory: categories[indexPath.row])
+    let destinationContrller = SecondCatalogTreeViewController(withCategory: categories[indexPath.row])
     show(destinationContrller, sender: self)
   }
 }

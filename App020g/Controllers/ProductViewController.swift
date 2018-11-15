@@ -1,5 +1,5 @@
 //
-//  ProductTableViewController.swift
+//  ProductViewController.swift
 //  020g
 //
 //  Created by Юрий Истомин on 17/09/2018.
@@ -9,7 +9,7 @@
 import UIKit
 import SafariServices
 
-class ProductTableViewController: UITableViewController {
+class ProductViewController: UITableViewController {
   
   var selectedCities = [City]() {
     didSet {
@@ -263,7 +263,7 @@ class ProductTableViewController: UITableViewController {
   }
   
   private func showCitiesTableViewController() {
-    let citiesTableViewController = CitiesTableViewController()
+    let citiesTableViewController = CitiesViewController()
     citiesTableViewController.cities = getValidCities()
     citiesTableViewController.productController = self
     show(citiesTableViewController, sender: self)

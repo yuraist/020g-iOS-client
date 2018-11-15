@@ -13,7 +13,10 @@ class BreadcrumbsCollectionView: UICollectionView, UICollectionViewDelegate, UIC
   var breadcrumbs = [Breadcrumb]() {
     didSet {
       reloadData()
-      scrollToItem(at: IndexPath(item: breadcrumbs.count - 1, section: 0), at: .left, animated: false)
+//      let item = breadcrumbs.count - 1
+//      let indexPath = IndexPath(item: item, section: 0)
+//      let scrollPosition = UICollectionView.ScrollPosition.left
+//      scrollToItem(at: indexPath, at: scrollPosition, animated: false)
     }
   }
   

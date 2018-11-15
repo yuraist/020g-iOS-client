@@ -184,7 +184,7 @@ extension ContainerViewController: MenuViewControllerDelegate {
     case "Авторизация":
       showAuthorizationViewController()
     case "Страйкбольные магазины":
-      guard let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsCollectionViewController else {
+      guard let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsViewController else {
         showShopListTableViewController()
         break
       }
@@ -197,7 +197,7 @@ extension ContainerViewController: MenuViewControllerDelegate {
   }
   
   private func showMainViewController() {
-    if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsCollectionViewController  {
+    if let _ = centerNavigationController.viewControllers[centerNavigationController.viewControllers.count-1] as? ShopsViewController  {
       centerNavigationController.popViewController(animated: false)
     }
   }
@@ -212,10 +212,10 @@ extension ContainerViewController: MenuViewControllerDelegate {
     centerNavigationController.pushViewController(initializeShopListTableViewController(), animated: false)
   }
   
-  private func initializeShopListTableViewController() -> ShopsCollectionViewController {
+  private func initializeShopListTableViewController() -> ShopsViewController {
     let serverManager = ServerManager()
     let shopsViewModel = ShopsViewModel(manager: serverManager)
-    let shopListTableViewController = ShopsCollectionViewController(viewModel: shopsViewModel)
+    let shopListTableViewController = ShopsViewController(viewModel: shopsViewModel)
     shopListTableViewController.delegate = self
     return shopListTableViewController
   }

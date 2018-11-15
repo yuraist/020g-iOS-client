@@ -82,7 +82,7 @@ class MainViewController: CenterViewController {
   
   @objc
   private func showCatalogTree() {
-    let catalogTreeController = CatalogTreeTableViewController()
+    let catalogTreeController = CatalogTreeViewController()
     show(catalogTreeController, sender: self)
   }
   
