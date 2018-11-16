@@ -36,16 +36,17 @@ class SearchViewController: UICollectionViewController {
     searchController.dimsBackgroundDuringPresentation = false
     searchController.searchBar.tintColor = ApplicationColors.white
     
-    UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColors.white]
-    
     if #available(iOS 9.1, *) {
       searchController.obscuresBackgroundDuringPresentation = false
     }
+    
     if #available(iOS 11.0, *) {
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
+      UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).defaultTextAttributes = [NSAttributedString.Key.foregroundColor: ApplicationColors.white]
     } else {
       // TODO: - Implement search bar for iOS < 11.0
+      searchController.searchBar.tintColor = ApplicationColors.black
       navigationItem.titleView = searchController.searchBar
     }
   }
