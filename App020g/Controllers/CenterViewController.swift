@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import DGCollectionViewLeftAlignFlowLayout
 
 class CenterViewController: UIViewController {
   var delegate: CenterViewControllerDelegate?
@@ -54,7 +55,8 @@ class CenterViewController: UIViewController {
   }
   
   @objc private func showSearchCollectionViewController() {
-    let searchViewController = SearchViewController()
+    let layout = DGCollectionViewLeftAlignFlowLayout()
+    let searchViewController = SearchViewController(collectionViewLayout: layout)
     show(searchViewController, sender: self)
   }
   

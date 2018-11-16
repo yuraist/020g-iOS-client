@@ -8,7 +8,9 @@
 
 import UIKit
 
-class SearchViewController: UITableViewController {
+class SearchViewController: UICollectionViewController {
+  private let categoryCellId = "categoryCell"
+  private let productCellId = "productCell"
   
   private let searchController = UISearchController(searchResultsController: nil)
   private let viewModel = SearchViewModel()
@@ -16,10 +18,11 @@ class SearchViewController: UITableViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    view.setWhiteBackgroundColor()
+    collectionView.setGrayBackgroundColor()
     setNavigationBarTitle()
     setupSearchController()
-    setupTableViewAppearance()
+    
+    registerCollectionViewCells()
   }
   
   private func setNavigationBarTitle() {
@@ -42,51 +45,58 @@ class SearchViewController: UITableViewController {
       navigationItem.searchController = searchController
       navigationItem.hidesSearchBarWhenScrolling = false
     } else {
-      tableView.tableHeaderView = searchController.searchBar
+      // TODO: - Implement search bar for iOS < 11.0
+      navigationItem.titleView = searchController.searchBar
     }
   }
   
-  private func setupTableViewAppearance() {
-    tableView.separatorStyle = .none
+  private func registerCollectionViewCells() {
+    collectionView.register(SearchCategoryCollectionViewCell.self, forCellWithReuseIdentifier: categoryCellId)
+    collectionView.register(SearchCatalogCollectionViewCell.self, forCellWithReuseIdentifier: productCellId)
   }
 }
 
+// MARK: - UICollectionViewDataSource
+
 extension SearchViewController {
-  override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 3
+  
+  override func numberOfSections(in collectionView: UICollectionView) -> Int {
+    return 2
   }
   
-  override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if indexPath.row == 0 {
-      
-      let cell = SearchBreadcrumbsCell(reuseIdentifier: "")
-      cell.breadcrumbsView.breadcrumbs = viewModel.breadcrumbs
+  override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    return section == 0 ? viewModel.categories.count : viewModel.products.count
+  }
+  
+  override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    if indexPath.section == 0 {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryCellId, for: indexPath) as! SearchCategoryCollectionViewCell
       return cell
-      
-    } else if indexPath.row == 1 {
-      
-      let cell = SearchCategoriesTableViewCell(reuseIdentifier: nil)
-      cell.categoriesCollectionView.categories = viewModel.categories
-      return cell
-      
     } else {
-      
-      let cell = SearchCatalogTableViewCell(reuseIdentifier: nil)
-      cell.catalogCollectionView.products = viewModel.products
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: productCellId, for: indexPath) as! SearchCatalogCollectionViewCell
       return cell
     }
   }
   
-  override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if indexPath.row == 0 {
-      return 32
-    } else if indexPath.row == 1 {
-      return estimatedCategoriesCollectionViewHeight()
-    } else if indexPath.row == 2 {
-      return view.frame.size.height
+  private func reloadCollectionViewAsynchronously() {
+    DispatchQueue.main.async {
+      self.collectionView.reloadData()
     }
-    
-    return 180
+  }
+}
+
+// MARK: - UICollectionViewFlowLayoutDelegate
+
+extension SearchViewController: UICollectionViewDelegateFlowLayout {
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    if indexPath.section == 0 {
+      let category = viewModel.categories[indexPath.item]
+      let width = category.text.estimatedWidth()
+      return CGSize(width: width, height: 38)
+    } else {
+      return CGSize(width: collectionView.frame.size.width/2 - 1, height: collectionView.frame.size.width/2 - 2)
+    }
   }
   
   private func estimatedCategoriesCollectionViewHeight() -> CGFloat {
@@ -112,12 +122,20 @@ extension SearchViewController {
     return estimatedHeight
   }
   
-  private func reloadTableViewAsynchronously() {
-    DispatchQueue.main.async {
-      self.tableView.reloadData()
-    }
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    return section == 0 ? 8 : 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    return section == 0 ? 8 : 1
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    return section == 0 ? UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   }
 }
+
+// MARK: - UISearchResultsUpdating
 
 extension SearchViewController: UISearchResultsUpdating {
   
@@ -127,7 +145,7 @@ extension SearchViewController: UISearchResultsUpdating {
     }
     
     viewModel.search(query: searchQuery) { [unowned self] in
-      self.reloadTableViewAsynchronously()
+      self.reloadCollectionViewAsynchronously()
     }
   }
   
