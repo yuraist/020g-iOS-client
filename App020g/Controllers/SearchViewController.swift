@@ -137,6 +137,34 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
   }
 }
 
+// MARK: - UICollectionViewDelegate
+
+extension SearchViewController {
+  override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    collectionView.deselectItem(at: indexPath, animated: true)
+    if indexPath.section == 0 {
+      updateBreadcrumbs()
+    } else {
+      showProductController(withProduct: viewModel.products[indexPath.item])
+    }
+  }
+  
+  private func updateBreadcrumbs() {
+    
+  }
+  
+  private func showProductController(withProduct product: SearchProduct) {
+    viewModel.fetch(product: product) { [unowned self] (productResponse) in
+      if productResponse != nil {
+        DispatchQueue.main.async {
+          let productController = ProductViewController(response: productResponse!)
+          self.show(productController, sender: self)
+        }
+      }
+    }
+  }
+}
+
 // MARK: - UISearchResultsUpdating
 
 extension SearchViewController: UISearchResultsUpdating {

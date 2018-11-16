@@ -36,4 +36,10 @@ extension SearchViewModel {
   func incrementPage() {
     currentPage += 1
   }
+  
+  func fetch(product: SearchProduct, completion: @escaping(ProductResponse?) -> Void) {
+    serverManager.getProduct(withId: Int(product.id)!) { (_, response) in
+      completion(response)
+    }
+  }
 }
