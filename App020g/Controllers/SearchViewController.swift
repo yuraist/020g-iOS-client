@@ -71,9 +71,11 @@ extension SearchViewController {
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     if indexPath.section == 0 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryCellId, for: indexPath) as! SearchCategoryCollectionViewCell
+      cell.label.text = viewModel.categories[indexPath.item].text
       return cell
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: productCellId, for: indexPath) as! SearchCatalogCollectionViewCell
+      cell.product = viewModel.products[indexPath.item]
       return cell
     }
   }
