@@ -11,6 +11,7 @@ import Foundation
 class SearchViewModel {
   
   private var serverManager = ServerManager()
+  private var currentQuery = ""
   
   var breadcrumbs = [Breadcrumb]()
   var categories = [SearchCategory]()
@@ -23,7 +24,8 @@ class SearchViewModel {
 extension SearchViewModel {
   
   func search(query: String, completion: @escaping () -> Void) {
-    serverManager.search(query: query, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
+    currentQuery = query
+    serverManager.search(query: currentQuery, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
       if let searchResponse = response {
         self.products = searchResponse.list
         self.categories = searchResponse.cats
@@ -33,7 +35,18 @@ extension SearchViewModel {
     }
   }
   
-  func incrementPage() {
+  func fetchNextPage(completion: @escaping () -> Void) {
+    incrementPage()
+    
+    serverManager.search(query: currentQuery, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
+      if let searchResponse = response {
+        self.products.append(contentsOf: searchResponse.list)
+      }
+      completion()
+    }
+  }
+  
+  private func incrementPage() {
     currentPage += 1
   }
   

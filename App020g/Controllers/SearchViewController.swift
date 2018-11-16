@@ -76,8 +76,24 @@ extension SearchViewController {
     } else {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: productCellId, for: indexPath) as! SearchCatalogCollectionViewCell
       cell.product = viewModel.products[indexPath.item]
+      
+      if last(index: indexPath) {
+        fetchNextPage()
+      }
+      
       return cell
     }
+  }
+  
+  private func last(index: IndexPath) -> Bool {
+    return index.item == viewModel.products.count - 1
+  }
+  
+  private func fetchNextPage() {
+    viewModel.fetchNextPage { [unowned self] in
+      self.reloadCollectionViewAsynchronously()
+    }
+    
   }
   
   private func reloadCollectionViewAsynchronously() {
