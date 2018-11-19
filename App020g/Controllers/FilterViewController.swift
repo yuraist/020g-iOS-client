@@ -158,14 +158,15 @@ class FilterViewController: UITableViewController {
     let lineHeight = 32
     let interlineOffset = 10
     
-    var width = CGFloat(view.frame.width - 32)
+    let viewWidth = CGFloat(tableView.frame.width - 32)
+    var width = viewWidth
     var lines = 1
     
     for option in options {
-      let estimatedOptionWidth = option.name.estimatedWidth() + 15
+      let estimatedOptionWidth = option.name.estimatedWidth() + 16
       if width - estimatedOptionWidth < 0 {
         lines += 1
-        width = 304 - estimatedOptionWidth
+        width = viewWidth - estimatedOptionWidth
       } else {
         width -= estimatedOptionWidth
       }

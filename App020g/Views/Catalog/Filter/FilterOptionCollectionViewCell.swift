@@ -50,7 +50,7 @@ class FilterOptionCollectionViewCell: UICollectionViewCell {
   private func setOptionLabelConstraints() {
     optionLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
     optionLabel.topAnchor.constraint(equalTo: topAnchor).isActive = true
-    optionLabel.widthAnchor.constraint(equalTo: widthAnchor, constant: -15).isActive = true
+    optionLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     optionLabel.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
   }
   
