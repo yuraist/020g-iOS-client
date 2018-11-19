@@ -238,7 +238,9 @@ extension CatalogViewController {
     
     viewModel.fetch(selectedProduct: product) { [unowned self] (product) in
       if let product = product {
-        self.showProductTableViewController(productResponse: product)
+        DispatchQueue.main.async {
+          self.showProductTableViewController(productResponse: product)
+        }
       }
     }
   }
