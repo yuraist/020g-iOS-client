@@ -9,17 +9,13 @@
 import UIKit
 
 class SecondCatalogTreeViewController: UITableViewController {
-
+  
   private let secondCell = "second"
   private let baseCell = "base"
   
   var parentCategory: CatalogCategory
   
-  var catalogTree: CatalogTree? {
-    didSet {
-      reloadTableViewAsync()
-    }
-  }
+  var catalogTree: CatalogTree?
   
   init(withCategory category: CatalogCategory) {
     self.parentCategory = category
@@ -34,7 +30,7 @@ class SecondCatalogTreeViewController: UITableViewController {
     super.viewDidLoad()
     setNavagationTitle()
     removeBackButtonTitle()
-    registerCell()
+    registerCells()
     fetchCategoriesTree()
   }
   
@@ -46,25 +42,37 @@ class SecondCatalogTreeViewController: UITableViewController {
     navigationController?.navigationBar.backItem?.title = ""
   }
   
-  private func registerCell() {
+  private func registerCells() {
     tableView.register(SecondCatalogTreeCell.self, forCellReuseIdentifier: secondCell)
     tableView.register(CatalogTreeBaseCell.self, forCellReuseIdentifier: baseCell)
   }
   
   private func fetchCategoriesTree() {
-    ServerManager.shared.fetchCatalogTree(byCategory: parentCategory.id) { (success, tree) in
+    ServerManager.shared.fetchCatalogTree(byCategory: parentCategory.id) { [unowned self] (success, tree) in
       if let tree = tree {
         self.catalogTree = tree
+        self.showAllCategories()
       }
     }
   }
   
   private func showAllCategories() {
     if let tree = catalogTree?.tree {
-      for i in 0..<tree.count {
-        if tree[i].hasTree && !tree[i].isShowingTree {
-          showTree(withCategory: tree[i], after: i)
+      var newTree = [CatalogTreeChildCategory]()
+      
+      for var item in tree {
+        if let subtree = item.tree {
+          if !item.isShowingTree {
+            item.isShowingTree = true
+            newTree.append(item)
+            newTree.append(contentsOf: subtree)
+          }
+        } else {
+          newTree.append(item)
         }
+        
+        catalogTree!.tree = newTree
+        reloadTableViewAsync()
       }
     }
   }
@@ -92,7 +100,7 @@ class SecondCatalogTreeViewController: UITableViewController {
       cell.childCategory = category
       return cell
     }
-
+    
     return UITableViewCell(style: .default, reuseIdentifier: baseCell)
   }
   
@@ -107,6 +115,8 @@ class SecondCatalogTreeViewController: UITableViewController {
       } else {
         showCatalog(withCategory: category)
       }
+      
+      reloadTableViewAsync()
     }
   }
   
