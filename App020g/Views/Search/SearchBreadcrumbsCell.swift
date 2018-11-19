@@ -8,16 +8,16 @@
 
 import UIKit
 
-class SearchBreadcrumbsCell: UITableViewCell {
+class SearchBreadcrumbsCell: UICollectionViewCell {
   
   let breadcrumbsView = BreadcrumbsCollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout())
   
-  init(reuseIdentifier: String) {
-    super.init(style: .default, reuseIdentifier: reuseIdentifier)
+  override init(frame: CGRect) {
+    super.init(frame: frame)
     
+    setTranslatesAutoresizingMaskIntoConstraintsFalse()
     addBreadcrumbsCollectionView()
     setupConstraintsForBreadcrumbsView()
-    
   }
   
   required init?(coder aDecoder: NSCoder) {

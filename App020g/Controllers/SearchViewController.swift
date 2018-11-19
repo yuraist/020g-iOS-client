@@ -9,6 +9,8 @@
 import UIKit
 
 class SearchViewController: UICollectionViewController {
+  
+  private let breadcrumbsCellId = "breadcrumbsCell"
   private let categoryCellId = "categoryCell"
   private let productCellId = "productCell"
   
@@ -19,6 +21,7 @@ class SearchViewController: UICollectionViewController {
     super.viewDidLoad()
     
     collectionView.setGrayBackgroundColor()
+    
     setNavigationBarTitle()
     setupSearchController()
     
@@ -52,6 +55,7 @@ class SearchViewController: UICollectionViewController {
   }
   
   private func registerCollectionViewCells() {
+    collectionView.register(SearchBreadcrumbsCell.self, forCellWithReuseIdentifier: breadcrumbsCellId)
     collectionView.register(SearchCategoryCollectionViewCell.self, forCellWithReuseIdentifier: categoryCellId)
     collectionView.register(SearchCatalogCollectionViewCell.self, forCellWithReuseIdentifier: productCellId)
   }
@@ -62,15 +66,26 @@ class SearchViewController: UICollectionViewController {
 extension SearchViewController {
   
   override func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 2
+    return 3
   }
   
   override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    return section == 0 ? viewModel.categories.count : viewModel.products.count
+    if section == 0 {
+      return 1
+    } else if section == 1 {
+      return viewModel.categories.count
+    }
+    
+    return viewModel.products.count
   }
   
   override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
     if indexPath.section == 0 {
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: breadcrumbsCellId, for: indexPath) as! SearchBreadcrumbsCell
+      cell.breadcrumbsView.breadcrumbs = viewModel.breadcrumbs
+      return cell
+    } else if indexPath.section == 1 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: categoryCellId, for: indexPath) as! SearchCategoryCollectionViewCell
       cell.label.text = viewModel.categories[indexPath.item].text
       return cell
@@ -109,7 +124,10 @@ extension SearchViewController {
 extension SearchViewController: UICollectionViewDelegateFlowLayout {
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    
     if indexPath.section == 0 {
+      return CGSize(width: collectionView.frame.size.width, height: 30)
+    } else if indexPath.section == 1 {
       let category = viewModel.categories[indexPath.item]
       let width = category.text.estimatedWidth()
       return CGSize(width: width, height: 38)
@@ -142,15 +160,15 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-    return section == 0 ? 8 : 1
+    return section == 1 ? 8 : 1
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-    return section == 0 ? 8 : 1
+    return section == 1 ? 8 : 1
   }
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-    return section == 0 ? UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    return section == 1 ? UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
   }
 }
 
@@ -159,15 +177,20 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 extension SearchViewController {
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
-    if indexPath.section == 0 {
-      updateBreadcrumbs()
-    } else {
+    if indexPath.section == 1 {
+      updateBreadcrumbs(selectedCategory: viewModel.categories[indexPath.item])
+    } else if indexPath.section == 2 {
       showProductController(withProduct: viewModel.products[indexPath.item])
     }
   }
   
-  private func updateBreadcrumbs() {
-    
+  private func updateBreadcrumbs(selectedCategory categrory: SearchCategory) {
+    viewModel.selectedCategory = categrory
+    if let query = getValidQueryString(for: searchController) {
+      viewModel.search(query: query) { [unowned self] in
+        self.reloadCollectionViewAsynchronously()
+      }
+    }
   }
   
   private func showProductController(withProduct product: SearchProduct) {
