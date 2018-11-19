@@ -32,6 +32,7 @@ class FilterViewController: UITableViewController {
     super.viewDidLoad()
     
     tableView.setWhiteBackgroundColor()
+    setContentInsetForTableView()
     registerTableViewCells()
     
     addAcceptFilterView()
@@ -39,6 +40,10 @@ class FilterViewController: UITableViewController {
     setActionsForAcceptFilterViewButtons()
     
     setupViewModelObserving()
+  }
+  
+  private func setContentInsetForTableView() {
+    tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 60, right: 0)
   }
   
   private func registerTableViewCells() {
