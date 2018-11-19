@@ -38,6 +38,7 @@ class FilterViewController: UITableViewController {
     addAcceptFilterView()
     setConstraintsForAcceptFilterView()
     setActionsForAcceptFilterViewButtons()
+    setupAcceptFilterViewButtons()
     
     setupViewModelObserving()
   }
@@ -90,6 +91,12 @@ class FilterViewController: UITableViewController {
   func acceptFilterParameters() {
     parentController?.update(filter: viewModel.filterRequest)
     navigationController?.popViewController(animated: true)
+  }
+  
+  private func setupAcceptFilterViewButtons() {
+    if viewModel.filterRequest.options != nil {
+      acceptFilterView.showTwoButtons()
+    }
   }
   
   private func setupViewModelObserving() {
