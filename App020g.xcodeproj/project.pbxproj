@@ -394,6 +394,7 @@
 				BEE57E0D216C90A9005C9672 /* MenuBar */,
 				BEE57E0E216C90E3005C9672 /* BarButton */,
 				BEE57E0F216C9113005C9672 /* Catalog */,
+				BE0218D92185BA8500C8DBEC /* Filter */,
 				BEE57E10216C911D005C9672 /* Shops */,
 				BEE57E11216C9128005C9672 /* Product */,
 			);
@@ -493,7 +494,6 @@
 				BE3D1D21215954DD00A6E9E4 /* CatalogCollectionViewCell.swift */,
 				BE0FF10A2175A84B00F126BB /* CategoryPagesCollectionView.swift */,
 				BEF1B990216208EA00348A3D /* CategoryCollectionViewCell.swift */,
-				BE0218D92185BA8500C8DBEC /* Filter */,
 			);
 			path = Catalog;
 			sourceTree = "<group>";

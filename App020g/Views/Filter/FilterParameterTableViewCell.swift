@@ -20,21 +20,9 @@ class FilterParameterTableViewCell: UITableViewCell {
     }
   }
   
-  private func clearCell() {
-    parameterTitleLabel.text = ""
-    filterOptionsCollectionView.filterParameter = nil
-    filterOptionsCollectionView.filterOptions.removeAll()
-  }
-  
-  private func setupCell() {
-    parameterTitleLabel.text = filterParameter?.name
-    filterOptionsCollectionView.filterParameter = filterParameter
-    filterOptionsCollectionView.parentController = parentController
-  }
-  
   private let parameterTitleLabel = FilterParameterNameLabel(text: "", isMainTitle: true)
   
-  private lazy var filterOptionsCollectionView: FilterOptionsCollectionView = {
+  lazy var filterOptionsCollectionView: FilterOptionsCollectionView = {
     let layout = DGCollectionViewLeftAlignFlowLayout()
     let cv = FilterOptionsCollectionView(frame: .zero, collectionViewLayout: layout)
     cv.parentController = parentController
@@ -42,10 +30,18 @@ class FilterParameterTableViewCell: UITableViewCell {
     return cv
   }()
   
+  let clearButton: UIButton = {
+    let button = UIButton(frame: .zero)
+    button.setImage(#imageLiteral(resourceName: "cross").withRenderingMode(.alwaysTemplate), for: .normal)
+    button.tintColor = ApplicationColors.darkGray
+    button.setTranslatesAutoresizingMaskIntoConstraintsFalse()
+    return button
+  }()
+  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
-    addSubviews(parameterTitleLabel, filterOptionsCollectionView)
+    addSubviews(parameterTitleLabel, filterOptionsCollectionView, clearButton)
     setConstraintsForSubviews()
   }
   
@@ -63,5 +59,22 @@ class FilterParameterTableViewCell: UITableViewCell {
     filterOptionsCollectionView.topAnchor.constraint(equalTo: parameterTitleLabel.bottomAnchor, constant: 8).isActive = true
     filterOptionsCollectionView.rightAnchor.constraint(equalTo: rightAnchor, constant: -12).isActive = true
     filterOptionsCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16).isActive = true
+    
+    clearButton.topAnchor.constraint(equalTo: topAnchor, constant: 16).isActive = true
+    clearButton.rightAnchor.constraint(equalTo: rightAnchor, constant: -16).isActive = true
+    clearButton.widthAnchor.constraint(equalToConstant: 22).isActive = true
+    clearButton.heightAnchor.constraint(equalToConstant: 22).isActive = true
+  }
+  
+  private func clearCell() {
+    parameterTitleLabel.text = ""
+    filterOptionsCollectionView.filterParameter = nil
+    filterOptionsCollectionView.filterOptions.removeAll()
+  }
+  
+  private func setupCell() {
+    parameterTitleLabel.text = filterParameter?.name
+    filterOptionsCollectionView.filterParameter = filterParameter
+    filterOptionsCollectionView.parentController = parentController
   }
 }

@@ -93,6 +93,18 @@ class FilterViewController: UITableViewController {
     navigationController?.popViewController(animated: true)
   }
   
+  @objc
+  private func clearSelectedOptions(_ sender: UIButton) {
+    guard let cell = sender.superview as? FilterParameterTableViewCell, let indexPath = tableView.indexPath(for: cell) else {
+      return
+    }
+    
+    if let id = cell.filterParameter?.id {
+      viewModel.selectedParameters[id]?.removeAll()
+      tableView.reloadRows(at: [indexPath], with: .none)
+    }
+  }
+  
   private func setupAcceptFilterViewButtons() {
     if viewModel.filterRequest.options != nil {
       acceptFilterView.showTwoButtons()
@@ -141,6 +153,7 @@ class FilterViewController: UITableViewController {
     cell.selectionStyle = .none
     cell.parentController = self
     cell.filterParameter = viewModel.filterResponse.list[indexPath.row]
+    cell.clearButton.addTarget(self, action: #selector(clearSelectedOptions(_:)), for: .touchUpInside)
     return cell
   }
   
