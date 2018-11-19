@@ -51,7 +51,7 @@ class CatalogViewController: UICollectionViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    if viewModel.filter.options != nil {
+    if viewModel.filter.options != nil && viewModel.filter.options?.count != 0 {
       let filledFilterImage = #imageLiteral(resourceName: "filter_filled").withRenderingMode(.alwaysTemplate)
       filterBarView.filterButton.setImage(filledFilterImage, for: .normal)
     } else {

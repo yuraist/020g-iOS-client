@@ -80,7 +80,7 @@ class FilterViewController: UITableViewController {
   
   @objc
   func clearFilter() {
-    viewModel.selectedParameters = [:]
+    viewModel.selectedParameters.removeAll()
     viewModel.selectedCost = nil
     
     tableView.reloadRows(at: tableView.indexPathsForVisibleRows ?? [], with: .none)
@@ -100,13 +100,13 @@ class FilterViewController: UITableViewController {
     }
     
     if let id = cell.filterParameter?.id {
-      viewModel.selectedParameters[id]?.removeAll()
+      viewModel.selectedParameters.removeValue(forKey: id)
       tableView.reloadRows(at: [indexPath], with: .none)
     }
   }
   
   private func setupAcceptFilterViewButtons() {
-    if viewModel.filterRequest.options != nil {
+    if viewModel.filterRequest.options != nil && viewModel.filterRequest.options?.count != 0 {
       acceptFilterView.showTwoButtons()
     }
   }
