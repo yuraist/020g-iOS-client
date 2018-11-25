@@ -179,9 +179,9 @@ class FilterViewController: UITableViewController {
   
   private func estimateHeight(forOptions options: [FilterOption]) -> CGFloat {
     let top = 48
-    let bottom = 20
+    let bottom = 16
     let lineHeight = 32
-    let interlineOffset = 10
+    let interlineOffset = 8
     
     let viewWidth = CGFloat(tableView.frame.width - 32)
     var width = viewWidth
@@ -193,7 +193,7 @@ class FilterViewController: UITableViewController {
         lines += 1
         width = viewWidth - estimatedOptionWidth
       } else {
-        width -= estimatedOptionWidth
+        width -= (estimatedOptionWidth + 8)
       }
     }
     
