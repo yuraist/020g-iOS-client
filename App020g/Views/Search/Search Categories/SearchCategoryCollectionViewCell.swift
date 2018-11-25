@@ -19,9 +19,11 @@ class SearchCategoryCollectionViewCell: UICollectionViewCell {
   
   private let bubbleView: UIView = {
     let view = UIView()
-    view.backgroundColor = ApplicationColors.salate
+    view.backgroundColor = ApplicationColors.greenCategories
     view.layer.cornerRadius = 3
     view.layer.masksToBounds = true
+    view.layer.borderColor = ApplicationColors.greenBorder.cgColor
+    view.layer.borderWidth = 1
     view.setTranslatesAutoresizingMaskIntoConstraintsFalse()
     return view
   }()
