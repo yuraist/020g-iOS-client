@@ -113,17 +113,17 @@ class AuthorizationViewController: UIViewController {
       viewModel.login { [unowned self] (success) in
         DispatchQueue.main.async {
           if success {
-            self.showSuccessAuthorizationAlert()
+            self.perform(#selector(self.dismissController))
           } else {
             self.showFailureAuthorizationAlert()
           }
         }
       }
     } else {
-      viewModel.signUp { (success) in
+      viewModel.signUp { [unowned self] (success) in
         DispatchQueue.main.async {
           if success {
-            self.showSuccessAuthorizationAlert()
+            self.perform(#selector(self.dismissController))
           } else {
             self.showFailureAuthorizationAlert()
           }
