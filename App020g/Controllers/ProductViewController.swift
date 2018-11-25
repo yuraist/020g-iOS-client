@@ -222,7 +222,7 @@ class ProductViewController: UITableViewController {
     return cell
   }
   
-  private func getCitiesTableViewCell() ->UITableViewCell {
+  private func getCitiesTableViewCell() -> UITableViewCell {
     let cell = UITableViewCell(style: .value1, reuseIdentifier: citiesCellId)
     cell.textLabel?.text = "Доступные города"
     cell.accessoryType = .disclosureIndicator
