@@ -126,7 +126,7 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
     
     if indexPath.section == 0 {
-      return CGSize(width: collectionView.frame.size.width, height: 30)
+      return CGSize(width: collectionView.frame.size.width, height: 20)
     } else if indexPath.section == 1 {
       let category = viewModel.categories[indexPath.item]
       let width = category.text.estimatedWidth()
