@@ -153,7 +153,15 @@ class FilterViewController: UITableViewController {
     cell.selectionStyle = .none
     cell.parentController = self
     cell.filterParameter = viewModel.filterResponse.list[indexPath.row]
+    
+    if viewModel.selectedParameters.count == 0 {
+      cell.clearButton.isHidden = true
+    } else {
+      cell.clearButton.isHidden = false
+    }
+    
     cell.clearButton.addTarget(self, action: #selector(clearSelectedOptions(_:)), for: .touchUpInside)
+    
     return cell
   }
   

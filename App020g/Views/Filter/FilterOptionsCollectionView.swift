@@ -121,8 +121,16 @@ class FilterOptionsCollectionView: UICollectionView, UICollectionViewDelegate, U
       
       if parent.viewModel.selectedParameters.count == 0 {
         parent.acceptFilterView.showOnlyAcceptView()
+        
+        if let parentCell = superview as? FilterParameterTableViewCell {
+          parentCell.clearButton.isHidden = true
+        }
       } else {
         parent.acceptFilterView.showTwoButtons()
+        
+        if let parentCell = superview as? FilterParameterTableViewCell {
+          parentCell.clearButton.isHidden = false
+        }
       }
     }
   }
