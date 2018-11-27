@@ -62,7 +62,7 @@ class FilterBarView: UIView {
     dropDownSortingMenu.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.4).isActive = true
     dropDownSortingMenu.heightAnchor.constraint(equalTo: heightAnchor, constant: -4).isActive = true
     
-    addConstraints(withFormat: "H:[v0(22)]-8-[v1(22)]-8-[v2(22)]-16-|", views: largeGridButton, smallGridButton, filterButton)
+    addConstraints(withFormat: "H:[v0(22)]-16-[v1(22)]-16-[v2(22)]-16-|", views: largeGridButton, smallGridButton, filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: filterButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: largeGridButton)
     addConstraints(withFormat: "V:[v0(22)]-10-|", views: smallGridButton)
