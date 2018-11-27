@@ -69,6 +69,7 @@
 		BE7CE71E2192F45400BDE049 /* SearchCatalogCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CE71D2192F45400BDE049 /* SearchCatalogCollectionView.swift */; };
 		BE7CE7202192F45E00BDE049 /* SearchCatalogCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CE71F2192F45E00BDE049 /* SearchCatalogCollectionViewCell.swift */; };
 		BE7CE7242192F49100BDE049 /* SearchCatalogTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE7CE7232192F49100BDE049 /* SearchCatalogTableViewCell.swift */; };
+		BE8FB70621ADC00100B1CF83 /* SearchDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BE8FB70521ADC00100B1CF83 /* SearchDelegate.swift */; };
 		BEA2FFA72154D2DC00E5C6FA /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */; };
 		BEA2FFA92154D3AB00E5C6FA /* MenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */; };
 		BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BEA2FFAA215500C000E5C6FA /* MainViewController.swift */; };
@@ -182,6 +183,7 @@
 		BE7CE71D2192F45400BDE049 /* SearchCatalogCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalogCollectionView.swift; sourceTree = "<group>"; };
 		BE7CE71F2192F45E00BDE049 /* SearchCatalogCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalogCollectionViewCell.swift; sourceTree = "<group>"; };
 		BE7CE7232192F49100BDE049 /* SearchCatalogTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCatalogTableViewCell.swift; sourceTree = "<group>"; };
+		BE8FB70521ADC00100B1CF83 /* SearchDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDelegate.swift; sourceTree = "<group>"; };
 		BEA2FFA62154D2DC00E5C6FA /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
 		BEA2FFA82154D3AB00E5C6FA /* MenuTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewCell.swift; sourceTree = "<group>"; };
 		BEA2FFAA215500C000E5C6FA /* MainViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -525,6 +527,7 @@
 		BEF1B98B21614EBA00348A3D /* Delegates */ = {
 			isa = PBXGroup;
 			children = (
+				BE8FB70521ADC00100B1CF83 /* SearchDelegate.swift */,
 				BEA2FFAC215502A400E5C6FA /* CenterViewControllerDelegate.swift */,
 				BEF6F6A0215E63AA000E4BCB /* MenuViewControllerDelegate.swift */,
 			);
@@ -718,6 +721,7 @@
 				BE1DC54E214FAB6A00E6AF30 /* ProductViewController.swift in Sources */,
 				BEA2FFAB215500C000E5C6FA /* MainViewController.swift in Sources */,
 				BE0FF0F72170C6DF00F126BB /* CustomHeaderView.swift in Sources */,
+				BE8FB70621ADC00100B1CF83 /* SearchDelegate.swift in Sources */,
 				BE0218E12186F0E700C8DBEC /* FilterOptionCollectionViewCell.swift in Sources */,
 				BEF6F699215B35E1000E4BCB /* ServerManager.swift in Sources */,
 				BEE1EC602191F558005FD245 /* SearchViewModel.swift in Sources */,

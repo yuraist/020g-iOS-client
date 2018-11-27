@@ -83,6 +83,7 @@ extension SearchViewController {
     
     if indexPath.section == 0 {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: breadcrumbsCellId, for: indexPath) as! SearchBreadcrumbsCell
+      cell.breadcrumbsView.searchDelegate = self
       cell.breadcrumbsView.breadcrumbs = viewModel.breadcrumbs
       return cell
     } else if indexPath.section == 1 {
@@ -174,13 +175,22 @@ extension SearchViewController: UICollectionViewDelegateFlowLayout {
 
 // MARK: - UICollectionViewDelegate
 
-extension SearchViewController {
+extension SearchViewController: SearchDelegate {
   override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     collectionView.deselectItem(at: indexPath, animated: true)
     if indexPath.section == 1 {
       updateBreadcrumbs(selectedCategory: viewModel.categories[indexPath.item])
     } else if indexPath.section == 2 {
       showProductController(withProduct: viewModel.products[indexPath.item])
+    }
+  }
+  
+  func updateBreadcrumbs(withBreadcrumbId id: Int) {
+    if let query = getValidQueryString(for: searchController) {
+      viewModel.selectedCategory?.id = id
+      viewModel.search(query: query) { [unowned self] in
+        self.reloadCollectionViewAsynchronously()
+      }
     }
   }
   

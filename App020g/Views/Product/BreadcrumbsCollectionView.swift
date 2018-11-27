@@ -13,12 +13,10 @@ class BreadcrumbsCollectionView: UICollectionView, UICollectionViewDelegate, UIC
   var breadcrumbs = [Breadcrumb]() {
     didSet {
       reloadData()
-//      let item = breadcrumbs.count - 1
-//      let indexPath = IndexPath(item: item, section: 0)
-//      let scrollPosition = UICollectionView.ScrollPosition.left
-//      scrollToItem(at: indexPath, at: scrollPosition, animated: false)
     }
   }
+  
+  weak var searchDelegate: SearchDelegate?
   
   override init(frame: CGRect, collectionViewLayout layout: UICollectionViewLayout) {
     super.init(frame: frame, collectionViewLayout: layout)
@@ -89,6 +87,11 @@ class BreadcrumbsCollectionView: UICollectionView, UICollectionViewDelegate, UIC
   
   func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
     return 0
+  }
+  
+  func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let breadcrumb = breadcrumbs[indexPath.item]
+    searchDelegate?.updateBreadcrumbs(withBreadcrumbId: breadcrumb.id)
   }
   
 }
