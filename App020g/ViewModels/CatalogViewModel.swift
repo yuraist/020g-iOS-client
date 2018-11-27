@@ -22,7 +22,7 @@ class CatalogViewModel {
   init(_ filterRequest: FilterRequest, categoryName category: String) {
     filter = filterRequest
     categoryName = category
-    sorting = Observable(SortingType.chipFirst)
+    sorting = Observable(SortingType.groupedFirst)
     products = Observable([CodableProduct]())
   }
   
