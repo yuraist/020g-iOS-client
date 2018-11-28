@@ -113,7 +113,7 @@ class AuthorizationViewController: UIViewController {
       viewModel.login { [unowned self] (success) in
         DispatchQueue.main.async {
           if success {
-            self.perform(#selector(self.dismissController))
+            self.showSuccessAuthorizationAlert()
           } else {
             self.showFailureAuthorizationAlert()
           }
@@ -123,7 +123,8 @@ class AuthorizationViewController: UIViewController {
       viewModel.signUp { [unowned self] (success) in
         DispatchQueue.main.async {
           if success {
-            self.perform(#selector(self.dismissController))
+            self.showSuccessRegistrationAlert()
+            self.loginInputContainerView.clearTextFields()
           } else {
             self.showFailureAuthorizationAlert()
           }
@@ -133,11 +134,15 @@ class AuthorizationViewController: UIViewController {
   }
   
   private func showSuccessAuthorizationAlert() {
-    self.showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")
+    showAuthorizationAlert(title: "Вы авторизованы", text: "Авторизация прошла успешно")
+  }
+  
+  private func showSuccessRegistrationAlert() {
+    showAuthorizationAlert(title: "Вы зарегистрированы", text: "Проверьте Ваш EMAIL")
   }
   
   private func showFailureAuthorizationAlert() {
-    self.showAuthorizationAlert(title: "Что-то пошло не так",
+    showAuthorizationAlert(title: "Что-то пошло не так",
                                 text: "Проверьте правильность введенных данных. Если вы забыли пароль, то нажмите \"Напомнить пароль\" или создайте новый акккаунт.")
   }
   

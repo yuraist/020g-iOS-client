@@ -194,6 +194,10 @@ class LoginInputContainerView: UIView {
   }
   
   func clearTextFields() {
-    
+    emailTextField.text = ""
+    nameTextField.text = ""
+    phoneTextField.text = ""
+    passwordTextField.text = ""
+    repeatPasswordTextField.text = ""
   }
 }
