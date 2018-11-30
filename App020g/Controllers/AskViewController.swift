@@ -67,7 +67,7 @@ class AskViewController: UIViewController {
   
   private func setupNavigationItem() {
     navigationItem.title = "Задать вопрос"
-    navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Cancel", style: .done, target: self, action: #selector(dismissController))
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissController))
   }
   
   private func setGrayBackgroundColor() {
