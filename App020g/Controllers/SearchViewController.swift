@@ -188,6 +188,9 @@ extension SearchViewController: SearchDelegate {
   func updateBreadcrumbs(withBreadcrumbId id: Int) {
     if let query = getValidQueryString(for: searchController) {
       viewModel.selectedCategory?.id = id
+      viewModel.noMorePages = false
+      viewModel.clearCurrentPage()
+      
       viewModel.search(query: query) { [unowned self] in
         self.reloadCollectionViewAsynchronously()
       }

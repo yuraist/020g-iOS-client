@@ -19,7 +19,7 @@ class SearchViewModel {
   
   var noMorePages = false
   
-  private var currentPage = 0
+  private var currentPage = 1
   var selectedCategory: SearchCategory? = .none
 }
 
@@ -51,6 +51,10 @@ extension SearchViewModel {
       }
       completion()
     }
+  }
+  
+  func clearCurrentPage() {
+    currentPage = 1
   }
   
   private func incrementPage() {
