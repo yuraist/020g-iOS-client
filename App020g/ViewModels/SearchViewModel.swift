@@ -17,6 +17,8 @@ class SearchViewModel {
   var categories = [SearchCategory]()
   var products = [SearchProduct]()
   
+  var noMorePages = false
+  
   private var currentPage = 0
   var selectedCategory: SearchCategory? = .none
 }
@@ -25,6 +27,7 @@ extension SearchViewModel {
   
   func search(query: String, completion: @escaping () -> Void) {
     currentQuery = query
+    
     serverManager.search(query: currentQuery, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
       if let searchResponse = response {
         self.products = searchResponse.list
@@ -40,7 +43,11 @@ extension SearchViewModel {
     
     serverManager.search(query: currentQuery, page: currentPage, category: selectedCategory?.id) { [unowned self] (response) in
       if let searchResponse = response {
-        self.products.append(contentsOf: searchResponse.list)
+        if searchResponse.list.count == 0 {
+          self.noMorePages = true
+        } else {
+          self.products.append(contentsOf: searchResponse.list)
+        }
       }
       completion()
     }

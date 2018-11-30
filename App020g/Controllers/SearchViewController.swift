@@ -94,7 +94,7 @@ extension SearchViewController {
       let cell = collectionView.dequeueReusableCell(withReuseIdentifier: productCellId, for: indexPath) as! SearchCatalogCollectionViewCell
       cell.product = viewModel.products[indexPath.item]
       
-      if last(index: indexPath) {
+      if last(index: indexPath) && !viewModel.noMorePages {
         fetchNextPage()
       }
       
