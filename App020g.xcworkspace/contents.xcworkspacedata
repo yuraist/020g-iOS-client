@@ -7,4 +7,20 @@
    <FileRef
       location = "group:Pods/Pods.xcodeproj">
    </FileRef>
+   <Group
+      location = "container:"
+      name = "Screenshots">
+      <FileRef
+         location = "group:catalogue.png">
+      </FileRef>
+      <FileRef
+         location = "group:filter.png">
+      </FileRef>
+      <FileRef
+         location = "group:product.png">
+      </FileRef>
+      <FileRef
+         location = "group:search.png">
+      </FileRef>
+   </Group>
 </Workspace>
