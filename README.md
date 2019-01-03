@@ -7,10 +7,10 @@ It works via RESTful API, uses Swift 4.2 and is available for devices with iOS =
 
 UI is written using Autolayout withous interface builders.
 
-![Catalogue screen](Screenshots/catalogue.png | width=256)
-![Filter screen](Screenshots/filter.png | width=256)
-![Product screen](Screenshots/product.png | width=256)
-![Search screen](Screenshots/search.png | width=256)
+<img src='Screenshots/catalogue.png' width=256 alt='Catalogue screen'>
+<img src='Screenshots/filter.png' width=256 alt='Filter screen'>
+<img src='Screenshots/product.png' width=256 alt='Product screen'>
+<img src='Screenshots/search.png' width=256 alt='Search screen'>
 
 ### Data
 
